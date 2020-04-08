@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>order-manager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+<h1>order-manager</h1>
+<form action="#" th:action="@{/order-management/upload}" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file-unshipped-orders">Wybierz plik csv unshipped</label>
+        <input type="file" id="file-unshipped-orders" name="file-unshipped-orders"/>
+        <label for="file-new-orders">Wybierz plik csv new orders</label>
+        <input type="file" id="file-new-orders" name="file-new-orders"/>
+        <button type="submit">wyślij</button>
+    </div>
+</form>
+<div class="content">
+    <div>
+        <form action="shipment-manager" th:action="@{/order-management/generate}" th:object="${generateAddress}" method="post">
+            <div>
+                <label for="generate">Generuje Packing Slips oraz listę adresów</label>
+                <button id="generate" type="submit">Generuj wysyłki</button>
+            </div>
+            <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Numer Zamówienia</th>
+                        <th scope="col">Nazwa Kupującego</th>
+                        <th scope="col">Data zakupu</th>
+                        <th scope="col">Nazwa przedmiotu</th>
+                        <th scope="col">Nazwa wewnętrzna</th>
+                        <th scope="col">Szt.</th>
+                        <th scope="col">Do wysłania</th>
+                        <th scope="col">Wygenerowane</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order, stat : ${orders}">
+                        <th th:text="${stat.count}" scope="row"></th>
+                        <td th:text="${order.orderId}"></td>
+                        <td th:text="${order.client.buyerName}">/td>
+                        <td th:text="${order.purchaseDateFormatted}"></td>
+                        <td th:text="${order.product.productName}">/td>
+                        <td th:text="${order.product.internalId}">/td>
+                        <td th:text="${order.quantityPurchased}"></td>
+                        <td><input th:value="${order.oId}" type="checkbox" name="chosen"/></td>
+                        <td th:text="${order.status}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+</body>
+</html>

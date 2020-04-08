@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Administracyjny</title>
+</head>
+<body>
+<div>
+    <div>Import powiązań produktów</div>
+    <div>
+        <form action="#" th:action="@{/admin/products/import/mapping}" method="post" enctype="multipart/form-data">
+            <input name="products-mapping" type="file" placeholder="wybierz plik">
+            <button type="submit">Wyślij</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
