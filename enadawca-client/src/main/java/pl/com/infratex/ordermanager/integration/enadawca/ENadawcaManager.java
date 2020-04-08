@@ -54,7 +54,7 @@ public class ENadawcaManager {
             startDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(dataNadania);
 
             BuforType buforType = new BuforType();
-            buforType.setIdBufor(idBufor);
+//            buforType.setIdBufor(idBufor);
             buforType.setOpis(opis);
             buforType.setDataNadania(startDateXML);
 

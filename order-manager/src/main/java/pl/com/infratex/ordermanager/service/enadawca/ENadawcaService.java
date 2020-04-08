@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class ENadawcaService {
 
     private static final Logger LOGGER = Logger.getLogger(ENadawcaService.class.getName());
-    public static final int ID_BUFOR = 999;
+    public static final int ID_BUFOR = 998;
 
     private ENadawcaMapper eNadawcaMapper;
 
