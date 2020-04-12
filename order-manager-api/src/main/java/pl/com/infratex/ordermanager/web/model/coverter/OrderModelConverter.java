@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -26,6 +27,30 @@ public class OrderModelConverter {
         String format = purchaseDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         order.setPurchaseDateFormatted(format);
     }
+
+    private static void addUnitPrice(OrderModel order) {
+        BigDecimal unitPrice=order.getItemPrice().divide(new BigDecimal(order.getQuantityPurchased()));
+        order.getProduct().setUnitPrice(unitPrice);
+    }
+
+    private static void addTotalPrice(OrderModel order) {
+        BigDecimal totalPrice=order.getItemPrice().add(order.getShippingPrice());
+        order.setTotalPrice(totalPrice);
+    }
+
+    private static void addCurrencySymbol(OrderModel order) {
+        String currencySymbol=CurrencyConverter.currencyConvertToSymbol(order.getCurrency());
+        order.setCurrencySymbol(currencySymbol);
+    }
+
+
+    public static void setAdditionalFieldsForPackingSlips(OrderModel order){
+        formatDate(order);
+        addCurrencySymbol(order);
+        addUnitPrice(order);
+        addTotalPrice(order);
+    }
+
 
     private static void fillBlank(OrderModel order) {
         ClientModel client = order.getClient();

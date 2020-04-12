@@ -17,9 +17,11 @@ public class OrderModel {
     private Long oId;
     private String orderId;
     private String orderItemId;
+    private String asin;
+    private String condition;
     private LocalDateTime purchaseDate;
     private String purchaseDateFormatted;
-    private String quantityPurchased;
+    private int quantityPurchased;
     private boolean isBusinessOrder;
     private String currency;
     private BigDecimal itemPrice;
@@ -35,6 +37,10 @@ public class OrderModel {
     private int status;
 
     private String guid;
+
+    private String currencySymbol;
+    private BigDecimal totalPrice;
+
 
     public OrderModel(Long oId, String orderId, BigDecimal itemPrice) {
         this.oId = oId;

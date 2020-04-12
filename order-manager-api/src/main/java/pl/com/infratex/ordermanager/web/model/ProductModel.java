@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,4 +18,9 @@ public class ProductModel {
     private String sku;
     private String productName;
     private String orderItemId;
+    private String asin;
+    private String condition;
+
+    private BigDecimal unitPrice;
 }
+
