@@ -10,6 +10,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
+import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -29,14 +30,19 @@ public class PackingSlipAddressPdfReportGenerator {
     public OutputStream generatePdf(List<OrderModel> orders, String jasperReportFileName) throws JRException, IOException {
 
         ClassPathResource classPathResource = new ClassPathResource("reports/" + jasperReportFileName);
-        InputStream employeeReportStream = classPathResource.getInputStream();
-        JasperReport jasperReport = JasperCompileManager.compileReport(employeeReportStream);
+        InputStream orderReportStream = classPathResource.getInputStream();
+        JasperReport jasperReport = JasperCompileManager.compileReport(orderReportStream);
+
+        for (OrderModel order:orders) {
+            OrderModelConverter.setAdditionalFieldsForPackingSlips(order);
+        }
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orders);
+
         Map<String, Object> parameters = new HashMap<>();
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, "src/main/resources/template.pdf");
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "order-manager/src/main/resources/template.pdf");
         OutputStream outputStream = new ByteArrayOutputStream();
         JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
         return outputStream;

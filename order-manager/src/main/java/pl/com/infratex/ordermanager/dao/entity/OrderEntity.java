@@ -24,7 +24,7 @@ public class OrderEntity {
     private String orderId;
     private String orderItemId;
     private LocalDateTime purchaseDate;
-    private String quantityPurchased;
+    private int quantityPurchased;
     private boolean isBusinessOrder;
     private String currency;
     private BigDecimal itemPrice;
@@ -80,11 +80,11 @@ public class OrderEntity {
         this.purchaseDate = purchaseDate;
     }
 
-    public String getQuantityPurchased() {
+    public int getQuantityPurchased() {
         return quantityPurchased;
     }
 
-    public void setQuantityPurchased(String quantityPurchased) {
+    public void setQuantityPurchased(int quantityPurchased) {
         this.quantityPurchased = quantityPurchased;
     }
 
