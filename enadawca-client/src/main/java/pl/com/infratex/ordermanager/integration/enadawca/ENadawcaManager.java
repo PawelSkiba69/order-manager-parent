@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public class ENadawcaManager {
 
     private static final Logger LOGGER = Logger.getLogger(ENadawcaManager.class.getName());
+    private static final int GENEREATED_GUIDS_LIMIT=100;
     private ElektronicznyNadawca elektronicznyNadawca;
     private GregorianCalendar dataNadania;
     private int idBufor;
@@ -45,7 +46,17 @@ public class ENadawcaManager {
     }
 
     public List<String> generateGuids(int amount) {
-        return elektronicznyNadawca.getGuid(amount);
+        List<String> generatedGuids=new ArrayList<>();
+
+        int numberOfGeneratedSets=amount/GENEREATED_GUIDS_LIMIT;
+
+        for(int i=0;i<=numberOfGeneratedSets;i++){
+            generatedGuids.addAll(elektronicznyNadawca.getGuid(GENEREATED_GUIDS_LIMIT));
+        }
+
+        generatedGuids.addAll(elektronicznyNadawca.getGuid(amount-numberOfGeneratedSets*GENEREATED_GUIDS_LIMIT));
+
+        return generatedGuids;
     }
 
     public void elektronicznyNadawcaProperties(GregorianCalendar dataNadania, int idBufor, String opis) throws ENadawcaException {
@@ -54,19 +65,20 @@ public class ENadawcaManager {
             startDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(dataNadania);
 
             BuforType buforType = new BuforType();
-//            buforType.setIdBufor(idBufor);
+            buforType.setIdBufor(idBufor);
             buforType.setOpis(opis);
             buforType.setDataNadania(startDateXML);
 
             List<BuforType> listBufors = new ArrayList<>();
             listBufors.add(buforType);
 
-            Holder<List<BuforType>> holderBufors = new Holder(buforType);
-            List<ErrorType> errors = elektronicznyNadawca.setEnvelopeBuforDataNadania(startDateXML);
-            Holder<List<ErrorType>> holderErrors = new Holder(errors);
+            List<BuforType> holder = new ArrayList<>();;
+            Holder<List<BuforType>> holderBufors = new Holder(holder);
+//            List<ErrorType> errors = elektronicznyNadawca.setEnvelopeBuforDataNadania(startDateXML);
+//            Holder<List<ErrorType>> holderErrors = new Holder(errors);
 
-            elektronicznyNadawca.setEnvelopeBuforDataNadania(startDateXML);
-            elektronicznyNadawca.createEnvelopeBufor(listBufors, holderBufors, holderErrors);
+//            elektronicznyNadawca.setEnvelopeBuforDataNadania(startDateXML);
+            elektronicznyNadawca.createEnvelopeBufor(listBufors, holderBufors, null);
         } catch (DatatypeConfigurationException e) {
             throw new ENadawcaException("Błędny format daty nadania", e);
         }
