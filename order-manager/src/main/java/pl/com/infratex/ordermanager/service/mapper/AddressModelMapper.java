@@ -55,6 +55,8 @@ public class AddressModelMapper {
         addressModel.setShipAddress3(clientModel.getShipAddress3());
         addressModel.setShipCity(clientModel.getShipCity());
         addressModel.setShipPostalCode(clientModel.getShipPostalCode());
+        addressModel.setShipCountry(clientModel.getShipCountry());
+        addressModel.setWeight(1);
         LOGGER.info("Dane klienta: " + addressModel);
         return addressModel;
     }
