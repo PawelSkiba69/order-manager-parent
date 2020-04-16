@@ -1,6 +1,7 @@
 package pl.com.infratex.ordermanager.service.enadawca;
 
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
 import pl.com.infratex.ordermanager.integration.enadawca.ENadawcaManager;
 import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaException;
 import pl.com.infratex.ordermanager.service.mapper.ENadawcaMapper;
@@ -19,19 +20,23 @@ public class ENadawcaService {
     public static final int ID_BUFOR = 998;
 
     private ENadawcaMapper eNadawcaMapper;
+    private SequenceIdGenerator sequenceIdGenerator;
 
-    public ENadawcaService(ENadawcaMapper eNadawcaMapper) {
+    public ENadawcaService(ENadawcaMapper eNadawcaMapper, SequenceIdGenerator sequenceIdGenerator) {
         this.eNadawcaMapper = eNadawcaMapper;
+        this.sequenceIdGenerator = sequenceIdGenerator;
     }
 
     public void send(List<AddressModel> addresses) {
-        GregorianCalendar dataNadania = new GregorianCalendar(2020, Calendar.APRIL, 15);
+        GregorianCalendar dataNadania = new GregorianCalendar(2020, Calendar.APRIL, 16);
         ENadawcaManager eNadawcaManager= new ENadawcaManager();
         //FIXME rzucić wyjątek biznesowy
         try {
-            eNadawcaManager.elektronicznyNadawcaProperties(dataNadania, ID_BUFOR,"ZBIOR");
+            Integer generateId = sequenceIdGenerator.generateId();
+            eNadawcaManager.elektronicznyNadawcaProperties(dataNadania, generateId,"Amazon"+dataNadania.getTime().toString());
             List<PrzesylkaType> przesylkaTypes = eNadawcaMapper.shipmentsSet(addresses);
-            eNadawcaManager.addShipment(przesylkaTypes, ID_BUFOR);
+            eNadawcaManager.addShipment(przesylkaTypes, generateId);
+            LOGGER.info("####GeneratedID= "+generateId);
         } catch (ENadawcaException e) {
             e.printStackTrace();
         }
