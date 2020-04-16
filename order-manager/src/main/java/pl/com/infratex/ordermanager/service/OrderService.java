@@ -29,7 +29,7 @@ public class OrderService {
     }
 
     public List<OrderModel> generatedOrders() {
-        List<OrderEntity> orderEntities = orderRepository.findByGeneratedAddressTrueOrderByProduct_InternalIdDesc();
+        List<OrderEntity> orderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(0);
 
         return orderModelMapper.fromEntities(orderEntities);
     }

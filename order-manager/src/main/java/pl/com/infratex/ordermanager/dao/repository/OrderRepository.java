@@ -8,6 +8,6 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<OrderEntity,Long> {
 
     List<OrderEntity> findByGeneratedAddressTrue();
-    List<OrderEntity> findByGeneratedAddressTrueOrderByProduct_InternalIdDesc();
+    List<OrderEntity> findByStatusOrderByProduct_InternalIdDesc(int status);
     List<OrderEntity> findByOrderByProduct_InternalIdDesc();
 }

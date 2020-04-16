@@ -58,7 +58,7 @@ public class OrderManagerService {
 
         saveOrders(productMappingService.assignInternalProductId(sellerOrderReportModel));
 
-        List<OrderEntity> foundOrderEntities = orderRepository.findByOrderByProduct_InternalIdDesc();
+        List<OrderEntity> foundOrderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(0);
         List<OrderModel> orderModels = orderModelMapper.fromEntities(foundOrderEntities);
 
         return new SellerOrderReportModel(orderModels,null);
