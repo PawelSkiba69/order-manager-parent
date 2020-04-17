@@ -42,6 +42,7 @@ public class OrderEntity {
 
     private LocalDateTime loadDate;
     private boolean generatedAddress;
+    private boolean inProcess;
     private int status;
     private String guid;
 
@@ -168,6 +169,38 @@ public class OrderEntity {
         this.generatedAddress = generatedAddress;
     }
 
+    public boolean isInProcess() {
+        return inProcess;
+    }
+
+    public void setInProcess(boolean inProcess) {
+        this.inProcess = inProcess;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "oId=" + oId +
+                ", orderId='" + orderId + '\'' +
+                ", orderItemId='" + orderItemId + '\'' +
+                ", purchaseDate=" + purchaseDate +
+                ", quantityPurchased=" + quantityPurchased +
+                ", isBusinessOrder=" + isBusinessOrder +
+                ", currency='" + currency + '\'' +
+                ", itemPrice=" + itemPrice +
+                ", itemTax=" + itemTax +
+                ", shippingPrice=" + shippingPrice +
+                ", shippingTax=" + shippingTax +
+                ", product=" + product +
+                ", client=" + client +
+                ", loadDate=" + loadDate +
+                ", generatedAddress=" + generatedAddress +
+                ", inProcess=" + inProcess +
+                ", status=" + status +
+                ", guid='" + guid + '\'' +
+                '}';
+    }
+
     public int getStatus() {
         return status;
     }
@@ -184,26 +217,4 @@ public class OrderEntity {
         this.guid = guid;
     }
 
-    @Override
-    public String toString() {
-        return "OrderEntity{" +
-                "oId=" + oId +
-                ", orderId='" + orderId + '\'' +
-                ", orderItemId='" + orderItemId + '\'' +
-                ", purchaseDate=" + purchaseDate +
-                ", quantityPurchased='" + quantityPurchased + '\'' +
-                ", isBusinessOrder=" + isBusinessOrder +
-                ", currency='" + currency + '\'' +
-                ", itemPrice=" + itemPrice +
-                ", itemTax=" + itemTax +
-                ", shippingPrice=" + shippingPrice +
-                ", shippingTax=" + shippingTax +
-                ", product=" + product +
-                ", client=" + client +
-                ", loadDate=" + loadDate +
-                ", preparedAddress=" + generatedAddress +
-                ", status=" + status +
-                ", guid='" + guid + '\'' +
-                '}';
-    }
 }

@@ -29,7 +29,7 @@ public class OrderService {
     }
 
     public List<OrderModel> generatedOrders() {
-        List<OrderEntity> orderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(0);
+        List<OrderEntity> orderEntities = orderRepository.findByInProcessTrueOrderByProduct_InternalIdDesc();
 
         return orderModelMapper.fromEntities(orderEntities);
     }
@@ -40,7 +40,7 @@ public class OrderService {
             for (Long id : chosen) {
                 Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(id);
                 OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + id));
-                foundOrderEntity.setGeneratedAddress(true);
+                foundOrderEntity.setInProcess(true);
                 orderRepository.save(foundOrderEntity);
             }
         }
@@ -64,4 +64,17 @@ public class OrderService {
         }
         return orders;
     }
+
+    public void updateOrderGeneratedAddressStatus(List<OrderModel> orders) throws OrderNotFoundException {
+        if (orders != null) {
+            for (OrderModel order : orders) {
+                Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(order.getOId());
+                OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + order.getOId()));
+                foundOrderEntity.setInProcess(false);
+                foundOrderEntity.setGeneratedAddress(true);
+                orderRepository.save(foundOrderEntity);
+            }
+        }
+    }
+
 }

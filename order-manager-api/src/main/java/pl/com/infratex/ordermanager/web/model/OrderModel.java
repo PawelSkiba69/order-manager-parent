@@ -34,6 +34,7 @@ public class OrderModel {
 
     private LocalDateTime loadDate;
     private boolean generatedAddress;
+    private boolean inProcess;
     private int status;
 
     private String guid;
