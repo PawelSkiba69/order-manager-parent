@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -46,7 +48,7 @@ class ENadawcaServiceTest {
                 AddressModel.builder().oId(O_ID_3).guid(GUID_3).recipientName(NAZWA_3).shipAddress2(ULICA_3)
                         .shipPostalCode(KOD_3).shipCity(MIASTO_3).shipCountry(KRAJ).build());
     // when
-        eNadawcaService.send(addresses);
+        eNadawcaService.send(addresses, "04/20/2020");
     // then
 
     }

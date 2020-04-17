@@ -2,6 +2,7 @@ package pl.com.infratex.ordermanager.service;
 
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.integration.enadawca.ENadawcaManager;
 import pl.com.infratex.ordermanager.service.enadawca.ENadawcaService;
 import pl.com.infratex.ordermanager.service.generator.report.PackingSlipAddressPdfReportGenerator;
@@ -13,6 +14,8 @@ import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -62,7 +65,7 @@ public class ShipmentManagerService {
         return null;
     }
 
-    public void send() {
+    public void send(String sendDate) {
         List<AddressModel> addresses = addressService.list();
 
         ENadawcaManager eNadawcaManager = new ENadawcaManager();
@@ -73,7 +76,13 @@ public class ShipmentManagerService {
 //        LOGGER.info("Orders before sent "+orders);
         orderService.updateOrdersWithGuids(addressesWithGuids, orders);
 
-        eNadawcaService.send(addressesWithGuids);
+        eNadawcaService.send(addressesWithGuids,sendDate);
+
+        try {
+            orderService.updateOrderGeneratedAddressStatus(orders);
+        } catch (OrderNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

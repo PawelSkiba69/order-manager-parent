@@ -31,12 +31,13 @@
                         <th scope="col">#</th>
                         <th scope="col">Numer Zamówienia</th>
                         <th scope="col">Nazwa Kupującego</th>
+                        <th scope="col">Kraj wysyłki</th>
                         <th scope="col">Data zakupu</th>
                         <th scope="col">Nazwa przedmiotu</th>
                         <th scope="col">Nazwa wewnętrzna</th>
                         <th scope="col">Szt.</th>
                         <th scope="col">Do wysłania</th>
-                        <th scope="col">Wygenerowane</th>
+<!--                        <th scope="col">Wygenerowane</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -44,12 +45,13 @@
                         <th th:text="${stat.count}" scope="row"></th>
                         <td th:text="${order.orderId}"></td>
                         <td th:text="${order.client.buyerName}">/td>
+                        <td th:text="${order.client.shipCountry}">/td>
                         <td th:text="${order.purchaseDateFormatted}"></td>
                         <td th:text="${order.product.productName}">/td>
                         <td th:text="${order.product.internalId}">/td>
                         <td th:text="${order.quantityPurchased}"></td>
-                        <td><input th:value="${order.oId}" type="checkbox" name="chosen"/></td>
-                        <td th:text="${order.status}"></td>
+                        <td><input th:value="${order.oId}" type="checkbox" name="chosen" checked/></td>
+<!--                        <td th:text="${order.status}"></td>-->
                     </tr>
                     </tbody>
                 </table>

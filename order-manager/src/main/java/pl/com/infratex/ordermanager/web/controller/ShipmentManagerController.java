@@ -1,5 +1,6 @@
 package pl.com.infratex.ordermanager.web.controller;
 
+import javafx.scene.control.DatePicker;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,15 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
 import pl.com.infratex.ordermanager.service.OrderManagerService;
 import pl.com.infratex.ordermanager.service.ShipmentManagerService;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
 import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
+import sun.util.calendar.LocalGregorianCalendar;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -50,11 +56,13 @@ public class ShipmentManagerController {
     }
 
     @PostMapping(value = "/send")//)
-    public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport, Model model) {
+    public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport,
+                       @RequestParam("sendDate") String sendDate) {
         LOGGER.info("Sending ...");
         LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
+        LOGGER.info("Data wysylania:  " + sendDate);
         shipmentManagerService.generateCorrectedAddresses(sellerOrderReport);
-        shipmentManagerService.send();
+        shipmentManagerService.send(sendDate);
 
         return SHIPMENT_MANAGER_STATUS_VIEW;
     }
