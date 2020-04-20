@@ -65,7 +65,7 @@ public class ShipmentManagerService {
         return null;
     }
 
-    public void send(String sendDate) {
+    public void send(Date sendDate) {
         List<AddressModel> addresses = addressService.list();
 
         ENadawcaManager eNadawcaManager = new ENadawcaManager();
