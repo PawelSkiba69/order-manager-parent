@@ -28,30 +28,6 @@ public class OrderModelConverter {
         order.setPurchaseDateFormatted(format);
     }
 
-    private static void addUnitPrice(OrderModel order) {
-        BigDecimal unitPrice=order.getItemPrice().divide(new BigDecimal(order.getQuantityPurchased()));
-        order.getProduct().setUnitPrice(unitPrice);
-    }
-
-    private static void addTotalPrice(OrderModel order) {
-        BigDecimal totalPrice=order.getItemPrice().add(order.getShippingPrice());
-        order.setTotalPrice(totalPrice);
-    }
-
-    private static void addCurrencySymbol(OrderModel order) {
-        String currencySymbol=CurrencyConverter.currencyConvertToSymbol(order.getCurrency());
-        order.setCurrencySymbol(currencySymbol);
-    }
-
-
-    public static void setAdditionalFieldsForPackingSlips(OrderModel order){
-        formatDate(order);
-        addCurrencySymbol(order);
-        addUnitPrice(order);
-        addTotalPrice(order);
-    }
-
-
     private static void fillBlank(OrderModel order) {
         ClientModel client = order.getClient();
         if (client != null) {

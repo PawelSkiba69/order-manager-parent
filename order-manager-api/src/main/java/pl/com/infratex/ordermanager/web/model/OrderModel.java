@@ -42,10 +42,20 @@ public class OrderModel {
     private String currencySymbol;
     private BigDecimal totalPrice;
 
-
     public OrderModel(Long oId, String orderId, BigDecimal itemPrice) {
         this.oId = oId;
         this.orderId = orderId;
         this.itemPrice = itemPrice;
+    }
+
+    public OrderModel(Long oId, String orderId, BigDecimal itemPrice,LocalDateTime purchaseDate, int quantityPurchased,
+                        BigDecimal shippingPrice,String currency) {
+        this.oId = oId;
+        this.orderId = orderId;
+        this.itemPrice = itemPrice;
+        this.purchaseDate = purchaseDate;
+        this.quantityPurchased = quantityPurchased;
+        this.shippingPrice = shippingPrice;
+        this.currency = currency;
     }
 }

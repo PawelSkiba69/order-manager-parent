@@ -2,48 +2,70 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jasper_report_template" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad825e6c-7eb6-4db7-bc1e-2594356f6702">
 	<property name="ireport.zoom" value="1.3310000000000057"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="477"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
 	<field name="orderId" class="java.lang.String">
-		<fieldDescription><![CDATA[orderId]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.orderId]]></fieldDescription>
 	</field>
 	<field name="itemPrice" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[itemPrice]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.itemPrice]]></fieldDescription>
 	</field>
 	<field name="product.productName" class="java.lang.String">
-		<fieldDescription><![CDATA[product.productName]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.product.productName]]></fieldDescription>
 	</field>
 	<field name="client.recipientName" class="java.lang.String">
-		<fieldDescription><![CDATA[client.recipientName]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.client.recipientName]]></fieldDescription>
 	</field>
 	<field name="client.shipAddress1" class="java.lang.String">
-		<fieldDescription><![CDATA[client.shipAddress1]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.client.shipAddress1]]></fieldDescription>
 	</field>
 	<field name="client.shipAddress2" class="java.lang.String">
-		<fieldDescription><![CDATA[client.shipAddress2]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.client.shipAddress2]]></fieldDescription>
 	</field>
 	<field name="client.shipCity" class="java.lang.String">
-		<fieldDescription><![CDATA[client.shipCity]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.client.shipCity]]></fieldDescription>
 	</field>
 	<field name="client.shipPostalCode" class="java.lang.String">
-		<fieldDescription><![CDATA[client.shipPostalCode]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.client.shipPostalCode]]></fieldDescription>
 	</field>
 	<field name="client.shipCountry" class="java.lang.String">
-		<fieldDescription><![CDATA[client.shipCountry]]></fieldDescription>
+		<fieldDescription><![CDATA[orderModel.client.shipCountry]]></fieldDescription>
 	</field>
-	<field name="product.internalId" class="java.lang.String"/>
-	<field name="purchaseDateFormatted" class="java.lang.String"/>
-	<field name="client.buyerName" class="java.lang.String"/>
-	<field name="quantityPurchased" class="java.lang.Integer"/>
-	<field name="product.unitPrice" class="java.math.BigDecimal"/>
-	<field name="orderItemId" class="java.lang.String"/>
-	<field name="shippingPrice" class="java.math.BigDecimal"/>
-	<field name="totalPrice" class="java.math.BigDecimal"/>
-	<field name="product.asin" class="java.lang.String"/>
-	<field name="product.condition" class="java.lang.String"/>
-	<field name="currencySymbol" class="java.lang.String"/>
+	<field name="product.internalId" class="java.lang.String">
+		<fieldDescription><![CDATA[orderModel.product.internalId]]></fieldDescription>
+	</field>
+	<field name="purchaseDateFormatted" class="java.lang.String">
+		<fieldDescription><![CDATA[orderModel.purchaseDateFormatted]]></fieldDescription>
+	</field>
+	<field name="client.buyerName" class="java.lang.String">
+		<fieldDescription><![CDATA[orderModel.client.buyerName]]></fieldDescription>
+	</field>
+	<field name="quantityPurchased" class="java.lang.Integer">
+		<fieldDescription><![CDATA[orderModel.quantityPurchased]]></fieldDescription>
+	</field>
+	<field name="product.unitPrice" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[unitPrice]]></fieldDescription>
+	</field>
+	<field name="orderItemId" class="java.lang.String">
+		<fieldDescription><![CDATA[orderModel.orderItemId]]></fieldDescription>
+	</field>
+	<field name="shippingPrice" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[orderModel.shippingPrice]]></fieldDescription>
+	</field>
+	<field name="totalPrice" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[totalPrice]]></fieldDescription>
+	</field>
+	<field name="product.asin" class="java.lang.String">
+		<fieldDescription><![CDATA[orderModel.product.asin]]></fieldDescription>
+	</field>
+	<field name="product.condition" class="java.lang.String">
+		<fieldDescription><![CDATA[orderModel.product.condition]]></fieldDescription>
+	</field>
+	<field name="currencySymbol" class="java.lang.String">
+		<fieldDescription><![CDATA[currencySymbol]]></fieldDescription>
+	</field>
 	<columnHeader>
 		<band height="152" splitType="Stretch">
 			<staticText>
@@ -433,6 +455,15 @@
 			<line>
 				<reportElement x="1" y="204" width="555" height="2" uuid="d30d7140-13af-499b-a69b-dadbd3633a1e"/>
 			</line>
+			<textField>
+				<reportElement x="432" y="549" width="80" height="20" uuid="4b2b15e0-61a2-4a08-9abb-c62503bc0c61"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="549" width="40" height="20" uuid="38c25a72-46a6-4825-b5b7-23d03158838d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

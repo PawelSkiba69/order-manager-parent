@@ -20,7 +20,5 @@ public class ProductModel {
     private String orderItemId;
     private String asin;
     private String condition;
-
-    private BigDecimal unitPrice;
 }
 

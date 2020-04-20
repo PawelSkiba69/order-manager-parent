@@ -10,12 +10,14 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
+import pl.com.infratex.ordermanager.web.model.OrderReportModel;
 import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,11 +35,12 @@ public class PackingSlipAddressPdfReportGenerator {
         InputStream orderReportStream = classPathResource.getInputStream();
         JasperReport jasperReport = JasperCompileManager.compileReport(orderReportStream);
 
+        List<OrderReportModel> orderReportModels=new ArrayList<>();
         for (OrderModel order:orders) {
-            OrderModelConverter.setAdditionalFieldsForPackingSlips(order);
+            orderReportModels.add(new OrderReportModel(order));
         }
 
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orders);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(orderReportModels);
 
         Map<String, Object> parameters = new HashMap<>();
 

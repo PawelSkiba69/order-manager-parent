@@ -9,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,9 +21,12 @@ class PackingSlipAddressPdfReportGeneratorTest {
         SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel();
         sellerOrderReportModel.setOrders(
                 Arrays.asList(
-                        new OrderModel(1L, "111", BigDecimal.valueOf(11L)),
-                        new OrderModel(2L, "222", BigDecimal.valueOf(12L)),
-                        new OrderModel(3L, "333", BigDecimal.valueOf(13L))
+                        new OrderModel(1L, "111", BigDecimal.valueOf(11L), LocalDateTime.now(),
+                                2,BigDecimal.valueOf(3.99),"EUR"),
+                        new OrderModel(2L, "222", BigDecimal.valueOf(12L),LocalDateTime.now(),
+                                5,BigDecimal.valueOf(4.99),"GBP"),
+                        new OrderModel(3L, "333", BigDecimal.valueOf(13L),LocalDateTime.now(),
+                                1,BigDecimal.valueOf(4.99),"EUR")
                 )
         );
         PackingSlipAddressPdfReportGenerator pdfReportGenerator = new PackingSlipAddressPdfReportGenerator();
