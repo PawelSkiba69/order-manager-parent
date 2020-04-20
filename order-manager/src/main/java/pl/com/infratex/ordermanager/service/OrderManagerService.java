@@ -57,18 +57,14 @@ public class OrderManagerService {
         List<AmazonCsvOrder> amazonCsvOrders = parseCsv(inputStreamUnshippedOrders, inputStreamNewOrders);
         SellerOrderReportModel sellerOrderReportModel = sellerOrderReportMapper.fromAmazonCsvOrders(amazonCsvOrders);
 
-        List<String>unshippedOrdersIds=new ArrayList<>();
+        saveOrders(productMappingService.assignInternalProductId(sellerOrderReportModel));
 
-        SellerOrderReportModel sellerOrderReportModelWithInternalProductId=
-                productMappingService.assignInternalProductId(sellerOrderReportModel);
-        saveOrders(productMappingService.assignInternalProductId(sellerOrderReportModel),unshippedOrdersIds);
-
-        //TODO do wykorzystania przy pobieraniu zamówień bezpośrednio z Amazaona
+        //TODO do wykorzystania przy pobieraniu zamówień bezpośrednio z Amazona
 //        List<OrderEntity> foundOrderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(0);
 //        List<OrderModel> orderModels = orderModelMapper.fromEntities(foundOrderEntities);
 
         List<OrderEntity> foundOrderEntities = orderRepository.
-                findByOrderIdInOrderByProduct_InternalIdDesc(unshippedOrdersIds);
+                findByOrderItemIdInOrderByProduct_InternalIdDesc(getUnshippedOrderItemIds(sellerOrderReportModel));
 
         return new SellerOrderReportModel(orderModelMapper.fromEntities(foundOrderEntities) ,null);
     }
@@ -94,13 +90,11 @@ public class OrderManagerService {
         return amazonCsvOrdersMergeProcessor.mergeOrders(readerUnshippedOrders, readerNewOrders);
     }
 
-    private void saveOrders(SellerOrderReportModel sellerOrderReportModel,List<String>unshippedOrdersIds) {
+    private void saveOrders(SellerOrderReportModel sellerOrderReportModel) {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         List<OrderEntity> orderEntities = orderModelMapper.fromModels(orders);
-//        orderRepository.saveAll(orderEntities);
 
         for (OrderEntity orderEntity : orderEntities) {
-            unshippedOrdersIds.add(orderEntity.getOrderId());
             if (orderNotExist(orderEntity)) {
                 ProductEntity productEntity = productRepository.save(orderEntity.getProduct());
                 ClientEntity clientEntity = clientRepository.save(orderEntity.getClient());
@@ -116,6 +110,15 @@ public class OrderManagerService {
     private boolean orderNotExist(OrderEntity orderEntity){
         return orderRepository.findByOrderIdAndOrderItemId(
                 orderEntity.getOrderId(),orderEntity.getOrderItemId()).isEmpty();
+    }
+
+    private List<String>getUnshippedOrderItemIds(SellerOrderReportModel sellerOrderReportModel){
+        List<String>unshippedOrderItemIds=new ArrayList<>();
+        List<OrderModel> orders = sellerOrderReportModel.getOrders();
+        for (OrderModel order:orders){
+            unshippedOrderItemIds.add(order.getOrderItemId());
+        }
+        return unshippedOrderItemIds;
     }
 
 }
