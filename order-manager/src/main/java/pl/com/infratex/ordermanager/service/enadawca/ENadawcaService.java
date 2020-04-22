@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,22 +33,24 @@ public class ENadawcaService {
         this.sequenceIdGenerator = sequenceIdGenerator;
     }
 
-    public void send(List<AddressModel> addresses, Date sendDate) {
+    public void send(List<AddressModel> addresses, LocalDate sendDate) {
         GregorianCalendar dataNadania = new GregorianCalendar();
-        dataNadania.setTime(sendDate);
+        dataNadania.setTime(Date.from(sendDate.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant()));
         ENadawcaManager eNadawcaManager= new ENadawcaManager();
         //FIXME rzucić wyjątek biznesowy
-  //      try {
+        try {
             Integer generateId = sequenceIdGenerator.generateId();
-//            eNadawcaManager.elektronicznyNadawcaProperties(dataNadania, generateId,
-//                    "Amazon"+ dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
-//            List<PrzesylkaType> przesylkaTypes = eNadawcaMapper.shipmentsSet(addresses);
-//            eNadawcaManager.addShipment(przesylkaTypes, generateId);
+            eNadawcaManager.elektronicznyNadawcaProperties(dataNadania, generateId,
+                    "Amazon"+ dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
+            List<PrzesylkaType> przesylkaTypes = eNadawcaMapper.shipmentsSet(addresses);
+            eNadawcaManager.addShipment(przesylkaTypes, generateId);
             LOGGER.info("####GeneratedID= "+generateId);
             LOGGER.info("####BuforName= "+"Amazon_"+dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
-   //     } catch (ENadawcaException e) {
-  //          e.printStackTrace();
-   //     }
+        } catch (ENadawcaException e) {
+            e.printStackTrace();
+        }
 
     }
 

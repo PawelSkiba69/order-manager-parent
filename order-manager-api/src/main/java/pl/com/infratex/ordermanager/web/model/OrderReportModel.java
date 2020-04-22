@@ -18,8 +18,11 @@ public class OrderReportModel {
         this.orderModel = orderModel;
 
         OrderModelConverter.formatDate(this.orderModel);
-        this.currencySymbol= CurrencyConverter.currencyConvertToSymbol(orderModel.getCurrency());
-        this.unitPrice=orderModel.getItemPrice().divide(new BigDecimal(orderModel.getQuantityPurchased()));
-        this.totalPrice=orderModel.getItemPrice().add(orderModel.getShippingPrice());
+        this.currencySymbol = CurrencyConverter.currencyConvertToSymbol(orderModel.getCurrency());
+        BigDecimal itemPrice = orderModel.getItemPrice();
+        if (itemPrice != null) {
+            this.unitPrice = itemPrice.divide(BigDecimal.valueOf(orderModel.getQuantityPurchased()), BigDecimal.ROUND_UP);
+            this.totalPrice = itemPrice.add(orderModel.getShippingPrice());
+        }
     }
 }

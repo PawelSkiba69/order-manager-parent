@@ -61,7 +61,6 @@ public class OrderManagerService {
 
         //TODO do wykorzystania przy pobieraniu zamówień bezpośrednio z Amazona
 //        List<OrderEntity> foundOrderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(0);
-//        List<OrderModel> orderModels = orderModelMapper.fromEntities(foundOrderEntities);
 
         List<OrderEntity> foundOrderEntities = orderRepository.
                 findByOrderItemIdInOrderByProduct_InternalIdDesc(getUnshippedOrderItemIds(sellerOrderReportModel));
@@ -76,10 +75,6 @@ public class OrderManagerService {
         } catch (OrderNotFoundException e) {
             throw new OrderManagerException(e.getMessage(), e);
         }
-    }
-
-    public void assignInternalProductId(SellerOrderReportModel sellerOrderReportModel){
-
     }
 
     private List<AmazonCsvOrder> parseCsv(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException {

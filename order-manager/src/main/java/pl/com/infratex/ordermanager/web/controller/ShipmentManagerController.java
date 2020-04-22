@@ -53,14 +53,12 @@ public class ShipmentManagerController {
     }
 
     @PostMapping(value = "/send")//)
-    public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport,
-                       @RequestParam("sendDate") @DateTimeFormat(pattern = "MM/dd/yyyy") Date sendDate) {
+    public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport) {
 
         LOGGER.info("Sending ...");
         LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
-        LOGGER.info("Data wysylania:  " + sendDate);
         shipmentManagerService.generateCorrectedAddresses(sellerOrderReport);
-        shipmentManagerService.send(sendDate);
+        shipmentManagerService.send(sellerOrderReport.getSendDate());
 
         return SHIPMENT_MANAGER_STATUS_VIEW;
     }
