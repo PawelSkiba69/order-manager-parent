@@ -24,6 +24,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderManagerService {
@@ -108,12 +109,15 @@ public class OrderManagerService {
     }
 
     private List<String>getUnshippedOrderItemIds(SellerOrderReportModel sellerOrderReportModel){
-        List<String>unshippedOrderItemIds=new ArrayList<>();
-        List<OrderModel> orders = sellerOrderReportModel.getOrders();
-        for (OrderModel order:orders){
-            unshippedOrderItemIds.add(order.getOrderItemId());
-        }
-        return unshippedOrderItemIds;
+        return sellerOrderReportModel.getOrders().stream()
+                .map(OrderModel::getOrderItemId)
+                .collect(Collectors.toList());
+//        List<String>unshippedOrderItemIds=new ArrayList<>();
+//        List<OrderModel> orders = sellerOrderReportModel.getOrders();
+//        for (OrderModel order:orders){
+//            unshippedOrderItemIds.add(order.getOrderItemId());
+//        }
+//        return unshippedOrderItemIds;
     }
 
 }

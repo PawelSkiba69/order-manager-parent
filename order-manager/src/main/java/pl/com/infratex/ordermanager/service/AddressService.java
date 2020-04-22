@@ -28,6 +28,10 @@ public class AddressService {
         });
     }
 
+    public void deleteAll(List<AddressModel> addressModels) {
+        addressRepository.deleteAll();
+    }
+
     public List<AddressModel> list() {
         List<AddressEntity> addressEntities = addressRepository.findByOrderByInternalIdDesc();
         return addressModelMapper.fromEntities(addressEntities);

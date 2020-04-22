@@ -48,7 +48,7 @@ class ENadawcaServiceTest {
                 AddressModel.builder().oId(O_ID_3).guid(GUID_3).recipientName(NAZWA_3).shipAddress2(ULICA_3)
                         .shipPostalCode(KOD_3).shipCity(MIASTO_3).shipCountry(KRAJ).build());
     // when
-        eNadawcaService.send(addresses, new Date());
+        eNadawcaService.send(addresses, LocalDate.now());
     // then
 
     }

@@ -45,13 +45,6 @@ public class ShipmentManagerService {
         return orderService.generatedOrders();
     }
 
-    public void generateCorrectedAddresses(SellerOrderReportModel sellerOrderReportModel) {
-        List<OrderModel> orders = sellerOrderReportModel.getOrders();
-        List<AddressModel> addressModels = addressModelMapper.fromOrderModels(orders);
-
-        addressService.saveAll(addressModels);
-    }
-
     public byte[] generatePackingSlips() {
         List<OrderModel> orders = orderService.generatedOrders();
         try {
@@ -65,7 +58,13 @@ public class ShipmentManagerService {
         return null;
     }
 
-    public void send(LocalDate sendDate) {
+    public void send(SellerOrderReportModel sellerOrderReport){
+        generateCorrectedAddresses(sellerOrderReport);
+        sendToENadawca(sellerOrderReport.getSendDate());
+        removeCorrectedAddresses(sellerOrderReport);
+    }
+
+    private void sendToENadawca(LocalDate sendDate) {
         List<AddressModel> addresses = addressService.list();
 
         ENadawcaManager eNadawcaManager = new ENadawcaManager();
@@ -83,6 +82,20 @@ public class ShipmentManagerService {
         } catch (OrderNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    void generateCorrectedAddresses(SellerOrderReportModel sellerOrderReportModel) {
+        List<OrderModel> orders = sellerOrderReportModel.getOrders();
+        List<AddressModel> addressModels = addressModelMapper.fromOrderModels(orders);
+
+        addressService.saveAll(addressModels);
+    }
+
+    void removeCorrectedAddresses(SellerOrderReportModel sellerOrderReportModel) {
+        List<OrderModel> orders = sellerOrderReportModel.getOrders();
+        List<AddressModel> addressModels = addressModelMapper.fromOrderModels(orders);
+
+        addressService.deleteAll(addressModels);
     }
 
 
