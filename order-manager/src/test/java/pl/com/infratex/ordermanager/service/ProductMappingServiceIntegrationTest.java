@@ -30,7 +30,7 @@ class ProductMappingServiceIntegrationTest {
     private ProductMappingCsvProcessor productMappingCsvProcessor;
 
     @Test
-    void givenProductWithSku_whenAssignInternalProductId_thenOrdersNotNull() {
+    void givenProductWithSku_assignAdditionalProductInfo_thenOrdersNotNull() {
         //given
         ProductModel productModel = ProductModel.builder()
                 .productName("Remote control Grandin")
@@ -49,7 +49,7 @@ class ProductMappingServiceIntegrationTest {
                 productMappingCsvProcessor, productMappingRepository, productMappingMapper);
         //when
         SellerOrderReportModel sellerOrderReportModelWithInternalProductIds =
-                productMappingService.assignInternalProductId(sellerOrderReportModel);
+                productMappingService.assignAdditionalProductInfo(sellerOrderReportModel);
         //then
         assertAll(
                 () -> assertNotNull(sellerOrderReportModelWithInternalProductIds, "sellerOrderReportModel is null"),
@@ -59,11 +59,13 @@ class ProductMappingServiceIntegrationTest {
     }
 
     @Test
-    void givenProductWithSku_whenAssignInternalProductId_thenInternalIdNotNull() {
+    void givenProductWithSku_assignAdditionalProductInfo_thenInternalIdNotNull() {
         //given
         ProductMappingEntity productMappingEntity = new ProductMappingEntity();
         productMappingEntity.setSku(SKU_INF_0001);
         productMappingEntity.setInternalProductName("p732");
+        productMappingEntity.setAsin("A4802GNN490");
+        productMappingEntity.setCondition("new");
         ProductMappingEntity savedProductMappingEntity = productMappingRepository.save(productMappingEntity);
 
         ProductModel productModel = ProductModel.builder()
@@ -83,13 +85,15 @@ class ProductMappingServiceIntegrationTest {
                 productMappingCsvProcessor, productMappingRepository, productMappingMapper);
         //when
         SellerOrderReportModel sellerOrderReportModelWithInternalProductIds =
-                productMappingService.assignInternalProductId(sellerOrderReportModel);
+                productMappingService.assignAdditionalProductInfo(sellerOrderReportModel);
         List<OrderModel> ordersWithInternalProductIds = sellerOrderReportModelWithInternalProductIds.getOrders();
         OrderModel orderModelWithInternalProductId = ordersWithInternalProductIds.get(0);
         ProductModel productWithInternalProductId = orderModelWithInternalProductId.getProduct();
         //then
         assertAll(
                 () -> assertNotNull(productWithInternalProductId.getInternalId(), "internalId is null"),
+                () -> assertNotNull(productWithInternalProductId.getAsin(), "asin is null"),
+                () -> assertNotNull(productWithInternalProductId.getCondition(), "condition is null"),
                 () -> assertEquals(savedProductMappingEntity.getSku(),productWithInternalProductId.getSku(),"sku's aren't equals")
         );
 

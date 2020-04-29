@@ -20,6 +20,8 @@ public class ProductEntity {
     @Column(length = 1024)
     private String productName;
     private String orderItemId;
+    private String asin;
+    private String condition;
 
     public ProductEntity() {
     }
@@ -64,6 +66,22 @@ public class ProductEntity {
         this.orderItemId = orderItemId;
     }
 
+    public String getAsin() {
+        return asin;
+    }
+
+    public void setAsin(String asin) {
+        this.asin = asin;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
     @Override
     public String toString() {
         return "ProductEntity{" +
@@ -72,6 +90,8 @@ public class ProductEntity {
                 ", sku='" + sku + '\'' +
                 ", productName='" + productName + '\'' +
                 ", orderItemId='" + orderItemId + '\'' +
+                ", asin='" + asin + '\'' +
+                ", condition='" + condition + '\'' +
                 '}';
     }
 }

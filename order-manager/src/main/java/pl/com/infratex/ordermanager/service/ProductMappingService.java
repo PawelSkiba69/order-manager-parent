@@ -42,7 +42,7 @@ public class ProductMappingService {
         return productMappingMapper.fromEntities(saveProductMappingEntities);
     }
 
-    public SellerOrderReportModel assignInternalProductId(SellerOrderReportModel sellerOrderReportModel) {
+    public SellerOrderReportModel assignAdditionalProductInfo(SellerOrderReportModel sellerOrderReportModel) {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         if (orders != null && orders.size() > 0) {
             for (OrderModel order : orders) {
@@ -52,6 +52,8 @@ public class ProductMappingService {
                     ProductMappingEntity productMappingEntity = productMappingRepository.findBySku(sku);
                     if (productMappingEntity != null)
                         product.setInternalId(productMappingEntity.getInternalProductName());
+                    product.setAsin(productMappingEntity.getAsin());
+                    product.setCondition(productMappingEntity.getCondition());
                 }
 
                 LOGGER.info("order with internal id: " + order);

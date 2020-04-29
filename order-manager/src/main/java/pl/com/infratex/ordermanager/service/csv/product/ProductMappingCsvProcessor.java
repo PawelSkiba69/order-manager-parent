@@ -28,9 +28,13 @@ public class ProductMappingCsvProcessor {
             for (CSVRecord csvRecord : csvRecords) {
                 String sku = csvRecord.get(ProductMappingCsvHeader.SKU.getName());
                 String internalProductName = csvRecord.get(ProductMappingCsvHeader.INTERNAL_PRODUCT_NAME.getName());
+                String asin=csvRecord.get(ProductMappingCsvHeader.ASIN.getName());
+                String condition=csvRecord.get(ProductMappingCsvHeader.CONDITION.getName());
                 LOGGER.info("sku: " + sku);
                 LOGGER.info("internalProductName: " + internalProductName);
-                productMappingModels.add(new ProductMappingModel(sku, internalProductName));
+                LOGGER.info("asin: " + asin);
+                LOGGER.info("condition: " + condition);
+                productMappingModels.add(new ProductMappingModel(sku, internalProductName,asin,condition));
             }
         } catch (IOException e) {
             throw new ProductMappingCsvProcessorException("Błąd podczas parsowania pliku csv z mapowaniem produktu", e);

@@ -1,7 +1,7 @@
 package pl.com.infratex.ordermanager.service.model;
 
 public enum ProductMappingCsvHeader {
-    SKU("SKU"), INTERNAL_PRODUCT_NAME("internal-product-name");
+    SKU("SKU"), INTERNAL_PRODUCT_NAME("internal-product-name"),ASIN("ASIN"),CONDITION("condition");
 
     private String name;
 

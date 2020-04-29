@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -58,7 +57,7 @@ public class OrderManagerService {
         List<AmazonCsvOrder> amazonCsvOrders = parseCsv(inputStreamUnshippedOrders, inputStreamNewOrders);
         SellerOrderReportModel sellerOrderReportModel = sellerOrderReportMapper.fromAmazonCsvOrders(amazonCsvOrders);
 
-        saveOrders(productMappingService.assignInternalProductId(sellerOrderReportModel));
+        saveOrders(productMappingService.assignAdditionalProductInfo(sellerOrderReportModel));
 
         //TODO do wykorzystania przy pobieraniu zamówień bezpośrednio z Amazona
 //        List<OrderEntity> foundOrderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(0);
@@ -112,12 +111,6 @@ public class OrderManagerService {
         return sellerOrderReportModel.getOrders().stream()
                 .map(OrderModel::getOrderItemId)
                 .collect(Collectors.toList());
-//        List<String>unshippedOrderItemIds=new ArrayList<>();
-//        List<OrderModel> orders = sellerOrderReportModel.getOrders();
-//        for (OrderModel order:orders){
-//            unshippedOrderItemIds.add(order.getOrderItemId());
-//        }
-//        return unshippedOrderItemIds;
     }
 
 }

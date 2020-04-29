@@ -16,6 +16,8 @@ public class ProductMappingEntity {
 
     private String sku;
     private String internalProductName;
+    private String asin;
+    private String condition;
 
     public ProductMappingEntity() {
     }
@@ -44,12 +46,30 @@ public class ProductMappingEntity {
         this.internalProductName = internalProductName;
     }
 
+    public String getAsin() {
+        return asin;
+    }
+
+    public void setAsin(String asin) {
+        this.asin = asin;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
     @Override
     public String toString() {
-        return "ProductMapping{" +
+        return "ProductMappingEntity{" +
                 "id=" + id +
                 ", sku='" + sku + '\'' +
                 ", internalProductName='" + internalProductName + '\'' +
+                ", asin='" + asin + '\'' +
+                ", condition='" + condition + '\'' +
                 '}';
     }
 }
