@@ -19,11 +19,11 @@ public class AmazonCsvOrdersMergeProcessor {
         List<AmazonCsvOrder> amazonCsvNewOrders = amazonCsvProcessor.parseCsv(new AmazonCsvNewOrdersProcessor(newOrdersReader));
 
         for (AmazonCsvOrder amazonCsvUnshippedOrder : amazonCsvUnshippedOrders) {
-            String unshippedOrderId = amazonCsvUnshippedOrder.getOrderId();
+            String unshippedOrderItemId = amazonCsvUnshippedOrder.getOrderItemId();
             for (AmazonCsvOrder amazonCsvNewOrder : amazonCsvNewOrders) {
-                String newOrderId = amazonCsvNewOrder.getOrderId();
-                if (unshippedOrderId != null && newOrderId != null) {
-                    if (unshippedOrderId.equalsIgnoreCase(newOrderId)) {
+                String newOrderItemId = amazonCsvNewOrder.getOrderItemId();
+                if (unshippedOrderItemId != null && newOrderItemId != null) {
+                    if (unshippedOrderItemId.equalsIgnoreCase(newOrderItemId)) {
                         try {
                             amazonCsvUnshippedOrder.setCurrency(amazonCsvNewOrder.getCurrency());
                             amazonCsvUnshippedOrder.setItemPrice(amazonCsvNewOrder.getItemPrice());

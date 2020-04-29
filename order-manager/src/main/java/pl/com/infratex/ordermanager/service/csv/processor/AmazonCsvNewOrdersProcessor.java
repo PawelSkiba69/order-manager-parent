@@ -36,6 +36,7 @@ public class AmazonCsvNewOrdersProcessor implements AmazonCsvOrdersProcessor {
             AmazonCsvOrder amazonCsvOrder = new AmazonCsvOrder();
             try {
                 amazonCsvOrder.setOrderId(orderId);
+                amazonCsvOrder.setOrderItemId(csvRecord.get(AmazonCsvOrderHeader.ORDER_ITEM_ID.getName()));
                 amazonCsvOrder.setCurrency(csvRecord.get(AmazonCsvOrderHeader.CURRENCY.getName()));
                 amazonCsvOrder.setItemPrice(new BigDecimal(csvRecord.get(AmazonCsvOrderHeader.ITEM_PRICE.getName())));
                 amazonCsvOrder.setShippingPrice(new BigDecimal(csvRecord.get(AmazonCsvOrderHeader.SHIPPING_PRICE.getName())));
