@@ -22,6 +22,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class ProductMappingServiceIntegrationTest {
 
     public static final String SKU_INF_0001 = "INF0001";
+    public static final String INTERNAL_PRODUCT_NAME_P_732 = "p732";
+    public static final String ASIN_A_4802_GNN_490 = "A4802GNN490";
+    public static final String CONDITION_NEW = "new";
     @Autowired
     private ProductMappingMapper productMappingMapper;
     @Autowired
@@ -43,7 +46,7 @@ class ProductMappingServiceIntegrationTest {
         List<OrderModel> orders = asList(
                 orderModel
         );
-        SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel(orders,null);
+        SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel(orders, null);
 
         ProductMappingService productMappingService = new ProductMappingService(
                 productMappingCsvProcessor, productMappingRepository, productMappingMapper);
@@ -63,9 +66,9 @@ class ProductMappingServiceIntegrationTest {
         //given
         ProductMappingEntity productMappingEntity = new ProductMappingEntity();
         productMappingEntity.setSku(SKU_INF_0001);
-        productMappingEntity.setInternalProductName("p732");
-        productMappingEntity.setAsin("A4802GNN490");
-        productMappingEntity.setCondition("new");
+        productMappingEntity.setInternalProductName(INTERNAL_PRODUCT_NAME_P_732);
+        productMappingEntity.setAsin(ASIN_A_4802_GNN_490);
+        productMappingEntity.setCondition(CONDITION_NEW);
         ProductMappingEntity savedProductMappingEntity = productMappingRepository.save(productMappingEntity);
 
         ProductModel productModel = ProductModel.builder()
@@ -79,7 +82,7 @@ class ProductMappingServiceIntegrationTest {
         List<OrderModel> orders = asList(
                 orderModel
         );
-        SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel(orders,null);
+        SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel(orders, null);
 
         ProductMappingService productMappingService = new ProductMappingService(
                 productMappingCsvProcessor, productMappingRepository, productMappingMapper);
@@ -94,7 +97,10 @@ class ProductMappingServiceIntegrationTest {
                 () -> assertNotNull(productWithInternalProductId.getInternalId(), "internalId is null"),
                 () -> assertNotNull(productWithInternalProductId.getAsin(), "asin is null"),
                 () -> assertNotNull(productWithInternalProductId.getCondition(), "condition is null"),
-                () -> assertEquals(savedProductMappingEntity.getSku(),productWithInternalProductId.getSku(),"sku's aren't equals")
+                () -> assertEquals(savedProductMappingEntity.getSku(), productWithInternalProductId.getSku(), "sku's aren't equals"),
+                () -> assertEquals(savedProductMappingEntity.getInternalProductName(), productWithInternalProductId.getInternalId(), "internalId aren't equals"),
+                () -> assertEquals(savedProductMappingEntity.getAsin(), productWithInternalProductId.getAsin(), "asins aren't equals"),
+                () -> assertEquals(savedProductMappingEntity.getCondition(), productWithInternalProductId.getCondition(), "conditions aren't equals")
         );
 
     }
