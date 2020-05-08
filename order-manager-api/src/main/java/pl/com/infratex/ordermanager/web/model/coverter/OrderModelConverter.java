@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -15,7 +14,7 @@ public class OrderModelConverter {
 
     public static List<OrderModel> convert(List<OrderModel> orders) {
         for (OrderModel order : orders) {
-            fillBlank(order);
+            formatShipAddress(order);
             toUpperCase(order);
             countryCode(order);
         }
@@ -28,11 +27,17 @@ public class OrderModelConverter {
         order.setPurchaseDateFormatted(format);
     }
 
-    private static void fillBlank(OrderModel order) {
+    private static void formatShipAddress(OrderModel order) {
         ClientModel client = order.getClient();
         if (client != null) {
-            if (StringUtils.isBlank(client.getShipAddress2())) {
-                client.setShipAddress2(client.getShipAddress1());
+            String shipAddress1=client.getShipAddress1();
+            String shipAddress2=client.getShipAddress2();
+            if (StringUtils.isBlank(shipAddress2)) {
+                client.setShipAddress2(shipAddress1);
+                client.setShipAddress1("");
+            }
+            else if (shipAddress2.length()<4){
+                client.setShipAddress2(shipAddress1+" "+shipAddress2);
                 client.setShipAddress1("");
             }
         }
