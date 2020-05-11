@@ -42,6 +42,7 @@ public class ProductMappingService {
         return productMappingMapper.fromEntities(saveProductMappingEntities);
     }
 
+
     public SellerOrderReportModel assignAdditionalProductInfo(SellerOrderReportModel sellerOrderReportModel) {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         if (orders != null && orders.size() > 0) {
@@ -61,5 +62,17 @@ public class ProductMappingService {
             }
         }
         return sellerOrderReportModel;
+    }
+
+    public ProductMappingModel addOrUpdateProductMapping(ProductMappingModel productMappingModel) {
+
+        ProductMappingEntity productMappingEntity = productMappingMapper.fromModel(productMappingModel);
+        ProductMappingEntity existingProductMappingEntity = productMappingRepository.findBySku(productMappingModel.getSku());
+        if (existingProductMappingEntity!=null){
+           productMappingEntity.setId(existingProductMappingEntity.getId());
+        }
+        ProductMappingEntity saveProductMappingEntity = productMappingRepository.save(productMappingEntity);
+
+        return productMappingMapper.fromEntity(saveProductMappingEntity);
     }
 }

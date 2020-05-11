@@ -3,15 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Panel Administracyjny</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
-<div>
-    <div>Import powiązań produktów</div>
+<div class="container-fluid">
     <div>
-        <form action="#" th:action="@{/admin/products/import/mapping}" method="post" enctype="multipart/form-data">
-            <input name="products-mapping" type="file" placeholder="wybierz plik">
-            <button type="submit">Wyślij</button>
-        </form>
+        <div>Import powiązań produktów z pliku csv</div>
+        <div>
+            <form action="#" th:action="@{/admin/products/import/mapping}" method="post" enctype="multipart/form-data">
+                <input name="products-mapping" type="file" placeholder="wybierz plik">
+                <button type="submit">Wyślij</button>
+            </form>
+        </div>
+        <br>
+        <div>Dodaj/aktualizuj produkt</div>
+        <div>
+            <form action="#" th:action="@{/admin/products/add/mapping}" th:object="${productMappingModel}"
+                  method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <table>
+                    <tr>
+                        <td>SKU:</td>
+                        <td><input id="sku" type="text" th:field="*{sku}" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Nazwa wewnętrzna:</td>
+                        <td><input id="internalProductName" type="text" th:field="*{internalProductName}" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ASIN:</td>
+                        <td><input id="asin" type="text" th:field="*{asin}" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Stan:</td>
+                        <td><select id="condition" th:field="*{condition}" required defavlue="11">
+                            <option value="11">Nowy</option>
+                            <option value="1">Używany: jak nowy</option>
+                            <option value="2">Używany: bardzo dobry</option>
+                            <option value="3">Używany: dobry</option>
+                            <option value="4">Używany: akceptowalny</option>
+                        </select></td>
+                    </tr>
+                </table>
+                <button type="submit">Dodaj</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>
