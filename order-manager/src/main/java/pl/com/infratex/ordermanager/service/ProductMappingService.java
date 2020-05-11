@@ -42,6 +42,13 @@ public class ProductMappingService {
         return productMappingMapper.fromEntities(saveProductMappingEntities);
     }
 
+    public ProductMappingModel addProductMapping(ProductMappingModel productMappingModel) {
+        ProductMappingEntity productMappingEntity = productMappingMapper.fromModel(productMappingModel);
+        ProductMappingEntity saveProductMappingEntity = productMappingRepository.save(productMappingEntity);
+
+        return productMappingMapper.fromEntity(saveProductMappingEntity);
+    }
+
     public SellerOrderReportModel assignAdditionalProductInfo(SellerOrderReportModel sellerOrderReportModel) {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         if (orders != null && orders.size() > 0) {
@@ -50,10 +57,11 @@ public class ProductMappingService {
                 if (product != null) {
                     String sku = product.getSku();
                     ProductMappingEntity productMappingEntity = productMappingRepository.findBySku(sku);
-                    if (productMappingEntity != null)
+                    if (productMappingEntity != null) {
                         product.setInternalId(productMappingEntity.getInternalProductName());
-                    product.setAsin(productMappingEntity.getAsin());
-                    product.setCondition(productMappingEntity.getCondition());
+                        product.setAsin(productMappingEntity.getAsin());
+                        product.setCondition(productMappingEntity.getCondition());
+                    }
                 }
 
                 LOGGER.info("order with internal id: " + order);
