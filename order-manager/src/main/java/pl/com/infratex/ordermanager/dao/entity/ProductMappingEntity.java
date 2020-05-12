@@ -17,7 +17,7 @@ public class ProductMappingEntity {
     private String sku;
     private String internalProductName;
     private String asin;
-    private String condition;
+    private int condition;
 
     public ProductMappingEntity() {
     }
@@ -54,11 +54,11 @@ public class ProductMappingEntity {
         this.asin = asin;
     }
 
-    public String getCondition() {
+    public int getCondition() {
         return condition;
     }
 
-    public void setCondition(String condition) {
+    public void setCondition(int condition) {
         this.condition = condition;
     }
 

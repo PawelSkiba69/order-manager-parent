@@ -6,6 +6,7 @@ import pl.com.infratex.ordermanager.dao.entity.ProductMappingEntity;
 import pl.com.infratex.ordermanager.dao.repository.ProductMappingRepository;
 import pl.com.infratex.ordermanager.service.csv.product.ProductMappingCsvProcessor;
 import pl.com.infratex.ordermanager.service.mapper.ProductMappingMapper;
+import pl.com.infratex.ordermanager.service.model.ProductMappingCondition;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.ProductMappingModel;
 import pl.com.infratex.ordermanager.web.model.ProductModel;
@@ -51,10 +52,11 @@ public class ProductMappingService {
                 if (product != null) {
                     String sku = product.getSku();
                     ProductMappingEntity productMappingEntity = productMappingRepository.findBySku(sku);
-                    if (productMappingEntity != null)
+                    if (productMappingEntity != null) {
                         product.setInternalId(productMappingEntity.getInternalProductName());
-                    product.setAsin(productMappingEntity.getAsin());
-                    product.setCondition(productMappingEntity.getCondition());
+                        product.setAsin(productMappingEntity.getAsin());
+                        product.setCondition(ProductMappingCondition.valueOf("CONDITION_"+productMappingEntity.getCondition()).getConditionType());
+                    }
                 }
 
                 LOGGER.info("order with internal id: " + order);

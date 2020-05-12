@@ -34,7 +34,7 @@ public class ProductMappingCsvProcessor {
                 LOGGER.info("internalProductName: " + internalProductName);
                 LOGGER.info("asin: " + asin);
                 LOGGER.info("condition: " + condition);
-                productMappingModels.add(new ProductMappingModel(sku, internalProductName,asin,condition));
+                productMappingModels.add(new ProductMappingModel(sku, internalProductName,asin,Integer.parseInt(condition)));
             }
         } catch (IOException e) {
             throw new ProductMappingCsvProcessorException("Błąd podczas parsowania pliku csv z mapowaniem produktu", e);

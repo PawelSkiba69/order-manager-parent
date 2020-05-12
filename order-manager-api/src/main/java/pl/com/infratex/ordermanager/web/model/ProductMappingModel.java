@@ -12,14 +12,14 @@ public class ProductMappingModel {
     private String sku;
     private String internalProductName;
     private String asin;
-    private String condition;
+    private int condition;
 
     public ProductMappingModel(String sku, String internalProductName) {
         this.sku = sku;
         this.internalProductName = internalProductName;
     }
 
-    public ProductMappingModel(String sku, String internalProductName, String asin, String condition) {
+    public ProductMappingModel(String sku, String internalProductName, String asin, int condition) {
         this.sku = sku;
         this.internalProductName = internalProductName;
         this.asin = asin;

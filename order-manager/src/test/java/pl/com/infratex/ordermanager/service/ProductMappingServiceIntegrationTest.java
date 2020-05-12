@@ -24,7 +24,7 @@ class ProductMappingServiceIntegrationTest {
     public static final String SKU_INF_0001 = "INF0001";
     public static final String INTERNAL_PRODUCT_NAME_P_732 = "p732";
     public static final String ASIN_A_4802_GNN_490 = "A4802GNN490";
-    public static final String CONDITION_NEW = "new";
+    public static final int CONDITION_NEW = 11;
     @Autowired
     private ProductMappingMapper productMappingMapper;
     @Autowired
@@ -100,7 +100,7 @@ class ProductMappingServiceIntegrationTest {
                 () -> assertEquals(savedProductMappingEntity.getSku(), productWithInternalProductId.getSku(), "sku's aren't equals"),
                 () -> assertEquals(savedProductMappingEntity.getInternalProductName(), productWithInternalProductId.getInternalId(), "internalId aren't equals"),
                 () -> assertEquals(savedProductMappingEntity.getAsin(), productWithInternalProductId.getAsin(), "asins aren't equals"),
-                () -> assertEquals(savedProductMappingEntity.getCondition(), productWithInternalProductId.getCondition(), "conditions aren't equals")
+                () -> assertEquals("New", productWithInternalProductId.getCondition(), "conditions aren't equals")
         );
 
     }
