@@ -14,7 +14,9 @@ import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
@@ -55,8 +57,16 @@ public class ProductMappingService {
                     if (productMappingEntity != null) {
                         product.setInternalId(productMappingEntity.getInternalProductName());
                         product.setAsin(productMappingEntity.getAsin());
-                        product.setCondition(ProductMappingCondition.valueOf("CONDITION_"+productMappingEntity.getCondition()).getConditionType());
+//                        product.setCondition(ProductMappingCondition.valueOf("CONDITION_"+productMappingEntity.getCondition()).getConditionType());
+//                        product.setCondition();
+                        Optional<String> stringOptional = Arrays.stream(ProductMappingCondition.values())
+                                .filter(condition -> condition.getKey() == productMappingEntity.getCondition())
+                                .map(ProductMappingCondition::getValue)
+                                .findFirst();
+                        String string = stringOptional.orElse(ProductMappingCondition.NEW.getValue());
+                        product.setCondition(string);
                     }
+
                 }
 
                 LOGGER.info("order with internal id: " + order);
@@ -70,8 +80,8 @@ public class ProductMappingService {
 
         ProductMappingEntity productMappingEntity = productMappingMapper.fromModel(productMappingModel);
         ProductMappingEntity existingProductMappingEntity = productMappingRepository.findBySku(productMappingModel.getSku());
-        if (existingProductMappingEntity!=null){
-           productMappingEntity.setId(existingProductMappingEntity.getId());
+        if (existingProductMappingEntity != null) {
+            productMappingEntity.setId(existingProductMappingEntity.getId());
         }
         ProductMappingEntity saveProductMappingEntity = productMappingRepository.save(productMappingEntity);
 

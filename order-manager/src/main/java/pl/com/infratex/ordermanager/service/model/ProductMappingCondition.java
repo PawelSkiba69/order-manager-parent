@@ -1,40 +1,49 @@
 package pl.com.infratex.ordermanager.service.model;
 
 public enum ProductMappingCondition {
-    USED_LIKE_NEW (1,"Used; Like New"),
-    USED_VERY_GOOD (2,"Used; Very Good"),
-    USED_GOOD (3,"Used; Good"),
-    USED_ACCEPTABLE (4,"Used; Acceptable"),
-    COLLECTIBLE_LIKE_NEW (5,"Collectible; Like New"),
-    COLLECTIBLE_VERY_GOOD (6,"Collectible; Very Good"),
-    COLLECTIBLE_GOOD (7,"Collectible; Good"),
-    COLLECTIBLE_ACCEPTABLE (8,"Collectible; Acceptable"),
-    NOT_USED(9,"Not used"),
-    REFURBISHED (10,"Refurbished"),
-    NEW (11,"New"),
-    CONDITION_11 (11,"New");
+    USED_LIKE_NEW (1,"Used; Like New", "Używany; jak nowy"),
+    USED_VERY_GOOD (2,"Used; Very Good", "Używany; bardzo dobry"),
+    USED_GOOD (3,"Used; Good", "Używany; dobry"),
+    USED_ACCEPTABLE (4,"Used; Acceptable", "Używany; akceptowalny"),
+    COLLECTIBLE_LIKE_NEW (5,"Collectible; Like New", "Używany; jak nowy"),
+    COLLECTIBLE_VERY_GOOD (6,"Collectible; Very Good", "Używany; jak nowy"),
+    COLLECTIBLE_GOOD (7,"Collectible; Good", "Używany; jak nowy"),
+    COLLECTIBLE_ACCEPTABLE (8,"Collectible; Acceptable", "Używany; jak nowy"),
+    NOT_USED(9,"Not used", "Używany; jak nowy"),
+    REFURBISHED (10,"Refurbished", "Odświeżony"),
+    NEW (11,"New", "Nowy");
 
-    private int conditionId;
-    private String conditionType;
+    private int key;
+    private String value;
+    private String label;
 
-    ProductMappingCondition(int conditionId, String conditionType) {
-        this.conditionId = conditionId;
-        this.conditionType = conditionType;
+    ProductMappingCondition(int key, String value, String label) {
+        this.key = key;
+        this.value = value;
+        this.label = label;
     }
 
-    public int getConditionId() {
-        return conditionId;
+    public int getKey() {
+        return key;
     }
 
-    public void setConditionId(int conditionId) {
-        this.conditionId = conditionId;
+    public void setKey(int key) {
+        this.key = key;
     }
 
-    public String getConditionType() {
-        return conditionType;
+    public String getValue() {
+        return value;
     }
 
-    public void setConditionType(String conditionType) {
-        this.conditionType = conditionType;
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 }

@@ -38,13 +38,12 @@
                     </tr>
                     <tr>
                         <td>Stan:</td>
-                        <td><select id="condition" th:field="*{condition}" required defavlue="11">
-                            <option value="11">Nowy</option>
-                            <option value="1">Używany: jak nowy</option>
-                            <option value="2">Używany: bardzo dobry</option>
-                            <option value="3">Używany: dobry</option>
-                            <option value="4">Używany: akceptowalny</option>
-                        </select></td>
+                        <td>
+                                <select th:field="*{condition}">
+                                <option th:each="condition : ${T(pl.com.infratex.ordermanager.service.model.ProductMappingCondition).values()}"
+                                        th:value="${condition.key}" th:text="${condition.label}"></option>
+                            </select>
+                        </td>
                     </tr>
                 </table>
                 <button type="submit">Dodaj</button>
