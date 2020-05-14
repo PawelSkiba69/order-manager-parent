@@ -26,4 +26,8 @@ public class AdminService {
             throw new AdminProductMappingException("Błąd podczas ładowania mapowań produktu", e);
         }
     }
+
+    public ProductMappingModel addOrUpdateProductMapping(ProductMappingModel productMappingModel){
+        return productMappingService.addOrUpdateProductMapping(productMappingModel);
+    }
 }

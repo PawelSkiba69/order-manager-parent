@@ -1,6 +1,9 @@
 package pl.com.infratex.ordermanager.dao.entity;
 
+import pl.com.infratex.ordermanager.service.model.ProductMappingCondition;
+
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +20,9 @@ public class ProductMappingEntity {
     private String sku;
     private String internalProductName;
     private String asin;
-    private String condition;
+    private int condition;
+    @Enumerated
+    private ProductMappingCondition productCondition;
 
     public ProductMappingEntity() {
     }
@@ -54,12 +59,20 @@ public class ProductMappingEntity {
         this.asin = asin;
     }
 
-    public String getCondition() {
+    public int getCondition() {
         return condition;
     }
 
-    public void setCondition(String condition) {
+    public void setCondition(int condition) {
         this.condition = condition;
+    }
+
+    public ProductMappingCondition getProductCondition() {
+        return productCondition;
+    }
+
+    public void setProductCondition(ProductMappingCondition productCondition) {
+        this.productCondition = productCondition;
     }
 
     @Override
@@ -69,7 +82,8 @@ public class ProductMappingEntity {
                 ", sku='" + sku + '\'' +
                 ", internalProductName='" + internalProductName + '\'' +
                 ", asin='" + asin + '\'' +
-                ", condition='" + condition + '\'' +
+                ", condition=" + condition +
+                ", productCondition=" + productCondition +
                 '}';
     }
 }

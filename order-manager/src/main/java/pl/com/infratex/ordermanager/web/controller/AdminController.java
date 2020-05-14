@@ -2,7 +2,9 @@ package pl.com.infratex.ordermanager.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +27,8 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping
-    public String adminPanelView() {
+    public String adminPanelView(ModelMap modelMap) {
+        modelMap.addAttribute("productMappingModel", new ProductMappingModel());
         return "admin/admin-panel";
     }
 
@@ -37,6 +40,12 @@ public class AdminController {
         } catch (IOException e) {
             throw new AdminException("Wystąpił błąd podczas ładowania pliku csv", e);
         }
+        return "admin/admin-panel";
+    }
+
+    @PostMapping("/products/add/mapping")
+    public String addSingleProductMapping(@ModelAttribute ProductMappingModel productMappingModel) {
+        ProductMappingModel savedProductMappingModel = adminService.addOrUpdateProductMapping(productMappingModel);
         return "admin/admin-panel";
     }
 }
