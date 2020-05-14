@@ -45,6 +45,12 @@ public class ProductMappingService {
         return productMappingMapper.fromEntities(saveProductMappingEntities);
     }
 
+    public ProductMappingModel addProductMapping(ProductMappingModel productMappingModel) {
+        ProductMappingEntity productMappingEntity = productMappingMapper.fromModel(productMappingModel);
+        ProductMappingEntity saveProductMappingEntity = productMappingRepository.save(productMappingEntity);
+
+        return productMappingMapper.fromEntity(saveProductMappingEntity);
+    }
 
     public SellerOrderReportModel assignAdditionalProductInfo(SellerOrderReportModel sellerOrderReportModel) {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
