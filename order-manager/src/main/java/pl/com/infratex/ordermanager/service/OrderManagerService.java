@@ -96,7 +96,7 @@ public class OrderManagerService {
 
                 orderEntity.setProduct(productEntity);
                 orderEntity.setClient(clientEntity);
-
+                //TODO OrderEntity set generatedId from SequenceIdGenerator
                 orderRepository.save(orderEntity);
             }
         }

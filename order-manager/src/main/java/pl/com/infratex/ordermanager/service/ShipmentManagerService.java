@@ -61,7 +61,7 @@ public class ShipmentManagerService {
     public void send(SellerOrderReportModel sellerOrderReport){
         generateCorrectedAddresses(sellerOrderReport);
         sendToENadawca(sellerOrderReport.getSendDate());
-        removeCorrectedAddresses(sellerOrderReport);
+//        removeCorrectedAddresses(sellerOrderReport);
     }
 
     private void sendToENadawca(LocalDate sendDate) {
@@ -79,6 +79,7 @@ public class ShipmentManagerService {
 
         try {
             orderService.updateOrderGeneratedAddressStatus(orders);
+            // TODO update AddressModel status to SENT
         } catch (OrderNotFoundException e) {
             e.printStackTrace();
         }
@@ -87,7 +88,7 @@ public class ShipmentManagerService {
     void generateCorrectedAddresses(SellerOrderReportModel sellerOrderReportModel) {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         List<AddressModel> addressModels = addressModelMapper.fromOrderModels(orders);
-
+        // TODO set AddressModel status to GENERATE
         addressService.saveAll(addressModels);
     }
 

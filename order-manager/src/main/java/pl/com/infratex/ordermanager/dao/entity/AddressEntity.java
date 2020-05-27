@@ -26,6 +26,7 @@ public class AddressEntity {
     private String shipPostalCode;
     private String shipCountry;
     private String shipPhoneNumber;
+    private String status;
 
     public AddressEntity() {
     }
@@ -134,6 +135,14 @@ public class AddressEntity {
         this.shipPhoneNumber = shipPhoneNumber;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "AddressEntity{" +
@@ -150,6 +159,7 @@ public class AddressEntity {
                 ", shipPostalCode='" + shipPostalCode + '\'' +
                 ", shipCountry='" + shipCountry + '\'' +
                 ", shipPhoneNumber='" + shipPhoneNumber + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

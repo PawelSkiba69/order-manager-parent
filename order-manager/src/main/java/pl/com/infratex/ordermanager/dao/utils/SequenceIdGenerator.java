@@ -3,9 +3,7 @@ package pl.com.infratex.ordermanager.dao.utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import pl.com.infratex.ordermanager.service.OrderManagerService;
 
-import javax.sql.DataSource;
 import java.util.logging.Logger;
 
 @Component
@@ -18,6 +16,11 @@ public class SequenceIdGenerator {
 
     public Integer generateId() {
         String sql = "SELECT NEXTVAL ('ENADAWCA_BUFOR_ID_SEQ')";
-        return jdbcTemplate.queryForObject(sql, new Object[] {}, Integer.class);
+        return jdbcTemplate.queryForObject(sql, new Object[]{}, Integer.class);
+    }
+
+    public Integer generateId(String sequenceName) {
+        String sql = "SELECT NEXTVAL ('" + sequenceName + "')";
+        return jdbcTemplate.queryForObject(sql, new Object[]{}, Integer.class);
     }
 }

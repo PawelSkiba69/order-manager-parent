@@ -33,6 +33,7 @@ public class AddressService {
     }
 
     public List<AddressModel> list() {
+        // TODO AddressRepository find by address status is GENERATE
         List<AddressEntity> addressEntities = addressRepository.findByOrderByInternalIdDesc();
         return addressModelMapper.fromEntities(addressEntities);
     }
