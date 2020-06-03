@@ -1,6 +1,7 @@
 package pl.com.infratex.ordermanager.service;
 
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
@@ -34,6 +35,7 @@ public class OrderService {
         return orderModelMapper.fromEntities(orderEntities);
     }
 
+    //FIXME Add test
     public void prepareAddresses(GenerateAddressModel preparedAddressModel) throws OrderNotFoundException {
         Long[] chosen = preparedAddressModel.getChosen();
         if (chosen != null) {
@@ -41,6 +43,7 @@ public class OrderService {
                 Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(id);
                 OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + id));
                 foundOrderEntity.setInProcess(true);
+                foundOrderEntity.setStatus(OrderStatusType.GENERATED);
                 orderRepository.save(foundOrderEntity);
             }
         }

@@ -1,7 +1,11 @@
 package pl.com.infratex.ordermanager.dao.entity;
 
+import pl.com.infratex.ordermanager.api.OrderStatusType;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,8 +48,10 @@ public class OrderEntity {
     private LocalDateTime loadDate;
     private boolean generatedAddress;
     private boolean inProcess;
-    private int status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatusType status;
     private String guid;
+    private Integer batchId;
 
     public OrderEntity() {
     }
@@ -178,6 +184,30 @@ public class OrderEntity {
         this.inProcess = inProcess;
     }
 
+    public OrderStatusType getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatusType status) {
+        this.status = status;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
+    public Integer getBatchId() {
+        return batchId;
+    }
+
+    public void setBatchId(Integer batchId) {
+        this.batchId = batchId;
+    }
+
     @Override
     public String toString() {
         return "OrderEntity{" +
@@ -199,23 +229,7 @@ public class OrderEntity {
                 ", inProcess=" + inProcess +
                 ", status=" + status +
                 ", guid='" + guid + '\'' +
+                ", batchId=" + batchId +
                 '}';
     }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getGuid() {
-        return guid;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
-
 }

@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.service.mapper;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
+import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrder;
 import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
@@ -31,7 +32,7 @@ public class SellerOrderReportMapper {
         OrderModel orderModel = modelMapper.map(amazonCsvOrder, OrderModel.class);
         orderModel.setProduct(fromAmazonCsvOrderToProductModel(amazonCsvOrder));
         orderModel.setClient(fromAmazonCsvOrderToClientModel(amazonCsvOrder));
-        orderModel.setStatus(0);
+        orderModel.setStatus(OrderStatusType.UPLOADED);
         return orderModel;
     }
 
