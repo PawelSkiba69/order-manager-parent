@@ -44,7 +44,6 @@ public class OrderService {
             for (Long id : chosen) {
                 Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(id);
                 OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + id));
-                foundOrderEntity.setInProcess(true);
                 foundOrderEntity.setStatus(OrderStatusType.GENERATED);
                 orderRepository.save(foundOrderEntity);
             }
@@ -76,8 +75,6 @@ public class OrderService {
             for (OrderModel order : orders) {
                 Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(order.getOId());
                 OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + order.getOId()));
-                foundOrderEntity.setInProcess(false);
-                foundOrderEntity.setGeneratedAddress(true);
                 foundOrderEntity.setStatus(orderStatus);
                 orderRepository.save(foundOrderEntity);
             }

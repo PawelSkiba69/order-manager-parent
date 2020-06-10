@@ -46,8 +46,6 @@ public class OrderEntity {
     private ClientEntity client;
 
     private LocalDateTime loadDate;
-    private boolean generatedAddress;
-    private boolean inProcess;
     @Enumerated(EnumType.STRING)
     private OrderStatusType status;
     private String guid;
@@ -168,22 +166,6 @@ public class OrderEntity {
         this.loadDate = loadDate;
     }
 
-    public boolean isGeneratedAddress() {
-        return generatedAddress;
-    }
-
-    public void setGeneratedAddress(boolean generatedAddress) {
-        this.generatedAddress = generatedAddress;
-    }
-
-    public boolean isInProcess() {
-        return inProcess;
-    }
-
-    public void setInProcess(boolean inProcess) {
-        this.inProcess = inProcess;
-    }
-
     public OrderStatusType getStatus() {
         return status;
     }
@@ -225,8 +207,6 @@ public class OrderEntity {
                 ", product=" + product +
                 ", client=" + client +
                 ", loadDate=" + loadDate +
-                ", generatedAddress=" + generatedAddress +
-                ", inProcess=" + inProcess +
                 ", status=" + status +
                 ", guid='" + guid + '\'' +
                 ", batchId=" + batchId +
