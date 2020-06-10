@@ -12,6 +12,8 @@ import pl.com.infratex.ordermanager.web.model.OrderModel;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class OrderService {
@@ -29,9 +31,9 @@ public class OrderService {
         return orderModelMapper.fromEntities(orderEntities);
     }
 
-    public List<OrderModel> generatedOrders() {
-        List<OrderEntity> orderEntities = orderRepository.findByInProcessTrueOrderByProduct_InternalIdDesc();
-
+    //FIXME Add test
+    public List<OrderModel> ordersWithStatus(OrderStatusType orderStatusType) {
+        List<OrderEntity> orderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(orderStatusType);
         return orderModelMapper.fromEntities(orderEntities);
     }
 
@@ -68,16 +70,17 @@ public class OrderService {
         return orders;
     }
 
-    public void updateOrderGeneratedAddressStatus(List<OrderModel> orders) throws OrderNotFoundException {
+    //FIXME Add test
+    public void updateOrderStatus(List<OrderModel> orders, OrderStatusType orderStatus) throws OrderNotFoundException {
         if (orders != null) {
             for (OrderModel order : orders) {
                 Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(order.getOId());
                 OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + order.getOId()));
                 foundOrderEntity.setInProcess(false);
                 foundOrderEntity.setGeneratedAddress(true);
+                foundOrderEntity.setStatus(orderStatus);
                 orderRepository.save(foundOrderEntity);
             }
         }
     }
-
 }

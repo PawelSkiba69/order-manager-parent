@@ -9,6 +9,4 @@ public enum OrderStatusType {
     UNDELIVERED,
     RETURNED,
     SHIPPED
-
-
 }
