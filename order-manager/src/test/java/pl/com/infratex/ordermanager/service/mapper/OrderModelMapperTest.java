@@ -41,6 +41,6 @@ class OrderModelMapperTest {
         //when
         OrderEntity orderEntity = orderModelMapper.fromModel(orderModel);
         //then
-        assertTrue(orderEntity.isGeneratedAddress(),"generated address is false");
+        assertTrue(orderEntity.isBusinessOrder(),"generated address is false");
     }
 }

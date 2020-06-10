@@ -63,13 +63,13 @@ public class ProductMappingService {
                     if (productMappingEntity != null) {
                         product.setInternalId(productMappingEntity.getInternalProductName());
                         product.setAsin(productMappingEntity.getAsin());
-                        product.setCondition(productMappingEntity.getProductCondition().getValue());
-//                        Optional<String> stringOptional = Arrays.stream(ProductMappingCondition.values())
-//                                .filter(condition -> condition.getKey() == productMappingEntity.getCondition())
-//                                .map(ProductMappingCondition::getValue)
-//                                .findFirst();
-//                        String string = stringOptional.orElse(ProductMappingCondition.NEW.getValue());
-//                        product.setCondition(string);
+//                        product.setCondition(productMappingEntity.getProductCondition().getValue());
+                        Optional<String> stringOptional = Arrays.stream(ProductMappingCondition.values())
+                                .filter(condition -> condition.getKey() == productMappingEntity.getCondition())
+                                .map(ProductMappingCondition::getValue)
+                                .findFirst();
+                        String string = stringOptional.orElse(ProductMappingCondition.NEW.getValue());
+                        product.setCondition(string);
                     }
 
                 }

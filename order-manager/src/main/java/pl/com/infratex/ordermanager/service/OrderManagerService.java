@@ -9,6 +9,7 @@ import pl.com.infratex.ordermanager.dao.entity.ProductEntity;
 import pl.com.infratex.ordermanager.dao.repository.ClientRepository;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.dao.repository.ProductRepository;
+import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
 import pl.com.infratex.ordermanager.service.csv.processor.AmazonCsvOrdersMergeProcessor;
 import pl.com.infratex.ordermanager.service.mapper.OrderModelMapper;
 import pl.com.infratex.ordermanager.service.mapper.SellerOrderReportMapper;
@@ -25,6 +26,8 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator.ORDER_BATCH_ID_SEQ;
+
 @Service
 public class OrderManagerService {
 
@@ -37,12 +40,13 @@ public class OrderManagerService {
     private SellerOrderReportMapper sellerOrderReportMapper;
     private OrderModelMapper orderModelMapper;
     private ProductMappingService productMappingService;
+    private SequenceIdGenerator sequenceIdGenerator;
 
 
     public OrderManagerService(OrderService orderService, OrderRepository orderRepository,
                                ProductRepository productRepository, ClientRepository clientRepository,
                                SellerOrderReportMapper sellerOrderReportMapper, OrderModelMapper orderModelMapper,
-                               ProductMappingService productMappingService) {
+                               ProductMappingService productMappingService, SequenceIdGenerator sequenceIdGenerator) {
         this.orderService = orderService;
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
@@ -50,6 +54,7 @@ public class OrderManagerService {
         this.sellerOrderReportMapper = sellerOrderReportMapper;
         this.orderModelMapper = orderModelMapper;
         this.productMappingService = productMappingService;
+        this.sequenceIdGenerator = sequenceIdGenerator;
     }
 
     public SellerOrderReportModel createSellerOrderReport(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException {
@@ -88,6 +93,7 @@ public class OrderManagerService {
     private void saveOrders(SellerOrderReportModel sellerOrderReportModel) {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         List<OrderEntity> orderEntities = orderModelMapper.fromModels(orders);
+        Integer generateId = sequenceIdGenerator.generateId(ORDER_BATCH_ID_SEQ);
 
         for (OrderEntity orderEntity : orderEntities) {
             if (orderNotExist(orderEntity)) {
@@ -96,7 +102,7 @@ public class OrderManagerService {
 
                 orderEntity.setProduct(productEntity);
                 orderEntity.setClient(clientEntity);
-
+                orderEntity.setBatchId(generateId);
                 orderRepository.save(orderEntity);
             }
         }

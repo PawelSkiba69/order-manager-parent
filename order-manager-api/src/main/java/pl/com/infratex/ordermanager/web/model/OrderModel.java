@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.com.infratex.ordermanager.api.OrderStatusType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,9 +36,10 @@ public class OrderModel {
     private LocalDateTime loadDate;
     private boolean generatedAddress;
     private boolean inProcess;
-    private int status;
+    private OrderStatusType status;
 
     private String guid;
+    private Integer batchId;
 
     private String currencySymbol;
     private BigDecimal totalPrice;

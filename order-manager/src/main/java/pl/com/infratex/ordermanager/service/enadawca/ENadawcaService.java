@@ -20,6 +20,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator.ENADAWCA_BUFOR_ID_SEQ;
+
 @Service
 public class ENadawcaService {
 
@@ -41,7 +43,7 @@ public class ENadawcaService {
         ENadawcaManager eNadawcaManager= new ENadawcaManager();
         //FIXME rzucić wyjątek biznesowy
         try {
-            Integer generateId = sequenceIdGenerator.generateId();
+            Integer generateId = sequenceIdGenerator.generateId(ENADAWCA_BUFOR_ID_SEQ);
             eNadawcaManager.elektronicznyNadawcaProperties(dataNadania, generateId,
                     "Amazon"+ dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
             List<PrzesylkaType> przesylkaTypes = eNadawcaMapper.shipmentsSet(addresses);

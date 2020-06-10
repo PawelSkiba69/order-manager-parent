@@ -2,6 +2,7 @@ package pl.com.infratex.ordermanager.service;
 
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.integration.enadawca.ENadawcaManager;
 import pl.com.infratex.ordermanager.service.enadawca.ENadawcaService;
@@ -15,7 +16,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -42,17 +42,20 @@ public class ShipmentManagerService {
     }
 
     public List<OrderModel> list() {
-        return orderService.generatedOrders();
+        return orderService.ordersWithStatus(OrderStatusType.GENERATED);
     }
 
     public byte[] generatePackingSlips() {
-        List<OrderModel> orders = orderService.generatedOrders();
+        List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT);
         try {
+            orderService.updateOrderStatus(orders,OrderStatusType.LABELED);
             OutputStream outputStream = packingSlipAddressPdfReportGenerator.generatePdf(orders, "template.jrxml");
             return ((ByteArrayOutputStream) outputStream).toByteArray();
         } catch (JRException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (OrderNotFoundException e) {
             e.printStackTrace();
         }
         return null;
@@ -71,23 +74,21 @@ public class ShipmentManagerService {
         List<String> guids = eNadawcaManager.generateGuids(addresses.size());
 
         List<AddressModel> addressesWithGuids = addressService.assignGuids(guids, addresses);
-        List<OrderModel> orders = orderService.generatedOrders();
+        List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.GENERATED);
 //        LOGGER.info("Orders before sent "+orders);
         orderService.updateOrdersWithGuids(addressesWithGuids, orders);
-
-        eNadawcaService.send(addressesWithGuids,sendDate);
-
         try {
-            orderService.updateOrderGeneratedAddressStatus(orders);
+            orderService.updateOrderStatus(orders, OrderStatusType.SENT);
         } catch (OrderNotFoundException e) {
             e.printStackTrace();
         }
+
+        eNadawcaService.send(addressesWithGuids,sendDate);
     }
 
     void generateCorrectedAddresses(SellerOrderReportModel sellerOrderReportModel) {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         List<AddressModel> addressModels = addressModelMapper.fromOrderModels(orders);
-
         addressService.saveAll(addressModels);
     }
 
@@ -97,6 +98,4 @@ public class ShipmentManagerService {
 
         addressService.deleteAll(addressModels);
     }
-
-
 }
