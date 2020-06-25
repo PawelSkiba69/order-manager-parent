@@ -149,4 +149,13 @@ public class EnvelopeInfoType {
         this.dataTransmisji = value;
     }
 
+    @Override
+    public String toString() {
+        return "EnvelopeInfoType{" +
+                "error=" + error +
+                ", idEnvelope=" + idEnvelope +
+                ", envelopeStatus=" + envelopeStatus +
+                ", dataTransmisji=" + dataTransmisji +
+                '}';
+    }
 }

@@ -1,10 +1,13 @@
 package pl.com.infratex.ordermanager.integration.enadawca;
 
 import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaException;
+import pl.poczta_polska.e_nadawca.AddShipmentResponseItemType;
 import pl.poczta_polska.e_nadawca.BuforType;
 import pl.poczta_polska.e_nadawca.ElektronicznyNadawca;
 import pl.poczta_polska.e_nadawca.ElektronicznyNadawca_Service;
+import pl.poczta_polska.e_nadawca.EnvelopeInfoType;
 import pl.poczta_polska.e_nadawca.ErrorType;
+import pl.poczta_polska.e_nadawca.PrzesylkaShortType;
 import pl.poczta_polska.e_nadawca.PrzesylkaType;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -13,7 +16,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Holder;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -86,6 +91,23 @@ public class ENadawcaManager {
 
     public void addShipment(List<PrzesylkaType> shipments, int idBufor) {
         LOGGER.info("addShipment " + shipments + " id Bufor: " + idBufor);
-        elektronicznyNadawca.addShipment(shipments, idBufor);
+        List<AddShipmentResponseItemType> addShipmentResponseItemTypes = elektronicznyNadawca.addShipment(shipments, idBufor);
+    }
+
+    public void checkStatus(String guid) throws DatatypeConfigurationException {
+        GregorianCalendar startDateCalendar = new GregorianCalendar(2020, Calendar.JUNE, 15);
+        XMLGregorianCalendar startDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(startDateCalendar);
+        XMLGregorianCalendar endDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(GregorianCalendar.from(ZonedDateTime.now()));
+        System.out.println(elektronicznyNadawca.getPasswordExpiredDate());
+        System.out.println(startDateXML);
+        System.out.println(endDateXML);
+        List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML,startDateXML);
+        System.out.println(envelopeList);
+        List<PrzesylkaShortType> envelopeContentShort = elektronicznyNadawca.getEnvelopeContentShort(0);
+        envelopeContentShort.forEach((przesylkaShortType)-> System.out.println(przesylkaShortType.getStatus().value()));
+
+
+//        System.out.println(envelopeList.get(0).getEnvelopeStatus().value());
+        System.out.println(envelopeList.size());
     }
 }

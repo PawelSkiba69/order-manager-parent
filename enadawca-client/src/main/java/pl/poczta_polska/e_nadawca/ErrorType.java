@@ -113,4 +113,12 @@ public class ErrorType {
         this.guid = value;
     }
 
+    @Override
+    public String toString() {
+        return "ErrorType{" +
+                "errorNumber=" + errorNumber +
+                ", errorDesc='" + errorDesc + '\'' +
+                ", guid='" + guid + '\'' +
+                '}';
+    }
 }
