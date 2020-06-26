@@ -16,6 +16,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Holder;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -96,14 +97,18 @@ public class ENadawcaManager {
 
     public void checkStatus(String guid) throws DatatypeConfigurationException {
         GregorianCalendar startDateCalendar = new GregorianCalendar(2020, Calendar.JUNE, 15);
-        XMLGregorianCalendar startDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(startDateCalendar);
-        XMLGregorianCalendar endDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(GregorianCalendar.from(ZonedDateTime.now()));
-        System.out.println(elektronicznyNadawca.getPasswordExpiredDate());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println(sdf.format(startDateCalendar.getTime()));
+
+        XMLGregorianCalendar startDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(sdf.format(startDateCalendar.getTime()));
+        XMLGregorianCalendar endDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(sdf.format(GregorianCalendar.from(ZonedDateTime.now()).getTime()));
+
         System.out.println(startDateXML);
         System.out.println(endDateXML);
-        List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML,startDateXML);
+        List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML,endDateXML);
         System.out.println(envelopeList);
-        List<PrzesylkaShortType> envelopeContentShort = elektronicznyNadawca.getEnvelopeContentShort(0);
+        List<PrzesylkaShortType> envelopeContentShort = elektronicznyNadawca.getEnvelopeContentShort(envelopeList.get(0).getIdEnvelope());
         envelopeContentShort.forEach((przesylkaShortType)-> System.out.println(przesylkaShortType.getStatus().value()));
 
 
