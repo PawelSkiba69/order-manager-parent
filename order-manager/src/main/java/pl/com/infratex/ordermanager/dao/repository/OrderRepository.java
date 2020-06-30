@@ -9,12 +9,21 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
+    String SQL = "select * \n" +
+            " from ORDERS O \n" +
+            " where O.BATCH_ID = \n" +
+            "    (select max(OMAX.BATCH_ID) from ORDERS OMAX) ";
+
     List<OrderEntity> findByStatusOrderByProduct_InternalIdDesc(OrderStatusType status);
 
     List<OrderEntity> findByOrderIdAndOrderItemId(String orderId, String orderItemId);
 
     List<OrderEntity> findByOrderItemIdInOrderByProduct_InternalIdDesc(List<String> orderIds);
 
-    @Query(name = "latestLoadedOrders")
+    @Query(name = "latestLoadedOrders", value = SQL, nativeQuery = true)
     List<OrderEntity> latestLoadedOrders();
 }
+//select *
+//        from ORDERS O
+//        where O.BATCH_ID =
+//        (select max(OMAX.BATCH_ID) from ORDERS OMAX)
