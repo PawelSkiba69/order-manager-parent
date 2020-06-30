@@ -4,17 +4,14 @@ import org.springframework.stereotype.Service;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
 import pl.com.infratex.ordermanager.integration.enadawca.ENadawcaManager;
 import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaException;
+import pl.com.infratex.ordermanager.service.OrderService;
 import pl.com.infratex.ordermanager.service.mapper.ENadawcaMapper;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
 import pl.poczta_polska.e_nadawca.PrzesylkaType;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -29,10 +26,12 @@ public class ENadawcaService {
 
     private ENadawcaMapper eNadawcaMapper;
     private SequenceIdGenerator sequenceIdGenerator;
+    private OrderService orderService;
 
-    public ENadawcaService(ENadawcaMapper eNadawcaMapper, SequenceIdGenerator sequenceIdGenerator) {
+    public ENadawcaService(ENadawcaMapper eNadawcaMapper, SequenceIdGenerator sequenceIdGenerator, OrderService orderService) {
         this.eNadawcaMapper = eNadawcaMapper;
         this.sequenceIdGenerator = sequenceIdGenerator;
+        this.orderService = orderService;
     }
 
     public void send(List<AddressModel> addresses, LocalDate sendDate) {
@@ -54,6 +53,10 @@ public class ENadawcaService {
             e.printStackTrace();
         }
 
+    }
+
+    public void checkStatus(){
+        orderService.oldestUnshippedLabeledOrder();
     }
 
 
