@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -103,6 +104,7 @@ public class OrderManagerService {
                 orderEntity.setProduct(productEntity);
                 orderEntity.setClient(clientEntity);
                 orderEntity.setBatchId(generateId);
+                orderEntity.setLoadDate(LocalDateTime.now());
                 orderRepository.save(orderEntity);
             }
         }
