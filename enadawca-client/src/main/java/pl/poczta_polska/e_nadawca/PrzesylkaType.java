@@ -146,14 +146,4 @@ public abstract class PrzesylkaType {
         this.opis = value;
     }
 
-    //FIXME Remove
-    @Override
-    public String toString() {
-        return "PrzesylkaType{" +
-                "guid='" + guid + '\'' +
-                ", pakietGuid='" + pakietGuid + '\'' +
-                ", opakowanieGuid='" + opakowanieGuid + '\'' +
-                ", opis='" + opis + '\'' +
-                '}';
-    }
 }

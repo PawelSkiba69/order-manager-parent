@@ -7,9 +7,11 @@ import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaExcep
 import pl.com.infratex.ordermanager.service.OrderService;
 import pl.com.infratex.ordermanager.service.mapper.ENadawcaMapper;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
+import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.poczta_polska.e_nadawca.PrzesylkaType;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -56,7 +58,9 @@ public class ENadawcaService {
     }
 
     public void checkStatus(){
-        orderService.oldestUnshippedLabeledOrder();
+        OrderModel orderModel = orderService.oldestUnshippedLabeledOrder();
+        LocalDateTime oldestLoadDate = orderModel.getLoadDate();
+
     }
 
 
