@@ -1,7 +1,9 @@
 package pl.com.infratex.ordermanager.integration.enadawca;
 
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
+import pl.com.infratex.ordermanager.integration.enadawca.converter.ENadawcaXMLDateConverter;
 import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaException;
+import pl.com.infratex.ordermanager.integration.enadawca.mapper.ShipmentConfirmationMapper;
 import pl.poczta_polska.e_nadawca.AddShipmentResponseItemType;
 import pl.poczta_polska.e_nadawca.BuforType;
 import pl.poczta_polska.e_nadawca.ElektronicznyNadawca;
@@ -16,9 +18,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Holder;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -99,34 +99,19 @@ public class ENadawcaManager {
         List<AddShipmentResponseItemType> addShipmentResponseItemTypes = elektronicznyNadawca.addShipment(shipments, idBufor);
     }
 
-    public List<ShipmentConfirmationModel> checkStatus(List<String> guids, LocalDateTime oldestLoadDate) throws DatatypeConfigurationException {
+    public List<ShipmentConfirmationModel> checkStatus(List<String> guids, LocalDateTime oldestLoadDate) {
 
         LOGGER.info("#startDate: " + oldestLoadDate);
 
-        GregorianCalendar startDateCalendar = new GregorianCalendar(
-                oldestLoadDate.getYear(),
-                //NOTE BE AWARE OF MAGIC VARIABLES
-                oldestLoadDate.getMonthValue() - 1,
-                oldestLoadDate.getDayOfMonth());
-        LOGGER.info("#startDate: " + startDateCalendar);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(sdf.format(startDateCalendar.getTime()));
+        XMLGregorianCalendar startDateXML = ENadawcaXMLDateConverter.from(oldestLoadDate);
+        XMLGregorianCalendar endDateXML = ENadawcaXMLDateConverter.from(LocalDateTime.now());
 
-        XMLGregorianCalendar startDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(sdf.format(startDateCalendar.getTime()));
-        XMLGregorianCalendar endDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(sdf.format(GregorianCalendar.from(ZonedDateTime.now()).getTime()));
-
-        System.out.println(startDateXML);
-        System.out.println(endDateXML);
         List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML, endDateXML);
-        System.out.println(envelopeList);
-//        List<PrzesylkaShortType> envelopeContentShort = elektronicznyNadawca.getEnvelopeContentShort(envelopeList.get(0).getIdEnvelope());
-//        envelopeContentShort.forEach((przesylkaShortType) -> System.out.println(przesylkaShortType.getGuid()));
 
         List<PrzesylkaShortType> przesylkaShortTypes = filterEnvelope(envelopeList, guids);
-        ShipmentConfirmationModel shipmentConfirmationModel=new ShipmentConfirmationModel();
-//        System.out.println(envelopeList.get(0).getEnvelopeStatus().value());
-//        System.out.println(envelopeContentShort.size());
-        return null;//FIXME remove proper variable
+        ShipmentConfirmationMapper shipmentConfirmationMapper = new ShipmentConfirmationMapper();
+
+        return shipmentConfirmationMapper.map(przesylkaShortTypes);
     }
 
     List<PrzesylkaShortType> filterEnvelope(List<EnvelopeInfoType> envelopeList, List<String> guids) {

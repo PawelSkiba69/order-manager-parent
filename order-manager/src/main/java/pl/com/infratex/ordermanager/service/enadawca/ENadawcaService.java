@@ -2,6 +2,7 @@ package pl.com.infratex.ordermanager.service.enadawca;
 
 import org.springframework.stereotype.Service;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
+import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.integration.enadawca.ENadawcaManager;
 import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaException;
 import pl.com.infratex.ordermanager.service.OrderService;
@@ -29,11 +30,14 @@ public class ENadawcaService {
     private ENadawcaMapper eNadawcaMapper;
     private SequenceIdGenerator sequenceIdGenerator;
     private OrderService orderService;
+    private ENadawcaManager eNadawcaManager;
 
     public ENadawcaService(ENadawcaMapper eNadawcaMapper, SequenceIdGenerator sequenceIdGenerator, OrderService orderService) {
         this.eNadawcaMapper = eNadawcaMapper;
         this.sequenceIdGenerator = sequenceIdGenerator;
         this.orderService = orderService;
+
+        eNadawcaManager = new ENadawcaManager();
     }
 
     public void send(List<AddressModel> addresses, LocalDate sendDate) {
@@ -41,7 +45,6 @@ public class ENadawcaService {
         dataNadania.setTime(Date.from(sendDate.atStartOfDay()
                 .atZone(ZoneId.systemDefault())
                 .toInstant()));
-        ENadawcaManager eNadawcaManager= new ENadawcaManager();
         //FIXME rzucić wyjątek biznesowy
         try {
             Integer generateId = sequenceIdGenerator.generateId(ENADAWCA_BUFOR_ID_SEQ);
@@ -60,6 +63,7 @@ public class ENadawcaService {
     public void checkStatus(){
         OrderModel orderModel = orderService.oldestUnshippedLabeledOrder();
         LocalDateTime oldestLoadDate = orderModel.getLoadDate();
+        List<ShipmentConfirmationModel> shipmentConfirmationModels = eNadawcaManager.checkStatus(null, oldestLoadDate);
 
     }
 
