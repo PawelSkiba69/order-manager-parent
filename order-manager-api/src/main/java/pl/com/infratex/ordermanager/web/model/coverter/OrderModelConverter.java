@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -24,8 +23,10 @@ public class OrderModelConverter {
 
     public static void formatDate(OrderModel order) {
         LocalDateTime purchaseDate = order.getPurchaseDate();
-        String format = purchaseDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        order.setPurchaseDateFormatted(format);
+        if (purchaseDate != null) {
+            String format = purchaseDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            order.setPurchaseDateFormatted(format);
+        }
     }
 
     private static void fillBlank(OrderModel order) {

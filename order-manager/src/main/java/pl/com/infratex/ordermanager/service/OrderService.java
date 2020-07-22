@@ -78,4 +78,9 @@ public class OrderService {
             }
         }
     }
+
+    public OrderModel oldestUnshippedLabeledOrder(){
+        OrderEntity orderEntity = orderRepository.findFirstByStatusOrderByLoadDateAsc(OrderStatusType.LABELED);
+        return orderModelMapper.fromEntity(orderEntity);
+    }
 }

@@ -20,12 +20,11 @@ public class OrderModelMapper {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
         OrderEntity orderEntity = modelMapper.map(orderModel, OrderEntity.class);
-        orderEntity.setLoadDate(LocalDateTime.now());
         LOGGER.info("orderEntity: " + orderEntity);
         return orderEntity;
     }
 
-    private OrderModel fromEntity(OrderEntity orderEntity) {
+    public OrderModel fromEntity(OrderEntity orderEntity) {
         ModelMapper modelMapper = new ModelMapper();
         OrderModel orderModel = modelMapper.map(orderEntity, OrderModel.class);
         OrderModelConverter.formatDate(orderModel);
