@@ -10,6 +10,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -17,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ShipmentConfirmationMapperTest {
 
-    public static final String NUMER_NADANIA_RR_4934820_PL = "RR4934820PL";
-    public static final String GUID_1 = "843002030s";
+    private static final String NUMER_NADANIA_RR_4934820_PL = "RR4934820PL";
+    private static final String GUID_1 = "843002030s";
 
     @Test
     void givenXMLStatusType_whenConvert_thenShipmentConfirmationStatusType() {
@@ -33,7 +34,7 @@ class ShipmentConfirmationMapperTest {
     @Test
     void map() throws Exception {
         //GIVEN
-        ShipmentConfirmationMapper shipmentConfirmationMapper=new ShipmentConfirmationMapper();
+        ShipmentConfirmationMapper shipmentConfirmationMapper = new ShipmentConfirmationMapper();
 
         PrzesylkaShortType przesylkaShortType = new PrzesylkaShortType();
         przesylkaShortType.setNumerNadania(NUMER_NADANIA_RR_4934820_PL);
@@ -42,6 +43,8 @@ class ShipmentConfirmationMapperTest {
         GregorianCalendar startDateCalendar = new GregorianCalendar(2020, 6, 20);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.format(startDateCalendar.getTime());
+
+        LocalDateTime expectedLocalDateTime = LocalDateTime.of(2020, Month.JULY, 20, 0, 0);
 
         XMLGregorianCalendar dataNadania = DatatypeFactory.newInstance().newXMLGregorianCalendar(sdf.format(startDateCalendar.getTime()));
         przesylkaShortType.setDataNadania(dataNadania);
@@ -52,9 +55,9 @@ class ShipmentConfirmationMapperTest {
         ShipmentConfirmationModel shipmentConfirmationModel = shipmentConfirmationMapper.map(przesylkaShortType);
         //THEN
         assertAll(
-                ()->assertEquals(NUMER_NADANIA_RR_4934820_PL,shipmentConfirmationModel.getNumerNadania(),"numery nadania nie są takie same"),
-                ()->assertEquals(LocalDateTime.now(),shipmentConfirmationModel.getDataNadania(),"daty nadania nie są takie same")
+                () -> assertEquals(NUMER_NADANIA_RR_4934820_PL, shipmentConfirmationModel.getNumerNadania(), "numery nadania nie są takie same"),
+                () -> assertEquals(expectedLocalDateTime, shipmentConfirmationModel.getDataNadania(), "daty nadania nie są takie same")
         );
-        ;
+
     }
 }
