@@ -16,7 +16,7 @@ import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ShipmentConfirmationMapperTest {
+class ShipmentConfirmationMergerTest {
 
     private static final String NUMER_NADANIA_RR_4934820_PL = "RR4934820PL";
     private static final String GUID_1 = "843002030s";
@@ -34,7 +34,7 @@ class ShipmentConfirmationMapperTest {
     @Test
     void map() throws Exception {
         //GIVEN
-        ShipmentConfirmationMapper shipmentConfirmationMapper = new ShipmentConfirmationMapper();
+        ShipmentConfirmationMerger shipmentConfirmationMerger = new ShipmentConfirmationMerger();
 
         PrzesylkaShortType przesylkaShortType = new PrzesylkaShortType();
         przesylkaShortType.setNumerNadania(NUMER_NADANIA_RR_4934820_PL);
@@ -52,7 +52,7 @@ class ShipmentConfirmationMapperTest {
         przesylkaShortType.setStatus(StatusType.NOWA);
 
         //WHEN
-        ShipmentConfirmationModel shipmentConfirmationModel = shipmentConfirmationMapper.map(przesylkaShortType);
+        ShipmentConfirmationModel shipmentConfirmationModel = shipmentConfirmationMerger.merge(przesylkaShortType);
         //THEN
         assertAll(
                 () -> assertEquals(NUMER_NADANIA_RR_4934820_PL, shipmentConfirmationModel.getNumerNadania(), "numery nadania nie są takie same"),

@@ -12,6 +12,7 @@ import pl.com.infratex.ordermanager.web.model.OrderModel;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -48,7 +49,7 @@ public class OrderService {
         }
     }
 
-    public List<OrderEntity> updateOrdersWithGuids(List<AddressModel> addresses, List<OrderModel> orders){
+    public List<OrderEntity> updateOrdersWithGuids(List<AddressModel> addresses, List<OrderModel> orders) {
         List<OrderModel> ordersWithGuids = copyGuids(addresses, orders);
         List<OrderEntity> orderEntitiesWithGuids = orderModelMapper.fromModels(ordersWithGuids);
         return orderRepository.saveAll(orderEntitiesWithGuids);
@@ -79,8 +80,20 @@ public class OrderService {
         }
     }
 
-    public OrderModel oldestUnshippedLabeledOrder(){
+    public OrderModel oldestUnshippedLabeledOrder() {
         OrderEntity orderEntity = orderRepository.findFirstByStatusOrderByLoadDateAsc(OrderStatusType.LABELED);
         return orderModelMapper.fromEntity(orderEntity);
+    }
+
+    public List<OrderModel> findOrdersByStatusLabeled() {
+        List<OrderEntity> orderEntities = orderRepository.findByStatus(OrderStatusType.LABELED);
+        return orderModelMapper.fromEntities(orderEntities);
+    }
+
+    public List<String> extractNotNullGuids(List<OrderModel> orders) {
+        return orders.stream()
+                .filter(orderModel -> orderModel.getGuid() != null)
+                .map(OrderModel::getGuid)
+                .collect(Collectors.toList());
     }
 }

@@ -49,21 +49,26 @@ public class ENadawcaService {
         try {
             Integer generateId = sequenceIdGenerator.generateId(ENADAWCA_BUFOR_ID_SEQ);
             eNadawcaManager.elektronicznyNadawcaProperties(dataNadania, generateId,
-                    "Amazon"+ dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
+                    "Amazon" + dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
             List<PrzesylkaType> przesylkaTypes = eNadawcaMapper.shipmentsSet(addresses);
             eNadawcaManager.addShipment(przesylkaTypes, generateId);
-            LOGGER.info("####GeneratedID= "+generateId);
-            LOGGER.info("####BuforName= "+"Amazon_"+dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
+            LOGGER.info("####GeneratedID= " + generateId);
+            LOGGER.info("####BuforName= " + "Amazon_" + dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
         } catch (ENadawcaException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void checkStatus(){
+    public void checkStatus() {
         OrderModel orderModel = orderService.oldestUnshippedLabeledOrder();
         LocalDateTime oldestLoadDate = orderModel.getLoadDate();
-        List<ShipmentConfirmationModel> shipmentConfirmationModels = eNadawcaManager.checkStatus(null, oldestLoadDate);
+
+        List<OrderModel> ordersByStatusLabeled = orderService.findOrdersByStatusLabeled();
+        List<String> guids = orderService.extractNotNullGuids(ordersByStatusLabeled);
+
+        List<ShipmentConfirmationModel> shipmentConfirmationModels =
+                eNadawcaManager.checkStatus(ordersByStatusLabeled, guids, oldestLoadDate);
 
     }
 

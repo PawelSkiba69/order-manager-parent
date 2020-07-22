@@ -3,7 +3,8 @@ package pl.com.infratex.ordermanager.integration.enadawca;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.integration.enadawca.converter.ENadawcaXMLDateConverter;
 import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaException;
-import pl.com.infratex.ordermanager.integration.enadawca.mapper.ShipmentConfirmationMapper;
+import pl.com.infratex.ordermanager.integration.enadawca.mapper.ShipmentConfirmationMerger;
+import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.poczta_polska.e_nadawca.AddShipmentResponseItemType;
 import pl.poczta_polska.e_nadawca.BuforType;
 import pl.poczta_polska.e_nadawca.ElektronicznyNadawca;
@@ -99,7 +100,7 @@ public class ENadawcaManager {
         List<AddShipmentResponseItemType> addShipmentResponseItemTypes = elektronicznyNadawca.addShipment(shipments, idBufor);
     }
 
-    public List<ShipmentConfirmationModel> checkStatus(List<String> guids, LocalDateTime oldestLoadDate) {
+    public List<ShipmentConfirmationModel> checkStatus(List<OrderModel> unshippedOrders, List<String> guids, LocalDateTime oldestLoadDate) {
 
         LOGGER.info("#startDate: " + oldestLoadDate);
 
@@ -109,9 +110,11 @@ public class ENadawcaManager {
         List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML, endDateXML);
 
         List<PrzesylkaShortType> przesylkaShortTypes = filterEnvelope(envelopeList, guids);
-        ShipmentConfirmationMapper shipmentConfirmationMapper = new ShipmentConfirmationMapper();
+        ShipmentConfirmationMerger shipmentConfirmationMerger = new ShipmentConfirmationMerger();
 
-        return shipmentConfirmationMapper.map(przesylkaShortTypes);
+        List<ShipmentConfirmationModel> shipmentConfirmationModels = shipmentConfirmationMerger.merge(przesylkaShortTypes);
+
+        return shipmentConfirmationModels;
     }
 
     List<PrzesylkaShortType> filterEnvelope(List<EnvelopeInfoType> envelopeList, List<String> guids) {
