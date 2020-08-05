@@ -9,25 +9,24 @@ import pl.poczta_polska.e_nadawca.StatusType;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShipmentConfirmationMerger {
     public List<ShipmentConfirmationModel> merge(List<PrzesylkaShortType> przesylkaShortTypes, List<OrderModel> orders) {
-//        return przesylkaShortTypes.stream()
-////                .map()
-////                .collect(Collectors.toList());
-        for (PrzesylkaShortType przesylkaShortType : przesylkaShortTypes) {
-            for (OrderModel orderModel : orders) {
-                merge(przesylkaShortType, orderModel);
-            }
-        }
+
+        List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
 
         przesylkaShortTypes.forEach(przesylkaShortType -> {
             orders.forEach(orderModel -> {
-                merge(przesylkaShortType,orderModel);
+                ShipmentConfirmationModel shipmentConfirmationModel = merge(przesylkaShortType, orderModel);
+                if (shipmentConfirmationModel != null) {
+                    shipmentConfirmationModels.add(shipmentConfirmationModel);
+                }
             });
         });
-        return null;
+
+        return shipmentConfirmationModels;
     }
 
     public ShipmentConfirmationModel merge(PrzesylkaShortType przesylkaShortType, OrderModel orderModel) {
@@ -48,13 +47,11 @@ public class ShipmentConfirmationMerger {
                 shipmentConfirmationModel.setStatus(ShipmentConfirmationStatusType.fromValue(statusType.value()));
             }
 
-
             shipmentConfirmationModel.setOrderId(orderModel.getOrderId());
             shipmentConfirmationModel.setCarrierCode(orderModel.getClient().getShipCountry());//Fixme nullPointerException i dodać konwerter
 
             return shipmentConfirmationModel;
         }
-
         return null;
     }
 }

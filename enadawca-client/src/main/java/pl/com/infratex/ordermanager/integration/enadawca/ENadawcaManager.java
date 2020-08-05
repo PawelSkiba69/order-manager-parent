@@ -102,8 +102,6 @@ public class ENadawcaManager {
 
     public List<ShipmentConfirmationModel> checkStatus(List<OrderModel> unshippedOrders, List<String> guids, LocalDateTime oldestLoadDate) {
 
-        LOGGER.info("#startDate: " + oldestLoadDate);
-
         XMLGregorianCalendar startDateXML = ENadawcaXMLDateConverter.from(oldestLoadDate);
         XMLGregorianCalendar endDateXML = ENadawcaXMLDateConverter.from(LocalDateTime.now());
 
@@ -112,7 +110,7 @@ public class ENadawcaManager {
         List<PrzesylkaShortType> przesylkaShortTypes = filterEnvelope(envelopeList, guids);
         ShipmentConfirmationMerger shipmentConfirmationMerger = new ShipmentConfirmationMerger();
 
-        List<ShipmentConfirmationModel> shipmentConfirmationModels = shipmentConfirmationMerger.merge(przesylkaShortTypes);
+        List<ShipmentConfirmationModel> shipmentConfirmationModels = shipmentConfirmationMerger.merge(przesylkaShortTypes,unshippedOrders);
 
         return shipmentConfirmationModels;
     }
