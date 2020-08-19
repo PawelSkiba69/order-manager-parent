@@ -20,6 +20,7 @@
         <module>/enadawca-client</module>
         <module>/order-manager-api</module>
         <module>/order-manager</module>
+        <module>/amazon-mws-connector</module>
     </modules>
 
     <dependencies>
