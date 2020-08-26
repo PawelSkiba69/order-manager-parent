@@ -295,6 +295,8 @@ public class SubmitFeedSample {
         // Effectively resets the stream to be beginning of the file
         // via a FileChannel.
         fis.getChannel().position( 0 );
+//        fis.mark(0);
+//        fis.reset();
 
         return md5Content;
     }
