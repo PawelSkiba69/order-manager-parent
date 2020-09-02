@@ -30,3 +30,5 @@ build/
 ### VS Code ###
 .vscode/
 
+/amazon-mws-connector/src/main/resources/application.properties
+/amazon-mws-connector/src/test/resources/application.properties

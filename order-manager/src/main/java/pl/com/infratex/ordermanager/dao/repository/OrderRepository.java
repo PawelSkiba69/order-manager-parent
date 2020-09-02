@@ -18,6 +18,8 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     OrderEntity findFirstByStatusOrderByLoadDateAsc(OrderStatusType status);
 
+    List<OrderEntity> findByStatus(OrderStatusType status);
+
     List<OrderEntity> findByOrderIdAndOrderItemId(String orderId, String orderItemId);
 
     List<OrderEntity> findByOrderItemIdInOrderByProduct_InternalIdDesc(List<String> orderIds);
