@@ -1,5 +1,6 @@
 package pl.com.infratex.ordermanager.integration.amazon.feed;
 
+import com.amazonaws.mws.model.SubmitFeedResponse;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedInputStream;
@@ -17,7 +18,8 @@ class SubmitFeedConnectorTest {
 
         SubmitFeedConnector submitFeedConnector = new SubmitFeedConnector();
         //WHEN
-        submitFeedConnector.submitFeed(new BufferedInputStream(inputStream));
+        SubmitFeedResponse response = submitFeedConnector.submitFeed(new BufferedInputStream(inputStream));
         //THEN
+        assertNotNull(response,"response is null");
     }
 }

@@ -51,8 +51,8 @@ public class SubmitFeedSample {
          * Access Key ID and Secret Access Key ID, obtained from:
          * http://aws.amazon.com
          ***********************************************************************/
-        final String accessKeyId = "AKIAIZ37YS3ETWX2QKLA";
-        final String secretAccessKey = "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";
+        final String accessKeyId = ConnectorHelper.getInstance().getPropertyValue("KI");
+        final String secretAccessKey = ConnectorHelper.getInstance().getPropertyValue("AK");
 
         final String appName = "order-manager";
         final String appVersion = "1.0.0";
@@ -295,8 +295,6 @@ public class SubmitFeedSample {
         // Effectively resets the stream to be beginning of the file
         // via a FileChannel.
         fis.getChannel().position( 0 );
-//        fis.mark(0);
-//        fis.reset();
 
         return md5Content;
     }
