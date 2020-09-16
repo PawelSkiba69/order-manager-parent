@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -51,13 +52,13 @@ public class SubmitFeedConnector {
         try {
             if (inputStream != null) {
 
-
                 Path tempPath = Files.createTempFile("prefix", "suffix");
                 File tempFile = tempPath.toFile();
                 tempFile.deleteOnExit();
                 LOGGER.info("tempFile: "+tempFile);
                 LOGGER.info("tempPath: "+tempPath);
 
+                Files.copy(inputStream, tempPath, StandardCopyOption.REPLACE_EXISTING);
                 FileInputStream fileInputStream = new FileInputStream(tempFile);
 
                 request.setFeedContent(fileInputStream);
