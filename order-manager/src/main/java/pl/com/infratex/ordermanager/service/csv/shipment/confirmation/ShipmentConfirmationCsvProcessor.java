@@ -19,7 +19,8 @@ public class ShipmentConfirmationCsvProcessor {
     public void createCsv(List<ShipmentConfirmationModel> shipmentConfirmationModels) {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(SAMPLE_CSV_FILE));
                 CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-                        .withHeader("ID", "Name", "Designation", "Company"))) {
+                        .withHeader("order-id", "order-item-id", "quantity", "ship-date",
+                                "carrier-code","carrier-name","tracking-number","ship-method"))) {
             shipmentConfirmationModels.forEach(
                     shipmentConfirmationModel -> createCsvRecord(shipmentConfirmationModel, csvPrinter));
 
@@ -32,7 +33,13 @@ public class ShipmentConfirmationCsvProcessor {
 
     private void createCsvRecord(ShipmentConfirmationModel shipmentConfirmationModel, CSVPrinter csvPrinter) {
         List<String> strings = Arrays.asList(
-                shipmentConfirmationModel.getOrderId()
+                shipmentConfirmationModel.getOrderId(),
+                shipmentConfirmationModel.getOrderItemId(),
+                shipmentConfirmationModel.getQuantity(),
+                shipmentConfirmationModel.getDataNadania().toString(),
+                shipmentConfirmationModel.getCarrierName(),
+                shipmentConfirmationModel.getNumerNadania(),
+                shipmentConfirmationModel.getShipMethod()
         );
         try {
             csvPrinter.printRecord(strings);
