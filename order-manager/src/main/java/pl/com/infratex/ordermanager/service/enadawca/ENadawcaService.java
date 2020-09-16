@@ -60,15 +60,15 @@ public class ENadawcaService {
 
     }
 
-    public void checkStatus() {
+    public List<ShipmentConfirmationModel> checkStatus() {
         OrderModel orderModel = orderService.oldestUnshippedLabeledOrder();
         LocalDateTime oldestLoadDate = orderModel.getLoadDate();
 
         List<OrderModel> ordersByStatusLabeled = orderService.findOrdersByStatusLabeled();
         List<String> guids = orderService.extractNotNullGuids(ordersByStatusLabeled);
 
-        List<ShipmentConfirmationModel> shipmentConfirmationModels =
-                eNadawcaManager.checkStatus(ordersByStatusLabeled, guids, oldestLoadDate);
+//        List<ShipmentConfirmationModel> shipmentConfirmationModels =
+        return eNadawcaManager.checkStatus(ordersByStatusLabeled, guids, oldestLoadDate);
 
     }
 

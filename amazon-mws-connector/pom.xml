@@ -9,7 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>pl.com.infratex.ordermanager.integration.amazon</groupId>
     <artifactId>amazon-mws-connector</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

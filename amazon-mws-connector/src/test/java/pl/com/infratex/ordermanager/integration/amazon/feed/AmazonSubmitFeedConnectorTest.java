@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SubmitFeedConnectorTest {
+class AmazonSubmitFeedConnectorTest {
 
     @Test
     void submitFeed() {
@@ -16,9 +16,9 @@ class SubmitFeedConnectorTest {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("test-my-feed.txt");
 
-        SubmitFeedConnector submitFeedConnector = new SubmitFeedConnector();
+        AmazonSubmitFeedConnector amazonSubmitFeedConnector = new AmazonSubmitFeedConnector();
         //WHEN
-        SubmitFeedResponse response = submitFeedConnector.submitFeed(new BufferedInputStream(inputStream));
+        SubmitFeedResponse response = amazonSubmitFeedConnector.submitFeed(new BufferedInputStream(inputStream));
         //THEN
         assertNotNull(response,"response is null");
     }

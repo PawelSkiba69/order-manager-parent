@@ -20,9 +20,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 
-public class SubmitFeedConnector {
+public class AmazonSubmitFeedConnector {
 
-    private static final Logger LOGGER = Logger.getLogger(SubmitFeedConnector.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AmazonSubmitFeedConnector.class.getName());
 
     private static final String MWS_AMAZONSERVICES_CO_UK = "https://mws.amazonservices.co.uk/";
 
@@ -74,7 +74,7 @@ public class SubmitFeedConnector {
         return null;
     }
 
-    public SubmitFeedResponse invokeSubmitFeed(MarketplaceWebService service,
+    private SubmitFeedResponse invokeSubmitFeed(MarketplaceWebService service,
                                                SubmitFeedRequest request) {
         try {
             return service.submitFeed(request);
