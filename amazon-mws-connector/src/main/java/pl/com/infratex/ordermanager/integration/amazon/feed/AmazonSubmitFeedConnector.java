@@ -9,10 +9,10 @@ import com.amazonaws.mws.model.SubmitFeedResponse;
 import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.integration.amazon.ConnectorHelper;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -37,7 +37,7 @@ public class AmazonSubmitFeedConnector {
     private static final String M_ID = "A3NLKSN848UAEB";
     public static final String POST_FLAT_FILE_FULFILLMENT_DATA_ = "_POST_FLAT_FILE_FULFILLMENT_DATA_";
 
-    public SubmitFeedResponse submitFeed(BufferedInputStream inputStream) {
+    public SubmitFeedResponse submitFeed(InputStream inputStream) {
         MarketplaceWebServiceConfig config = new MarketplaceWebServiceConfig();
         config.setServiceURL(MWS_AMAZONSERVICES_CO_UK);
 
@@ -56,7 +56,7 @@ public class AmazonSubmitFeedConnector {
 
                 Path tempPath = Files.createTempFile("prefix", "suffix");
                 File tempFile = tempPath.toFile();
-                tempFile.deleteOnExit();
+//                tempFile.deleteOnExit();
                 LOGGER.info("tempFile: "+tempFile);
                 LOGGER.info("tempPath: "+tempPath);
 

@@ -3,12 +3,15 @@ package pl.com.infratex.ordermanager.service.csv.shipment.confirmation;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.springframework.stereotype.Component;
+import pl.com.infratex.ordermanager.api.exception.shipment.confirmation.ShipmentConfirmationCsvProcessorException;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 
-import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,18 +21,22 @@ public class ShipmentConfirmationCsvProcessor {
 
     //https://docs.developer.amazonservices.com/en_UK/feeds/Feeds_SubmitFeed.html
 
-    public void createCsv(List<ShipmentConfirmationModel> shipmentConfirmationModels) {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(SAMPLE_CSV_FILE));
-                CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-                        .withHeader("order-id", "order-item-id", "quantity", "ship-date",
-                                "carrier-code","carrier-name","tracking-number","ship-method"))) {
+    public InputStream createCsv(List<ShipmentConfirmationModel> shipmentConfirmationModels) throws ShipmentConfirmationCsvProcessorException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
+             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
+                     .withHeader("order-id", "order-item-id", "quantity", "ship-date",
+                             "carrier-code", "carrier-name", "tracking-number", "ship-method"))) {
             shipmentConfirmationModels.forEach(
                     shipmentConfirmationModel -> createCsvRecord(shipmentConfirmationModel, csvPrinter));
 
             csvPrinter.flush();
+
+            byte[] bytes = outputStream.toByteArray();
+            return new ByteArrayInputStream(bytes);
+
         } catch (IOException e) {
-            e.printStackTrace();
-            //FIXME rozważyć rzucenie własnego wyjątku
+            throw new ShipmentConfirmationCsvProcessorException("Nie można stworzyć pliku csv",e);
         }
     }
 
