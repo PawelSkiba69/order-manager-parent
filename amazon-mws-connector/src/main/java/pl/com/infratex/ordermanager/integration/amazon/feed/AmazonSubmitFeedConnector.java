@@ -6,6 +6,7 @@ import com.amazonaws.mws.MarketplaceWebServiceConfig;
 import com.amazonaws.mws.MarketplaceWebServiceException;
 import com.amazonaws.mws.model.SubmitFeedRequest;
 import com.amazonaws.mws.model.SubmitFeedResponse;
+import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.integration.amazon.ConnectorHelper;
 
 import java.io.BufferedInputStream;
@@ -20,6 +21,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 
+@Component
 public class AmazonSubmitFeedConnector {
 
     private static final Logger LOGGER = Logger.getLogger(AmazonSubmitFeedConnector.class.getName());

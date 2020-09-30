@@ -2,6 +2,7 @@ package pl.com.infratex.ordermanager.service.csv.shipment.confirmation;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 
 import java.io.BufferedWriter;
@@ -11,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 public class ShipmentConfirmationCsvProcessor {
     private static final String SAMPLE_CSV_FILE = "";
 
