@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AmazonSubmitFeedConnectorTest {
 

@@ -8,6 +8,7 @@ import pl.com.infratex.ordermanager.api.exception.shipment.confirmation.Shipment
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.integration.amazon.feed.AmazonSubmitFeedConnector;
 import pl.com.infratex.ordermanager.service.csv.shipment.confirmation.ShipmentConfirmationCsvProcessor;
+import pl.com.infratex.ordermanager.service.enadawca.ENadawcaService;
 
 import java.io.InputStream;
 import java.time.LocalDateTime;
@@ -20,9 +21,12 @@ class ShipmentConfirmationManagerServiceTest {
     @Autowired
     private ShipmentConfirmationManagerService shipmentConfirmationManagerService;
     @Autowired
+    private ENadawcaService eNadawcaService;
+    @Autowired
     private ShipmentConfirmationCsvProcessor shipmentConfirmationCsvProcessor;
     @Autowired
     private AmazonSubmitFeedConnector amazonSubmitFeedConnector;
+
 
     @Test
     void confirmShipmentWithoutENadawca() throws ShipmentConfirmationCsvProcessorException {
@@ -46,7 +50,9 @@ class ShipmentConfirmationManagerServiceTest {
                         .build()
         );
         //WHEN
-        InputStream csvInputStream = shipmentConfirmationCsvProcessor.createCsv(shipmentConfirmationModels);
+        List<ShipmentConfirmationModel> shipmentConfirmationModels1 = eNadawcaService.checkStatus();
+        System.out.println("shipmentConfirmationModels: "+shipmentConfirmationModels1);
+        InputStream csvInputStream = shipmentConfirmationCsvProcessor.createCsv(shipmentConfirmationModels1);
         SubmitFeedResponse submitFeedResponse = amazonSubmitFeedConnector.submitFeed(csvInputStream);
         System.out.println("submitFeedResponse: "+submitFeedResponse);
         //THEN

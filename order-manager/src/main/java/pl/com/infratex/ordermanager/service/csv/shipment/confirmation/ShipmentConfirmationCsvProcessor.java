@@ -18,13 +18,14 @@ import java.util.List;
 @Component
 public class ShipmentConfirmationCsvProcessor {
     private static final String SAMPLE_CSV_FILE = "";
+    static final char TAB = '\t';
 
     //https://docs.developer.amazonservices.com/en_UK/feeds/Feeds_SubmitFeed.html
 
     public InputStream createCsv(List<ShipmentConfirmationModel> shipmentConfirmationModels) throws ShipmentConfirmationCsvProcessorException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
-             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
+             CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withDelimiter(TAB)
                      .withHeader("order-id", "order-item-id", "quantity", "ship-date",
                              "carrier-code", "carrier-name", "tracking-number", "ship-method"))) {
             shipmentConfirmationModels.forEach(
@@ -46,6 +47,7 @@ public class ShipmentConfirmationCsvProcessor {
                 shipmentConfirmationModel.getOrderItemId(),
                 shipmentConfirmationModel.getQuantity(),
                 shipmentConfirmationModel.getDataNadania().toString(),
+                shipmentConfirmationModel.getCarrierCode(),
                 shipmentConfirmationModel.getCarrierName(),
                 shipmentConfirmationModel.getNumerNadania(),
                 shipmentConfirmationModel.getShipMethod()

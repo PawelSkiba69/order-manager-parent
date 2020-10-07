@@ -110,9 +110,7 @@ public class ENadawcaManager {
         List<PrzesylkaShortType> przesylkaShortTypes = filterEnvelope(envelopeList, guids);
         ShipmentConfirmationMerger shipmentConfirmationMerger = new ShipmentConfirmationMerger();
 
-        List<ShipmentConfirmationModel> shipmentConfirmationModels = shipmentConfirmationMerger.merge(przesylkaShortTypes,unshippedOrders);
-
-        return shipmentConfirmationModels;
+        return shipmentConfirmationMerger.merge(przesylkaShortTypes,unshippedOrders);
     }
 
     List<PrzesylkaShortType> filterEnvelope(List<EnvelopeInfoType> envelopeList, List<String> guids) {

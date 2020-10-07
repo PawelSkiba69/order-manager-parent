@@ -3,10 +3,10 @@ package pl.com.infratex.ordermanager.service.enadawca;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -50,6 +50,17 @@ class ENadawcaServiceTest {
     // when
         eNadawcaService.send(addresses, LocalDate.now());
     // then
+
+    }
+
+    @Test
+    void checkStatus(){
+        //given
+
+        //when
+        List<ShipmentConfirmationModel> shipmentConfirmationModels = eNadawcaService.checkStatus();
+        //then
+
 
     }
 }
