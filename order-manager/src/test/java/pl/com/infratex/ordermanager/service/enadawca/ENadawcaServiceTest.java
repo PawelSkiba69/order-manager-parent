@@ -7,6 +7,7 @@ import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -58,7 +59,7 @@ class ENadawcaServiceTest {
         //given
 
         //when
-        List<ShipmentConfirmationModel> shipmentConfirmationModels = eNadawcaService.checkStatus();
+        List<ShipmentConfirmationModel> shipmentConfirmationModels = eNadawcaService.checkStatus(LocalDateTime.now());
         //then
 
 

@@ -9,6 +9,7 @@ import pl.com.infratex.ordermanager.service.csv.shipment.confirmation.ShipmentCo
 import pl.com.infratex.ordermanager.service.enadawca.ENadawcaService;
 
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -29,7 +30,7 @@ public class ShipmentConfirmationManagerService {
     public void confirmShipment() {
         LOGGER.info("confirmShipment()");
         try {
-            List<ShipmentConfirmationModel> shipmentConfirmationModels = eNadawcaService.checkStatus();
+            List<ShipmentConfirmationModel> shipmentConfirmationModels = eNadawcaService.checkStatus(LocalDateTime.now());
             InputStream csvInputStream = shipmentConfirmationCsvProcessor.createCsv(shipmentConfirmationModels);
             SubmitFeedResponse submitFeedResponse = amazonSubmitFeedConnector.submitFeed(csvInputStream);
             String submitFeedResponseJSON = submitFeedResponse.toJSON();

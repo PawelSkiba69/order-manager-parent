@@ -11,9 +11,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ShipmentConfirmationMerger {
+
+    private static final Logger LOGGER = Logger.getLogger(ShipmentConfirmationMerger.class.getName());
+
     public List<ShipmentConfirmationModel> merge(List<PrzesylkaShortType> przesylkaShortTypes, List<OrderModel> orders) {
+
+        LOGGER.info("merge()");
+        LOGGER.info("przesylkaShortTypes: " + przesylkaShortTypes);
+        LOGGER.info("orders: " + orders);
 
         List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
 
@@ -26,6 +34,7 @@ public class ShipmentConfirmationMerger {
             });
         });
 
+        LOGGER.info("merge(...) = " + shipmentConfirmationModels);
         return shipmentConfirmationModels;
     }
 

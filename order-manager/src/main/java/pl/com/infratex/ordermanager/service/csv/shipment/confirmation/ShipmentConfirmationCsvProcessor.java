@@ -14,30 +14,35 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Component
 public class ShipmentConfirmationCsvProcessor {
+
+    private static final Logger LOGGER = Logger.getLogger(ShipmentConfirmationCsvProcessor.class.getName());
     private static final String SAMPLE_CSV_FILE = "";
-    static final char TAB = '\t';
+    private static final char TAB = '\t';
 
     //https://docs.developer.amazonservices.com/en_UK/feeds/Feeds_SubmitFeed.html
 
     public InputStream createCsv(List<ShipmentConfirmationModel> shipmentConfirmationModels) throws ShipmentConfirmationCsvProcessorException {
+        LOGGER.info("createCsv("+shipmentConfirmationModels+")");
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
              CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withDelimiter(TAB)
                      .withHeader("order-id", "order-item-id", "quantity", "ship-date",
                              "carrier-code", "carrier-name", "tracking-number", "ship-method"))) {
-            shipmentConfirmationModels.forEach(
-                    shipmentConfirmationModel -> createCsvRecord(shipmentConfirmationModel, csvPrinter));
-
+            if (shipmentConfirmationModels != null) {
+                shipmentConfirmationModels.forEach(
+                        shipmentConfirmationModel -> createCsvRecord(shipmentConfirmationModel, csvPrinter));
+            }
             csvPrinter.flush();
 
             byte[] bytes = outputStream.toByteArray();
             return new ByteArrayInputStream(bytes);
 
         } catch (IOException e) {
-            throw new ShipmentConfirmationCsvProcessorException("Nie można stworzyć pliku csv",e);
+            throw new ShipmentConfirmationCsvProcessorException("Nie można stworzyć pliku csv", e);
         }
     }
 

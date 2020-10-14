@@ -100,17 +100,23 @@ public class ENadawcaManager {
         List<AddShipmentResponseItemType> addShipmentResponseItemTypes = elektronicznyNadawca.addShipment(shipments, idBufor);
     }
 
-    public List<ShipmentConfirmationModel> checkStatus(List<OrderModel> unshippedOrders, List<String> guids, LocalDateTime oldestLoadDate) {
+    public List<ShipmentConfirmationModel> checkStatus(List<OrderModel> unshippedOrders, List<String> guids,
+                                                       LocalDateTime oldestLoadDate, LocalDateTime newestLoadDate) {
+        LOGGER.info("checkStatus()");
+        LOGGER.info("unshippedOrders: " + unshippedOrders);
+        LOGGER.info("guids: " + guids);
+        LOGGER.info("oldestLoadDate: " + oldestLoadDate);
+        LOGGER.info("newestLoadDate: " + newestLoadDate);
 
         XMLGregorianCalendar startDateXML = ENadawcaXMLDateConverter.from(oldestLoadDate);
-        XMLGregorianCalendar endDateXML = ENadawcaXMLDateConverter.from(LocalDateTime.now());
+        XMLGregorianCalendar endDateXML = ENadawcaXMLDateConverter.from(newestLoadDate);
 
         List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML, endDateXML);
 
         List<PrzesylkaShortType> przesylkaShortTypes = filterEnvelope(envelopeList, guids);
         ShipmentConfirmationMerger shipmentConfirmationMerger = new ShipmentConfirmationMerger();
 
-        return shipmentConfirmationMerger.merge(przesylkaShortTypes,unshippedOrders);
+        return shipmentConfirmationMerger.merge(przesylkaShortTypes, unshippedOrders);
     }
 
     List<PrzesylkaShortType> filterEnvelope(List<EnvelopeInfoType> envelopeList, List<String> guids) {
