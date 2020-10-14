@@ -3,7 +3,9 @@ package pl.com.infratex.ordermanager.integration.enadawca.mapper;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationStatusType;
 import pl.com.infratex.ordermanager.integration.enadawca.converter.ENadawcaXMLDateConverter;
+import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
+import pl.com.infratex.ordermanager.web.model.coverter.CarrierCodeConverter;
 import pl.poczta_polska.e_nadawca.PrzesylkaShortType;
 import pl.poczta_polska.e_nadawca.StatusType;
 
@@ -56,8 +58,14 @@ public class ShipmentConfirmationMerger {
                 shipmentConfirmationModel.setStatus(ShipmentConfirmationStatusType.fromValue(statusType.value()));
             }
 
+            CarrierCodeConverter carrierCodeConverter = new CarrierCodeConverter();
             shipmentConfirmationModel.setOrderId(orderModel.getOrderId());
-            shipmentConfirmationModel.setCarrierCode(orderModel.getClient().getShipCountry());//Fixme nullPointerException i dodać konwerter
+
+            ClientModel client = orderModel.getClient();
+            if (client != null) {
+                String shipCountry = client.getShipCountry();
+                shipmentConfirmationModel.setCarrierCode(carrierCodeConverter.convert(shipCountry));
+            }
 
             return shipmentConfirmationModel;
         }
