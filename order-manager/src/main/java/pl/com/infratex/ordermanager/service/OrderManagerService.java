@@ -97,22 +97,34 @@ public class OrderManagerService {
         Integer generateId = sequenceIdGenerator.generateId(ORDER_BATCH_ID_SEQ);
 
         for (OrderEntity orderEntity : orderEntities) {
-            if (orderNotExist(orderEntity)) {
-                ProductEntity productEntity = productRepository.save(orderEntity.getProduct());
-                ClientEntity clientEntity = clientRepository.save(orderEntity.getClient());
 
-                orderEntity.setProduct(productEntity);
-                orderEntity.setClient(clientEntity);
-                orderEntity.setBatchId(generateId);
-                orderEntity.setLoadDate(LocalDateTime.now());
-                orderRepository.save(orderEntity);
+            ProductEntity productEntity = orderEntity.getProduct();
+            ClientEntity clientEntity = orderEntity.getClient();
+
+            OrderEntity existingOrderEntity=orderRepository.findByOrderIdAndOrderItemId(
+                    orderEntity.getOrderId(), orderEntity.getOrderItemId());
+
+            if (existingOrderEntity!=null) {
+                orderEntity.setoId(existingOrderEntity.getoId());
+                orderEntity.setLoadDate(existingOrderEntity.getLoadDate());
+                ProductEntity existingProductEntity=existingOrderEntity.getProduct();
+                ClientEntity existingClientEntity=existingOrderEntity.getClient();
+                if (existingProductEntity!=null)
+                    productEntity.setId(existingProductEntity.getId());
+                if (existingClientEntity!=null)
+                    clientEntity.setId(existingClientEntity.getId());
             }
-        }
-    }
+            else{
+                orderEntity.setLoadDate(LocalDateTime.now());
+            }
+            productEntity = productRepository.save(productEntity);
+            clientEntity = clientRepository.save(clientEntity);
 
-    private boolean orderNotExist(OrderEntity orderEntity){
-        return orderRepository.findByOrderIdAndOrderItemId(
-                orderEntity.getOrderId(),orderEntity.getOrderItemId()).isEmpty();
+            orderEntity.setProduct(productEntity);
+            orderEntity.setClient(clientEntity);
+            orderEntity.setBatchId(generateId);
+            orderRepository.save(orderEntity);
+        }
     }
 
     private List<String>getUnshippedOrderItemIds(SellerOrderReportModel sellerOrderReportModel){
