@@ -5,8 +5,10 @@ import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.entity.ClientEntity;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
+import pl.com.infratex.ordermanager.dao.entity.OrderLoadedEntity;
 import pl.com.infratex.ordermanager.dao.entity.ProductEntity;
 import pl.com.infratex.ordermanager.dao.repository.ClientRepository;
+import pl.com.infratex.ordermanager.dao.repository.OrderLoadedRepository;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.dao.repository.ProductRepository;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
@@ -42,12 +44,13 @@ public class OrderManagerService {
     private OrderModelMapper orderModelMapper;
     private ProductMappingService productMappingService;
     private SequenceIdGenerator sequenceIdGenerator;
+    private OrderLoadedRepository orderLoadedRepository;
 
 
     public OrderManagerService(OrderService orderService, OrderRepository orderRepository,
                                ProductRepository productRepository, ClientRepository clientRepository,
                                SellerOrderReportMapper sellerOrderReportMapper, OrderModelMapper orderModelMapper,
-                               ProductMappingService productMappingService, SequenceIdGenerator sequenceIdGenerator) {
+                               ProductMappingService productMappingService, SequenceIdGenerator sequenceIdGenerator, OrderLoadedRepository orderLoadedRepository) {
         this.orderService = orderService;
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
@@ -56,6 +59,7 @@ public class OrderManagerService {
         this.orderModelMapper = orderModelMapper;
         this.productMappingService = productMappingService;
         this.sequenceIdGenerator = sequenceIdGenerator;
+        this.orderLoadedRepository = orderLoadedRepository;
     }
 
     public SellerOrderReportModel createSellerOrderReport(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException {
@@ -63,7 +67,7 @@ public class OrderManagerService {
         List<AmazonCsvOrder> amazonCsvOrders = parseCsv(inputStreamUnshippedOrders, inputStreamNewOrders);
         SellerOrderReportModel sellerOrderReportModel = sellerOrderReportMapper.fromAmazonCsvOrders(amazonCsvOrders);
 
-        saveOrders(productMappingService.assignAdditionalProductInfo(sellerOrderReportModel));
+        saveOrders(sellerOrderReportModel);
 
         //TODO do wykorzystania przy pobieraniu zamówień bezpośrednio z Amazona
 //        List<OrderEntity> foundOrderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(0);
@@ -71,7 +75,7 @@ public class OrderManagerService {
         List<OrderEntity> foundOrderEntities = orderRepository.
                 findByOrderItemIdInOrderByProduct_InternalIdDesc(getUnshippedOrderItemIds(sellerOrderReportModel));
 
-        return new SellerOrderReportModel(orderModelMapper.fromEntities(foundOrderEntities) ,null);
+        return new SellerOrderReportModel(orderModelMapper.fromEntities(foundOrderEntities), null);
     }
 
     public void generate(GenerateAddressModel preparedAddressModel) throws OrderManagerException {
@@ -91,43 +95,61 @@ public class OrderManagerService {
         return amazonCsvOrdersMergeProcessor.mergeOrders(readerUnshippedOrders, readerNewOrders);
     }
 
-    private void saveOrders(SellerOrderReportModel sellerOrderReportModel) {
+    void saveOrders(SellerOrderReportModel sellerOrderReportModel) {
+//        SellerOrderReportModel sellerOrderReportModelAddProductInfo =
+        productMappingService.assignAdditionalProductInfo(sellerOrderReportModel);
+
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         List<OrderEntity> orderEntities = orderModelMapper.fromModels(orders);
         Integer generateId = sequenceIdGenerator.generateId(ORDER_BATCH_ID_SEQ);
 
         for (OrderEntity orderEntity : orderEntities) {
+            String orderId = orderEntity.getOrderId();
+            String orderItemId = orderEntity.getOrderItemId();
+            OrderLoadedEntity foundOrderLoadedEntity = orderLoadedRepository.findByOrderIdAndOrderItemId(orderId, orderItemId);
 
+//            if (orderNotExist(orderEntity)) {
             ProductEntity productEntity = orderEntity.getProduct();
             ClientEntity clientEntity = orderEntity.getClient();
 
-            OrderEntity existingOrderEntity=orderRepository.findByOrderIdAndOrderItemId(
-                    orderEntity.getOrderId(), orderEntity.getOrderItemId());
-
-            if (existingOrderEntity!=null) {
-                orderEntity.setoId(existingOrderEntity.getoId());
-                orderEntity.setLoadDate(existingOrderEntity.getLoadDate());
-                ProductEntity existingProductEntity=existingOrderEntity.getProduct();
-                ClientEntity existingClientEntity=existingOrderEntity.getClient();
-                if (existingProductEntity!=null)
-                    productEntity.setId(existingProductEntity.getId());
-                if (existingClientEntity!=null)
-                    clientEntity.setId(existingClientEntity.getId());
+            if (foundOrderLoadedEntity != null) {
+                if (productEntity != null) productEntity.setId(foundOrderLoadedEntity.getProductId());
+                if (clientEntity != null) clientEntity.setId(foundOrderLoadedEntity.getProductId());
             }
-            else{
-                orderEntity.setLoadDate(LocalDateTime.now());
-            }
-            productEntity = productRepository.save(productEntity);
-            clientEntity = clientRepository.save(clientEntity);
 
-            orderEntity.setProduct(productEntity);
-            orderEntity.setClient(clientEntity);
+            ProductEntity savedProductEntity = productRepository.save(productEntity);
+            ClientEntity savedClientEntity = clientRepository.save(clientEntity);
+
+            orderEntity.setProduct(savedProductEntity);
+            orderEntity.setClient(savedClientEntity);
             orderEntity.setBatchId(generateId);
-            orderRepository.save(orderEntity);
+            orderEntity.setLoadDate(LocalDateTime.now());
+            if (foundOrderLoadedEntity != null) {
+                orderEntity.setoId(foundOrderLoadedEntity.getoId());
+            }
+            OrderEntity savedOrderEntity = orderRepository.save(orderEntity);
+
+            if (foundOrderLoadedEntity == null) {
+                OrderLoadedEntity orderLoadedEntity = new OrderLoadedEntity();
+                orderLoadedEntity.setoId(savedOrderEntity.getoId());
+                orderLoadedEntity.setOrderId(savedOrderEntity.getOrderId());
+                orderLoadedEntity.setOrderItemId(savedOrderEntity.getOrderItemId());
+
+                ClientEntity savedOrderEntityClient = savedOrderEntity.getClient();
+                if (savedOrderEntityClient != null) orderLoadedEntity.setClientId(savedOrderEntityClient.getId());
+                ProductEntity savedOrderEntityProduct = savedOrderEntity.getProduct();
+                if (savedOrderEntityProduct != null) orderLoadedEntity.setProductId(savedOrderEntityProduct.getId());
+                orderLoadedRepository.save(orderLoadedEntity);
+            }
         }
     }
 
-    private List<String>getUnshippedOrderItemIds(SellerOrderReportModel sellerOrderReportModel){
+    private boolean orderNotExist(OrderEntity orderEntity) {
+        return orderRepository.findByOrderIdAndOrderItemId(
+                orderEntity.getOrderId(), orderEntity.getOrderItemId()).isEmpty();
+    }
+
+    private List<String> getUnshippedOrderItemIds(SellerOrderReportModel sellerOrderReportModel) {
         return sellerOrderReportModel.getOrders().stream()
                 .map(OrderModel::getOrderItemId)
                 .collect(Collectors.toList());
