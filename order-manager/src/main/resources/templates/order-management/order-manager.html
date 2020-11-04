@@ -48,7 +48,7 @@
                         <td th:text="${order.client.shipCountry}">/td>
                         <td th:text="${order.purchaseDateFormatted}"></td>
                         <td th:text="${order.product.productName}">/td>
-                        <td th:text="${order.product.internalId}">/td>
+                        <td><input type="text" th:value="${order.product.internalId}"></td>
                         <td th:text="${order.quantityPurchased}"></td>
                         <td><input th:value="${order.oId}" type="checkbox" name="chosen"/></td>
 <!--                        <td th:text="${order.status}"></td>-->

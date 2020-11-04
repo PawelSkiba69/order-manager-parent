@@ -62,6 +62,10 @@ public class OrderManagerService {
         this.orderLoadedRepository = orderLoadedRepository;
     }
 
+    public List<OrderModel> filterByLatestBatchId() {
+        return orderService.filterByLatestBatchId();
+    }
+
     public SellerOrderReportModel createSellerOrderReport(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException {
 
         List<AmazonCsvOrder> amazonCsvOrders = parseCsv(inputStreamUnshippedOrders, inputStreamNewOrders);

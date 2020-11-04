@@ -30,6 +30,11 @@ public class OrderService {
         return orderModelMapper.fromEntities(orderEntities);
     }
 
+    public List<OrderModel> filterByLatestBatchId() {
+        List<OrderEntity> orderEntities = orderRepository.ordersWithLatestBatchId();
+        return orderModelMapper.fromEntities(orderEntities);
+    }
+
     //FIXME Add test
     public List<OrderModel> ordersWithStatus(OrderStatusType orderStatusType) {
         List<OrderEntity> orderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(orderStatusType);

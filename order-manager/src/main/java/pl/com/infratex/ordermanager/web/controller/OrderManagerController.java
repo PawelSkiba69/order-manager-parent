@@ -11,9 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
 import pl.com.infratex.ordermanager.service.OrderManagerService;
 import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
+import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.ORDER_MANAGER_VIEW;
@@ -33,8 +35,8 @@ public class OrderManagerController {
 
     @GetMapping
     public String orders(Model model) throws IOException {
-//        List<OrderModel> orders = orderManagerService.list();
-//        model.addAttribute("orders", orders);
+        List<OrderModel> orders = orderManagerService.filterByLatestBatchId();
+        model.addAttribute("orders", orders);
 
         return ORDER_MANAGER_VIEW;
     }
