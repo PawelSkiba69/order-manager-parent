@@ -15,6 +15,7 @@
         <label for="file-new-orders">Wybierz plik csv new orders</label>
         <input type="file" id="file-new-orders" name="file-new-orders"/>
         <button type="submit">wyślij</button>
+        <button type="submit" th:formaction="@{/order-management/secondAction}">Second Action</button>
     </div>
 </form>
 <div class="content">
@@ -23,6 +24,10 @@
             <div>
                 <label for="generate">Generuje Packing Slips oraz listę adresów</label>
                 <button id="generate" type="submit">Generuj wysyłki</button>
+            </div>
+            <div>
+                <label for="saveAll">Zapisz wszystkie zmiany</label>
+                <input id="saveAll"  type="checkbox" name="saveAll"/>
             </div>
             <div>
                 <table class="table">
@@ -41,16 +46,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="order, stat : ${orders}">
+                    <tr th:each="order, stat : *{orders}">
                         <th th:text="${stat.count}" scope="row"></th>
                         <td th:text="${order.orderId}"></td>
                         <td th:text="${order.client.buyerName}">/td>
                         <td th:text="${order.client.shipCountry}">/td>
                         <td th:text="${order.purchaseDateFormatted}"></td>
                         <td th:text="${order.product.productName}">/td>
-                        <td><input type="text" th:value="${order.product.internalId}"></td>
+                        <td><input type="text" th:field="*{orders[__${stat.index}__].product.internalId}"></td>
                         <td th:text="${order.quantityPurchased}"></td>
-                        <td><input th:value="${order.oId}" type="checkbox" name="chosen"/></td>
+<!--                        <td><input th:value="${order.oId}" type="checkbox" name="chosen"/></td>-->
+<!--                        <td><input th:field="${order.oId}" th:checked="${order.chosen}" type="checkbox" name="chosen"/></td>-->
+                        <td><input th:field="*{orders[__${stat.index}__].chosen}" th:value="${order.chosen}" th:checked="${order.chosen}" type="checkbox" /></td>
 <!--                        <td th:text="${order.status}"></td>-->
                     </tr>
                     </tbody>

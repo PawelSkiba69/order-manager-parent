@@ -2,6 +2,7 @@ package pl.com.infratex.ordermanager.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.GENERATE_ADDRESS_MODEL_ATTRIBUTE;
+import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.ORDERS_MODEL_ATTRIBUTE;
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.ORDER_MANAGER_VIEW;
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.SHIPMENT_MANAGER_URL;
 
@@ -34,9 +37,8 @@ public class OrderManagerController {
     }
 
     @GetMapping
-    public String orders(Model model) throws IOException {
-        List<OrderModel> orders = orderManagerService.filterByLatestBatchId();
-        model.addAttribute("orders", orders);
+    public String ordersView(ModelMap model) throws IOException {
+        orders(model);
 
         return ORDER_MANAGER_VIEW;
     }
@@ -51,10 +53,35 @@ public class OrderManagerController {
     }
 
     @PostMapping(value = "/generate")
-    public String generate(@ModelAttribute(name = "generateAddress") GenerateAddressModel generateAddressModel)
+    public String generate(@ModelAttribute(name = "generateAddress") GenerateAddressModel generateAddressModel, ModelMap model)
             throws OrderManagerException {
         LOGGER.info("generating: " + generateAddressModel);
-        orderManagerService.generate(generateAddressModel);
-        return "redirect:/" + SHIPMENT_MANAGER_URL;
+//        if (generateAddressModel != null) {
+        if (generateAddressModel.getSaveAll()) {
+            orders(model);
+            return ORDER_MANAGER_VIEW;
+        } else {
+            orderManagerService.generate(generateAddressModel);
+            return "redirect:/" + SHIPMENT_MANAGER_URL;
+        }
+//        }
+//        return ORDER_MANAGER_VIEW;
     }
+
+    private void orders(ModelMap model) {
+        List<OrderModel> orders = (List<OrderModel>) model.get(ORDERS_MODEL_ATTRIBUTE);
+        if (orders == null) {
+            orders = orderManagerService.filterByLatestBatchId();
+        }
+
+        GenerateAddressModel generateAddressModel = (GenerateAddressModel) model.get(GENERATE_ADDRESS_MODEL_ATTRIBUTE);
+        if (generateAddressModel == null) {
+            generateAddressModel = new GenerateAddressModel();
+        }
+        generateAddressModel.setOrders(orders);
+
+        model.addAttribute(GENERATE_ADDRESS_MODEL_ATTRIBUTE, generateAddressModel);
+        model.addAttribute(ORDERS_MODEL_ATTRIBUTE, orders);
+    }
+
 }
