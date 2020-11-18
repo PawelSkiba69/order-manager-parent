@@ -57,7 +57,7 @@
                         <td th:text="${order.quantityPurchased}"></td>
 <!--                        <td><input th:value="${order.oId}" type="checkbox" name="chosen"/></td>-->
 <!--                        <td><input th:field="${order.oId}" th:checked="${order.chosen}" type="checkbox" name="chosen"/></td>-->
-                        <td><input th:field="*{orders[__${stat.index}__].chosen}" th:value="${order.chosen}" th:checked="${order.chosen}" type="checkbox" /></td>
+                        <td><input th:field="*{orders[__${stat.index}__].chosen}"  type="checkbox" /></td>
 <!--                        <td th:text="${order.status}"></td>-->
                     </tr>
                     </tbody>
