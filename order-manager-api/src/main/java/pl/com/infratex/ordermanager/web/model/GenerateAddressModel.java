@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GenerateAddressModel {
-    private Boolean saveAll=false;
+    private Boolean saveAll = false;
     private List<OrderModel> orders;
     private Boolean[] chosen;
 }

@@ -44,14 +44,19 @@ public class OrderService {
     //FIXME Add test
     public void prepareAddresses(GenerateAddressModel preparedAddressModel) throws OrderNotFoundException {
 //        Long[] chosen = preparedAddressModel.getChosen();
-//        if (chosen != null) {
-//            for (Long id : chosen) {
-//                Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(id);
-//                OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + id));
-//                foundOrderEntity.setStatus(OrderStatusType.GENERATED);
-//                orderRepository.save(foundOrderEntity);
-//            }
-//        }
+        List<OrderModel> orders = preparedAddressModel.getOrders();
+
+        if (orders != null) {
+            for (OrderModel order : orders) {
+                if(order.isChosen()) {
+                    Long orderId = order.getOId();
+                    Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(orderId);
+                    OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + orderId));
+                    foundOrderEntity.setStatus(OrderStatusType.GENERATED);
+                    orderRepository.save(foundOrderEntity);
+                }
+            }
+        }
     }
 
     public List<OrderEntity> updateOrdersWithGuids(List<AddressModel> addresses, List<OrderModel> orders) {

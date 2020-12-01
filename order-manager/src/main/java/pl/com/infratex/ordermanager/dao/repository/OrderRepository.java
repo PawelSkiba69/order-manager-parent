@@ -15,7 +15,7 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
             "WHERE O.BATCH_ID =\n" +
             "    (SELECT max(OMAX.BATCH_ID)\n" +
             "     FROM ORDERS OMAX)\n" +
-            "ORDER BY P.INTERNAL_ID DESC";
+            "ORDER BY LOWER(P.INTERNAL_ID) DESC";
 
     List<OrderEntity> findByStatusOrderByProduct_InternalIdDesc(OrderStatusType status);
 

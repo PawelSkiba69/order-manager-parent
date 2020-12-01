@@ -83,6 +83,7 @@ public class ProductMappingService {
 
     public ProductMappingModel addOrUpdateProductMapping(ProductMappingModel productMappingModel) {
 
+        LOGGER.info("addOrUpdateProductMapping(" + productMappingModel + ")");
         ProductMappingEntity productMappingEntity = productMappingMapper.fromModel(productMappingModel);
         ProductMappingEntity existingProductMappingEntity = productMappingRepository.findBySku(productMappingModel.getSku());
         if (existingProductMappingEntity != null) {
@@ -90,6 +91,8 @@ public class ProductMappingService {
         }
         ProductMappingEntity saveProductMappingEntity = productMappingRepository.save(productMappingEntity);
 
-        return productMappingMapper.fromEntity(saveProductMappingEntity);
+        ProductMappingModel savedProductMappingModel = productMappingMapper.fromEntity(saveProductMappingEntity);
+        LOGGER.info("addOrUpdateProductMapping(...)= " + savedProductMappingModel);
+        return savedProductMappingModel;
     }
 }

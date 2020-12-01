@@ -17,8 +17,10 @@ import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.GENERATE_ADDRESS_MODEL_ATTRIBUTE;
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.ORDERS_MODEL_ATTRIBUTE;
@@ -62,7 +64,8 @@ public class OrderManagerController {
 //        if (generateAddressModel != null) {
         if (generateAddressModel.getSaveAll()) {
             LOGGER.info("SaveAll TRUE!");
-            orders(model);
+            List<OrderModel> orders = orders(model);
+            orderManagerService.updateOrders(SellerOrderReportModel.builder().orders(orders).build());
             return "redirect:" + ORDER_MANAGEMENT_URI;
         } else {
             LOGGER.info("SaveAll FALSE!");
@@ -73,11 +76,31 @@ public class OrderManagerController {
 //        return ORDER_MANAGER_VIEW;
     }
 
-    private void orders(ModelMap model) {
+    private List<OrderModel> orders(ModelMap model) {
         List<OrderModel> orders = (List<OrderModel>) model.get(ORDERS_MODEL_ATTRIBUTE);
         if (orders == null) {
             orders = orderManagerService.filterByLatestBatchId();
         }
+
+        Comparator<OrderModel> orderModelComparator =
+                Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
+                        Comparator.nullsLast(Comparator.reverseOrder()));
+        orders = orders.stream()
+                .sorted(Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
+                        Comparator.nullsLast(Comparator.reverseOrder())))
+//                .sorted(
+//                        orderModelComparator.thenComparing(
+//                                orderModel -> orderModel.getProduct().getInternalId(),
+////                                String.CASE_INSENSITIVE_ORDER,
+//                                Comparator.nullsLast(Comparator.reverseOrder()))
+//                )
+                .collect(Collectors.toList());
+
+
+//        hotels.sort(
+//                Comparator.comparing(Hotel::getCity)
+//                        .thenComparing(Hotel::getName, String.CASE_INSENSITIVE_ORDER)
+//        )
 
         GenerateAddressModel generateAddressModel = (GenerateAddressModel) model.get(GENERATE_ADDRESS_MODEL_ATTRIBUTE);
         if (generateAddressModel == null) {
@@ -87,6 +110,8 @@ public class OrderManagerController {
 
         model.addAttribute(GENERATE_ADDRESS_MODEL_ATTRIBUTE, generateAddressModel);
         model.addAttribute(ORDERS_MODEL_ATTRIBUTE, orders);
+
+        return orders;
     }
 
 }

@@ -1,10 +1,12 @@
 package pl.com.infratex.ordermanager.web.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductMappingModel {
@@ -13,7 +15,6 @@ public class ProductMappingModel {
     private String internalProductName;
     private String asin;
     private int condition;
-//    private ProductMappingC
 
     public ProductMappingModel(String sku, String internalProductName) {
         this.sku = sku;

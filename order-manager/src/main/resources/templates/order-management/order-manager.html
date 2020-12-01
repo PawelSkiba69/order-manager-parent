@@ -5,6 +5,7 @@
     <title>order-manager</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script defer src="/js/order-manager.js"></script>
 </head>
 <body>
 <h1>order-manager</h1>
@@ -27,7 +28,7 @@
             </div>
             <div>
                 <label for="saveAll">Zapisz wszystkie zmiany</label>
-                <input id="saveAll"  type="checkbox" name="saveAll"/>
+                <input id="saveAll" type="checkbox" th:field="*{saveAll}" />
             </div>
             <div>
                 <table class="table">
@@ -42,7 +43,6 @@
                         <th scope="col">Nazwa wewnętrzna</th>
                         <th scope="col">Szt.</th>
                         <th scope="col">Do wysłania</th>
-<!--                        <th scope="col">Wygenerowane</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -53,12 +53,12 @@
                         <td th:text="${order.client.shipCountry}">/td>
                         <td th:text="${order.purchaseDateFormatted}"></td>
                         <td th:text="${order.product.productName}">/td>
-                        <td><input type="text" th:field="*{orders[__${stat.index}__].product.internalId}"></td>
+                        <td class="chooseCar">
+                            <input type="text" th:field="*{orders[__${stat.index}__].product.internalId}">
+                            <input type="hidden" th:field="*{orders[__${stat.index}__].product.changedInternalId}">
+                        </td>
                         <td th:text="${order.quantityPurchased}"></td>
-<!--                        <td><input th:value="${order.oId}" type="checkbox" name="chosen"/></td>-->
-<!--                        <td><input th:field="${order.oId}" th:checked="${order.chosen}" type="checkbox" name="chosen"/></td>-->
                         <td><input th:field="*{orders[__${stat.index}__].chosen}"  type="checkbox" /></td>
-<!--                        <td th:text="${order.status}"></td>-->
                     </tr>
                     </tbody>
                 </table>
