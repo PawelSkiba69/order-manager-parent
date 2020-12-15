@@ -46,17 +46,16 @@ public class OrderService {
 //        Long[] chosen = preparedAddressModel.getChosen();
         List<OrderModel> orders = preparedAddressModel.getOrders();
 
-        if (orders != null) {
-            for (OrderModel order : orders) {
-                if(order.isChosen()) {
-                    Long orderId = order.getOId();
-                    Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(orderId);
-                    OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + orderId));
-                    foundOrderEntity.setStatus(OrderStatusType.GENERATED);
-                    orderRepository.save(foundOrderEntity);
-                }
+        for (OrderModel order : orders) {
+            if (order.isChosen()) {
+                Long orderId = order.getOId();
+                Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(orderId);
+                OrderEntity foundOrderEntity = foundOptionalOrderEntity.orElseThrow(() -> new OrderNotFoundException("No order with id: " + orderId));
+                foundOrderEntity.setStatus(OrderStatusType.GENERATED);
+                orderRepository.save(foundOrderEntity);
             }
         }
+
     }
 
     public List<OrderEntity> updateOrdersWithGuids(List<AddressModel> addresses, List<OrderModel> orders) {

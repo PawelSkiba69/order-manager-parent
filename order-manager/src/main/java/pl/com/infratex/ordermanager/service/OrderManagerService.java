@@ -110,12 +110,12 @@ public class OrderManagerService {
 
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         List<OrderEntity> orderEntities = orderModelMapper.fromModels(orders);
-        Integer generateId = sequenceIdGenerator.generateId(ORDER_BATCH_ID_SEQ);
 
-        saveOrUpdateOrders(orderEntities);
+        saveOrUpdateOrders(orderEntities,false);
     }
 
     public void updateOrders(SellerOrderReportModel sellerOrderReportModel) {
+        LOGGER.info("updateOrders(" + sellerOrderReportModel + ")");
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
 
         SellerOrderReportModel changedProductsSellerOrderReportModel = new SellerOrderReportModel();
@@ -124,8 +124,10 @@ public class OrderManagerService {
         for (OrderModel order : orders) {
             ProductModel product = order.getProduct();
             if (product != null) {
+                LOGGER.info("product: " + product);
                 if (product.isChangedInternalId()
                         && !StringUtils.isBlank(product.getInternalId())) {
+                    LOGGER.info("#### product ready for ProductMapping!");
                     ProductMappingModel productMappingModel = ProductMappingModel.builder()
                             .asin(product.getAsin())
                             .sku(product.getSku())
@@ -144,10 +146,16 @@ public class OrderManagerService {
 
         List<OrderEntity> orderEntities = orderModelMapper.fromModels(changedProductOrders);
 
-        saveOrUpdateOrders(orderEntities);
+        saveOrUpdateOrders(orderEntities,true);
     }
 
-    private void saveOrUpdateOrders(List<OrderEntity> orderEntities) {
+    private void saveOrUpdateOrders(List<OrderEntity> orderEntities, boolean update) {
+        LOGGER.info("saveOrUpdateOrders()");
+        LOGGER.info("orderEntities: " + orderEntities);
+        LOGGER.info("update: " + update);
+
+        Integer generateId = sequenceIdGenerator.generateId(ORDER_BATCH_ID_SEQ);
+
         for (OrderEntity orderEntity : orderEntities) {
             String orderId = orderEntity.getOrderId();
             String orderItemId = orderEntity.getOrderItemId();
@@ -166,6 +174,9 @@ public class OrderManagerService {
 
             orderEntity.setProduct(savedProductEntity);
             orderEntity.setClient(savedClientEntity);
+            if(!update) {
+                orderEntity.setBatchId(generateId);
+            }
             orderEntity.setLoadDate(LocalDateTime.now());
             if (foundOrderLoadedEntity != null) {
                 orderEntity.setoId(foundOrderLoadedEntity.getoId());

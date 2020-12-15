@@ -82,25 +82,10 @@ public class OrderManagerController {
             orders = orderManagerService.filterByLatestBatchId();
         }
 
-        Comparator<OrderModel> orderModelComparator =
-                Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
-                        Comparator.nullsLast(Comparator.reverseOrder()));
         orders = orders.stream()
                 .sorted(Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
                         Comparator.nullsLast(Comparator.reverseOrder())))
-//                .sorted(
-//                        orderModelComparator.thenComparing(
-//                                orderModel -> orderModel.getProduct().getInternalId(),
-////                                String.CASE_INSENSITIVE_ORDER,
-//                                Comparator.nullsLast(Comparator.reverseOrder()))
-//                )
                 .collect(Collectors.toList());
-
-
-//        hotels.sort(
-//                Comparator.comparing(Hotel::getCity)
-//                        .thenComparing(Hotel::getName, String.CASE_INSENSITIVE_ORDER)
-//        )
 
         GenerateAddressModel generateAddressModel = (GenerateAddressModel) model.get(GENERATE_ADDRESS_MODEL_ATTRIBUTE);
         if (generateAddressModel == null) {
