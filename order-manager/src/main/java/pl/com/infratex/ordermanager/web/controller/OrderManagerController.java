@@ -61,19 +61,17 @@ public class OrderManagerController {
     public String generate(@ModelAttribute(name = "generateAddress") GenerateAddressModel generateAddressModel, ModelMap model)
             throws OrderManagerException {
         LOGGER.info("generating: " + generateAddressModel);
-//        if (generateAddressModel != null) {
         if (generateAddressModel.getSaveAll()) {
             LOGGER.info("SaveAll TRUE!");
             List<OrderModel> orders = orders(model);
             orderManagerService.updateOrders(SellerOrderReportModel.builder().orders(orders).build());
+            generateAddressModel.setSaveAll(false);
             return "redirect:" + ORDER_MANAGEMENT_URI;
         } else {
             LOGGER.info("SaveAll FALSE!");
             orderManagerService.generate(generateAddressModel);
             return "redirect:" + SHIPMENT_MANAGER_URL;
         }
-//        }
-//        return ORDER_MANAGER_VIEW;
     }
 
     private List<OrderModel> orders(ModelMap model) {

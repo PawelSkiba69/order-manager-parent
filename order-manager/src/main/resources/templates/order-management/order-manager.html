@@ -16,7 +16,6 @@
         <label for="file-new-orders">Wybierz plik csv new orders</label>
         <input type="file" id="file-new-orders" name="file-new-orders"/>
         <button type="submit">wyślij</button>
-        <button type="submit" th:formaction="@{/order-management/secondAction}">Second Action</button>
     </div>
 </form>
 <div class="content">
@@ -25,10 +24,7 @@
             <div>
                 <label for="generate">Generuje Packing Slips oraz listę adresów</label>
                 <button id="generate" type="submit">Generuj wysyłki</button>
-            </div>
-            <div>
-                <label for="saveAll">Zapisz wszystkie zmiany</label>
-                <input id="saveAll" type="checkbox" th:field="*{saveAll}" />
+                <input id="saveAll" type="hidden" th:field="*{saveAll}" />
             </div>
             <div>
                 <table class="table">
@@ -53,7 +49,7 @@
                         <td th:text="${order.client.shipCountry}">/td>
                         <td th:text="${order.purchaseDateFormatted}"></td>
                         <td th:text="${order.product.productName}">/td>
-                        <td class="chooseCar">
+                        <td class="productChanged">
                             <input type="text" th:field="*{orders[__${stat.index}__].product.internalId}">
                             <input type="hidden" th:field="*{orders[__${stat.index}__].product.changedInternalId}">
                         </td>
