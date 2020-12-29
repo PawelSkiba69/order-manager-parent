@@ -1,5 +1,6 @@
 package pl.com.infratex.ordermanager.dao.entity;
 
+import org.apache.commons.lang3.StringUtils;
 import pl.com.infratex.ordermanager.service.model.ProductMappingCondition;
 
 import javax.persistence.Entity;
@@ -7,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -49,6 +52,12 @@ public class ProductMappingEntity {
 
     public void setInternalProductName(String internalProductName) {
         this.internalProductName = internalProductName;
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void setInternalProductName() {
+        this.internalProductName = StringUtils.upperCase(internalProductName);
     }
 
     public String getAsin() {

@@ -44,6 +44,8 @@ public class OrderModel {
     private String currencySymbol;
     private BigDecimal totalPrice;
 
+    private boolean chosen;
+
     public OrderModel(Long oId, String orderId, BigDecimal itemPrice) {
         this.oId = oId;
         this.orderId = orderId;
@@ -59,5 +61,13 @@ public class OrderModel {
         this.quantityPurchased = quantityPurchased;
         this.shippingPrice = shippingPrice;
         this.currency = currency;
+    }
+
+    public boolean isChosen() {
+        return chosen;
+    }
+
+    public void setChosen(boolean chosen) {
+        this.chosen = chosen;
     }
 }
