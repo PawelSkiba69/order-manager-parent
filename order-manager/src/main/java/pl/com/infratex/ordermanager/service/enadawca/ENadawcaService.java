@@ -61,7 +61,7 @@ public class ENadawcaService {
     }
 
     public List<ShipmentConfirmationModel> checkStatus(LocalDateTime newestLoadDate) {
-        LOGGER.info("checkStatus()");
+        LOGGER.info("checkStatus(" + newestLoadDate + ")");
         OrderModel orderModel = orderService.oldestUnshippedLabeledOrder();
         LocalDateTime oldestLoadDate = orderModel.getLoadDate();
 

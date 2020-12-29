@@ -59,4 +59,15 @@ class ShipmentConfirmationManagerServiceTest {
                 () -> assertNotNull(submitFeedResponse.getSubmitFeedResult(),"submitFeedResult is null")
         );
     }
+
+    @Test
+    void confirmShipmentWithENadawca(){
+        //GIVEN
+
+        //WHEN
+        shipmentConfirmationManagerService.confirmShipment();
+        //THEN
+
+    }
+
 }

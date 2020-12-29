@@ -10,9 +10,16 @@ public class AmazonSubmitFeedScheduledTask {
 
     private static final Logger LOGGER = Logger.getLogger(AmazonSubmitFeedScheduledTask.class.getName());
 
-    @Scheduled(fixedRate = 10000L)
+    private ShipmentConfirmationManagerService shipmentConfirmationManagerService;
+
+    public AmazonSubmitFeedScheduledTask(ShipmentConfirmationManagerService shipmentConfirmationManagerService) {
+        this.shipmentConfirmationManagerService = shipmentConfirmationManagerService;
+    }
+
+    @Scheduled(fixedRate = 5000L)
     public void task() {
         LOGGER.info("executing scheduled task");
+        shipmentConfirmationManagerService.confirmShipment();
     }
 
 }
