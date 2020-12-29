@@ -23,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class ProductMappingServiceIntegrationTest {
 
     private static final String SKU_INF_0001 = "INF0001";
-    private static final String INTERNAL_PRODUCT_NAME_P_732 = "p732";
+    private static final String INTERNAL_PRODUCT_NAME_P_732 = "p732 oryG";
+    private static final String INTERNAL_PRODUCT_NAME_P_732_UPPERCASE = "P732 ORYG";
     private static final String ASIN_A_4802_GNN_490 = "A4802GNN490";
     private static final int CONDITION_NEW_11 = 11;
 
@@ -101,6 +102,7 @@ class ProductMappingServiceIntegrationTest {
                 () -> assertNotNull(productWithInternalProductId.getCondition(), "condition is null"),
                 () -> assertEquals(savedProductMappingEntity.getSku(), productWithInternalProductId.getSku(), "sku's aren't equals"),
                 () -> assertEquals(savedProductMappingEntity.getInternalProductName(), productWithInternalProductId.getInternalId(), "internalId aren't equals"),
+                () -> assertEquals(INTERNAL_PRODUCT_NAME_P_732_UPPERCASE,savedProductMappingEntity.getInternalProductName(),"internalProductName is not Uppercase"),
                 () -> assertEquals(savedProductMappingEntity.getAsin(), productWithInternalProductId.getAsin(), "asins aren't equals"),
                 () -> assertEquals(ProductMappingCondition.NEW.getValue(), productWithInternalProductId.getCondition(), "conditions aren't equals")
         );

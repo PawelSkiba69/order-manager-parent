@@ -5,6 +5,7 @@
     <title>order-manager</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script defer src="/js/order-manager.js"></script>
 </head>
 <body>
 <h1>order-manager</h1>
@@ -23,6 +24,7 @@
             <div>
                 <label for="generate">Generuje Packing Slips oraz listę adresów</label>
                 <button id="generate" type="submit">Generuj wysyłki</button>
+                <input id="saveAll" type="hidden" th:field="*{saveAll}" />
             </div>
             <div>
                 <table class="table">
@@ -37,21 +39,22 @@
                         <th scope="col">Nazwa wewnętrzna</th>
                         <th scope="col">Szt.</th>
                         <th scope="col">Do wysłania</th>
-<!--                        <th scope="col">Wygenerowane</th>-->
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="order, stat : ${orders}">
+                    <tr th:each="order, stat : *{orders}">
                         <th th:text="${stat.count}" scope="row"></th>
                         <td th:text="${order.orderId}"></td>
                         <td th:text="${order.client.buyerName}">/td>
                         <td th:text="${order.client.shipCountry}">/td>
                         <td th:text="${order.purchaseDateFormatted}"></td>
                         <td th:text="${order.product.productName}">/td>
-                        <td th:text="${order.product.internalId}">/td>
+                        <td class="productChanged">
+                            <input type="text" th:field="*{orders[__${stat.index}__].product.internalId}">
+                            <input type="hidden" th:field="*{orders[__${stat.index}__].product.changedInternalId}">
+                        </td>
                         <td th:text="${order.quantityPurchased}"></td>
-                        <td><input th:value="${order.oId}" type="checkbox" name="chosen"/></td>
-<!--                        <td th:text="${order.status}"></td>-->
+                        <td><input th:field="*{orders[__${stat.index}__].chosen}"  type="checkbox" /></td>
                     </tr>
                     </tbody>
                 </table>

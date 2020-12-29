@@ -9,10 +9,13 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
-    String SQL = "select * \n" +
-            " from ORDERS O \n" +
-            " where O.BATCH_ID = \n" +
-            "    (select max(OMAX.BATCH_ID) from ORDERS OMAX) ";
+    String ORDERS_WITH_LATEST_BATCH_ID_SQL = "SELECT O.*\n" +
+            "FROM ORDERS O\n" +
+            "JOIN PRODUCTS P ON P.ID=O.PRODUCT_ID\n" +
+            "WHERE O.BATCH_ID =\n" +
+            "    (SELECT max(OMAX.BATCH_ID)\n" +
+            "     FROM ORDERS OMAX)\n" +
+            "ORDER BY P.INTERNAL_ID DESC";
 
     List<OrderEntity> findByStatusOrderByProduct_InternalIdDesc(OrderStatusType status);
 
@@ -24,10 +27,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     List<OrderEntity> findByOrderItemIdInOrderByProduct_InternalIdDesc(List<String> orderIds);
 
-    @Query(name = "latestLoadedOrders", value = SQL, nativeQuery = true)
-    List<OrderEntity> latestLoadedOrders();
+    @Query(name = "ordersWithLatestBatchId", value = ORDERS_WITH_LATEST_BATCH_ID_SQL, nativeQuery = true)
+    List<OrderEntity> ordersWithLatestBatchId();
 }
-//select *
-//        from ORDERS O
-//        where O.BATCH_ID =
-//        (select max(OMAX.BATCH_ID) from ORDERS OMAX)
