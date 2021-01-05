@@ -31,3 +31,5 @@ build/
 .vscode/
 
 /src/main/resources/template.jasper
+/src/main/resources/amazon.properties
+/src/test/resources/amazon.properties

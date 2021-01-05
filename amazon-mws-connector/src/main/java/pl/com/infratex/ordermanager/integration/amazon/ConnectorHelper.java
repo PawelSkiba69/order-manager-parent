@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class ConnectorHelper {
     private static final Logger LOGGER = Logger.getLogger(ConnectorHelper.class.getName());
-    private static final String APPLICATION_PROPERTIES_FILE = "application.properties";
+    private static final String AMAZON_PROPERTIES_FILE = "amazon.properties";
     private static ConnectorHelper instance;
 
     private Properties properties;
@@ -16,10 +16,10 @@ public class ConnectorHelper {
         properties = new Properties();
 
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        try (InputStream inputStream = classLoader.getResourceAsStream(APPLICATION_PROPERTIES_FILE)) {
+        try (InputStream inputStream = classLoader.getResourceAsStream(AMAZON_PROPERTIES_FILE)) {
             properties.load(inputStream);
         } catch (IOException e) {
-            LOGGER.severe("Exception with file: " + APPLICATION_PROPERTIES_FILE);
+            LOGGER.severe("Exception with file: " + AMAZON_PROPERTIES_FILE);
         }
     }
 
