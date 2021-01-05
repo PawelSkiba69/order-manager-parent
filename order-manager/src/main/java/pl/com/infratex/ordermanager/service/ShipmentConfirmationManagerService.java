@@ -16,6 +16,11 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 @Service
@@ -38,7 +43,7 @@ public class ShipmentConfirmationManagerService {
 
     public void confirmShipment() {
         LOGGER.info("confirmShipment()");
-        List<ShipmentConfirmationModel> shipmentConfirmationModels=new ArrayList<>();
+        List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
         try {
             shipmentConfirmationModels = eNadawcaService.checkStatus(LocalDateTime.now());
             InputStream csvInputStream = shipmentConfirmationCsvProcessor.createCsv(shipmentConfirmationModels);
@@ -57,4 +62,15 @@ public class ShipmentConfirmationManagerService {
             //TODO zastanowić się co z tym zrobić
         }
     }
+
+    public void checkShipment() throws ExecutionException, InterruptedException {
+        Callable<String> getFeedSubmissionResultCallable = () -> {
+            System.out.println("getFeedSubmissionResultCallable");
+            return "";
+        };
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<String> futureResultString = executorService.submit(getFeedSubmissionResultCallable);
+        String resultString = futureResultString.get();
+    }
+
 }
