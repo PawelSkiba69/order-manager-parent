@@ -60,6 +60,7 @@ public class ShipmentConfirmationMerger {
 
             CarrierCodeConverter carrierCodeConverter = new CarrierCodeConverter();
             shipmentConfirmationModel.setOrderId(orderModel.getOrderId());
+            shipmentConfirmationModel.setOId(orderModel.getOId());
 
             ClientModel client = orderModel.getClient();
             if (client != null) {

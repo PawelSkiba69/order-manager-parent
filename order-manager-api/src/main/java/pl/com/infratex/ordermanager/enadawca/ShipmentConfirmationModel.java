@@ -27,4 +27,7 @@ public class ShipmentConfirmationModel {
     private String carrierCode;
     private String carrierName;
     private String shipMethod;
+
+    //techniczne
+    private Long oId;
 }
