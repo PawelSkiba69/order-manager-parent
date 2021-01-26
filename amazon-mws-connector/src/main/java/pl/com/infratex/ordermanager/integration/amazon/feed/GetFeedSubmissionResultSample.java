@@ -28,13 +28,8 @@ import com.amazonaws.mws.model.GetFeedSubmissionResultResponse;
 import com.amazonaws.mws.model.ResponseMetadata;
 import pl.com.infratex.ordermanager.integration.amazon.csv.AmazonCsvSubmissionResultProcessor;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.Reader;
 
 /**
  *
@@ -56,8 +51,8 @@ public class GetFeedSubmissionResultSample {
          * Access Key ID and Secret Access Key ID, obtained from:
          * http://aws.amazon.com
          ***********************************************************************/
-        final String AKI = "";
-        final String SAK = "";
+        final String accessKeyId = "AKIAJKP3OBYPAGWGCP7A";
+        final String secretAccessKey = "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";
 
         final String appName = "order-manager";
         final String appVersion = "1.0.0";
@@ -100,7 +95,7 @@ public class GetFeedSubmissionResultSample {
          ***********************************************************************/
 
         MarketplaceWebService service = new MarketplaceWebServiceClient(
-                AKI, SAK, appName, appVersion, config);
+                accessKeyId, secretAccessKey, appName, appVersion, config);
 
         /************************************************************************
          * Setup request parameters and uncomment invoke to try out 
@@ -111,32 +106,41 @@ public class GetFeedSubmissionResultSample {
          * Marketplace and Merchant IDs are required parameters for all 
          * Marketplace Web Service calls.
          ***********************************************************************/
-        final String mID = "";
+        final String merchantId = "A3NLKSN848UAEB";
         final String sellerDevAuthToken = "<Merchant Developer MWS Auth Token>";
 
         GetFeedSubmissionResultRequest request = new GetFeedSubmissionResultRequest();
-        request.setMerchant( mID );
+        request.setMerchant( merchantId );
         //request.setMWSAuthToken(sellerDevAuthToken);
-        
-        request.setFeedSubmissionId("");
+
+        //ok 52403018646
+        //request.setFeedSubmissionId("52403018646");
+
+        //warning 52421018652
+        request.setFeedSubmissionId("52421018652");
+        //error 52349018635
+//        request.setFeedSubmissionId("52349018635");
 
         // Note that depending on the size of the feed sent in, and the number of errors and warnings,
         // the result can reach sizes greater than 1GB. For this reason we recommend that you _always_ 
         // program to MWS in a streaming fashion. Otherwise, as your business grows you may silently reach
         // the in-memory size limit and have to re-work your solution.
         //
-         OutputStream processingResult = new FileOutputStream( "feedSubmissionResult.csv" );
+        ByteArrayOutputStream processingResult = new ByteArrayOutputStream();
+         //new FileOutputStream( "feedSubmissionResult.csv" );
 //         OutputStream processingResult = new ByteArrayOutputStream();
          request.setFeedSubmissionResultOutputStream( processingResult );
 
-        InputStream fis = new FileInputStream("feedSubmissionResult.csv");
-        Reader reader = new InputStreamReader(fis);
-        AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor =
-                new AmazonCsvSubmissionResultProcessor(reader);
-        amazonCsvSubmissionResultProcessor.processResult();
+//        InputStream fis = new FileInputStream("feedSubmissionResult.csv");
+//        Reader reader = new InputStreamReader(fis);
+
 //        ByteArrayInputStream bais = new ByteArrayInputStream()
 
          invokeGetFeedSubmissionResult(service, request);
+
+        AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor =
+                new AmazonCsvSubmissionResultProcessor(processingResult);
+        amazonCsvSubmissionResultProcessor.processResult();
     }
 
 

@@ -1,0 +1,39 @@
+Feed Processing Summary:
+	Number of records processed		186
+	Number of records successful		186
+
+original-record-number	order-id	order-item-id	error-code	error-type	error-message
+102	406-3559049-2685160		18181	Warning	The tracking ID RR941522068PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+108	171-3101696-7511509		18181	Warning	The tracking ID RR941522125PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+11	171-0575368-4372303		18181	Warning	The tracking ID RR941521005PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+111	405-8912717-7253939		18181	Warning	The tracking ID RR941522156PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+115	404-6026195-7305935		18181	Warning	The tracking ID RR941522195PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+12	404-3067507-6405128		18181	Warning	The tracking ID RR941521014PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+147	403-8075098-4686737		18181	Warning	The tracking ID RR941522519PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+3	405-9573164-8772308		18181	Warning	The tracking ID RR941520929PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+32	405-9610910-4710751		18181	Warning	The tracking ID RR941521218PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+33	403-7154419-1541920		18181	Warning	The tracking ID RR941521221PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+34	405-6876467-4495564		18181	Warning	The tracking ID RR941521235PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+4	406-7467629-9547531		18181	Warning	The tracking ID RR941520932PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+42	407-7365168-9909165		18181	Warning	The tracking ID RR941521310PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+43	405-6172214-5541969		18181	Warning	The tracking ID RR941521323PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+45	402-9340470-7993142		18181	Warning	The tracking ID RR941521345PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+47	404-8308689-1997152		18181	Warning	The tracking ID RR941521368PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+48	403-3109453-5446707		18181	Warning	The tracking ID RR941521371PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+49	402-6840489-4115516		18181	Warning	The tracking ID RR941521385PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+5	408-1882228-7905944		18181	Warning	The tracking ID RR941520946PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+50	402-0503326-3709932		18181	Warning	The tracking ID RR941521399PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+51	405-1085817-8048308		18181	Warning	The tracking ID RR941521408PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+52	402-3748603-3281102		18181	Warning	The tracking ID RR941521411PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+53	407-3372761-8213966		18181	Warning	The tracking ID RR941521425PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+54	407-4919994-6225962		18181	Warning	The tracking ID RR941521439PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+59	408-5995207-7783510		18181	Warning	The tracking ID RR941521487PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+6	402-1340488-9748362		18181	Warning	The tracking ID RR941520950PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+61	407-4979176-7367537		18181	Warning	The tracking ID RR941521500PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+7	406-5601155-7033909		18181	Warning	The tracking ID RR941520963PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+75	408-5385126-8972317		18181	Warning	The tracking ID RR941521650PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+85	402-5589108-7081931		18181	Warning	The tracking ID RR941521751PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+86	407-0209146-3742720		18181	Warning	The tracking ID RR941521765PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+92	406-8649760-5305130		18181	Warning	The tracking ID RR941521941PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+96	406-0766258-0867535		18181	Warning	The tracking ID RR941521986PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
+97	171-1980247-4158756		18181	Warning	The tracking ID RR941521990PL for Correos does not match the expected format of the carrier. Please verify that you have entered the tracking ID and carrier name correctly.
