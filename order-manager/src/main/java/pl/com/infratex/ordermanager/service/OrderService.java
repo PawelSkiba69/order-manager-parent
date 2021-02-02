@@ -91,6 +91,7 @@ public class OrderService {
 
     public OrderModel oldestUnshippedLabeledOrder() {
         OrderEntity orderEntity = orderRepository.findFirstByStatusOrderByLoadDateAsc(OrderStatusType.LABELED);
+        //FIXME jeżeli orderEntity jest null to rzucić własny wyjątek
         return orderModelMapper.fromEntity(orderEntity);
     }
 
