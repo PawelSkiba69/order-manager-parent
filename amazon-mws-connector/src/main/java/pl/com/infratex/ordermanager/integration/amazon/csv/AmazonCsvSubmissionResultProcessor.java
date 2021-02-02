@@ -4,13 +4,23 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.IOUtils;
+import pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+
+import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel.ERROR_CODE;
+import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel.ERROR_MESSAGE;
+import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel.ERROR_TYPE;
+import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel.ORDER_ID;
+import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel.ORDER_ITEM_ID;
+import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel.ORIGINAL_RECORD_NUMBER;
 
 public class AmazonCsvSubmissionResultProcessor {
     private static final Logger LOGGER = Logger.getLogger(AmazonCsvSubmissionResultProcessor.class.getName());
@@ -21,8 +31,9 @@ public class AmazonCsvSubmissionResultProcessor {
         this.processingResult = processingResult;
     }
 
-    public void processResult() throws IOException {
+    public List<AmazonCsvSubmissionResultModel> processResult() throws IOException {
         LOGGER.info("processResult()");
+        List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels = new ArrayList<>();
 //        byte[] bytes = processingResult.toByteArray();
 //        LOGGER.info("#### bytes: " + Arrays.toString(bytes));
 //        Reader reader = new InputStreamReader(new ByteArrayInputStream(processingResult.toByteArray()));
@@ -40,18 +51,19 @@ public class AmazonCsvSubmissionResultProcessor {
             CSVParser csvParser = CSVFormat.TDF.withHeader().parse(bufferedReader);
 //            List<CSVRecord> csvRecords = csvParser.getRecords();
             LOGGER.info("#### csvRecords: " + csvParser);
-            for (CSVRecord csvRecord:csvParser){
-                LOGGER.info("#### "+csvRecord);
+            for (CSVRecord csvRecord : csvParser) {
+                AmazonCsvSubmissionResultModel amazonCsvSubmissionResultModel = new AmazonCsvSubmissionResultModel();
+                LOGGER.info("#### " + csvRecord);
                 //original-record-number	order-id	order-item-id	error-code	error-type	error-message
-                String originalRecordNumber = csvRecord.get("original-record-number");
-                String orderId = csvRecord.get("order-id");
-                String orderItemId = csvRecord.get("order-item-id");
-                String errorCode = csvRecord.get("error-code");
-                String errorType = csvRecord.get("error-type");
-                String errorMessage = csvRecord.get("error-message");
-
+                amazonCsvSubmissionResultModel.setOriginalRecordNumber(csvRecord.get(ORIGINAL_RECORD_NUMBER));
+                amazonCsvSubmissionResultModel.setOrderId(csvRecord.get(ORDER_ID));
+                amazonCsvSubmissionResultModel.setOrderItemId(csvRecord.get(ORDER_ITEM_ID));
+                amazonCsvSubmissionResultModel.setErrorCode(csvRecord.get(ERROR_CODE));
+                amazonCsvSubmissionResultModel.setErrorType(csvRecord.get(ERROR_TYPE));
+                amazonCsvSubmissionResultModel.setErrorMessage(csvRecord.get(ERROR_MESSAGE));
+                amazonCsvSubmissionResultModels.add(amazonCsvSubmissionResultModel);
             }
         }
-
+        return amazonCsvSubmissionResultModels;
     }
 }

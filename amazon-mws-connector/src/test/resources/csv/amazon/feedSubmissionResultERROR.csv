@@ -1,0 +1,6 @@
+Feed Processing Summary:
+	Number of records processed		126
+	Number of records successful		125
+
+original-record-number	order-id	order-item-id	error-code	error-type	error-message
+55	304-0138507-7237139		18028	Error	The items in your order cannot be found using order ID 304-0138507-7237139.
