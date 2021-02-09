@@ -139,8 +139,8 @@ public class GetFeedSubmissionResultSample {
          invokeGetFeedSubmissionResult(service, request);
 
         AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor =
-                new AmazonCsvSubmissionResultProcessor(processingResult);
-        amazonCsvSubmissionResultProcessor.processResult();
+                new AmazonCsvSubmissionResultProcessor();
+        amazonCsvSubmissionResultProcessor.processResult(processingResult);
     }
 
 

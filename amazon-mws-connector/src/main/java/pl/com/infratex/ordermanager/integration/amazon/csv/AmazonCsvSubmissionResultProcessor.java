@@ -4,6 +4,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel;
 
 import java.io.BufferedReader;
@@ -22,22 +23,24 @@ import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCs
 import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel.ORDER_ITEM_ID;
 import static pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel.ORIGINAL_RECORD_NUMBER;
 
+@Component
 public class AmazonCsvSubmissionResultProcessor {
     private static final Logger LOGGER = Logger.getLogger(AmazonCsvSubmissionResultProcessor.class.getName());
 
-    private ByteArrayOutputStream processingResult;
+//    private ByteArrayOutputStream processingResult;
 
-    public AmazonCsvSubmissionResultProcessor(ByteArrayOutputStream processingResult) {
-        this.processingResult = processingResult;
-    }
+//    public AmazonCsvSubmissionResultProcessor(ByteArrayOutputStream processingResult) {
+//        this.processingResult = processingResult;
+//    }
 
-    public List<AmazonCsvSubmissionResultModel> processResult() throws IOException {
+//    public void setProcessingResult(ByteArrayOutputStream processingResult) {
+//        this.processingResult = processingResult;
+//    }
+
+    public List<AmazonCsvSubmissionResultModel> processResult(ByteArrayOutputStream processingResult) throws IOException {
         LOGGER.info("processResult()");
         List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels = new ArrayList<>();
-//        byte[] bytes = processingResult.toByteArray();
-//        LOGGER.info("#### bytes: " + Arrays.toString(bytes));
-//        Reader reader = new InputStreamReader(new ByteArrayInputStream(processingResult.toByteArray()));
-//        BufferedReader bufferedReader = IOUtils.buffer(reader);
+
         BufferedReader bufferedReader = IOUtils.buffer(
                 new InputStreamReader(new ByteArrayInputStream(processingResult.toByteArray())));
 

@@ -16,7 +16,7 @@ class ConnectorHelperTest {
         //THEN
         assertAll(
                 ()->assertNotNull(propertyValue,"propertyValue is null"),
-                ()->assertEquals("sadfe4WFWWWRRW",propertyValue,"propertyValues not equals")
+                ()->assertEquals("AKIAJKP3OBYPAGWGCP7A",propertyValue,"propertyValues not equals")
         );
 
     }

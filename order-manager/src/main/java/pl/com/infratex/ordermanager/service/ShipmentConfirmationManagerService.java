@@ -15,6 +15,7 @@ import pl.com.infratex.ordermanager.service.enadawca.ENadawcaService;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.coverter.ShipmentConfirmationModelConverter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -35,10 +36,15 @@ public class ShipmentConfirmationManagerService {
     private AmazonSubmitFeedConnector amazonSubmitFeedConnector;
     private ShipmentConfirmationModelConverter shipmentConfirmationModelConverter;
 
-    public ShipmentConfirmationManagerService(ENadawcaService eNadawcaService, OrderService orderService, ShipmentConfirmationCsvProcessor shipmentConfirmationCsvProcessor, AmazonSubmitFeedConnector amazonSubmitFeedConnector, ShipmentConfirmationModelConverter shipmentConfirmationModelConverter) {
+    public ShipmentConfirmationManagerService(ENadawcaService eNadawcaService, OrderService orderService,
+                                              ShipmentConfirmationCsvProcessor shipmentConfirmationCsvProcessor,
+                                              AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor,
+                                              AmazonSubmitFeedConnector amazonSubmitFeedConnector,
+                                              ShipmentConfirmationModelConverter shipmentConfirmationModelConverter) {
         this.eNadawcaService = eNadawcaService;
         this.orderService = orderService;
         this.shipmentConfirmationCsvProcessor = shipmentConfirmationCsvProcessor;
+        this.amazonCsvSubmissionResultProcessor = amazonCsvSubmissionResultProcessor;
         this.amazonSubmitFeedConnector = amazonSubmitFeedConnector;
         this.shipmentConfirmationModelConverter = shipmentConfirmationModelConverter;
     }
@@ -59,27 +65,29 @@ public class ShipmentConfirmationManagerService {
         List<OrderModel> orderModels = shipmentConfirmationModelConverter.from(shipmentConfirmationModels);
         try {
             LOGGER.info("#### BEFORE CALLABLE");
-            checkShipment();
+            // FIXME: uncomment!!!
+//            checkShipment();
             LOGGER.info("#### AFTER CALLABLE");
             orderService.updateOrderStatus(orderModels, OrderStatusType.SENT);
         } catch (OrderNotFoundException e) {
             e.printStackTrace();
             //TODO zastanowić się co z tym zrobić
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
         }
+//        catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
     }
 
-    public void checkShipment() throws ExecutionException, InterruptedException {
+    public void checkShipment(ByteArrayOutputStream processingResult) throws ExecutionException, InterruptedException {
 
         Callable<String> getFeedSubmissionResultCallable = () -> {
             System.out.println("getFeedSubmissionResultCallable");
             try {
                 List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels =
-                        amazonCsvSubmissionResultProcessor.processResult();
-                LOGGER.info("#### amazonCsvSubmissionResultModels: "+amazonCsvSubmissionResultModels);
+                        amazonCsvSubmissionResultProcessor.processResult(processingResult);
+                LOGGER.info("#### amazonCsvSubmissionResultModels: " + amazonCsvSubmissionResultModels);
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }

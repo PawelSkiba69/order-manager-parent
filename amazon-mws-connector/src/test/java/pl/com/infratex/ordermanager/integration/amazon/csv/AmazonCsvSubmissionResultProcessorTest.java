@@ -22,10 +22,11 @@ class AmazonCsvSubmissionResultProcessorTest {
 
         ByteArrayOutputStream processingResult = new ByteArrayOutputStream();
         IOUtils.copy(inputStream, processingResult);
-        AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor = new AmazonCsvSubmissionResultProcessor(processingResult);
+        AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor = new AmazonCsvSubmissionResultProcessor();
 
         //WHEN
-        List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels = amazonCsvSubmissionResultProcessor.processResult();
+        List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels =
+                amazonCsvSubmissionResultProcessor.processResult(processingResult);
 
         //THEN
         assertTrue(amazonCsvSubmissionResultModels.size() > 0, "Lista jest pusta");
@@ -40,10 +41,12 @@ class AmazonCsvSubmissionResultProcessorTest {
 
         ByteArrayOutputStream processingResult = new ByteArrayOutputStream();
         IOUtils.copy(inputStream, processingResult);
-        AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor = new AmazonCsvSubmissionResultProcessor(processingResult);
+        AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor =
+                new AmazonCsvSubmissionResultProcessor();
 
         //WHEN
-        List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels = amazonCsvSubmissionResultProcessor.processResult();
+        List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels =
+                amazonCsvSubmissionResultProcessor.processResult(processingResult);
 
         //THEN
         assertTrue(amazonCsvSubmissionResultModels.size() > 0, "Lista jest pusta");
@@ -58,10 +61,11 @@ class AmazonCsvSubmissionResultProcessorTest {
 
         ByteArrayOutputStream processingResult = new ByteArrayOutputStream();
         IOUtils.copy(inputStream, processingResult);
-        AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor = new AmazonCsvSubmissionResultProcessor(processingResult);
+        AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor = new AmazonCsvSubmissionResultProcessor();
 
         //WHEN
-        List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels = amazonCsvSubmissionResultProcessor.processResult();
+        List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels =
+                amazonCsvSubmissionResultProcessor.processResult(processingResult);
 
         //THEN
         assertTrue(amazonCsvSubmissionResultModels.size() == 0, "Lista nie jest pusta");
