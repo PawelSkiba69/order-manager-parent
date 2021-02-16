@@ -28,7 +28,7 @@ public class AmazonSubmissionResultConnector {
 
     private static final String M_ID = "A3NLKSN848UAEB";
 
-    public GetFeedSubmissionResultResponse feedSubmissionResult(String feedSubmissionId) throws IOException {
+    public GetFeedSubmissionResultResponse feedSubmissionResult(String feedSubmissionId) throws IOException, MarketplaceWebServiceException {
         MarketplaceWebServiceConfig config = new MarketplaceWebServiceConfig();
         config.setServiceURL(MWS_AMAZONSERVICES_CO_UK);
 
@@ -54,8 +54,8 @@ public class AmazonSubmissionResultConnector {
     }
 
     private GetFeedSubmissionResultResponse invokeGetFeedSubmissionResult(MarketplaceWebService service,
-                                                                          GetFeedSubmissionResultRequest request) {
-        try {
+                                                                          GetFeedSubmissionResultRequest request) throws MarketplaceWebServiceException {
+//        try {
             return service.getFeedSubmissionResult(request);
 //            System.out.println ("GetFeedSubmissionResult Action Response");
 //            System.out.println ("=============================================================================");
@@ -89,16 +89,16 @@ public class AmazonSubmissionResultConnector {
 //            System.out.println(response.getResponseHeaderMetadata());
 //            System.out.println();
 //            System.out.println();
-        } catch (MarketplaceWebServiceException ex) {
-            System.out.println("Caught Exception: " + ex.getMessage());
-            System.out.println("Response Status Code: " + ex.getStatusCode());
-            System.out.println("Error Code: " + ex.getErrorCode());
-            System.out.println("Error Type: " + ex.getErrorType());
-            System.out.println("Request ID: " + ex.getRequestId());
-            System.out.print("XML: " + ex.getXML());
-            System.out.println("ResponseHeaderMetadata: " + ex.getResponseHeaderMetadata());
-        }
+//        } catch (MarketplaceWebServiceException ex) {
+//            System.out.println("Caught Exception: " + ex.getMessage());
+//            System.out.println("Response Status Code: " + ex.getStatusCode());
+//            System.out.println("Error Code: " + ex.getErrorCode());
+//            System.out.println("Error Type: " + ex.getErrorType());
+//            System.out.println("Request ID: " + ex.getRequestId());
+//            System.out.print("XML: " + ex.getXML());
+//            System.out.println("ResponseHeaderMetadata: " + ex.getResponseHeaderMetadata());
+//        }
 
-        return null;
+//        return null;
     }
 }
