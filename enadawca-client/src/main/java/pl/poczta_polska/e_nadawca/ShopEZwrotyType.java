@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="eZwrotPrzesylki" type="{http://e-nadawca.poczta-polska.pl}eZwrotPrzesylkiType" maxOccurs="2"/&gt;
+ *         &lt;element name="eZwrotKarta" type="{http://e-nadawca.poczta-polska.pl}eZwrotKartaType" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="idShop" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="nazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&gt;
@@ -38,7 +39,13 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="regon" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="krs" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="eZwrotTyp" type="{http://e-nadawca.poczta-polska.pl}eZwrotTypZgodyType" /&gt;
- *       &lt;attribute name="wymagalnoscNumeruIdentyfikujacegoPrzesylke" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="wymagalnoscNumeruIdentyfikujacegoPrzesylke" type="{http://e-nadawca.poczta-polska.pl}wymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum" /&gt;
+ *       &lt;attribute name="availableOnWebsite" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="emailForEZwrot" type="{http://e-nadawca.poczta-polska.pl}emailType" /&gt;
+ *       &lt;attribute name="paid" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="consentValidFor" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *       &lt;attribute name="contractorCost" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *       &lt;attribute name="infoForClient" type="{http://e-nadawca.poczta-polska.pl}infoForClientType" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -48,13 +55,15 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "shopEZwrotyType", propOrder = {
-    "eZwrotPrzesylki"
+    "eZwrotPrzesylki",
+    "eZwrotKarta"
 })
 public class ShopEZwrotyType {
 
     @XmlElement(required = true)
     @XmlSchemaType(name = "string")
     protected List<EZwrotPrzesylkiType> eZwrotPrzesylki;
+    protected EZwrotKartaType eZwrotKarta;
     @XmlAttribute(name = "idShop")
     protected Integer idShop;
     @XmlAttribute(name = "nazwa", required = true)
@@ -86,7 +95,19 @@ public class ShopEZwrotyType {
     @XmlAttribute(name = "eZwrotTyp")
     protected EZwrotTypZgodyType eZwrotTyp;
     @XmlAttribute(name = "wymagalnoscNumeruIdentyfikujacegoPrzesylke")
-    protected Boolean wymagalnoscNumeruIdentyfikujacegoPrzesylke;
+    protected WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum wymagalnoscNumeruIdentyfikujacegoPrzesylke;
+    @XmlAttribute(name = "availableOnWebsite")
+    protected Boolean availableOnWebsite;
+    @XmlAttribute(name = "emailForEZwrot")
+    protected String emailForEZwrot;
+    @XmlAttribute(name = "paid")
+    protected Boolean paid;
+    @XmlAttribute(name = "consentValidFor")
+    protected Integer consentValidFor;
+    @XmlAttribute(name = "contractorCost")
+    protected Integer contractorCost;
+    @XmlAttribute(name = "infoForClient")
+    protected String infoForClient;
 
     /**
      * Gets the value of the eZwrotPrzesylki property.
@@ -115,6 +136,30 @@ public class ShopEZwrotyType {
             eZwrotPrzesylki = new ArrayList<EZwrotPrzesylkiType>();
         }
         return this.eZwrotPrzesylki;
+    }
+
+    /**
+     * Gets the value of the eZwrotKarta property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link EZwrotKartaType }
+     *     
+     */
+    public EZwrotKartaType getEZwrotKarta() {
+        return eZwrotKarta;
+    }
+
+    /**
+     * Sets the value of the eZwrotKarta property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link EZwrotKartaType }
+     *     
+     */
+    public void setEZwrotKarta(EZwrotKartaType value) {
+        this.eZwrotKarta = value;
     }
 
     /**
@@ -482,10 +527,10 @@ public class ShopEZwrotyType {
      * 
      * @return
      *     possible object is
-     *     {@link Boolean }
+     *     {@link WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum }
      *     
      */
-    public Boolean isWymagalnoscNumeruIdentyfikujacegoPrzesylke() {
+    public WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum getWymagalnoscNumeruIdentyfikujacegoPrzesylke() {
         return wymagalnoscNumeruIdentyfikujacegoPrzesylke;
     }
 
@@ -494,11 +539,155 @@ public class ShopEZwrotyType {
      * 
      * @param value
      *     allowed object is
+     *     {@link WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum }
+     *     
+     */
+    public void setWymagalnoscNumeruIdentyfikujacegoPrzesylke(WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum value) {
+        this.wymagalnoscNumeruIdentyfikujacegoPrzesylke = value;
+    }
+
+    /**
+     * Gets the value of the availableOnWebsite property.
+     * 
+     * @return
+     *     possible object is
      *     {@link Boolean }
      *     
      */
-    public void setWymagalnoscNumeruIdentyfikujacegoPrzesylke(Boolean value) {
-        this.wymagalnoscNumeruIdentyfikujacegoPrzesylke = value;
+    public Boolean isAvailableOnWebsite() {
+        return availableOnWebsite;
+    }
+
+    /**
+     * Sets the value of the availableOnWebsite property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setAvailableOnWebsite(Boolean value) {
+        this.availableOnWebsite = value;
+    }
+
+    /**
+     * Gets the value of the emailForEZwrot property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEmailForEZwrot() {
+        return emailForEZwrot;
+    }
+
+    /**
+     * Sets the value of the emailForEZwrot property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEmailForEZwrot(String value) {
+        this.emailForEZwrot = value;
+    }
+
+    /**
+     * Gets the value of the paid property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isPaid() {
+        return paid;
+    }
+
+    /**
+     * Sets the value of the paid property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setPaid(Boolean value) {
+        this.paid = value;
+    }
+
+    /**
+     * Gets the value of the consentValidFor property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getConsentValidFor() {
+        return consentValidFor;
+    }
+
+    /**
+     * Sets the value of the consentValidFor property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setConsentValidFor(Integer value) {
+        this.consentValidFor = value;
+    }
+
+    /**
+     * Gets the value of the contractorCost property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getContractorCost() {
+        return contractorCost;
+    }
+
+    /**
+     * Sets the value of the contractorCost property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setContractorCost(Integer value) {
+        this.contractorCost = value;
+    }
+
+    /**
+     * Gets the value of the infoForClient property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getInfoForClient() {
+        return infoForClient;
+    }
+
+    /**
+     * Sets the value of the infoForClient property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setInfoForClient(String value) {
+        this.infoForClient = value;
     }
 
 }

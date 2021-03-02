@@ -20,6 +20,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="zwrot" type="{http://e-nadawca.poczta-polska.pl}zwrotType" minOccurs="0"/&gt;
  *         &lt;element name="deklaracjaCelna" type="{http://e-nadawca.poczta-polska.pl}deklaracjaCelnaType" minOccurs="0"/&gt;
  *         &lt;element name="deklaracjaCelna2" type="{http://e-nadawca.poczta-polska.pl}deklaracjaCelna2Type" minOccurs="0"/&gt;
+ *         &lt;element name="sposobNadaniaInterconnect" type="{http://e-nadawca.poczta-polska.pl}sposobNadaniaInterconnectType" minOccurs="0"/&gt;
+ *         &lt;element name="sposobDoreczenia" type="{http://e-nadawca.poczta-polska.pl}sposobDoreczeniaType" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&gt;
@@ -29,6 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="utrudnionaManipulacja" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="ekspres" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="numerReferencyjnyCelny" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="numerPrzesylkiKlienta" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/extension&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -40,7 +43,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "paczkaZagranicznaType", propOrder = {
     "zwrot",
     "deklaracjaCelna",
-    "deklaracjaCelna2"
+    "deklaracjaCelna2",
+    "sposobNadaniaInterconnect",
+    "sposobDoreczenia"
 })
 public class PaczkaZagranicznaType
     extends PrzesylkaRejestrowanaType
@@ -49,6 +54,8 @@ public class PaczkaZagranicznaType
     protected ZwrotType zwrot;
     protected DeklaracjaCelnaType deklaracjaCelna;
     protected DeklaracjaCelna2Type deklaracjaCelna2;
+    protected String sposobNadaniaInterconnect;
+    protected SposobDoreczeniaType sposobDoreczenia;
     @XmlAttribute(name = "posteRestante")
     protected Boolean posteRestante;
     @XmlAttribute(name = "masa")
@@ -65,6 +72,8 @@ public class PaczkaZagranicznaType
     protected Boolean ekspres;
     @XmlAttribute(name = "numerReferencyjnyCelny")
     protected String numerReferencyjnyCelny;
+    @XmlAttribute(name = "numerPrzesylkiKlienta")
+    protected String numerPrzesylkiKlienta;
 
     /**
      * Gets the value of the zwrot property.
@@ -136,6 +145,54 @@ public class PaczkaZagranicznaType
      */
     public void setDeklaracjaCelna2(DeklaracjaCelna2Type value) {
         this.deklaracjaCelna2 = value;
+    }
+
+    /**
+     * Gets the value of the sposobNadaniaInterconnect property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSposobNadaniaInterconnect() {
+        return sposobNadaniaInterconnect;
+    }
+
+    /**
+     * Sets the value of the sposobNadaniaInterconnect property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSposobNadaniaInterconnect(String value) {
+        this.sposobNadaniaInterconnect = value;
+    }
+
+    /**
+     * Gets the value of the sposobDoreczenia property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SposobDoreczeniaType }
+     *     
+     */
+    public SposobDoreczeniaType getSposobDoreczenia() {
+        return sposobDoreczenia;
+    }
+
+    /**
+     * Sets the value of the sposobDoreczenia property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SposobDoreczeniaType }
+     *     
+     */
+    public void setSposobDoreczenia(SposobDoreczeniaType value) {
+        this.sposobDoreczenia = value;
     }
 
     /**
@@ -328,6 +385,30 @@ public class PaczkaZagranicznaType
      */
     public void setNumerReferencyjnyCelny(String value) {
         this.numerReferencyjnyCelny = value;
+    }
+
+    /**
+     * Gets the value of the numerPrzesylkiKlienta property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getNumerPrzesylkiKlienta() {
+        return numerPrzesylkiKlienta;
+    }
+
+    /**
+     * Sets the value of the numerPrzesylkiKlienta property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNumerPrzesylkiKlienta(String value) {
+        this.numerPrzesylkiKlienta = value;
     }
 
 }

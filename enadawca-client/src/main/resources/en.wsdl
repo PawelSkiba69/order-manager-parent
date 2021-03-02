@@ -19,10 +19,18 @@
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:complexType name="przesylkaType" abstract="true">
-				<xsd:attribute name="guid" type="tns:guidType" use="required" />
+				<xsd:sequence>
+					<xsd:element name="oplacaOdbiorca"
+						type="tns:oplacaOdbiorcaType" maxOccurs="1" minOccurs="0">
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="guid" type="tns:guidType"
+					use="required" />
 				<xsd:attribute name="pakietGuid" type="tns:guidType" />
-				<xsd:attribute name="opakowanieGuid" type="tns:guidType" />
+				<xsd:attribute name="opakowanieGuid"
+					type="tns:guidType" />
 				<xsd:attribute name="opis" type="tns:opisType" />
+				<xsd:attribute name="planowanaDataNadania" type="xsd:date"></xsd:attribute>
 			</xsd:complexType>
 			<xsd:complexType name="pocztexKrajowyType">
 				<xsd:complexContent>
@@ -540,6 +548,16 @@
 							<xsd:element name="deklaracjaCelna2"
 								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
 							</xsd:element>
+							<xsd:element name="zawartosc"
+								type="xsd:string" maxOccurs="1" minOccurs="0">
+                                <xsd:annotation>
+                                	<xsd:documentation>Element określający zawartość przesyłki.
+Aktualnie dopuszczalne wartości:
+KORESPONDENCJA
+DOKUMENTY_PONIZEJ_250G
+DOKUMENTY_POWYZEJ_250G
+TOWARY</xsd:documentation></xsd:annotation>
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante"
 							type="xsd:boolean" use="optional" default="false" />
@@ -557,6 +575,16 @@
 						<xsd:sequence>
 							<xsd:element name="deklaracjaCelna2"
 								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="zawartosc"
+								type="xsd:string" maxOccurs="1" minOccurs="0">
+                                <xsd:annotation>
+                                	<xsd:documentation>Element określający zawartość przesyłki.
+Aktualnie dopuszczalne wartości:
+KORESPONDENCJA
+DOKUMENTY_PONIZEJ_250G
+DOKUMENTY_POWYZEJ_250G
+TOWARY</xsd:documentation></xsd:annotation>
 							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante"
@@ -653,12 +681,22 @@
 				<xsd:attribute name="numerTransakcjiOdbioru" type="xsd:string" />
 			</xsd:complexType>
 			<xsd:element name="getKarty">
-				<xsd:complexType />
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="idKarta"
+							type="xsd:int" maxOccurs="unbounded" minOccurs="0">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="getKartyResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="karta" type="tns:kartaType" minOccurs="1" maxOccurs="unbounded" />
+						<xsd:element name="karta" type="tns:kartaType"
+							minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="error"
+							type="tns:errorType" maxOccurs="unbounded" minOccurs="0">
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -729,9 +767,20 @@
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:complexType name="kartaType">
+				<xsd:sequence>
+					<xsd:element name="adresKorespondencyjny"
+						type="tns:adresKorespondencyjny" maxOccurs="unbounded"
+						minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Lista adresów korespondencyjnych dla kart typu 2</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>				</xsd:sequence>
 				<xsd:attribute name="idKarta" type="xsd:int" />
 				<xsd:attribute name="opis" type="xsd:string" />
 				<xsd:attribute name="aktywna" type="xsd:boolean" />
+				<xsd:attribute name="typ" type="xsd:int">
+					<xsd:annotation>
+						<xsd:documentation>Typ karty. Dopuszczalne wartości: 1-do nadawania, 2-do definicji adresów OPNA. Lista obsługiwanych wartości może być rozszerzona w przyszłości.</xsd:documentation></xsd:annotation></xsd:attribute>
 			</xsd:complexType>
 			<xsd:simpleType name="telefonType">
 				<xsd:restriction base="xsd:string">
@@ -829,6 +878,16 @@
 							<xsd:element name="deklaracjaCelna2"
 								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
 							</xsd:element>
+							<xsd:element name="zawartosc"
+								type="xsd:string" maxOccurs="1" minOccurs="0">
+                                <xsd:annotation>
+                                	<xsd:documentation>Element określający zawartość przesyłki.
+Aktualnie dopuszczalne wartości:
+KORESPONDENCJA
+DOKUMENTY_PONIZEJ_250G
+DOKUMENTY_POWYZEJ_250G
+TOWARY</xsd:documentation></xsd:annotation>
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante"
 							type="xsd:boolean" use="optional" default="false" />
@@ -845,7 +904,7 @@
 				<xsd:complexContent>
 					<xsd:extension base="tns:przesylkaType">
 						<xsd:sequence>
-							<xsd:element name="adres" type="tns:adresType" />
+							<xsd:element name="adres" type="tns:adresType" maxOccurs="1" minOccurs="0"/>
 							<xsd:element name="nadawca" type="tns:adresType" 
 								minOccurs="0" maxOccurs="1" />
 							<xsd:element name="relatedToAllegro" type="tns:relatedToAllegroType" 
@@ -883,6 +942,24 @@
 							</xsd:choice>
 							<xsd:element name="ubezpieczenie" type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0" />
 							<xsd:element name="epo" type="tns:EPOType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="adresDlaZwrotu"
+								type="tns:adresType" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce"
+								type="xsd:boolean" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="potwierdzenieOdbioru"
+								type="tns:potwierdzenieOdbioruBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
+							<xsd:element name="doreczenie"
+								type="tns:doreczenieBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
+							<xsd:element name="zwrotDokumentow"
+								type="tns:zwrotDokumentowBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="zasadySpecjalne" type="tns:zasadySpecjalneEnum" use="optional" />
 						<xsd:attribute name="masa" type="tns:masaType" />
@@ -968,10 +1045,25 @@
 								</xsd:annotation>
 							</xsd:element>
 							<xsd:element name="subPrzesylka" type="tns:subPrzesylkaBiznesowaPlusType" maxOccurs="100" minOccurs="0" />
-							<xsd:choice>
+							<xsd:choice maxOccurs="1" minOccurs="0">
 								<xsd:element name="dataDrugiejProbyDoreczenia" type="xsd:date" />
 								<xsd:element name="drugaProbaDoreczeniaPoLiczbieDni" type="xsd:int" />
 							</xsd:choice>
+							<xsd:element name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce"
+								type="xsd:boolean" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="potwierdzenieOdbioru"
+								type="tns:potwierdzenieOdbioruBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
+							<xsd:element name="doreczenie"
+								type="tns:doreczenieBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
+							<xsd:element name="zwrotDokumentow"
+								type="tns:zwrotDokumentowBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante" type="xsd:boolean" />
 						<xsd:attribute name="masa" type="tns:masaType" />
@@ -980,7 +1072,10 @@
 						<xsd:attribute name="kwotaTranzakcji" type="tns:kwotaTranzakcjiType" />
 						<xsd:attribute name="ostroznie" type="xsd:boolean" />
 						<xsd:attribute name="kategoria" type="tns:kategoriaType" />
-						<xsd:attribute name="iloscPotwierdzenOdbioru" type="tns:iloscPotwierdzenOdbioruType" />
+						<xsd:attribute name="iloscPotwierdzenOdbioru" type="tns:iloscPotwierdzenOdbioruType" >
+							<xsd:annotation>
+								<xsd:documentation>atrybut nieużywany, użyj potwierdzenieOdbioru</xsd:documentation>
+							</xsd:annotation></xsd:attribute>
 						<xsd:attribute name="zwrotDoslanie" type="xsd:boolean" />
 						<xsd:attribute name="eKontaktAdresata" type="tns:eKontaktType" />
 						<xsd:attribute name="eSposobPowiadomieniaAdresata" type="tns:eSposobPowiadomieniaType" />
@@ -1000,7 +1095,7 @@
 			</xsd:simpleType>
 			<xsd:simpleType name="numerPrzesylkiKlientaType">
 				<xsd:restriction base="xsd:string">
-					<xsd:maxLength value="20" />
+					<xsd:maxLength value="25" />
 				</xsd:restriction>
 			</xsd:simpleType>
 			<xsd:complexType name="pakietType">
@@ -1361,11 +1456,14 @@
 			</xsd:simpleType>
 			<xsd:complexType name="paczkaZagranicznaType">
 				<xsd:complexContent>
-					<xsd:extension base="tns:przesylkaRejestrowanaType">
+					<xsd:extension
+						base="tns:przesylkaRejestrowanaType">
 						<xsd:sequence>
 							<xsd:element name="zwrot" type="tns:zwrotType" maxOccurs="1" minOccurs="0" />
 							<xsd:element name="deklaracjaCelna" type="tns:deklaracjaCelnaType" maxOccurs="1" minOccurs="0" />
 							<xsd:element name="deklaracjaCelna2" type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobNadaniaInterconnect" type="tns:sposobNadaniaInterconnectType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobDoreczenia" type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0" />
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante" type="xsd:boolean" />
 						<xsd:attribute name="masa" type="tns:masaType" />
@@ -1379,6 +1477,24 @@
 								<xsd:documentation>atrybut przestarzały (deprecated), należy używać typu
 deklaracjaCelna2Type i elementu numerReferencyjnyCelny</xsd:documentation></xsd:annotation>
 						</xsd:attribute>
+						<xsd:attribute name="numerPrzesylkiKlienta"	type="xsd:string" />
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="paczkaZagranicznaPremiumType">
+				<xsd:complexContent>
+					<xsd:extension base="tns:przesylkaRejestrowanaType">
+						<xsd:sequence>
+							<xsd:element name="zwrot" type="tns:zwrotType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="posteRestante" type="xsd:boolean" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="masa" type="tns:masaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="deklaracjaCelna2" type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobNadaniaInterconnect" type="tns:sposobNadaniaInterconnectType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="potwierdzenieDoreczenia" type="tns:potwierdzenieDoreczeniaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="ubezpieczenie" type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="numerPrzesylkiKlienta" type="tns:numerPrzesylkiKlientaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobDoreczenia" type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0" />
+						</xsd:sequence>
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
@@ -1698,6 +1814,7 @@ deklaracjaCelna2Type i elementu numerReferencyjnyCelny</xsd:documentation></xsd:
 			<xsd:complexType name="ubezpieczenieType">
 				<xsd:attribute name="rodzaj" type="tns:rodzajUbezpieczeniaType" use="required" />
 				<xsd:attribute name="kwota" type="tns:kwotaUbezpieczeniaType" use="required" />
+				<xsd:attribute name="akceptacjaOWU" type="xsd:boolean" use="optional" />
 			</xsd:complexType>
 			<xsd:simpleType name="rodzajUbezpieczeniaType">
 				<xsd:restriction base="xsd:string">
@@ -1727,20 +1844,25 @@ deklaracjaCelna2Type i elementu numerReferencyjnyCelny</xsd:documentation></xsd:
 				<xsd:complexContent>
 					<xsd:extension base="tns:przesylkaRejestrowanaType">
 						<xsd:sequence>
-							<xsd:element name="ubezpieczenie"
-								type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0" />
-							<xsd:element name="deklaracjaCelna"
-								type="tns:deklaracjaCelnaType" maxOccurs="1" minOccurs="0" >
+							<xsd:element name="ubezpieczenie" type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="deklaracjaCelna" type="tns:deklaracjaCelnaType" maxOccurs="1" minOccurs="0">
 								<xsd:annotation>
-									<xsd:documentation>Deklaracja celna - "deprecated" - zalecane jest ustawianie elementu deklaracjaCelna2</xsd:documentation>
-								</xsd:annotation></xsd:element>
-							<xsd:element name="deklaracjaCelna2"
-								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
+									<xsd:documentation>
+										Deklaracja celna - "deprecated"
+										- zalecane jest ustawianie
+										elementu deklaracjaCelna2
+									</xsd:documentation>
+								</xsd:annotation>
 							</xsd:element>
+							<xsd:element name="potwierdzenieDoreczenia" type="tns:potwierdzenieDoreczeniaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="deklaracjaCelna2" type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobNadaniaInterconnect" type="tns:sposobNadaniaInterconnectType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobDoreczenia" type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0" />
 						</xsd:sequence>
 						<xsd:attribute name="typOpakowania" type="tns:EMSTypOpakowaniaType" />
 						<xsd:attribute name="masa" type="tns:masaType" />
 						<xsd:attribute name="zalaczoneDokumenty" type="xsd:boolean" />
+						<xsd:attribute name="numerPrzesylkiKlienta" type="xsd:string" />
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
@@ -2547,16 +2669,27 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 					<xsd:extension base="tns:przesylkaRejestrowanaType">
 						<xsd:sequence>
 							<xsd:element name="ubezpieczenie"
-								type="tns:ubezpieczenieType" />
+								type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0"/>
 							<xsd:element name="potwierdzenieDoreczenia"
-								type="tns:potwierdzenieDoreczeniaType" />
+								type="tns:potwierdzenieDoreczeniaType" maxOccurs="1" minOccurs="0"/>
 							<xsd:element name="deklaracjaCelna2"
 								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
 							</xsd:element>
+							<xsd:element name="sposobDoreczenia"
+								type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0">
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="masa" type="tns:masaType" />
 						<xsd:attribute name="posteRestante" type="xsd:boolean" />
-						<xsd:attribute name="zawartosc" type="xsd:string" />
+						<xsd:attribute name="zawartosc" type="xsd:string" >
+							<xsd:annotation>
+								<xsd:documentation>Element określający zawartość przesyłki.
+Aktualnie dopuszczalne wartości:
+KORESPONDENCJA
+DOKUMENTY_PONIZEJ_250G
+DOKUMENTY_POWYZEJ_250G
+TOWARY</xsd:documentation>
+							</xsd:annotation></xsd:attribute>
 						<xsd:attribute name="kategoria" type="tns:kategoriaType" />
 						<xsd:attribute name="numerPrzesylkiKlienta" type="xsd:string" />
 					</xsd:extension>
@@ -2614,24 +2747,52 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</xsd:element>
 			<xsd:complexType name="shopEZwrotyType">
 				<xsd:sequence>
-					<xsd:element name="eZwrotPrzesylki" type="tns:eZwrotPrzesylkiType" maxOccurs="2" minOccurs="1" />
+					<xsd:element name="eZwrotPrzesylki"
+						type="tns:eZwrotPrzesylkiType" maxOccurs="2" minOccurs="1" />
+					<xsd:element name="eZwrotKarta"
+						type="tns:eZwrotKartaType" maxOccurs="1" minOccurs="0">
+					</xsd:element>
 				</xsd:sequence>
 				<xsd:attribute name="idShop" type="xsd:int" />
-				<xsd:attribute name="nazwa" type="tns:nazwaEZwrotyType" use="required" />
-				<xsd:attribute name="nazwa2" type="tns:nazwaEZwrotyType" use="optional" />
-				<xsd:attribute name="przyjaznaNazwa" type="tns:nazwaEZwrotyType" use="required" />
-				<xsd:attribute name="ulica" type="tns:ulicaType" use="required" />
-				<xsd:attribute name="numerDomu" type="tns:numerDomuType" use="required" />
-				<xsd:attribute name="numerLokalu" type="tns:numerLokaluType" use="optional" />
-				<xsd:attribute name="miejscowosc" type="tns:miejscowoscType" use="required" />
-				<xsd:attribute name="kodPocztowy" type="tns:kodPocztowyType" use="required" />
-				<xsd:attribute name="mobile" type="tns:mobileType" use="required" />
-				<xsd:attribute name="email" type="tns:emailType" use="required" />
-				<xsd:attribute name="nip" type="xsd:string" use="optional" />
+				<xsd:attribute name="nazwa" type="tns:nazwaEZwrotyType"
+					use="required" />
+				<xsd:attribute name="nazwa2" type="tns:nazwaEZwrotyType"
+					use="optional" />
+				<xsd:attribute name="przyjaznaNazwa"
+					type="tns:nazwaEZwrotyType" use="required" />
+				<xsd:attribute name="ulica" type="tns:ulicaType"
+					use="required" />
+				<xsd:attribute name="numerDomu" type="tns:numerDomuType"
+					use="required" />
+				<xsd:attribute name="numerLokalu"
+					type="tns:numerLokaluType" use="optional" />
+				<xsd:attribute name="miejscowosc"
+					type="tns:miejscowoscType" use="required" />
+				<xsd:attribute name="kodPocztowy"
+					type="tns:kodPocztowyType" use="required" />
+				<xsd:attribute name="mobile" type="tns:mobileType"
+					use="required" />
+				<xsd:attribute name="email" type="tns:emailType"
+					use="required" />
+				<xsd:attribute name="nip" type="xsd:string"
+					use="optional" />
 				<xsd:attribute name="regon" type="xsd:string" />
 				<xsd:attribute name="krs" type="xsd:string" />
-				<xsd:attribute name="eZwrotTyp" type="tns:eZwrotTypZgodyType" />
-				<xsd:attribute name="wymagalnoscNumeruIdentyfikujacegoPrzesylke" type="xsd:boolean" />
+				<xsd:attribute name="eZwrotTyp"
+					type="tns:eZwrotTypZgodyType" />
+				<xsd:attribute
+					name="wymagalnoscNumeruIdentyfikujacegoPrzesylke"
+					type="tns:wymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum" />
+				<xsd:attribute name="availableOnWebsite"
+					type="xsd:boolean">
+				</xsd:attribute>
+				<xsd:attribute name="emailForEZwrot"
+					type="tns:emailType">
+				</xsd:attribute>
+				<xsd:attribute name="paid" type="xsd:boolean"></xsd:attribute>
+				<xsd:attribute name="consentValidFor" type="xsd:int"></xsd:attribute>
+				<xsd:attribute name="contractorCost" type="xsd:int"></xsd:attribute>
+				<xsd:attribute name="infoForClient" type="tns:infoForClientType"></xsd:attribute>
 			</xsd:complexType>
 			<xsd:simpleType name="nazwaEZwrotyType">
 				<xsd:restriction base="xsd:string">
@@ -2737,15 +2898,49 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</xsd:simpleType>
 			<xsd:complexType name="przesylkaEZwrotPocztexType">
 				<xsd:complexContent>
-					<xsd:extension base="tns:przesylkaRejestrowanaType">
-						<xsd:attribute name="numerNadaniaZwrot" type="tns:numerNadaniaType" />
+					<xsd:extension
+						base="tns:przesylkaRejestrowanaType">
+						<xsd:sequence>
+							<xsd:element name="idSklepEZwrot"
+								type="xsd:int" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="numerNadaniaZwrot"
+							type="tns:numerNadaniaType" />
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
 			<xsd:complexType name="przesylkaEZwrotPaczkaType">
 				<xsd:complexContent>
-					<xsd:extension base="tns:przesylkaRejestrowanaType">
-						<xsd:attribute name="numerNadaniaZwrot" type="tns:numerNadaniaType" />
+					<xsd:extension
+						base="tns:przesylkaRejestrowanaType">
+						<xsd:sequence>
+							<xsd:element name="idSklepEZwrot"
+								type="xsd:int" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="numerNadaniaZwrot"
+							type="tns:numerNadaniaType" />
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="przesylkaEZwrotPaczkaPlusType">
+				<xsd:complexContent>
+					<xsd:extension
+						base="tns:przesylkaRejestrowanaType">
+						<xsd:sequence>
+							<xsd:element name="idSklepEZwrot"
+								type="xsd:int" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="wartosc"
+								type="tns:wartoscType" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="ubezpieczenie"
+								type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="numerNadaniaZwrot"
+							type="tns:numerNadaniaType" />
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
@@ -3274,7 +3469,212 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 					</xsd:documentation>
                 </xsd:annotation>
                 <xsd:restriction base="xsd:int"></xsd:restriction>
+	</xsd:simpleType>		
+	<xsd:simpleType name="sposobNadaniaInterconnectType">
+                <xsd:annotation>
+                	<xsd:documentation>Umożliwia określenie sposobu nadania przesyłki w ramach systemu Interconnect.
+Obsługiwane wartości:
+- ODBIOR_Z_ADRESU_PRYWATNEGO
+- ODBIOR_Z_ADRESU_FIRMOWEGO
+- NADANIE_W_PLACOWCE_POCZTOWEJ
+					</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string"></xsd:restriction>
 	</xsd:simpleType>
+	
+	<xsd:complexType name="potwierdzenieOdbioruBiznesowaType">
+		<xsd:sequence>
+			<xsd:element name="ilosc"
+				type="tns:iloscPotwierdzenOdbioruType" maxOccurs="1"
+				minOccurs="0">
+			</xsd:element>
+			<xsd:element name="sposob" type="tns:sposobPrzekazaniaPotwierdzeniaBiznesowaType" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+		
+        
+	<xsd:simpleType
+		name="sposobPrzekazaniaPotwierdzeniaBiznesowaType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LIST_ZWYKLY_PRIORYTETOWY"></xsd:enumeration>
+			<xsd:enumeration value="EKSPRES24"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:complexType name="doreczenieBiznesowaType">
+		<xsd:sequence>
+			<xsd:element name="doRakWlasnych" type="xsd:boolean"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:complexType name="zwrotDokumentowBiznesowaType">
+		<xsd:sequence>
+			<xsd:element name="rodzaj" type="tns:terminZwrotDokumentowBiznesowaType" maxOccurs="1" minOccurs="1"></xsd:element>
+			<xsd:element name="idDokumentyZwrotneAdresy" type="xsd:int"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:simpleType name="terminZwrotDokumentowBiznesowaType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LIST_ZWYKLY_PRIORYTETOWY"></xsd:enumeration>
+			<xsd:enumeration value="LIST_ZWYKLY_EKONOMICZNY"></xsd:enumeration>
+			<xsd:enumeration value="LIST_POLECONY_PRIORYTETOWY"></xsd:enumeration>
+			<xsd:enumeration value="LIST_POLECONY_EKONOMICZNY"></xsd:enumeration>
+			<xsd:enumeration value="EKSPRES24"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="sposobDoreczeniaType">
+		<xsd:sequence>
+			<xsd:element name="kod" minOccurs="1" maxOccurs="1" type="xsd:string">
+                        <xsd:annotation>
+                        	<xsd:documentation>kod sposobu doręczenia (jeden z HOM, PCS, PCF, SHP)</xsd:documentation></xsd:annotation>
+
+			</xsd:element>
+			<xsd:element name="identyfikatorPunktuOdbioru" minOccurs="0"
+				maxOccurs="1" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Wartość alfanumeryczna o maksymalnej długości 35
+						znaków, nie wymagany dla kod=HOM
+					</xsd:documentation>
+				</xsd:annotation>
+
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="adresKorespondencyjny">
+		<xsd:complexContent>
+			<xsd:extension base="tns:adresType">
+				<xsd:attribute name="id" type="xsd:int">
+					<xsd:annotation>
+						<xsd:documentation>Identyfikator adresu korespondencyjnego</xsd:documentation></xsd:annotation></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+		
+	<xsd:complexType name="eZwrotKartaType">
+		<xsd:sequence>
+			<xsd:element name="idKarta" type="xsd:int"></xsd:element>
+			<xsd:element name="idAdresKorespondencyjny" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:simpleType name="infoForClientType">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="300"></xsd:maxLength>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:simpleType
+		name="wymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="BRAK"></xsd:enumeration>
+			<xsd:enumeration value="WYMAGANY"></xsd:enumeration>
+			<xsd:enumeration value="NIEWYMAGANY"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="createShopEZwroty">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="shop" type="tns:shopEZwrotyType" maxOccurs="1" minOccurs="1"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="createShopEZwrotyResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="idShop" type="xsd:int" maxOccurs="1" minOccurs="0"></xsd:element>
+				<xsd:element name="error" type="tns:errorType" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="deleteShopEZwroty">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="idShop" type="xsd:int" maxOccurs="1" minOccurs="1"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="deleteShopEZwrotyResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="error" type="tns:errorType" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="getShopEZwrotyList">
+		<xsd:complexType>
+			<xsd:sequence>
+
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="getShopEZwrotyListResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="shops" type="tns:shopEZwrotyInfoType" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+		
+	<xsd:complexType name="shopEZwrotyInfoType">
+		<xsd:attribute name="idShop" type="xsd:int"></xsd:attribute>
+		<xsd:attribute name="przyjaznaNazwa"
+			type="tns:nazwaEZwrotyType">
+		</xsd:attribute>
+		<xsd:attribute name="availableOnWebsite" type="xsd:boolean"></xsd:attribute>
+		<xsd:attribute name="nip" type="xsd:string"></xsd:attribute>
+	</xsd:complexType>
+			
+	<xsd:complexType name="oplacaOdbiorcaType">
+		<xsd:sequence>
+			<xsd:element name="typ" maxOccurs="1" minOccurs="0"
+				type="tns:typOplacaOdbiorcaEnum">
+				<xsd:annotation>
+					<xsd:documentation>Typ odbiorcy/adresata opłacającego przesyłkę. Dopuszczalne wartości: ADRESAT_INDYWIDUALNY, ADRESAT_UMOWNY, ODDZIAL.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+
+			<xsd:element name="karta" type="tns:oplacaOdbiorcaKartaType" maxOccurs="1" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Wymagalny dla typ=ADRESAT_UMOWNY i typ=ODDZIAL.</xsd:documentation>
+				</xsd:annotation></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>		
+	<xsd:simpleType name="typOplacaOdbiorcaEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ADRESAT_INDYWIDUALNY"></xsd:enumeration>
+			<xsd:enumeration value="ADRESAT_UMOWNY"></xsd:enumeration>
+			<xsd:enumeration value="ODDZIAL"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:complexType name="oplacaOdbiorcaKartaType">
+		<xsd:sequence>
+			<xsd:element name="idKarta" type="xsd:int" maxOccurs="1" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Identyfikator karty odbiorcy opłacającego przesyłkę.</xsd:documentation>
+				</xsd:annotation></xsd:element>
+			<xsd:element name="idAdresKorespondencyjny" type="xsd:int" maxOccurs="1" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Identyfikator jednego z adresów korespondencyjnych zdefiniowanych dla karty. Wymagalny dla typ=ADRESAT_UMOWNY.</xsd:documentation>
+				</xsd:annotation></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="addShipmentRequest">
@@ -3661,6 +4061,24 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 	<wsdl:message name="getPrintForParcelResponse">
 		<wsdl:part name="parameters" element="tns:getPrintForParcelResponse"></wsdl:part>
 	</wsdl:message>
+	<wsdl:message name="createShopEZwrotyRequest">
+		<wsdl:part name="parameters" element="tns:createShopEZwroty"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createShopEZwrotyResponse">
+		<wsdl:part name="parameters" element="tns:createShopEZwrotyResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteShopEZwrotyRequest">
+		<wsdl:part name="parameters" element="tns:deleteShopEZwroty"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteShopEZwrotyResponse">
+		<wsdl:part name="parameters" element="tns:deleteShopEZwrotyResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getShopEZwrotyListRequest">
+		<wsdl:part name="parameters" element="tns:getShopEZwrotyList"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getShopEZwrotyListResponse">
+		<wsdl:part name="parameters" element="tns:getShopEZwrotyListResponse"></wsdl:part>
+	</wsdl:message>
 	<wsdl:portType name="ElektronicznyNadawca">
 		<wsdl:operation name="addShipment">
 			<wsdl:input message="tns:addShipmentRequest" />
@@ -3919,11 +4337,25 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			<wsdl:input message="tns:getPrintForParcelRequest"></wsdl:input>
 			<wsdl:output message="tns:getPrintForParcelResponse"></wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="createShopEZwroty">
+			<wsdl:input message="tns:createShopEZwrotyRequest"></wsdl:input>
+			<wsdl:output message="tns:createShopEZwrotyResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteShopEZwroty">
+			<wsdl:input message="tns:deleteShopEZwrotyRequest"></wsdl:input>
+			<wsdl:output message="tns:deleteShopEZwrotyResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getShopEZwrotyList">
+			<wsdl:input message="tns:getShopEZwrotyListRequest"></wsdl:input>
+			<wsdl:output message="tns:getShopEZwrotyListResponse"></wsdl:output>
+		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="ENBinding" type="tns:ElektronicznyNadawca">
-		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
 		<wsdl:operation name="addShipment">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/addShipment" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/addShipment" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -3932,7 +4364,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="changePassword">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/changePassword" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/changePassword" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -3941,7 +4374,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="sendEnvelope">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/sendEnvelope" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/sendEnvelope" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -3950,7 +4384,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getUrzedyNadania">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getUrzedyNadania" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getUrzedyNadania" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -3959,7 +4394,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="clearEnvelope">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/clearEnvelope" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/clearEnvelope" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -3968,7 +4404,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getUrzedyWydajaceEPrzesylki">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getUrzedyWydajaceEPrzesylki" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getUrzedyWydajaceEPrzesylki" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -3977,7 +4414,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="uploadIWDContent">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/uploadIWDContent" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/uploadIWDContent" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -3986,7 +4424,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEnvelopeStatus">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeStatus" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeStatus" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -3995,7 +4434,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="downloadIWDContent">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/downloadIWDContent" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/downloadIWDContent" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4004,7 +4444,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getKarty">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getKarty" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getKarty" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4013,7 +4454,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getPasswordExpiredDate">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getPasswordExpiredDate" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getPasswordExpiredDate" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4022,7 +4464,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="setAktywnaKarta">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/setAktywnaKarta" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/setAktywnaKarta" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4031,7 +4474,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="hello">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/hello" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/hello" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4040,7 +4484,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEnvelopeContentShort">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeContentShort" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeContentShort" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4049,7 +4494,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEnvelopeContentFull">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeContentFull" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeContentFull" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4058,7 +4504,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getAddressLabel">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getAddressLabel" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getAddressLabel" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4067,7 +4514,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getOutboxBook">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getOutboxBook" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getOutboxBook" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4076,7 +4524,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getFirmowaPocztaBook">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getFirmowaPocztaBook" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getFirmowaPocztaBook" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4085,7 +4534,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEnvelopeList">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeList" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeList" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4094,7 +4544,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getAddresLabelByGuid">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getAddresLabelByGuid" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getAddresLabelByGuid" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4103,7 +4554,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getPlacowkiPocztowe">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getPlacowkiPocztowe" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getPlacowkiPocztowe" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4112,7 +4564,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getGuid">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getGuid" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getGuid" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4121,7 +4574,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getKierunki">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getKierunki" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getKierunki" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4130,7 +4584,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getKierunkiInfo">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getKierunkiInfo" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getKierunkiInfo" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4139,7 +4594,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEnvelopeBufor">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeBufor" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeBufor" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4148,7 +4604,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="clearEnvelopeByGuids">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/clearEnvelopeByGuids" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/clearEnvelopeByGuids" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4157,7 +4614,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="setEnvelopeBuforDataNadania">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/setEnvelopeBuforDataNadania" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/setEnvelopeBuforDataNadania" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4166,7 +4624,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEPOStatus">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEPOStatus" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEPOStatus" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4175,7 +4634,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getAddresLabelCompact">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getAddresLabelCompact" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getAddresLabelCompact" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4184,7 +4644,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getAddresLabelByGuidCompact">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getAddresLabelByGuidCompact" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getAddresLabelByGuidCompact" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4193,7 +4654,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEnvelopeBuforList">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeBuforList" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEnvelopeBuforList" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4202,7 +4664,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="createEnvelopeBufor">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/createEnvelopeBufor" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/createEnvelopeBufor" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4211,7 +4674,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="updateEnvelopeBufor">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/updateEnvelopeBufor" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/updateEnvelopeBufor" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4220,7 +4684,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="moveShipments">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/moveShipments" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/moveShipments" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4229,7 +4694,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getUbezpieczeniaInfo">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getUbezpieczeniaInfo" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getUbezpieczeniaInfo" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4238,7 +4704,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="isMiejscowa">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/isMiejscowa" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/isMiejscowa" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4247,7 +4714,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getBlankietPobraniaByGuids">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getBlankietPobraniaByGuids" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getBlankietPobraniaByGuids" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4256,7 +4724,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="updateAccount">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/updateAccount" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/updateAccount" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4265,7 +4734,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getAccountList">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getAccountList" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getAccountList" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4274,7 +4744,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getProfilList">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getProfilList" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getProfilList" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4283,7 +4754,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="updateProfil">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/updateProfil" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/updateProfil" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4292,7 +4764,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="createAccount">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/createAccount" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/createAccount" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4301,7 +4774,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="createProfil">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/createProfil" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/createProfil" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4310,7 +4784,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="addReklamacje">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/addReklamacje" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/addReklamacje" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4319,7 +4794,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getReklamacje">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getReklamacje" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getReklamacje" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4328,7 +4804,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="addOdwolanieDoReklamacji">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/addOdwolanieDoReklamacji" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/addOdwolanieDoReklamacji" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4337,7 +4814,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="cancelReklamacja">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/cancelReklamacja" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/cancelReklamacja" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4346,7 +4824,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getZapowiedziFaktur">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getZapowiedziFaktur" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getZapowiedziFaktur" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4355,7 +4834,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="addRozbieznoscDoZapowiedziFaktur">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/addRozbieznoscDoZapowiedziFaktur" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/addRozbieznoscDoZapowiedziFaktur" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4364,7 +4844,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getListaPowodowReklamacji">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getListaPowodowReklamacji" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getListaPowodowReklamacji" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4373,7 +4854,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="zamowKuriera">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/zamowKuriera" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/zamowKuriera" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4382,7 +4864,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEZDO">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEZDO" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEZDO" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4391,7 +4874,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getEZDOList">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getEZDOList" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getEZDOList" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4400,7 +4884,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getWplatyCKP">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getWplatyCKP" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getWplatyCKP" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4409,7 +4894,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="addZalacznikDoReklamacji">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/addZalacznikDoReklamacji" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/addZalacznikDoReklamacji" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4418,7 +4904,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="updateShopEZwroty">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/updateShopEZwroty" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/updateShopEZwroty" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4427,7 +4914,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getListaZgodEZwrotow">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getListaZgodEZwrotow" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getListaZgodEZwrotow" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4436,7 +4924,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="setStatusZgodyNaEZwrot">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/setStatusZgodyNaEZwrot" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/setStatusZgodyNaEZwrot" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4445,7 +4934,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="wyslijLinkaOStatusieEZwrotu">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/wyslijLinkaOStatusieEZwrotu" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/wyslijLinkaOStatusieEZwrotu" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4454,7 +4944,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="isObszarMiasto">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/isObszarMiasto" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/isObszarMiasto" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4463,7 +4954,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getPaczkaKorzysciInfo">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getPaczkaKorzysciInfo" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getPaczkaKorzysciInfo" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4472,7 +4964,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="setJednostkaOrganizacyjna">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/setJednostkaOrganizacyjna" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/setJednostkaOrganizacyjna" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4481,7 +4974,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getJednostkaOrganizacyjna">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getJednostkaOrganizacyjna" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getJednostkaOrganizacyjna" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>
@@ -4490,7 +4984,38 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</wsdl:output>
 		</wsdl:operation>
 		<wsdl:operation name="getPrintForParcel">
-			<soap:operation soapAction="http://e-nadawca.poczta-polska.pl/getPrintForParcel" />
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getPrintForParcel" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createShopEZwroty">
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/createShopEZwroty" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteShopEZwroty">
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/deleteShopEZwroty" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getShopEZwrotyList">
+			<soap:operation
+				soapAction="http://e-nadawca.poczta-polska.pl/getShopEZwrotyList" />
 			<wsdl:input>
 				<soap:body use="literal" />
 			</wsdl:input>

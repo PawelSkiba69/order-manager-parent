@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "adresType")
 @XmlSeeAlso({
-    ProfilType.class
+    ProfilType.class,
+    AdresKorespondencyjny.class
 })
 public class AdresType {
 

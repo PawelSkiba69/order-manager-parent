@@ -102,15 +102,21 @@ public class ENadawcaManager {
 
     public List<ShipmentConfirmationModel> checkStatus(List<OrderModel> unshippedOrders, List<String> guids, LocalDateTime oldestLoadDate) {
 
-        XMLGregorianCalendar startDateXML = ENadawcaXMLDateConverter.from(oldestLoadDate);
-        XMLGregorianCalendar endDateXML = ENadawcaXMLDateConverter.from(LocalDateTime.now());
+        List<ShipmentConfirmationModel> shipmentConfirmationModels = null;
 
-        List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML, endDateXML);
+        try {
+            XMLGregorianCalendar startDateXML = ENadawcaXMLDateConverter.from(oldestLoadDate);
+            XMLGregorianCalendar endDateXML = ENadawcaXMLDateConverter.from(LocalDateTime.now());
 
-        List<PrzesylkaShortType> przesylkaShortTypes = filterEnvelope(envelopeList, guids);
-        ShipmentConfirmationMerger shipmentConfirmationMerger = new ShipmentConfirmationMerger();
+            List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML, endDateXML);
 
-        List<ShipmentConfirmationModel> shipmentConfirmationModels = shipmentConfirmationMerger.merge(przesylkaShortTypes,unshippedOrders);
+            List<PrzesylkaShortType> przesylkaShortTypes = filterEnvelope(envelopeList, guids);
+            ShipmentConfirmationMerger shipmentConfirmationMerger = new ShipmentConfirmationMerger();
+
+            shipmentConfirmationModels = shipmentConfirmationMerger.merge(przesylkaShortTypes, unshippedOrders);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return shipmentConfirmationModels;
     }

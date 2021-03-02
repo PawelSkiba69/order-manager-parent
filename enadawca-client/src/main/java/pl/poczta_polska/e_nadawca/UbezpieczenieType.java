@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;attribute name="rodzaj" use="required" type="{http://e-nadawca.poczta-polska.pl}rodzajUbezpieczeniaType" /&gt;
  *       &lt;attribute name="kwota" use="required" type="{http://e-nadawca.poczta-polska.pl}kwotaUbezpieczeniaType" /&gt;
+ *       &lt;attribute name="akceptacjaOWU" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -34,6 +35,8 @@ public class UbezpieczenieType {
     protected RodzajUbezpieczeniaType rodzaj;
     @XmlAttribute(name = "kwota", required = true)
     protected BigDecimal kwota;
+    @XmlAttribute(name = "akceptacjaOWU")
+    protected Boolean akceptacjaOWU;
 
     /**
      * Gets the value of the rodzaj property.
@@ -81,6 +84,30 @@ public class UbezpieczenieType {
      */
     public void setKwota(BigDecimal value) {
         this.kwota = value;
+    }
+
+    /**
+     * Gets the value of the akceptacjaOWU property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isAkceptacjaOWU() {
+        return akceptacjaOWU;
+    }
+
+    /**
+     * Sets the value of the akceptacjaOWU property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setAkceptacjaOWU(Boolean value) {
+        this.akceptacjaOWU = value;
     }
 
 }
