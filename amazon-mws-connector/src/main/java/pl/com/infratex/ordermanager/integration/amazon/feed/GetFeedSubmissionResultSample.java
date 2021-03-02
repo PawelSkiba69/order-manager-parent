@@ -51,8 +51,8 @@ public class GetFeedSubmissionResultSample {
          * Access Key ID and Secret Access Key ID, obtained from:
          * http://aws.amazon.com
          ***********************************************************************/
-        final String accessKeyId = "AKIAJKP3OBYPAGWGCP7A";
-        final String secretAccessKey = "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";
+        final String ak = "";
+        final String sak = "";
 
         final String appName = "order-manager";
         final String appVersion = "1.0.0";
@@ -95,7 +95,7 @@ public class GetFeedSubmissionResultSample {
          ***********************************************************************/
 
         MarketplaceWebService service = new MarketplaceWebServiceClient(
-                accessKeyId, secretAccessKey, appName, appVersion, config);
+                ak, sak, appName, appVersion, config);
 
         /************************************************************************
          * Setup request parameters and uncomment invoke to try out 
