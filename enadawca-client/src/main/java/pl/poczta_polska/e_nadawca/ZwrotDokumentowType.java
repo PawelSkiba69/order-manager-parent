@@ -9,23 +9,23 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for zwrotDokumentowType complex type.
+ * &lt;p&gt;Java class for zwrotDokumentowType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="zwrotDokumentowType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;choice&gt;
- *         &lt;element name="rodzajPocztex" type="{http://e-nadawca.poczta-polska.pl}terminRodzajType" minOccurs="0"/&gt;
- *         &lt;element name="rodzajList" type="{http://e-nadawca.poczta-polska.pl}rodzajListType" minOccurs="0"/&gt;
- *       &lt;/choice&gt;
- *       &lt;attribute name="odleglosc" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="zwrotDokumentowType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;choice&amp;gt;
+ *         &amp;lt;element name="rodzajPocztex" type="{http://e-nadawca.poczta-polska.pl}terminRodzajType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="rodzajList" type="{http://e-nadawca.poczta-polska.pl}rodzajListType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/choice&amp;gt;
+ *       &amp;lt;attribute name="odleglosc" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

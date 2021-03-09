@@ -8,29 +8,29 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for listZwyklyFirmowyType complex type.
+ * &lt;p&gt;Java class for listZwyklyFirmowyType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="listZwyklyFirmowyType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaNieRejestrowanaType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="adres" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="miejscowa" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&gt;
- *       &lt;attribute name="egzemplarzBiblioteczny" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="dlaOciemnialych" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="obszarMiasto" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="kategoria" type="{http://e-nadawca.poczta-polska.pl}kategoriaType" /&gt;
- *       &lt;attribute name="gabaryt" type="{http://e-nadawca.poczta-polska.pl}gabarytType" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="listZwyklyFirmowyType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaNieRejestrowanaType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="adres" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="miejscowa" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&amp;gt;
+ *       &amp;lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&amp;gt;
+ *       &amp;lt;attribute name="egzemplarzBiblioteczny" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&amp;gt;
+ *       &amp;lt;attribute name="dlaOciemnialych" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&amp;gt;
+ *       &amp;lt;attribute name="obszarMiasto" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="kategoria" type="{http://e-nadawca.poczta-polska.pl}kategoriaType" /&amp;gt;
+ *       &amp;lt;attribute name="gabaryt" type="{http://e-nadawca.poczta-polska.pl}gabarytType" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

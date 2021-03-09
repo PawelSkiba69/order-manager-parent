@@ -24,11 +24,17 @@
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:complexType name="przesylkaType" abstract="true">
-				<xsd:attribute name="guid" type="tns:guidType" use="required" />
+				<xsd:sequence>
+					<xsd:element name="oplacaOdbiorca" type="tns:oplacaOdbiorcaType" maxOccurs="1" minOccurs="0"></xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="guid" type="tns:guidType"
+					use="required" />
 				<xsd:attribute name="pakietGuid" type="tns:guidType" />
-				<xsd:attribute name="opakowanieGuid" type="tns:guidType" />
-        <xsd:attribute name="opis" type="tns:opisType" />
-        <xsd:attribute name="planowanaDataNadania" type="xsd:date" use="optional" />
+				<xsd:attribute name="opakowanieGuid"
+					type="tns:guidType" />
+				<xsd:attribute name="opis" type="tns:opisType" />
+				<xsd:attribute name="planowanaDataNadania"
+					type="xsd:date" use="optional" />
 			</xsd:complexType>
 			<xsd:complexType name="pocztexKrajowyType">
 				<xsd:complexContent>
@@ -540,6 +546,16 @@
 							<xsd:element name="deklaracjaCelna2"
 								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
 							</xsd:element>
+							<xsd:element name="zawartosc"
+								type="xsd:string" maxOccurs="1" minOccurs="0">
+                                <xsd:annotation>
+                                	<xsd:documentation>Element określający zawartość przesyłki.
+Aktualnie dopuszczalne wartości:
+KORESPONDENCJA
+DOKUMENTY_PONIZEJ_250G
+DOKUMENTY_POWYZEJ_250G
+TOWARY</xsd:documentation></xsd:annotation>
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante"
 							type="xsd:boolean" use="optional" default="false" />
@@ -559,6 +575,16 @@
 						<xsd:sequence>
 							<xsd:element name="deklaracjaCelna2"
 								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="zawartosc"
+								type="xsd:string" maxOccurs="1" minOccurs="0">
+                                <xsd:annotation>
+                                	<xsd:documentation>Element określający zawartość przesyłki.
+Aktualnie dopuszczalne wartości:
+KORESPONDENCJA
+DOKUMENTY_PONIZEJ_250G
+DOKUMENTY_POWYZEJ_250G
+TOWARY</xsd:documentation></xsd:annotation>
 							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante"
@@ -656,13 +682,22 @@
 				<xsd:attribute name="numerTransakcjiOdbioru" type="xsd:string" />
 			</xsd:complexType>
 			<xsd:element name="getKarty">
-				<xsd:complexType />
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="idKarta"
+							type="xsd:int" maxOccurs="unbounded" minOccurs="0">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="getKartyResponse">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="karta" type="tns:kartaType"
-							minOccurs="1" maxOccurs="unbounded" />
+							minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="error"
+							type="tns:errorType" maxOccurs="unbounded" minOccurs="0">
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -739,9 +774,22 @@
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:complexType name="kartaType">
+				<xsd:sequence>
+					<xsd:element name="adresKorespondencyjny"
+						type="tns:adresKorespondencyjny" maxOccurs="unbounded"
+						minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Lista adresów korespondencyjnych dla kart typu 2</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
 				<xsd:attribute name="idKarta" type="xsd:int" />
 				<xsd:attribute name="opis" type="xsd:string" />
 				<xsd:attribute name="aktywna" type="xsd:boolean" />
+				<xsd:attribute name="typ" type="xsd:int">
+					<xsd:annotation>
+						<xsd:documentation>Typ karty. Dopuszczalne wartości: 1-do nadawania, 2-do definicji adresów OPNA. Lista obsługiwanych wartości może być rozszerzona w przyszłości.</xsd:documentation>
+					</xsd:annotation></xsd:attribute>
 			</xsd:complexType>
 			<xsd:simpleType name="telefonType">
 				<xsd:restriction base="xsd:string">
@@ -820,8 +868,8 @@
 			<xsd:element name="getEnvelopeListResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="envelopes" type="tns:envelopeInfoType"
-							maxOccurs="unbounded" minOccurs="0" />
+						<xsd:element name="envelopes"
+							type="tns:envelopeInfoType" maxOccurs="unbounded" minOccurs="0" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -829,6 +877,7 @@
 				<xsd:sequence>
 					<xsd:element name="error" type="tns:errorType"
 						maxOccurs="unbounded" minOccurs="0" />
+					<xsd:element name="envelopeFilename" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
 				</xsd:sequence>
 				<xsd:attribute name="idEnvelope" type="xsd:int" />
 				<xsd:attribute name="envelopeStatus" type="tns:envelopeStatusType" />
@@ -845,7 +894,16 @@
 							</xsd:element>
                             <xsd:element name="deklaracjaCelna2"
 								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
-							</xsd:element>
+							</xsd:element>							<xsd:element name="zawartosc"
+								type="xsd:string" maxOccurs="1" minOccurs="0">
+                                <xsd:annotation>
+                                	<xsd:documentation>Element określający zawartość przesyłki.
+Aktualnie dopuszczalne wartości:
+KORESPONDENCJA
+DOKUMENTY_PONIZEJ_250G
+DOKUMENTY_POWYZEJ_250G
+TOWARY</xsd:documentation></xsd:annotation>
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante"
 							type="xsd:boolean" use="optional" default="false" />
@@ -914,6 +972,22 @@
 								maxOccurs="1" minOccurs="0" />
 							<xsd:element name="adresDlaZwrotu"
 								type="tns:adresType" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+
+							<xsd:element name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce"
+								type="xsd:boolean" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="potwierdzenieOdbioru"
+								type="tns:potwierdzenieOdbioruBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
+							<xsd:element name="doreczenie"
+								type="tns:doreczenieBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
+							<xsd:element name="zwrotDokumentow"
+								type="tns:zwrotDokumentowBiznesowaType" maxOccurs="1"
+								minOccurs="0">
 							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="zasadySpecjalne" type="tns:zasadySpecjalneEnum"
@@ -1063,11 +1137,26 @@
 							</xsd:element>
 							<xsd:element name="subPrzesylka" type="tns:subPrzesylkaBiznesowaPlusType"
 								maxOccurs="100" minOccurs="0" />
-							<xsd:choice minOccurs="0" maxOccurs="unbounded">
+							<xsd:choice minOccurs="0" maxOccurs="1">
 								<xsd:element name="dataDrugiejProbyDoreczenia" type="xsd:date" />
 								<xsd:element name="drugaProbaDoreczeniaPoLiczbieDni"
 									type="xsd:int" />
 							</xsd:choice>
+							<xsd:element name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce"
+								type="xsd:boolean" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="potwierdzenieOdbioru"
+								type="tns:potwierdzenieOdbioruBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
+							<xsd:element name="doreczenie"
+								type="tns:doreczenieBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
+							<xsd:element name="zwrotDokumentow"
+								type="tns:zwrotDokumentowBiznesowaType" maxOccurs="1"
+								minOccurs="0">
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante" type="xsd:boolean" />
 						<xsd:attribute name="masa" type="tns:masaType" />
@@ -1077,7 +1166,9 @@
 						<xsd:attribute name="ostroznie" type="xsd:boolean" />
 						<xsd:attribute name="kategoria" type="tns:kategoriaType" />
 						<xsd:attribute name="iloscPotwierdzenOdbioru"
-							type="tns:iloscPotwierdzenOdbioruType" />
+							type="tns:iloscPotwierdzenOdbioruType" >
+							<xsd:annotation>
+								<xsd:documentation>atrybut nieużywany, użyj potwierdzenieOdbioru</xsd:documentation></xsd:annotation></xsd:attribute>
 						<xsd:attribute name="eKontaktAdresata" type="tns:eKontaktType" />
 						<xsd:attribute name="eSposobPowiadomieniaAdresata"
 							type="tns:eSposobPowiadomieniaType" />
@@ -1099,7 +1190,7 @@
 			</xsd:simpleType>
 			<xsd:simpleType name="numerPrzesylkiKlientaType">
 				<xsd:restriction base="xsd:string">
-					<xsd:maxLength value="20" />
+					<xsd:maxLength value="25" />
 				</xsd:restriction>
 			</xsd:simpleType>
 			<xsd:complexType name="pakietType">
@@ -1583,13 +1674,11 @@
 				<xsd:complexContent>
 					<xsd:extension base="tns:przesylkaRejestrowanaType">
 						<xsd:sequence>
-							<xsd:element name="zwrot"
-								type="tns:zwrotType" maxOccurs="1" minOccurs="0" />
-							<xsd:element name="deklaracjaCelna"
-								type="tns:deklaracjaCelnaType" maxOccurs="1" minOccurs="0" />
-							<xsd:element name="deklaracjaCelna2"
-								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
-							</xsd:element>
+							<xsd:element name="zwrot" type="tns:zwrotType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="deklaracjaCelna" type="tns:deklaracjaCelnaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="deklaracjaCelna2" type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobNadaniaInterconnect" type="tns:sposobNadaniaInterconnectType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobDoreczenia" type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0" />
 						</xsd:sequence>
 						<xsd:attribute name="posteRestante" type="xsd:boolean" />
 						<xsd:attribute name="masa" type="tns:masaType" />
@@ -1606,6 +1695,23 @@ deklaracjaCelna2Type i elementu numerReferencyjnyCelny</xsd:documentation>
 							</xsd:annotation>
 						</xsd:attribute>
 						<xsd:attribute name="numerPrzesylkiKlienta" type="xsd:string" />
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="paczkaZagranicznaPremiumType">
+				<xsd:complexContent>
+					<xsd:extension base="tns:przesylkaRejestrowanaType">
+						<xsd:sequence>
+							<xsd:element name="zwrot" type="tns:zwrotType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="posteRestante" type="xsd:boolean" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="masa" type="tns:masaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="deklaracjaCelna2" type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobNadaniaInterconnect" type="tns:sposobNadaniaInterconnectType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="potwierdzenieDoreczenia" type="tns:potwierdzenieDoreczeniaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="ubezpieczenie" type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="numerPrzesylkiKlienta" type="tns:numerPrzesylkiKlientaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobDoreczenia" type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0" />
+						</xsd:sequence>
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
@@ -1789,10 +1895,6 @@ deklaracjaCelna2Type i elementu numerReferencyjnyCelny</xsd:documentation>
 			<xsd:complexType name="przesylkaNierejestrowanaZNumeremType">
 				<xsd:complexContent>
 					<xsd:extension base="tns:przesylkaRejestrowanaType">
-						<xsd:sequence>
-							<xsd:element name="adres" type="tns:adresType"
-								maxOccurs="1" minOccurs="0" />
-						</xsd:sequence>
 						<xsd:attribute name="posteRestante" type="xsd:boolean" />
 						<xsd:attribute name="miejscowa" type="xsd:boolean"
 							default="false" />
@@ -1967,12 +2069,9 @@ deklaracjaCelna2Type i elementu numerReferencyjnyCelny</xsd:documentation>
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:complexType name="ubezpieczenieType">
-				<xsd:attribute name="rodzaj" type="tns:rodzajUbezpieczeniaType"
-					use="required" />
-				<xsd:attribute name="kwota" type="tns:kwotaUbezpieczeniaType"
-					use="required" />
-				<xsd:attribute name="akceptacjaOWU" type="xsd:boolean"
-					use="optional"></xsd:attribute>
+				<xsd:attribute name="rodzaj" type="tns:rodzajUbezpieczeniaType" use="required" />
+				<xsd:attribute name="kwota" type="tns:kwotaUbezpieczeniaType" use="required" />
+				<xsd:attribute name="akceptacjaOWU" type="xsd:boolean" use="optional"/>
 			</xsd:complexType>
 			<xsd:simpleType name="rodzajUbezpieczeniaType">
 				<xsd:restriction base="xsd:string">
@@ -2002,17 +2101,12 @@ deklaracjaCelna2Type i elementu numerReferencyjnyCelny</xsd:documentation>
 				<xsd:complexContent>
 					<xsd:extension base="tns:przesylkaRejestrowanaType">
 						<xsd:sequence>
-							<xsd:element name="ubezpieczenie"
-								type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0" />
-							<xsd:element name="deklaracjaCelna"
-								type="tns:deklaracjaCelnaType" maxOccurs="1" minOccurs="0" />
-							<xsd:element name="potwierdzenieDoreczenia"
-								type="tns:potwierdzenieDoreczeniaType" maxOccurs="1"
-								minOccurs="0">
-							</xsd:element>
-							<xsd:element name="deklaracjaCelna2"
-								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
-							</xsd:element>
+							<xsd:element name="ubezpieczenie" type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="deklaracjaCelna" type="tns:deklaracjaCelnaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="potwierdzenieDoreczenia" type="tns:potwierdzenieDoreczeniaType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="deklaracjaCelna2" type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobNadaniaInterconnect" type="tns:sposobNadaniaInterconnectType" maxOccurs="1" minOccurs="0" />
+							<xsd:element name="sposobDoreczenia" type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0" />
 						</xsd:sequence>
 						<xsd:attribute name="typOpakowania" type="tns:EMSTypOpakowaniaType" />
 						<xsd:attribute name="masa" type="tns:masaType" />
@@ -2724,8 +2818,14 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			<xsd:element name="getReklamacje">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="dataRozpatrzenia" type="xsd:date"
-							maxOccurs="1" minOccurs="1" />
+						<xsd:element name="dataRozpatrzenia"
+							type="xsd:date" maxOccurs="1" minOccurs="0" />
+						<xsd:element name="guidPrzesylki"
+							type="tns:guidType" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="dataZlozenia"
+							type="tns:dataZlozeniaType" maxOccurs="1" minOccurs="0">
+						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -2789,18 +2889,33 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</xsd:element>
 			<xsd:complexType name="reklamowanaPrzesylkaType">
 				<xsd:sequence>
-					<xsd:element name="przesylka" type="tns:przesylkaType"
-						maxOccurs="1" minOccurs="1" />
-					<xsd:element name="powodReklamacji" type="tns:powodReklamacjiType"
-						maxOccurs="1" minOccurs="1" />
+					<xsd:element name="przesylka"
+						type="tns:przesylkaType" maxOccurs="1" minOccurs="1" />
+					<xsd:element name="powodReklamacji"
+						type="tns:powodReklamacjiType" maxOccurs="1" minOccurs="1" />
+					<xsd:element name="nrb" type="tns:nrbType" maxOccurs="1" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Numer rachunku bankowego na który ma zostać przekazane ewentualne odszkodowanie z tytułu złożonej reklamacji.</xsd:documentation>
+						</xsd:annotation></xsd:element>
+					<xsd:element name="numerFaktury" type="tns:numerFakturyType" maxOccurs="1" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Numer dokumentu powiązanego z reklamowaną przesyłką.</xsd:documentation>
+						</xsd:annotation></xsd:element>
+					<xsd:element name="ezgoda" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Znacznik decydujący o zgodzie na otrzymywanie drogą elektroniczną powiadomień o rozpatrywanej reklamacji.</xsd:documentation>
+						</xsd:annotation></xsd:element>
 				</xsd:sequence>
-				<xsd:attribute name="dataNadania" type="xsd:date" use="required" />
-				<xsd:attribute name="urzadNadania" type="tns:urzadNadaniaType" />
-				<xsd:attribute name="powodReklamacjiOpis" type="xsd:string"
-					use="optional" />
+				<xsd:attribute name="dataNadania" type="xsd:date"
+					use="required" />
+				<xsd:attribute name="urzadNadania"
+					type="tns:urzadNadaniaType" />
+				<xsd:attribute name="powodReklamacjiOpis"
+					type="xsd:string" use="optional" />
 				<xsd:attribute name="odszkodowanie" type="xsd:int" />
 				<xsd:attribute name="oplata" type="xsd:int" />
-				<xsd:attribute name="oczekiwaneOdszkodowanie" type="xsd:int" />
+				<xsd:attribute name="oczekiwaneOdszkodowanie"
+					type="xsd:int" />
 			</xsd:complexType>
 			<xsd:complexType name="powodReklamacjiType">
 				<xsd:sequence>
@@ -2978,16 +3093,27 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 					<xsd:extension base="tns:przesylkaRejestrowanaType">
 						<xsd:sequence>
 							<xsd:element name="ubezpieczenie"
-								type="tns:ubezpieczenieType" />
+								type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0"/>
 							<xsd:element name="potwierdzenieDoreczenia"
-								type="tns:potwierdzenieDoreczeniaType" />
+								type="tns:potwierdzenieDoreczeniaType" maxOccurs="1" minOccurs="0"/>
 							<xsd:element name="deklaracjaCelna2"
 								type="tns:deklaracjaCelna2Type" maxOccurs="1" minOccurs="0">
 							</xsd:element>
+							<xsd:element name="sposobDoreczenia"
+								type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0">
+							</xsd:element>
 						</xsd:sequence>
 						<xsd:attribute name="masa" type="tns:masaType" />
 						<xsd:attribute name="posteRestante" type="xsd:boolean" />
-						<xsd:attribute name="zawartosc" type="xsd:string" />
+						<xsd:attribute name="zawartosc" type="xsd:string" >
+							<xsd:annotation>
+								<xsd:documentation>Element określający zawartość przesyłki.
+Aktualnie dopuszczalne wartości:
+KORESPONDENCJA
+DOKUMENTY_PONIZEJ_250G
+DOKUMENTY_POWYZEJ_250G
+TOWARY</xsd:documentation>
+							</xsd:annotation></xsd:attribute>
 						<xsd:attribute name="kategoria" type="tns:kategoriaType" />
 						<xsd:attribute name="numerPrzesylkiKlienta" type="xsd:string" />
 					</xsd:extension>
@@ -3057,6 +3183,7 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 				<xsd:sequence>
 					<xsd:element name="eZwrotPrzesylki"
 						type="tns:eZwrotPrzesylkiType" maxOccurs="2" minOccurs="1" />
+					<xsd:element name="eZwrotKarta" type="tns:eZwrotKartaType" maxOccurs="1" minOccurs="0"></xsd:element>
 				</xsd:sequence>
 				<xsd:attribute name="idShop" type="xsd:int" />
 				<xsd:attribute name="nazwa" type="tns:nazwaEZwrotyType"
@@ -3235,15 +3362,49 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 			</xsd:simpleType>
 			<xsd:complexType name="przesylkaEZwrotPocztexType">
 				<xsd:complexContent>
-					<xsd:extension base="tns:przesylkaRejestrowanaType">
-						<xsd:attribute name="numerNadaniaZwrot" type="tns:numerNadaniaType" />
+					<xsd:extension
+						base="tns:przesylkaRejestrowanaType">
+						<xsd:sequence>
+							<xsd:element name="idSklepEZwrot"
+								type="xsd:int" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="numerNadaniaZwrot"
+							type="tns:numerNadaniaType" />
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
 			<xsd:complexType name="przesylkaEZwrotPaczkaType">
 				<xsd:complexContent>
-					<xsd:extension base="tns:przesylkaRejestrowanaType">
-						<xsd:attribute name="numerNadaniaZwrot" type="tns:numerNadaniaType" />
+					<xsd:extension
+						base="tns:przesylkaRejestrowanaType">
+						<xsd:sequence>
+							<xsd:element name="idSklepEZwrot"
+								type="xsd:int" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="numerNadaniaZwrot"
+							type="tns:numerNadaniaType" />
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="przesylkaEZwrotPaczkaPlusType">
+				<xsd:complexContent>
+					<xsd:extension
+						base="tns:przesylkaRejestrowanaType">
+						<xsd:sequence>
+							<xsd:element name="idSklepEZwrot"
+								type="xsd:int" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="wartosc"
+								type="tns:wartoscType" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+							<xsd:element name="ubezpieczenie"
+								type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0">
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="numerNadaniaZwrot"
+							type="tns:numerNadaniaType" />
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
@@ -3398,8 +3559,10 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 				<xsd:annotation>
 					<xsd:documentation>Określa do jakiej sieci należy placówka pocztowa.
 Zastrzegamy prawo do zmiany w/w listy placówek w każdym momencie.
-Na dzień 2018-02-27 dostępne wartości to:
-POCZTAPOLSKA, ORLEN, RUCH, ZABKA, FRESHMARKET
+Na dzień 2019-09-13 dostępne wartości to:
+POCZTAPOLSKA, ORLEN, RUCH, ZABKA, FRESHMARKET, 
+AUTOMAT BIEDRONKA, AUTOMAT CARREFOUR, AUTOMAT PLACOWKA, AUTOMAT POCZTOWY, 
+AUTOMAT SPOLEM, AUTOMAT LEWIATAN
 					</xsd:documentation>
 				</xsd:annotation>
 				<xsd:restriction base="xsd:string">				</xsd:restriction>
@@ -4427,6 +4590,157 @@ POCZTAPOLSKA, ORLEN, RUCH, ZABKA, FRESHMARKET
                 </xsd:annotation>
                 <xsd:restriction base="xsd:int"></xsd:restriction>
 	</xsd:simpleType>
+	<xsd:simpleType name="sposobNadaniaInterconnectType">
+                <xsd:annotation>
+                	<xsd:documentation>Umożliwia określenie sposobu nadania przesyłki w ramach systemu Interconnect.
+Obsługiwane wartości:
+- ODBIOR_Z_ADRESU_PRYWATNEGO
+- ODBIOR_Z_ADRESU_FIRMOWEGO
+- NADANIE_W_PLACOWCE_POCZTOWEJ
+					</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string"></xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:simpleType name="nrbType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="26"></xsd:maxLength>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:simpleType name="numerFakturyType">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"></xsd:minLength>
+			<xsd:maxLength value="100"></xsd:maxLength>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:complexType name="dataZlozeniaType">
+		<xsd:sequence>
+			<xsd:element name="od" type="xsd:date" maxOccurs="1" minOccurs="1"></xsd:element>
+			<xsd:element name="do" type="xsd:date" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:complexType name="potwierdzenieOdbioruBiznesowaType">
+		<xsd:sequence>
+			<xsd:element name="ilosc"
+				type="tns:iloscPotwierdzenOdbioruType" maxOccurs="1"
+				minOccurs="0">
+			</xsd:element>
+			<xsd:element name="sposob" type="tns:sposobPrzekazaniaPotwierdzeniaBiznesowaType" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+		
+        
+	<xsd:simpleType
+		name="sposobPrzekazaniaPotwierdzeniaBiznesowaType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LIST_ZWYKLY_PRIORYTETOWY"></xsd:enumeration>
+			<xsd:enumeration value="EKSPRES24"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:complexType name="doreczenieBiznesowaType">
+		<xsd:sequence>
+			<xsd:element name="doRakWlasnych" type="xsd:boolean"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:complexType name="zwrotDokumentowBiznesowaType">
+		<xsd:sequence>
+			<xsd:element name="rodzaj" type="tns:terminZwrotDokumentowBiznesowaType" maxOccurs="1" minOccurs="1"></xsd:element>
+			<xsd:element name="idDokumentyZwrotneAdresy" type="xsd:int"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:simpleType name="terminZwrotDokumentowBiznesowaType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LIST_ZWYKLY_PRIORYTETOWY"></xsd:enumeration>
+			<xsd:enumeration value="LIST_ZWYKLY_EKONOMICZNY"></xsd:enumeration>
+			<xsd:enumeration value="LIST_POLECONY_PRIORYTETOWY"></xsd:enumeration>
+			<xsd:enumeration value="LIST_POLECONY_EKONOMICZNY"></xsd:enumeration>
+			<xsd:enumeration value="EKSPRES24"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="sposobDoreczeniaType">
+		<xsd:sequence>
+			<xsd:element name="kod" minOccurs="1" maxOccurs="1" type="xsd:string">
+                        <xsd:annotation>
+                        	<xsd:documentation>kod sposobu doręczenia (jeden z HOM, PCS, PCF, SHP)</xsd:documentation></xsd:annotation>
+			</xsd:element>
+			<xsd:element name="identyfikatorPunktuOdbioru" minOccurs="0"
+				maxOccurs="1" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Wartość alfanumeryczna o maksymalnej długości 35
+						znaków, nie wymagany dla kod=HOM
+					</xsd:documentation>
+				</xsd:annotation>
+
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="adresKorespondencyjny">
+		<xsd:complexContent>
+			<xsd:extension base="tns:adresType">
+				<xsd:attribute name="id" type="xsd:int">
+					<xsd:annotation>
+						<xsd:documentation>Identyfikator adresu korespondencyjnego</xsd:documentation></xsd:annotation></xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+		
+	<xsd:complexType name="eZwrotKartaType">
+		<xsd:sequence>
+			<xsd:element name="idKarta" type="xsd:int"></xsd:element>
+			<xsd:element name="idAdresKorespondencyjny" type="xsd:int"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="oplacaOdbiorcaType">
+		<xsd:sequence>
+			<xsd:element name="typ" maxOccurs="1" minOccurs="0"
+				type="tns:typOplacaOdbiorcaEnum">
+				<xsd:annotation>
+					<xsd:documentation>Typ odbiorcy/adresata opłacającego przesyłkę. Dopuszczalne wartości: ADRESAT_INDYWIDUALNY, ADRESAT_UMOWNY, ODDZIAL.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+
+			<xsd:element name="karta" type="tns:oplacaOdbiorcaKartaType" maxOccurs="1" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Wymagalny dla typ=ADRESAT_UMOWNY i typ=ODDZIAL.</xsd:documentation>
+				</xsd:annotation></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>		
+	<xsd:simpleType name="typOplacaOdbiorcaEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ADRESAT_INDYWIDUALNY"></xsd:enumeration>
+			<xsd:enumeration value="ADRESAT_UMOWNY"></xsd:enumeration>
+			<xsd:enumeration value="ODDZIAL"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:complexType name="oplacaOdbiorcaKartaType">
+		<xsd:sequence>
+			<xsd:element name="idKarta" type="xsd:int" maxOccurs="1" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Identyfikator karty odbiorcy opłacającego przesyłkę.</xsd:documentation>
+				</xsd:annotation></xsd:element>
+			<xsd:element name="idAdresKorespondencyjny" type="xsd:int" maxOccurs="1" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Identyfikator jednego z adresów korespondencyjnych zdefiniowanych dla karty. Wymagalny dla typ=ADRESAT_UMOWNY.</xsd:documentation>
+				</xsd:annotation></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
 		</xsd:schema>
 	</wsdl:types>
 	<wsdl:message name="addShipmentRequest">

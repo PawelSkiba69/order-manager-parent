@@ -4,33 +4,32 @@ package pl.poczta_polska.e_nadawca;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for przesylkaRejestrowanaType complex type.
+ * &lt;p&gt;Java class for przesylkaRejestrowanaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaRejestrowanaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="adres" type="{http://e-nadawca.poczta-polska.pl}adresType"/&gt;
- *         &lt;element name="nadawca" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&gt;
- *         &lt;element name="relatedToAllegro" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&gt;
- *       &lt;attribute name="sygnatura" type="{http://e-nadawca.poczta-polska.pl}sygnaturaType" /&gt;
- *       &lt;attribute name="terminSprawy" type="{http://e-nadawca.poczta-polska.pl}terminType" /&gt;
- *       &lt;attribute name="rodzaj" type="{http://e-nadawca.poczta-polska.pl}rodzajType" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaRejestrowanaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="adres" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="nadawca" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="relatedToAllegro" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&amp;gt;
+ *       &amp;lt;attribute name="sygnatura" type="{http://e-nadawca.poczta-polska.pl}sygnaturaType" /&amp;gt;
+ *       &amp;lt;attribute name="terminSprawy" type="{http://e-nadawca.poczta-polska.pl}terminType" /&amp;gt;
+ *       &amp;lt;attribute name="rodzaj" type="{http://e-nadawca.poczta-polska.pl}rodzajType" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -55,6 +54,7 @@ import javax.xml.bind.annotation.XmlType;
     PrzesylkaBiznesowaType.class,
     PrzesylkaBiznesowaPlusType.class,
     PaczkaZagranicznaType.class,
+    PaczkaZagranicznaPremiumType.class,
     PrzesylkaFirmowaPoleconaType.class,
     EMSType.class,
     PrzesylkaPaletowaType.class,
@@ -63,13 +63,13 @@ import javax.xml.bind.annotation.XmlType;
     GlobalExpresType.class,
     PrzesylkaEZwrotPocztexType.class,
     PrzesylkaEZwrotPaczkaType.class,
+    PrzesylkaEZwrotPaczkaPlusType.class,
     ListWartosciowyKrajowyType.class
 })
 public abstract class PrzesylkaRejestrowanaType
     extends PrzesylkaType
 {
 
-    @XmlElement(required = true)
     protected AdresType adres;
     protected AdresType nadawca;
     protected RelatedToAllegroType relatedToAllegro;

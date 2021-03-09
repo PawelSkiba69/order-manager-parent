@@ -4,32 +4,40 @@ package pl.poczta_polska.e_nadawca;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for przesylkaType complex type.
+ * &lt;p&gt;Java class for przesylkaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="guid" use="required" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="pakietGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="opakowanieGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="opis" type="{http://e-nadawca.poczta-polska.pl}opisType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="oplacaOdbiorca" type="{http://e-nadawca.poczta-polska.pl}oplacaOdbiorcaType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="guid" use="required" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="pakietGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="opakowanieGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="opis" type="{http://e-nadawca.poczta-polska.pl}opisType" /&amp;gt;
+ *       &amp;lt;attribute name="planowanaDataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "przesylkaType")
+@XmlType(name = "przesylkaType", propOrder = {
+    "oplacaOdbiorca"
+})
 @XmlSeeAlso({
     SubPrzesylkaBiznesowaType.class,
     SubPrzesylkaBiznesowaPlusType.class,
@@ -41,6 +49,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public abstract class PrzesylkaType {
 
+    protected OplacaOdbiorcaType oplacaOdbiorca;
     @XmlAttribute(name = "guid", required = true)
     protected String guid;
     @XmlAttribute(name = "pakietGuid")
@@ -49,6 +58,33 @@ public abstract class PrzesylkaType {
     protected String opakowanieGuid;
     @XmlAttribute(name = "opis")
     protected String opis;
+    @XmlAttribute(name = "planowanaDataNadania")
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar planowanaDataNadania;
+
+    /**
+     * Gets the value of the oplacaOdbiorca property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link OplacaOdbiorcaType }
+     *     
+     */
+    public OplacaOdbiorcaType getOplacaOdbiorca() {
+        return oplacaOdbiorca;
+    }
+
+    /**
+     * Sets the value of the oplacaOdbiorca property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link OplacaOdbiorcaType }
+     *     
+     */
+    public void setOplacaOdbiorca(OplacaOdbiorcaType value) {
+        this.oplacaOdbiorca = value;
+    }
 
     /**
      * Gets the value of the guid property.
@@ -144,6 +180,30 @@ public abstract class PrzesylkaType {
      */
     public void setOpis(String value) {
         this.opis = value;
+    }
+
+    /**
+     * Gets the value of the planowanaDataNadania property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getPlanowanaDataNadania() {
+        return planowanaDataNadania;
+    }
+
+    /**
+     * Sets the value of the planowanaDataNadania property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setPlanowanaDataNadania(XMLGregorianCalendar value) {
+        this.planowanaDataNadania = value;
     }
 
 }

@@ -10,27 +10,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for buforType complex type.
+ * &lt;p&gt;Java class for buforType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="buforType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="profil" type="{http://e-nadawca.poczta-polska.pl}profilType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="idBufor" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="dataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *       &lt;attribute name="urzadNadania" type="{http://e-nadawca.poczta-polska.pl}urzadNadaniaType" /&gt;
- *       &lt;attribute name="active" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="opis" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="aktualizujPlanowanaDateNadaniaPrzesylek" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="buforType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="profil" type="{http://e-nadawca.poczta-polska.pl}profilType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="idBufor" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="dataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *       &amp;lt;attribute name="urzadNadania" type="{http://e-nadawca.poczta-polska.pl}urzadNadaniaType" /&amp;gt;
+ *       &amp;lt;attribute name="active" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="opis" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="aktualizujPlanowanaDateNadaniaPrzesylek" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

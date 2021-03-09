@@ -9,38 +9,39 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for adresType complex type.
+ * &lt;p&gt;Java class for adresType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="adresType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="nazwa" type="{http://e-nadawca.poczta-polska.pl}nazwaType" /&gt;
- *       &lt;attribute name="nazwa2" type="{http://e-nadawca.poczta-polska.pl}nazwa2Type" /&gt;
- *       &lt;attribute name="ulica" type="{http://e-nadawca.poczta-polska.pl}ulicaType" /&gt;
- *       &lt;attribute name="numerDomu" type="{http://e-nadawca.poczta-polska.pl}numerDomuType" /&gt;
- *       &lt;attribute name="numerLokalu" type="{http://e-nadawca.poczta-polska.pl}numerLokaluType" /&gt;
- *       &lt;attribute name="miejscowosc" type="{http://e-nadawca.poczta-polska.pl}miejscowoscType" /&gt;
- *       &lt;attribute name="kodPocztowy" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType" /&gt;
- *       &lt;attribute name="kraj" type="{http://e-nadawca.poczta-polska.pl}krajType" default="Polska" /&gt;
- *       &lt;attribute name="telefon" type="{http://e-nadawca.poczta-polska.pl}telefonType" /&gt;
- *       &lt;attribute name="email" type="{http://e-nadawca.poczta-polska.pl}emailType" /&gt;
- *       &lt;attribute name="mobile" type="{http://e-nadawca.poczta-polska.pl}mobileType" /&gt;
- *       &lt;attribute name="osobaKontaktowa" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="nip" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="adresType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="nazwa" type="{http://e-nadawca.poczta-polska.pl}nazwaType" /&amp;gt;
+ *       &amp;lt;attribute name="nazwa2" type="{http://e-nadawca.poczta-polska.pl}nazwa2Type" /&amp;gt;
+ *       &amp;lt;attribute name="ulica" type="{http://e-nadawca.poczta-polska.pl}ulicaType" /&amp;gt;
+ *       &amp;lt;attribute name="numerDomu" type="{http://e-nadawca.poczta-polska.pl}numerDomuType" /&amp;gt;
+ *       &amp;lt;attribute name="numerLokalu" type="{http://e-nadawca.poczta-polska.pl}numerLokaluType" /&amp;gt;
+ *       &amp;lt;attribute name="miejscowosc" type="{http://e-nadawca.poczta-polska.pl}miejscowoscType" /&amp;gt;
+ *       &amp;lt;attribute name="kodPocztowy" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType" /&amp;gt;
+ *       &amp;lt;attribute name="kraj" type="{http://e-nadawca.poczta-polska.pl}krajType" default="Polska" /&amp;gt;
+ *       &amp;lt;attribute name="telefon" type="{http://e-nadawca.poczta-polska.pl}telefonType" /&amp;gt;
+ *       &amp;lt;attribute name="email" type="{http://e-nadawca.poczta-polska.pl}emailType" /&amp;gt;
+ *       &amp;lt;attribute name="mobile" type="{http://e-nadawca.poczta-polska.pl}mobileType" /&amp;gt;
+ *       &amp;lt;attribute name="osobaKontaktowa" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="nip" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "adresType")
 @XmlSeeAlso({
-    ProfilType.class
+    ProfilType.class,
+    AdresKorespondencyjny.class
 })
 public class AdresType {
 

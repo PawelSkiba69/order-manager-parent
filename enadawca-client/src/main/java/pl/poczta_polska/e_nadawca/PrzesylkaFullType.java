@@ -8,22 +8,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for przesylkaFullType complex type.
+ * &lt;p&gt;Java class for przesylkaFullType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaFullType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="przesylkaShort" type="{http://e-nadawca.poczta-polska.pl}przesylkaShortType"/&gt;
- *         &lt;element name="przesylkaFull" type="{http://e-nadawca.poczta-polska.pl}przesylkaType"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaFullType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="przesylkaShort" type="{http://e-nadawca.poczta-polska.pl}przesylkaShortType"/&amp;gt;
+ *         &amp;lt;element name="przesylkaFull" type="{http://e-nadawca.poczta-polska.pl}przesylkaType"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

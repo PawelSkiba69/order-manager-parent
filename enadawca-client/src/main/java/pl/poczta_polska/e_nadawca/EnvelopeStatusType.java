@@ -6,21 +6,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for envelopeStatusType.
+ * &lt;p&gt;Java class for envelopeStatusType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="envelopeStatusType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="WYSLANY"/&gt;
- *     &lt;enumeration value="DOSTARCZONY"/&gt;
- *     &lt;enumeration value="PRZYJETY"/&gt;
- *     &lt;enumeration value="WALIDOWANY"/&gt;
- *     &lt;enumeration value="BLEDNY"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="envelopeStatusType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="WYSLANY"/&amp;gt;
+ *     &amp;lt;enumeration value="DOSTARCZONY"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZYJETY"/&amp;gt;
+ *     &amp;lt;enumeration value="WALIDOWANY"/&amp;gt;
+ *     &amp;lt;enumeration value="BLEDNY"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "envelopeStatusType")

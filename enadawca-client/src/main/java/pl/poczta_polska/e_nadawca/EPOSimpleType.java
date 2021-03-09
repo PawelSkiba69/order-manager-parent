@@ -7,18 +7,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for EPOSimpleType complex type.
+ * &lt;p&gt;Java class for EPOSimpleType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="EPOSimpleType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}EPOType"&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="EPOSimpleType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}EPOType"&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

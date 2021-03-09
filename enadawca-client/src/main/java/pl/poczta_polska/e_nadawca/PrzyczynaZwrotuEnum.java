@@ -6,40 +6,39 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for przyczynaZwrotuEnum.
+ * &lt;p&gt;Java class for przyczynaZwrotuEnum.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="przyczynaZwrotuEnum"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="ODMOWA"/&gt;
- *     &lt;enumeration value="ADRESAT_ZMARL"/&gt;
- *     &lt;enumeration value="ADRESAT_NIEZNANY"/&gt;
- *     &lt;enumeration value="ADRESAT_WYPROWADZIL_SIE"/&gt;
- *     &lt;enumeration value="ADRESAT_NIE_PODJAL"/&gt;
- *     &lt;enumeration value="INNA"/&gt;
- *     &lt;enumeration value="ADRES_NIEPELNY"/&gt;
- *     &lt;enumeration value="ADRES_BLEDNY"/&gt;
- *     &lt;enumeration value="ADRES_NIEZGODNY"/&gt;
- *     &lt;enumeration value="ADRES_NIEZNALEZIONY"/&gt;
- *     &lt;enumeration value="ADRESAT_NIE_ZASTANO"/&gt;
- *     &lt;enumeration value="ADRESAT_NIE_ZGLASZA_SIE"/&gt;
- *     &lt;enumeration value="ADRESAT_NIEOBECNY"/&gt;
- *     &lt;enumeration value="ADRESAT_NIEODNALEZIONY"/&gt;
- *     &lt;enumeration value="ADRESAT_STRAJKUJE"/&gt;
- *     &lt;enumeration value="DO_NADAWCY_NA_POZNIEJ"/&gt;
- *     &lt;enumeration value="MYLNE_SKIEROWANIE"/&gt;
- *     &lt;enumeration value="NADAWCA_ODMOWIL"/&gt;
- *     &lt;enumeration value="NIE_PODJETO"/&gt;
- *     &lt;enumeration value="NIEZGODNE_WYMAGANIA"/&gt;
- *     &lt;enumeration value="ODMOWA_USZKODZENIA"/&gt;
- *     &lt;enumeration value="POBRANIE_NIEZGODNE"/&gt;
- *     &lt;enumeration value="USZKODZONA"/&gt;
- *     &lt;enumeration value="ZAMKNIETA_SIEDZIBA"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="przyczynaZwrotuEnum"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="ODMOWA"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_ZMARL"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_NIEZNANY"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_WYPROWADZIL_SIE"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_NIE_PODJAL"/&amp;gt;
+ *     &amp;lt;enumeration value="INNA"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRES_NIEPELNY"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRES_BLEDNY"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRES_NIEZGODNY"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRES_NIEZNALEZIONY"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_NIE_ZASTANO"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_NIE_ZGLASZA_SIE"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_NIEOBECNY"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_NIEODNALEZIONY"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_STRAJKUJE"/&amp;gt;
+ *     &amp;lt;enumeration value="DO_NADAWCY_NA_POZNIEJ"/&amp;gt;
+ *     &amp;lt;enumeration value="MYLNE_SKIEROWANIE"/&amp;gt;
+ *     &amp;lt;enumeration value="NADAWCA_ODMOWIL"/&amp;gt;
+ *     &amp;lt;enumeration value="NIE_PODJETO"/&amp;gt;
+ *     &amp;lt;enumeration value="NIEZGODNE_WYMAGANIA"/&amp;gt;
+ *     &amp;lt;enumeration value="ODMOWA_USZKODZENIA"/&amp;gt;
+ *     &amp;lt;enumeration value="POBRANIE_NIEZGODNE"/&amp;gt;
+ *     &amp;lt;enumeration value="USZKODZONA"/&amp;gt;
+ *     &amp;lt;enumeration value="ZAMKNIETA_SIEDZIBA"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "przyczynaZwrotuEnum")

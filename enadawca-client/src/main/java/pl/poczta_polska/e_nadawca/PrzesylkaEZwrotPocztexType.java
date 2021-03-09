@@ -8,30 +8,60 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for przesylkaEZwrotPocztexType complex type.
+ * &lt;p&gt;Java class for przesylkaEZwrotPocztexType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaEZwrotPocztexType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&gt;
- *       &lt;attribute name="numerNadaniaZwrot" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaEZwrotPocztexType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="idSklepEZwrot" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="numerNadaniaZwrot" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "przesylkaEZwrotPocztexType")
+@XmlType(name = "przesylkaEZwrotPocztexType", propOrder = {
+    "idSklepEZwrot"
+})
 public class PrzesylkaEZwrotPocztexType
     extends PrzesylkaRejestrowanaType
 {
 
+    protected Integer idSklepEZwrot;
     @XmlAttribute(name = "numerNadaniaZwrot")
     protected String numerNadaniaZwrot;
+
+    /**
+     * Gets the value of the idSklepEZwrot property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getIdSklepEZwrot() {
+        return idSklepEZwrot;
+    }
+
+    /**
+     * Sets the value of the idSklepEZwrot property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setIdSklepEZwrot(Integer value) {
+        this.idSklepEZwrot = value;
+    }
 
     /**
      * Gets the value of the numerNadaniaZwrot property.

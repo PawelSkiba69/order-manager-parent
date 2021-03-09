@@ -11,19 +11,19 @@ import javax.xml.bind.annotation.XmlType;
  * atrybut zasadySpecjalne zostanie usunięty z EPOExtendedType do końca 2016 roku
  * 					
  * 
- * <p>Java class for EPOExtendedType complex type.
+ * &lt;p&gt;Java class for EPOExtendedType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="EPOExtendedType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}EPOType"&gt;
- *       &lt;attribute name="zasadySpecjalne" type="{http://e-nadawca.poczta-polska.pl}zasadySpecjalneEnum" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="EPOExtendedType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}EPOType"&amp;gt;
+ *       &amp;lt;attribute name="zasadySpecjalne" type="{http://e-nadawca.poczta-polska.pl}zasadySpecjalneEnum" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

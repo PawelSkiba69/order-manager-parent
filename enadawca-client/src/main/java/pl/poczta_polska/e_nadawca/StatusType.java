@@ -6,20 +6,19 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for statusType.
+ * &lt;p&gt;Java class for statusType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="statusType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="NIEPOTWIERDZONA"/&gt;
- *     &lt;enumeration value="POTWIERDZONA"/&gt;
- *     &lt;enumeration value="NOWA"/&gt;
- *     &lt;enumeration value="BRAK"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="statusType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="NIEPOTWIERDZONA"/&amp;gt;
+ *     &amp;lt;enumeration value="POTWIERDZONA"/&amp;gt;
+ *     &amp;lt;enumeration value="NOWA"/&amp;gt;
+ *     &amp;lt;enumeration value="BRAK"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "statusType")

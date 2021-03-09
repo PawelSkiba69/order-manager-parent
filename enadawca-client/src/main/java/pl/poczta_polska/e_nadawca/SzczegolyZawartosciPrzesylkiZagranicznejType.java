@@ -8,26 +8,26 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for SzczegolyZawartosciPrzesylkiZagranicznejType complex type.
+ * &lt;p&gt;Java class for SzczegolyZawartosciPrzesylkiZagranicznejType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="SzczegolyZawartosciPrzesylkiZagranicznejType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="okreslenieZawartosci" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="ilosc" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="masaNetto" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/&gt;
- *         &lt;element name="wartosc" type="{http://www.w3.org/2001/XMLSchema}float"/&gt;
- *         &lt;element name="numerTaryfyHs" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="krajPochodzeniaKodAlfa2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="SzczegolyZawartosciPrzesylkiZagranicznejType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="okreslenieZawartosci" type="{http://www.w3.org/2001/XMLSchema}string"/&amp;gt;
+ *         &amp;lt;element name="ilosc" type="{http://www.w3.org/2001/XMLSchema}int"/&amp;gt;
+ *         &amp;lt;element name="masaNetto" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="wartosc" type="{http://www.w3.org/2001/XMLSchema}float"/&amp;gt;
+ *         &amp;lt;element name="numerTaryfyHs" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="krajPochodzeniaKodAlfa2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

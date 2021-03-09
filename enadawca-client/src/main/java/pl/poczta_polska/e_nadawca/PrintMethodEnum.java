@@ -6,18 +6,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for PrintMethodEnum.
+ * &lt;p&gt;Java class for PrintMethodEnum.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="PrintMethodEnum"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="EACH_PARCEL_SEPARATELY"/&gt;
- *     &lt;enumeration value="ALL_PARCELS_IN_ONE_FILE"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="PrintMethodEnum"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="EACH_PARCEL_SEPARATELY"/&amp;gt;
+ *     &amp;lt;enumeration value="ALL_PARCELS_IN_ONE_FILE"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "PrintMethodEnum")

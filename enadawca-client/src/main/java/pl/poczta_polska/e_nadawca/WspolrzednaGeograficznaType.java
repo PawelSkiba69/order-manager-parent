@@ -8,22 +8,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for wspolrzednaGeograficznaType complex type.
+ * &lt;p&gt;Java class for wspolrzednaGeograficznaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="wspolrzednaGeograficznaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="dec" type="{http://www.w3.org/2001/XMLSchema}float" /&gt;
- *       &lt;attribute name="stopien" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="minuta" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="sekunda" type="{http://www.w3.org/2001/XMLSchema}float" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="wspolrzednaGeograficznaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="dec" type="{http://www.w3.org/2001/XMLSchema}float" /&amp;gt;
+ *       &amp;lt;attribute name="stopien" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="minuta" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="sekunda" type="{http://www.w3.org/2001/XMLSchema}float" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

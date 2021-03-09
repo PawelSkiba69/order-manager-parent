@@ -9,23 +9,23 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for subPrzesylkaPaletowaType complex type.
+ * &lt;p&gt;Java class for subPrzesylkaPaletowaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="subPrzesylkaPaletowaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="paleta" type="{http://e-nadawca.poczta-polska.pl}paletaType"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="subPrzesylkaPaletowaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="paleta" type="{http://e-nadawca.poczta-polska.pl}paletaType"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

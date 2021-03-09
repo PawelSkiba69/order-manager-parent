@@ -102,11 +102,6 @@ public class ENadawcaManager {
 
     public List<ShipmentConfirmationModel> checkStatus(List<OrderModel> unshippedOrders, List<String> guids,
                                                        LocalDateTime oldestLoadDate, LocalDateTime newestLoadDate) {
-        LOGGER.info("checkStatus()");
-        LOGGER.info("unshippedOrders: " + unshippedOrders);
-        LOGGER.info("guids: " + guids);
-        LOGGER.info("oldestLoadDate: " + oldestLoadDate);
-        LOGGER.info("newestLoadDate: " + newestLoadDate);
 
         XMLGregorianCalendar startDateXML = ENadawcaXMLDateConverter.from(oldestLoadDate);
         XMLGregorianCalendar endDateXML = ENadawcaXMLDateConverter.from(newestLoadDate);

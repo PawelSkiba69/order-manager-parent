@@ -12,34 +12,37 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for envelopeInfoType complex type.
+ * &lt;p&gt;Java class for envelopeInfoType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="envelopeInfoType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="error" type="{http://e-nadawca.poczta-polska.pl}errorType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="idEnvelope" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="envelopeStatus" type="{http://e-nadawca.poczta-polska.pl}envelopeStatusType" /&gt;
- *       &lt;attribute name="dataTransmisji" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="envelopeInfoType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="error" type="{http://e-nadawca.poczta-polska.pl}errorType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="envelopeFilename" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="idEnvelope" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="envelopeStatus" type="{http://e-nadawca.poczta-polska.pl}envelopeStatusType" /&amp;gt;
+ *       &amp;lt;attribute name="dataTransmisji" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "envelopeInfoType", propOrder = {
-    "error"
+    "error",
+    "envelopeFilename"
 })
 public class EnvelopeInfoType {
 
     protected List<ErrorType> error;
+    protected List<String> envelopeFilename;
     @XmlAttribute(name = "idEnvelope")
     protected Integer idEnvelope;
     @XmlAttribute(name = "envelopeStatus")
@@ -51,20 +54,20 @@ public class EnvelopeInfoType {
     /**
      * Gets the value of the error property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the error property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the error property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getError().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link ErrorType }
      * 
@@ -75,6 +78,35 @@ public class EnvelopeInfoType {
             error = new ArrayList<ErrorType>();
         }
         return this.error;
+    }
+
+    /**
+     * Gets the value of the envelopeFilename property.
+     * 
+     * &lt;p&gt;
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the envelopeFilename property.
+     * 
+     * &lt;p&gt;
+     * For example, to add a new item, do as follows:
+     * &lt;pre&gt;
+     *    getEnvelopeFilename().add(newItem);
+     * &lt;/pre&gt;
+     * 
+     * 
+     * &lt;p&gt;
+     * Objects of the following type(s) are allowed in the list
+     * {@link String }
+     * 
+     * 
+     */
+    public List<String> getEnvelopeFilename() {
+        if (envelopeFilename == null) {
+            envelopeFilename = new ArrayList<String>();
+        }
+        return this.envelopeFilename;
     }
 
     /**

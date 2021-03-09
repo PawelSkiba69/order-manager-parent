@@ -8,24 +8,24 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for szczegolyDeklaracjiCelnejType complex type.
+ * &lt;p&gt;Java class for szczegolyDeklaracjiCelnejType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="szczegolyDeklaracjiCelnejType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="ilosc" type="{http://www.w3.org/2001/XMLSchema}float" /&gt;
- *       &lt;attribute name="masa" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="wartosc" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="numerTaryfowy" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="krajPochodzenia" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="szczegolyDeklaracjiCelnejType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="ilosc" type="{http://www.w3.org/2001/XMLSchema}float" /&amp;gt;
+ *       &amp;lt;attribute name="masa" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="wartosc" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="numerTaryfowy" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="krajPochodzenia" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

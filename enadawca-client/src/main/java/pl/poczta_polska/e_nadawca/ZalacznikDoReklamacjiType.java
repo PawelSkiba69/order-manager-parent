@@ -8,23 +8,23 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for zalacznikDoReklamacjiType complex type.
+ * &lt;p&gt;Java class for zalacznikDoReklamacjiType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="zalacznikDoReklamacjiType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="fileContent" type="{http://www.w3.org/2001/XMLSchema}base64Binary"/&gt;
- *         &lt;element name="fileName" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="fileDesc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="zalacznikDoReklamacjiType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="fileContent" type="{http://www.w3.org/2001/XMLSchema}base64Binary"/&amp;gt;
+ *         &amp;lt;element name="fileName" type="{http://www.w3.org/2001/XMLSchema}string"/&amp;gt;
+ *         &amp;lt;element name="fileDesc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

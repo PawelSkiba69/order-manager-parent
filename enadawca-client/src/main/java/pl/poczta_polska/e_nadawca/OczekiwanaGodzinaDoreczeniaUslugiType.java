@@ -7,28 +7,27 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for oczekiwanaGodzinaDoreczeniaUslugiType.
+ * &lt;p&gt;Java class for oczekiwanaGodzinaDoreczeniaUslugiType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="oczekiwanaGodzinaDoreczeniaUslugiType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="DO 08:00"/&gt;
- *     &lt;enumeration value="DO 09:00"/&gt;
- *     &lt;enumeration value="DO 12:00"/&gt;
- *     &lt;enumeration value="NA 13:00"/&gt;
- *     &lt;enumeration value="NA 14:00"/&gt;
- *     &lt;enumeration value="NA 15:00"/&gt;
- *     &lt;enumeration value="NA 16:00"/&gt;
- *     &lt;enumeration value="NA 17:00"/&gt;
- *     &lt;enumeration value="NA 18:00"/&gt;
- *     &lt;enumeration value="NA 19:00"/&gt;
- *     &lt;enumeration value="NA 20:00"/&gt;
- *     &lt;enumeration value="PO 17:00"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="oczekiwanaGodzinaDoreczeniaUslugiType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="DO 08:00"/&amp;gt;
+ *     &amp;lt;enumeration value="DO 09:00"/&amp;gt;
+ *     &amp;lt;enumeration value="DO 12:00"/&amp;gt;
+ *     &amp;lt;enumeration value="NA 13:00"/&amp;gt;
+ *     &amp;lt;enumeration value="NA 14:00"/&amp;gt;
+ *     &amp;lt;enumeration value="NA 15:00"/&amp;gt;
+ *     &amp;lt;enumeration value="NA 16:00"/&amp;gt;
+ *     &amp;lt;enumeration value="NA 17:00"/&amp;gt;
+ *     &amp;lt;enumeration value="NA 18:00"/&amp;gt;
+ *     &amp;lt;enumeration value="NA 19:00"/&amp;gt;
+ *     &amp;lt;enumeration value="NA 20:00"/&amp;gt;
+ *     &amp;lt;enumeration value="PO 17:00"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "oczekiwanaGodzinaDoreczeniaUslugiType")

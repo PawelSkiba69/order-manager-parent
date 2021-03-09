@@ -11,7 +11,7 @@ import javax.xml.namespace.QName;
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the pl.poczta_polska.e_nadawca package. 
- * <p>An ObjectFactory allows you to programatically 
+ * &lt;p&gt;An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
  * content can consist of schema derived interfaces 
@@ -1355,6 +1355,62 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CreateShopEZwroty }
+     * 
+     */
+    public CreateShopEZwroty createCreateShopEZwroty() {
+        return new CreateShopEZwroty();
+    }
+
+    /**
+     * Create an instance of {@link CreateShopEZwrotyResponse }
+     * 
+     */
+    public CreateShopEZwrotyResponse createCreateShopEZwrotyResponse() {
+        return new CreateShopEZwrotyResponse();
+    }
+
+    /**
+     * Create an instance of {@link DeleteShopEZwroty }
+     * 
+     */
+    public DeleteShopEZwroty createDeleteShopEZwroty() {
+        return new DeleteShopEZwroty();
+    }
+
+    /**
+     * Create an instance of {@link DeleteShopEZwrotyResponse }
+     * 
+     */
+    public DeleteShopEZwrotyResponse createDeleteShopEZwrotyResponse() {
+        return new DeleteShopEZwrotyResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetShopEZwrotyList }
+     * 
+     */
+    public GetShopEZwrotyList createGetShopEZwrotyList() {
+        return new GetShopEZwrotyList();
+    }
+
+    /**
+     * Create an instance of {@link GetShopEZwrotyListResponse }
+     * 
+     */
+    public GetShopEZwrotyListResponse createGetShopEZwrotyListResponse() {
+        return new GetShopEZwrotyListResponse();
+    }
+
+    /**
+     * Create an instance of {@link ShopEZwrotyInfoType }
+     * 
+     */
+    public ShopEZwrotyInfoType createShopEZwrotyInfoType() {
+        return new ShopEZwrotyInfoType();
+    }
+
+    /**
      * Create an instance of {@link PocztexKrajowyType }
      * 
      */
@@ -1576,6 +1632,14 @@ public class ObjectFactory {
      */
     public PaczkaZagranicznaType createPaczkaZagranicznaType() {
         return new PaczkaZagranicznaType();
+    }
+
+    /**
+     * Create an instance of {@link PaczkaZagranicznaPremiumType }
+     * 
+     */
+    public PaczkaZagranicznaPremiumType createPaczkaZagranicznaPremiumType() {
+        return new PaczkaZagranicznaPremiumType();
     }
 
     /**
@@ -1851,6 +1915,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PrzesylkaEZwrotPaczkaPlusType }
+     * 
+     */
+    public PrzesylkaEZwrotPaczkaPlusType createPrzesylkaEZwrotPaczkaPlusType() {
+        return new PrzesylkaEZwrotPaczkaPlusType();
+    }
+
+    /**
      * Create an instance of {@link DaneSentType }
      * 
      */
@@ -1912,6 +1984,70 @@ public class ObjectFactory {
      */
     public SzczegolyZawartosciPrzesylkiZagranicznejType createSzczegolyZawartosciPrzesylkiZagranicznejType() {
         return new SzczegolyZawartosciPrzesylkiZagranicznejType();
+    }
+
+    /**
+     * Create an instance of {@link PotwierdzenieOdbioruBiznesowaType }
+     * 
+     */
+    public PotwierdzenieOdbioruBiznesowaType createPotwierdzenieOdbioruBiznesowaType() {
+        return new PotwierdzenieOdbioruBiznesowaType();
+    }
+
+    /**
+     * Create an instance of {@link DoreczenieBiznesowaType }
+     * 
+     */
+    public DoreczenieBiznesowaType createDoreczenieBiznesowaType() {
+        return new DoreczenieBiznesowaType();
+    }
+
+    /**
+     * Create an instance of {@link ZwrotDokumentowBiznesowaType }
+     * 
+     */
+    public ZwrotDokumentowBiznesowaType createZwrotDokumentowBiznesowaType() {
+        return new ZwrotDokumentowBiznesowaType();
+    }
+
+    /**
+     * Create an instance of {@link SposobDoreczeniaType }
+     * 
+     */
+    public SposobDoreczeniaType createSposobDoreczeniaType() {
+        return new SposobDoreczeniaType();
+    }
+
+    /**
+     * Create an instance of {@link AdresKorespondencyjny }
+     * 
+     */
+    public AdresKorespondencyjny createAdresKorespondencyjny() {
+        return new AdresKorespondencyjny();
+    }
+
+    /**
+     * Create an instance of {@link EZwrotKartaType }
+     * 
+     */
+    public EZwrotKartaType createEZwrotKartaType() {
+        return new EZwrotKartaType();
+    }
+
+    /**
+     * Create an instance of {@link OplacaOdbiorcaType }
+     * 
+     */
+    public OplacaOdbiorcaType createOplacaOdbiorcaType() {
+        return new OplacaOdbiorcaType();
+    }
+
+    /**
+     * Create an instance of {@link OplacaOdbiorcaKartaType }
+     * 
+     */
+    public OplacaOdbiorcaKartaType createOplacaOdbiorcaKartaType() {
+        return new OplacaOdbiorcaKartaType();
     }
 
     /**

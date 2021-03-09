@@ -9,26 +9,26 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for przesylkaEPOType complex type.
+ * &lt;p&gt;Java class for przesylkaEPOType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaEPOType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="EPOInfo" type="{http://e-nadawca.poczta-polska.pl}EPOInfoType" minOccurs="0"/&gt;
- *         &lt;element name="biometricSignatureContent" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/&gt;
- *         &lt;element name="version" type="{http://e-nadawca.poczta-polska.pl}EpoVersionType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="guid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&gt;
- *       &lt;attribute name="statusEPO" type="{http://e-nadawca.poczta-polska.pl}statusEPOEnum" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaEPOType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="EPOInfo" type="{http://e-nadawca.poczta-polska.pl}EPOInfoType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="biometricSignatureContent" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="version" type="{http://e-nadawca.poczta-polska.pl}EpoVersionType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="guid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&amp;gt;
+ *       &amp;lt;attribute name="statusEPO" type="{http://e-nadawca.poczta-polska.pl}statusEPOEnum" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

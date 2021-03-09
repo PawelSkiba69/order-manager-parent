@@ -12,49 +12,58 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for shopEZwrotyType complex type.
+ * &lt;p&gt;Java class for shopEZwrotyType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="shopEZwrotyType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="eZwrotPrzesylki" type="{http://e-nadawca.poczta-polska.pl}eZwrotPrzesylkiType" maxOccurs="2"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="idShop" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="nazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&gt;
- *       &lt;attribute name="nazwa2" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&gt;
- *       &lt;attribute name="przyjaznaNazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&gt;
- *       &lt;attribute name="ulica" use="required" type="{http://e-nadawca.poczta-polska.pl}ulicaType" /&gt;
- *       &lt;attribute name="numerDomu" use="required" type="{http://e-nadawca.poczta-polska.pl}numerDomuType" /&gt;
- *       &lt;attribute name="numerLokalu" type="{http://e-nadawca.poczta-polska.pl}numerLokaluType" /&gt;
- *       &lt;attribute name="miejscowosc" use="required" type="{http://e-nadawca.poczta-polska.pl}miejscowoscType" /&gt;
- *       &lt;attribute name="kodPocztowy" use="required" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType" /&gt;
- *       &lt;attribute name="mobile" use="required" type="{http://e-nadawca.poczta-polska.pl}mobileType" /&gt;
- *       &lt;attribute name="email" use="required" type="{http://e-nadawca.poczta-polska.pl}emailType" /&gt;
- *       &lt;attribute name="nip" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="regon" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="krs" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="eZwrotTyp" type="{http://e-nadawca.poczta-polska.pl}eZwrotTypZgodyType" /&gt;
- *       &lt;attribute name="wymagalnoscNumeruIdentyfikujacegoPrzesylke" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="shopEZwrotyType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="eZwrotPrzesylki" type="{http://e-nadawca.poczta-polska.pl}eZwrotPrzesylkiType" maxOccurs="2"/&amp;gt;
+ *         &amp;lt;element name="eZwrotKarta" type="{http://e-nadawca.poczta-polska.pl}eZwrotKartaType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="idShop" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="nazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&amp;gt;
+ *       &amp;lt;attribute name="nazwa2" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&amp;gt;
+ *       &amp;lt;attribute name="przyjaznaNazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&amp;gt;
+ *       &amp;lt;attribute name="ulica" use="required" type="{http://e-nadawca.poczta-polska.pl}ulicaType" /&amp;gt;
+ *       &amp;lt;attribute name="numerDomu" use="required" type="{http://e-nadawca.poczta-polska.pl}numerDomuType" /&amp;gt;
+ *       &amp;lt;attribute name="numerLokalu" type="{http://e-nadawca.poczta-polska.pl}numerLokaluType" /&amp;gt;
+ *       &amp;lt;attribute name="miejscowosc" use="required" type="{http://e-nadawca.poczta-polska.pl}miejscowoscType" /&amp;gt;
+ *       &amp;lt;attribute name="kodPocztowy" use="required" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType" /&amp;gt;
+ *       &amp;lt;attribute name="mobile" use="required" type="{http://e-nadawca.poczta-polska.pl}mobileType" /&amp;gt;
+ *       &amp;lt;attribute name="email" use="required" type="{http://e-nadawca.poczta-polska.pl}emailType" /&amp;gt;
+ *       &amp;lt;attribute name="nip" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="regon" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="krs" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="eZwrotTyp" type="{http://e-nadawca.poczta-polska.pl}eZwrotTypZgodyType" /&amp;gt;
+ *       &amp;lt;attribute name="wymagalnoscNumeruIdentyfikujacegoPrzesylke" type="{http://e-nadawca.poczta-polska.pl}wymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum" /&amp;gt;
+ *       &amp;lt;attribute name="availableOnWebsite" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="emailForEZwrot" type="{http://e-nadawca.poczta-polska.pl}emailType" /&amp;gt;
+ *       &amp;lt;attribute name="paid" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="consentValidFor" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="contractorCost" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="infoForClient" type="{http://e-nadawca.poczta-polska.pl}infoForClientType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "shopEZwrotyType", propOrder = {
-    "eZwrotPrzesylki"
+    "eZwrotPrzesylki",
+    "eZwrotKarta"
 })
 public class ShopEZwrotyType {
 
     @XmlElement(required = true)
     @XmlSchemaType(name = "string")
     protected List<EZwrotPrzesylkiType> eZwrotPrzesylki;
+    protected EZwrotKartaType eZwrotKarta;
     @XmlAttribute(name = "idShop")
     protected Integer idShop;
     @XmlAttribute(name = "nazwa", required = true)
@@ -86,25 +95,37 @@ public class ShopEZwrotyType {
     @XmlAttribute(name = "eZwrotTyp")
     protected EZwrotTypZgodyType eZwrotTyp;
     @XmlAttribute(name = "wymagalnoscNumeruIdentyfikujacegoPrzesylke")
-    protected Boolean wymagalnoscNumeruIdentyfikujacegoPrzesylke;
+    protected WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum wymagalnoscNumeruIdentyfikujacegoPrzesylke;
+    @XmlAttribute(name = "availableOnWebsite")
+    protected Boolean availableOnWebsite;
+    @XmlAttribute(name = "emailForEZwrot")
+    protected String emailForEZwrot;
+    @XmlAttribute(name = "paid")
+    protected Boolean paid;
+    @XmlAttribute(name = "consentValidFor")
+    protected Integer consentValidFor;
+    @XmlAttribute(name = "contractorCost")
+    protected Integer contractorCost;
+    @XmlAttribute(name = "infoForClient")
+    protected String infoForClient;
 
     /**
      * Gets the value of the eZwrotPrzesylki property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the eZwrotPrzesylki property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the eZwrotPrzesylki property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getEZwrotPrzesylki().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link EZwrotPrzesylkiType }
      * 
@@ -115,6 +136,30 @@ public class ShopEZwrotyType {
             eZwrotPrzesylki = new ArrayList<EZwrotPrzesylkiType>();
         }
         return this.eZwrotPrzesylki;
+    }
+
+    /**
+     * Gets the value of the eZwrotKarta property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link EZwrotKartaType }
+     *     
+     */
+    public EZwrotKartaType getEZwrotKarta() {
+        return eZwrotKarta;
+    }
+
+    /**
+     * Sets the value of the eZwrotKarta property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link EZwrotKartaType }
+     *     
+     */
+    public void setEZwrotKarta(EZwrotKartaType value) {
+        this.eZwrotKarta = value;
     }
 
     /**
@@ -482,10 +527,10 @@ public class ShopEZwrotyType {
      * 
      * @return
      *     possible object is
-     *     {@link Boolean }
+     *     {@link WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum }
      *     
      */
-    public Boolean isWymagalnoscNumeruIdentyfikujacegoPrzesylke() {
+    public WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum getWymagalnoscNumeruIdentyfikujacegoPrzesylke() {
         return wymagalnoscNumeruIdentyfikujacegoPrzesylke;
     }
 
@@ -494,11 +539,155 @@ public class ShopEZwrotyType {
      * 
      * @param value
      *     allowed object is
+     *     {@link WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum }
+     *     
+     */
+    public void setWymagalnoscNumeruIdentyfikujacegoPrzesylke(WymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum value) {
+        this.wymagalnoscNumeruIdentyfikujacegoPrzesylke = value;
+    }
+
+    /**
+     * Gets the value of the availableOnWebsite property.
+     * 
+     * @return
+     *     possible object is
      *     {@link Boolean }
      *     
      */
-    public void setWymagalnoscNumeruIdentyfikujacegoPrzesylke(Boolean value) {
-        this.wymagalnoscNumeruIdentyfikujacegoPrzesylke = value;
+    public Boolean isAvailableOnWebsite() {
+        return availableOnWebsite;
+    }
+
+    /**
+     * Sets the value of the availableOnWebsite property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setAvailableOnWebsite(Boolean value) {
+        this.availableOnWebsite = value;
+    }
+
+    /**
+     * Gets the value of the emailForEZwrot property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEmailForEZwrot() {
+        return emailForEZwrot;
+    }
+
+    /**
+     * Sets the value of the emailForEZwrot property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEmailForEZwrot(String value) {
+        this.emailForEZwrot = value;
+    }
+
+    /**
+     * Gets the value of the paid property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isPaid() {
+        return paid;
+    }
+
+    /**
+     * Sets the value of the paid property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setPaid(Boolean value) {
+        this.paid = value;
+    }
+
+    /**
+     * Gets the value of the consentValidFor property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getConsentValidFor() {
+        return consentValidFor;
+    }
+
+    /**
+     * Sets the value of the consentValidFor property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setConsentValidFor(Integer value) {
+        this.consentValidFor = value;
+    }
+
+    /**
+     * Gets the value of the contractorCost property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getContractorCost() {
+        return contractorCost;
+    }
+
+    /**
+     * Sets the value of the contractorCost property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setContractorCost(Integer value) {
+        this.contractorCost = value;
+    }
+
+    /**
+     * Gets the value of the infoForClient property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getInfoForClient() {
+        return infoForClient;
+    }
+
+    /**
+     * Sets the value of the infoForClient property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setInfoForClient(String value) {
+        this.infoForClient = value;
     }
 
 }

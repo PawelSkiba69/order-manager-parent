@@ -6,18 +6,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for uiszczaOplateType.
+ * &lt;p&gt;Java class for uiszczaOplateType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="uiszczaOplateType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="NADAWCA"/&gt;
- *     &lt;enumeration value="ADRESAT"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="uiszczaOplateType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="NADAWCA"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "uiszczaOplateType")

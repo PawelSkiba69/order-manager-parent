@@ -6,26 +6,25 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for permisionType.
+ * &lt;p&gt;Java class for permisionType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="permisionType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="MANAGE_USERS"/&gt;
- *     &lt;enumeration value="TRANSMIT"/&gt;
- *     &lt;enumeration value="MANAGE_PROFILES"/&gt;
- *     &lt;enumeration value="MANAGE_ORGANIZATION_UNIT"/&gt;
- *     &lt;enumeration value="MANAGE_TEMPLATES"/&gt;
- *     &lt;enumeration value="EDIT_PARCELS"/&gt;
- *     &lt;enumeration value="EDIT_PARCELS_FROM_TEMPLATES"/&gt;
- *     &lt;enumeration value="MANAGE_ADDRESS_BOOK"/&gt;
- *     &lt;enumeration value="SAVE_SELF_SETTINGS"/&gt;
- *     &lt;enumeration value="MANAGE_DICTIONARIES"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="permisionType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="MANAGE_USERS"/&amp;gt;
+ *     &amp;lt;enumeration value="TRANSMIT"/&amp;gt;
+ *     &amp;lt;enumeration value="MANAGE_PROFILES"/&amp;gt;
+ *     &amp;lt;enumeration value="MANAGE_ORGANIZATION_UNIT"/&amp;gt;
+ *     &amp;lt;enumeration value="MANAGE_TEMPLATES"/&amp;gt;
+ *     &amp;lt;enumeration value="EDIT_PARCELS"/&amp;gt;
+ *     &amp;lt;enumeration value="EDIT_PARCELS_FROM_TEMPLATES"/&amp;gt;
+ *     &amp;lt;enumeration value="MANAGE_ADDRESS_BOOK"/&amp;gt;
+ *     &amp;lt;enumeration value="SAVE_SELF_SETTINGS"/&amp;gt;
+ *     &amp;lt;enumeration value="MANAGE_DICTIONARIES"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "permisionType")

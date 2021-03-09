@@ -8,36 +8,39 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for przesylkaPoleconaZagranicznaType complex type.
+ * &lt;p&gt;Java class for przesylkaPoleconaZagranicznaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaPoleconaZagranicznaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="deklaracjaCelna2" type="{http://e-nadawca.poczta-polska.pl}deklaracjaCelna2Type" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&gt;
- *       &lt;attribute name="iloscPotwierdzenOdbioru" type="{http://e-nadawca.poczta-polska.pl}iloscPotwierdzenOdbioruType" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaPoleconaZagranicznaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="deklaracjaCelna2" type="{http://e-nadawca.poczta-polska.pl}deklaracjaCelna2Type" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&amp;gt;
+ *       &amp;lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&amp;gt;
+ *       &amp;lt;attribute name="iloscPotwierdzenOdbioru" type="{http://e-nadawca.poczta-polska.pl}iloscPotwierdzenOdbioruType" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "przesylkaPoleconaZagranicznaType", propOrder = {
-    "deklaracjaCelna2"
+    "deklaracjaCelna2",
+    "zawartosc"
 })
 public class PrzesylkaPoleconaZagranicznaType
     extends PrzesylkaRejestrowanaType
 {
 
     protected DeklaracjaCelna2Type deklaracjaCelna2;
+    protected String zawartosc;
     @XmlAttribute(name = "posteRestante")
     protected Boolean posteRestante;
     @XmlAttribute(name = "masa")
@@ -67,6 +70,30 @@ public class PrzesylkaPoleconaZagranicznaType
      */
     public void setDeklaracjaCelna2(DeklaracjaCelna2Type value) {
         this.deklaracjaCelna2 = value;
+    }
+
+    /**
+     * Gets the value of the zawartosc property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getZawartosc() {
+        return zawartosc;
+    }
+
+    /**
+     * Sets the value of the zawartosc property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setZawartosc(String value) {
+        this.zawartosc = value;
     }
 
     /**

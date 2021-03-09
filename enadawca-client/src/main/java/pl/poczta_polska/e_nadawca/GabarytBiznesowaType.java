@@ -6,22 +6,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for gabarytBiznesowaType.
+ * &lt;p&gt;Java class for gabarytBiznesowaType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="gabarytBiznesowaType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="XS"/&gt;
- *     &lt;enumeration value="S"/&gt;
- *     &lt;enumeration value="M"/&gt;
- *     &lt;enumeration value="L"/&gt;
- *     &lt;enumeration value="XL"/&gt;
- *     &lt;enumeration value="XXL"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="gabarytBiznesowaType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="XS"/&amp;gt;
+ *     &amp;lt;enumeration value="S"/&amp;gt;
+ *     &amp;lt;enumeration value="M"/&amp;gt;
+ *     &amp;lt;enumeration value="L"/&amp;gt;
+ *     &amp;lt;enumeration value="XL"/&amp;gt;
+ *     &amp;lt;enumeration value="XXL"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "gabarytBiznesowaType")

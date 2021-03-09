@@ -10,28 +10,28 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for oczekujeNaZgodeEZwrotType complex type.
+ * &lt;p&gt;Java class for oczekujeNaZgodeEZwrotType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="oczekujeNaZgodeEZwrotType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="sklepEZwrot" type="{http://e-nadawca.poczta-polska.pl}shopEZwrotyType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="idZgody" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="nazwaProduktu" type="{http://e-nadawca.poczta-polska.pl}nazwaProduktuEZwrotType" /&gt;
- *       &lt;attribute name="numerZamowienia" type="{http://e-nadawca.poczta-polska.pl}numerZamowieniaEZwrotType" /&gt;
- *       &lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&gt;
- *       &lt;attribute name="email" type="{http://e-nadawca.poczta-polska.pl}emailType" /&gt;
- *       &lt;attribute name="dataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *       &lt;attribute name="guidZgodaEZwrot" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="oczekujeNaZgodeEZwrotType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="sklepEZwrot" type="{http://e-nadawca.poczta-polska.pl}shopEZwrotyType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="idZgody" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="nazwaProduktu" type="{http://e-nadawca.poczta-polska.pl}nazwaProduktuEZwrotType" /&amp;gt;
+ *       &amp;lt;attribute name="numerZamowienia" type="{http://e-nadawca.poczta-polska.pl}numerZamowieniaEZwrotType" /&amp;gt;
+ *       &amp;lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&amp;gt;
+ *       &amp;lt;attribute name="email" type="{http://e-nadawca.poczta-polska.pl}emailType" /&amp;gt;
+ *       &amp;lt;attribute name="dataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *       &amp;lt;attribute name="guidZgodaEZwrot" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

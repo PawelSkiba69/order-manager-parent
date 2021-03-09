@@ -7,23 +7,23 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for EPOInfoType complex type.
+ * &lt;p&gt;Java class for EPOInfoType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="EPOInfoType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="awizoPrzesylki" type="{http://e-nadawca.poczta-polska.pl}awizoPrzesylkiType" minOccurs="0"/&gt;
- *         &lt;element name="doreczeniePrzesylki" type="{http://e-nadawca.poczta-polska.pl}doreczeniePrzesylkiType" minOccurs="0"/&gt;
- *         &lt;element name="zwrotPrzesylki" type="{http://e-nadawca.poczta-polska.pl}zwrotPrzesylkiType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="EPOInfoType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="awizoPrzesylki" type="{http://e-nadawca.poczta-polska.pl}awizoPrzesylkiType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="doreczeniePrzesylki" type="{http://e-nadawca.poczta-polska.pl}doreczeniePrzesylkiType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="zwrotPrzesylki" type="{http://e-nadawca.poczta-polska.pl}zwrotPrzesylkiType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

@@ -8,23 +8,23 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for obszarAdresowyType complex type.
+ * &lt;p&gt;Java class for obszarAdresowyType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="obszarAdresowyType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="kodPocztowy" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType" /&gt;
- *       &lt;attribute name="miejscowosc" type="{http://e-nadawca.poczta-polska.pl}miejscowoscType" /&gt;
- *       &lt;attribute name="ulica" type="{http://e-nadawca.poczta-polska.pl}ulicaType" /&gt;
- *       &lt;attribute name="numerDomu" type="{http://e-nadawca.poczta-polska.pl}numerDomuType" /&gt;
- *       &lt;attribute name="guid" use="required" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="obszarAdresowyType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="kodPocztowy" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType" /&amp;gt;
+ *       &amp;lt;attribute name="miejscowosc" type="{http://e-nadawca.poczta-polska.pl}miejscowoscType" /&amp;gt;
+ *       &amp;lt;attribute name="ulica" type="{http://e-nadawca.poczta-polska.pl}ulicaType" /&amp;gt;
+ *       &amp;lt;attribute name="numerDomu" type="{http://e-nadawca.poczta-polska.pl}numerDomuType" /&amp;gt;
+ *       &amp;lt;attribute name="guid" use="required" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

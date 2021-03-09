@@ -12,27 +12,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for przesylkaShortType complex type.
+ * &lt;p&gt;Java class for przesylkaShortType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaShortType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="czynnosciUpustowe" type="{http://e-nadawca.poczta-polska.pl}czynnoscUpustowaType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&gt;
- *       &lt;attribute name="guid" use="required" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="dataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *       &lt;attribute name="razem" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="pobranie" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="status" type="{http://e-nadawca.poczta-polska.pl}statusType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaShortType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="czynnosciUpustowe" type="{http://e-nadawca.poczta-polska.pl}czynnoscUpustowaType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&amp;gt;
+ *       &amp;lt;attribute name="guid" use="required" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="dataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *       &amp;lt;attribute name="razem" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="pobranie" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="status" type="{http://e-nadawca.poczta-polska.pl}statusType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -61,20 +61,20 @@ public class PrzesylkaShortType {
     /**
      * Gets the value of the czynnosciUpustowe property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the czynnosciUpustowe property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the czynnosciUpustowe property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getCzynnosciUpustowe().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link CzynnoscUpustowaType }
      * 

@@ -9,26 +9,26 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for przesylkaNieRejestrowanaType complex type.
+ * &lt;p&gt;Java class for przesylkaNieRejestrowanaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaNieRejestrowanaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaType"&gt;
- *       &lt;attribute name="ilosc"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}int"&gt;
- *             &lt;minInclusive value="1"/&gt;
- *             &lt;maxInclusive value="9999999"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaNieRejestrowanaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaType"&amp;gt;
+ *       &amp;lt;attribute name="ilosc"&amp;gt;
+ *         &amp;lt;simpleType&amp;gt;
+ *           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}int"&amp;gt;
+ *             &amp;lt;minInclusive value="1"/&amp;gt;
+ *             &amp;lt;maxInclusive value="9999999"/&amp;gt;
+ *           &amp;lt;/restriction&amp;gt;
+ *         &amp;lt;/simpleType&amp;gt;
+ *       &amp;lt;/attribute&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

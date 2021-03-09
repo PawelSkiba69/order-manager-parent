@@ -8,38 +8,38 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for pocztexKrajowyType complex type.
+ * &lt;p&gt;Java class for pocztexKrajowyType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="pocztexKrajowyType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="pobranie" type="{http://e-nadawca.poczta-polska.pl}pobranieType" minOccurs="0"/&gt;
- *         &lt;element name="odbiorPrzesylkiOdNadawcy" type="{http://e-nadawca.poczta-polska.pl}odbiorPrzesylkiOdNadawcyType" minOccurs="0"/&gt;
- *         &lt;element name="doreczenie" type="{http://e-nadawca.poczta-polska.pl}doreczenieType" minOccurs="0"/&gt;
- *         &lt;element name="zwrotDokumentow" type="{http://e-nadawca.poczta-polska.pl}zwrotDokumentowType" minOccurs="0"/&gt;
- *         &lt;element name="potwierdzenieOdbioru" type="{http://e-nadawca.poczta-polska.pl}potwierdzenieOdbioruType" minOccurs="0"/&gt;
- *         &lt;element name="potwierdzenieDoreczenia" type="{http://e-nadawca.poczta-polska.pl}potwierdzenieDoreczeniaType" minOccurs="0"/&gt;
- *         &lt;element name="ubezpieczenie" type="{http://e-nadawca.poczta-polska.pl}ubezpieczenieType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="terminRodzaj" use="required" type="{http://e-nadawca.poczta-polska.pl}terminRodzajType" /&gt;
- *       &lt;attribute name="kopertaFirmowa" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="masa" use="required" type="{http://e-nadawca.poczta-polska.pl}masaType" /&gt;
- *       &lt;attribute name="wartosc" use="required" type="{http://e-nadawca.poczta-polska.pl}wartoscType" /&gt;
- *       &lt;attribute name="ostroznie" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="ponadgabaryt" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="uiszczaOplate" use="required" type="{http://e-nadawca.poczta-polska.pl}uiszczaOplateType" /&gt;
- *       &lt;attribute name="odleglosc" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="pocztexKrajowyType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="pobranie" type="{http://e-nadawca.poczta-polska.pl}pobranieType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="odbiorPrzesylkiOdNadawcy" type="{http://e-nadawca.poczta-polska.pl}odbiorPrzesylkiOdNadawcyType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="doreczenie" type="{http://e-nadawca.poczta-polska.pl}doreczenieType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="zwrotDokumentow" type="{http://e-nadawca.poczta-polska.pl}zwrotDokumentowType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="potwierdzenieOdbioru" type="{http://e-nadawca.poczta-polska.pl}potwierdzenieOdbioruType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="potwierdzenieDoreczenia" type="{http://e-nadawca.poczta-polska.pl}potwierdzenieDoreczeniaType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="ubezpieczenie" type="{http://e-nadawca.poczta-polska.pl}ubezpieczenieType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&amp;gt;
+ *       &amp;lt;attribute name="terminRodzaj" use="required" type="{http://e-nadawca.poczta-polska.pl}terminRodzajType" /&amp;gt;
+ *       &amp;lt;attribute name="kopertaFirmowa" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="masa" use="required" type="{http://e-nadawca.poczta-polska.pl}masaType" /&amp;gt;
+ *       &amp;lt;attribute name="wartosc" use="required" type="{http://e-nadawca.poczta-polska.pl}wartoscType" /&amp;gt;
+ *       &amp;lt;attribute name="ostroznie" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="ponadgabaryt" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="uiszczaOplate" use="required" type="{http://e-nadawca.poczta-polska.pl}uiszczaOplateType" /&amp;gt;
+ *       &amp;lt;attribute name="odleglosc" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

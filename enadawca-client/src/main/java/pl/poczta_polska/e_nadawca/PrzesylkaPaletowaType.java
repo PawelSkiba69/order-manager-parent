@@ -13,51 +13,51 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for przesylkaPaletowaType complex type.
+ * &lt;p&gt;Java class for przesylkaPaletowaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaPaletowaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="miejsceOdbioru" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&gt;
- *         &lt;element name="miejsceDoreczenia" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&gt;
- *         &lt;element name="paleta" type="{http://e-nadawca.poczta-polska.pl}paletaType"/&gt;
- *         &lt;element name="platnik" type="{http://e-nadawca.poczta-polska.pl}platnikType" minOccurs="0"/&gt;
- *         &lt;element name="pobranie" type="{http://e-nadawca.poczta-polska.pl}pobranieType" minOccurs="0"/&gt;
- *         &lt;element name="subPaleta" type="{http://e-nadawca.poczta-polska.pl}subPrzesylkaPaletowaType" maxOccurs="32" minOccurs="0"/&gt;
- *         &lt;element name="daneSent" type="{http://e-nadawca.poczta-polska.pl}daneSentType" maxOccurs="10" minOccurs="0"/&gt;
- *         &lt;element name="awizacja" type="{http://e-nadawca.poczta-polska.pl}awizacjaType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&gt;
- *       &lt;attribute name="dataZaladunku" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *       &lt;attribute name="dataDostawy" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *       &lt;attribute name="wartosc" type="{http://e-nadawca.poczta-polska.pl}wartoscType" /&gt;
- *       &lt;attribute name="iloscZwracanychPaletEUR" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="zalaczonaFV" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="zalaczonyWZ" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="zalaczoneInne" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="zwracanaFV" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="zwracanyWZ" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="zwracaneInne" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="powiadomienieNadawcy" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="powiadomienieOdbiorcy" type="{http://e-nadawca.poczta-polska.pl}eSposobPowiadomieniaType" /&gt;
- *       &lt;attribute name="dostawaWSobote" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="przygotowanieDokumentowPrzewozowych" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="dostawaSamochodemDedykowanym" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="zmianaDanychAdresowych" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="ustalenieTerminuDostawy" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="samochodZWinda" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="zabranieOpakowania" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="wniesienie" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="awizoSMS" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaPaletowaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="miejsceOdbioru" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="miejsceDoreczenia" type="{http://e-nadawca.poczta-polska.pl}adresType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="paleta" type="{http://e-nadawca.poczta-polska.pl}paletaType"/&amp;gt;
+ *         &amp;lt;element name="platnik" type="{http://e-nadawca.poczta-polska.pl}platnikType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="pobranie" type="{http://e-nadawca.poczta-polska.pl}pobranieType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="subPaleta" type="{http://e-nadawca.poczta-polska.pl}subPrzesylkaPaletowaType" maxOccurs="32" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="daneSent" type="{http://e-nadawca.poczta-polska.pl}daneSentType" maxOccurs="10" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="awizacja" type="{http://e-nadawca.poczta-polska.pl}awizacjaType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="zawartosc" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&amp;gt;
+ *       &amp;lt;attribute name="dataZaladunku" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *       &amp;lt;attribute name="dataDostawy" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *       &amp;lt;attribute name="wartosc" type="{http://e-nadawca.poczta-polska.pl}wartoscType" /&amp;gt;
+ *       &amp;lt;attribute name="iloscZwracanychPaletEUR" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="zalaczonaFV" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="zalaczonyWZ" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="zalaczoneInne" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="zwracanaFV" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="zwracanyWZ" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="zwracaneInne" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="powiadomienieNadawcy" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="powiadomienieOdbiorcy" type="{http://e-nadawca.poczta-polska.pl}eSposobPowiadomieniaType" /&amp;gt;
+ *       &amp;lt;attribute name="dostawaWSobote" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="przygotowanieDokumentowPrzewozowych" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="dostawaSamochodemDedykowanym" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="zmianaDanychAdresowych" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="ustalenieTerminuDostawy" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="samochodZWinda" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="zabranieOpakowania" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="wniesienie" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="awizoSMS" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -257,20 +257,20 @@ public class PrzesylkaPaletowaType
     /**
      * Gets the value of the subPaleta property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the subPaleta property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the subPaleta property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getSubPaleta().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link SubPrzesylkaPaletowaType }
      * 
@@ -286,20 +286,20 @@ public class PrzesylkaPaletowaType
     /**
      * Gets the value of the daneSent property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the daneSent property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the daneSent property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getDaneSent().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link DaneSentType }
      * 

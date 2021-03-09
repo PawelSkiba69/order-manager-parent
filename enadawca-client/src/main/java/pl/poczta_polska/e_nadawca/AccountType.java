@@ -1,43 +1,43 @@
 
 package pl.poczta_polska.e_nadawca;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * <p>Java class for accountType complex type.
+ * &lt;p&gt;Java class for accountType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="accountType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="karta" type="{http://e-nadawca.poczta-polska.pl}kartaType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="permision" type="{http://e-nadawca.poczta-polska.pl}permisionType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="profil" type="{http://e-nadawca.poczta-polska.pl}profilType" maxOccurs="unbounded"/&gt;
- *         &lt;element name="jednostka" type="{http://e-nadawca.poczta-polska.pl}jednostkaOrganizacyjnaType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="domyslnaJednostka" type="{http://e-nadawca.poczta-polska.pl}jednostkaOrganizacyjnaType" minOccurs="0"/&gt;
- *         &lt;element name="domyslnyProfil" type="{http://e-nadawca.poczta-polska.pl}profilType" minOccurs="0"/&gt;
- *         &lt;element name="dostepPoAdresieIP" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="userName" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="firstName" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="lastName" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="email" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="status" type="{http://e-nadawca.poczta-polska.pl}statusAccountType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="accountType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="karta" type="{http://e-nadawca.poczta-polska.pl}kartaType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="permision" type="{http://e-nadawca.poczta-polska.pl}permisionType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="profil" type="{http://e-nadawca.poczta-polska.pl}profilType" maxOccurs="unbounded"/&amp;gt;
+ *         &amp;lt;element name="jednostka" type="{http://e-nadawca.poczta-polska.pl}jednostkaOrganizacyjnaType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="domyslnaJednostka" type="{http://e-nadawca.poczta-polska.pl}jednostkaOrganizacyjnaType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="domyslnyProfil" type="{http://e-nadawca.poczta-polska.pl}profilType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="dostepPoAdresieIP" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="userName" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="firstName" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="lastName" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="email" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="status" type="{http://e-nadawca.poczta-polska.pl}statusAccountType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -76,20 +76,20 @@ public class AccountType {
     /**
      * Gets the value of the karta property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the karta property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the karta property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getKarta().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link KartaType }
      * 
@@ -105,20 +105,20 @@ public class AccountType {
     /**
      * Gets the value of the permision property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the permision property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the permision property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getPermision().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link PermisionType }
      * 
@@ -134,20 +134,20 @@ public class AccountType {
     /**
      * Gets the value of the profil property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the profil property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the profil property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getProfil().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link ProfilType }
      * 
@@ -163,20 +163,20 @@ public class AccountType {
     /**
      * Gets the value of the jednostka property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the jednostka property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the jednostka property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getJednostka().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link JednostkaOrganizacyjnaType }
      * 
@@ -240,20 +240,20 @@ public class AccountType {
     /**
      * Gets the value of the dostepPoAdresieIP property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dostepPoAdresieIP property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the dostepPoAdresieIP property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getDostepPoAdresieIP().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link String }
      * 
