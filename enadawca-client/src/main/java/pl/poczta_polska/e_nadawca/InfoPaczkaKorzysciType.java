@@ -10,27 +10,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for infoPaczkaKorzysciType complex type.
+ * &lt;p&gt;Java class for infoPaczkaKorzysciType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="infoPaczkaKorzysciType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="iloscStandardDo5kg" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="iloscPobranieDo5kg" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="iloscOdbiorWPunkcieDo5kg" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="iloscPobranieOdbiorWPunkcieDo5kg" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="iloscStandardDo30kg" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="iloscPobranieDo30kg" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="iloscOdbiorWPunkcieDo30kg" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="iloscPobranieOdbiorWPunkcieDo30kg" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="dataWaznosciUmowy" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="infoPaczkaKorzysciType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="iloscStandardDo5kg" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="iloscPobranieDo5kg" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="iloscOdbiorWPunkcieDo5kg" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="iloscPobranieOdbiorWPunkcieDo5kg" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="iloscStandardDo30kg" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="iloscPobranieDo30kg" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="iloscOdbiorWPunkcieDo30kg" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="iloscPobranieOdbiorWPunkcieDo30kg" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="dataWaznosciUmowy" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

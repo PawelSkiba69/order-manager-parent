@@ -10,40 +10,40 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for jednostkaOrganizacyjnaType complex type.
+ * &lt;p&gt;Java class for jednostkaOrganizacyjnaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="jednostkaOrganizacyjnaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="account" type="{http://e-nadawca.poczta-polska.pl}accountType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="jednostkaNadrzedna" type="{http://e-nadawca.poczta-polska.pl}jednostkaOrganizacyjnaType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="nazwa"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;minLength value="1"/&gt;
- *             &lt;maxLength value="255"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute name="opis"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;minLength value="0"/&gt;
- *             &lt;maxLength value="4000"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute name="mpk" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="jednostkaOrganizacyjnaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="account" type="{http://e-nadawca.poczta-polska.pl}accountType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="jednostkaNadrzedna" type="{http://e-nadawca.poczta-polska.pl}jednostkaOrganizacyjnaType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="nazwa"&amp;gt;
+ *         &amp;lt;simpleType&amp;gt;
+ *           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *             &amp;lt;minLength value="1"/&amp;gt;
+ *             &amp;lt;maxLength value="255"/&amp;gt;
+ *           &amp;lt;/restriction&amp;gt;
+ *         &amp;lt;/simpleType&amp;gt;
+ *       &amp;lt;/attribute&amp;gt;
+ *       &amp;lt;attribute name="opis"&amp;gt;
+ *         &amp;lt;simpleType&amp;gt;
+ *           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *             &amp;lt;minLength value="0"/&amp;gt;
+ *             &amp;lt;maxLength value="4000"/&amp;gt;
+ *           &amp;lt;/restriction&amp;gt;
+ *         &amp;lt;/simpleType&amp;gt;
+ *       &amp;lt;/attribute&amp;gt;
+ *       &amp;lt;attribute name="mpk" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -68,20 +68,20 @@ public class JednostkaOrganizacyjnaType {
     /**
      * Gets the value of the account property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the account property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the account property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getAccount().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link AccountType }
      * 

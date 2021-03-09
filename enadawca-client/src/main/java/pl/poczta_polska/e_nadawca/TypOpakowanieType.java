@@ -7,33 +7,32 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for typOpakowanieType.
+ * &lt;p&gt;Java class for typOpakowanieType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="typOpakowanieType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="KL1"/&gt;
- *     &lt;enumeration value="KL2"/&gt;
- *     &lt;enumeration value="KL3"/&gt;
- *     &lt;enumeration value="S21"/&gt;
- *     &lt;enumeration value="S22"/&gt;
- *     &lt;enumeration value="S23"/&gt;
- *     &lt;enumeration value="P31"/&gt;
- *     &lt;enumeration value="P32"/&gt;
- *     &lt;enumeration value="P33"/&gt;
- *     &lt;enumeration value="SP41"/&gt;
- *     &lt;enumeration value="SP42"/&gt;
- *     &lt;enumeration value="WKL51"/&gt;
- *     &lt;enumeration value="K1"/&gt;
- *     &lt;enumeration value="K2"/&gt;
- *     &lt;enumeration value="K3"/&gt;
- *     &lt;enumeration value="P"/&gt;
- *     &lt;enumeration value="W"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="typOpakowanieType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="KL1"/&amp;gt;
+ *     &amp;lt;enumeration value="KL2"/&amp;gt;
+ *     &amp;lt;enumeration value="KL3"/&amp;gt;
+ *     &amp;lt;enumeration value="S21"/&amp;gt;
+ *     &amp;lt;enumeration value="S22"/&amp;gt;
+ *     &amp;lt;enumeration value="S23"/&amp;gt;
+ *     &amp;lt;enumeration value="P31"/&amp;gt;
+ *     &amp;lt;enumeration value="P32"/&amp;gt;
+ *     &amp;lt;enumeration value="P33"/&amp;gt;
+ *     &amp;lt;enumeration value="SP41"/&amp;gt;
+ *     &amp;lt;enumeration value="SP42"/&amp;gt;
+ *     &amp;lt;enumeration value="WKL51"/&amp;gt;
+ *     &amp;lt;enumeration value="K1"/&amp;gt;
+ *     &amp;lt;enumeration value="K2"/&amp;gt;
+ *     &amp;lt;enumeration value="K3"/&amp;gt;
+ *     &amp;lt;enumeration value="P"/&amp;gt;
+ *     &amp;lt;enumeration value="W"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "typOpakowanieType")

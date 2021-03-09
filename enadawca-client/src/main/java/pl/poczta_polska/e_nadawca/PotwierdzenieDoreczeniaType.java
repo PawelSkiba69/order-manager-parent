@@ -8,20 +8,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for potwierdzenieDoreczeniaType complex type.
+ * &lt;p&gt;Java class for potwierdzenieDoreczeniaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="potwierdzenieDoreczeniaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="sposob" type="{http://e-nadawca.poczta-polska.pl}sposobDoreczeniaPotwierdzeniaType" /&gt;
- *       &lt;attribute name="kontakt" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="potwierdzenieDoreczeniaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="sposob" type="{http://e-nadawca.poczta-polska.pl}sposobDoreczeniaPotwierdzeniaType" /&amp;gt;
+ *       &amp;lt;attribute name="kontakt" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

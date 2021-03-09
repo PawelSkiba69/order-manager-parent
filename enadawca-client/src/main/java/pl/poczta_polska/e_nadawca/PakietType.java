@@ -11,26 +11,26 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for pakietType complex type.
+ * &lt;p&gt;Java class for pakietType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="pakietType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="kierunek" type="{http://e-nadawca.poczta-polska.pl}kierunekType" minOccurs="0"/&gt;
- *         &lt;element name="opakowanie" type="{http://e-nadawca.poczta-polska.pl}opakowanieType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="czynnoscUpustowa" type="{http://e-nadawca.poczta-polska.pl}czynnoscUpustowaType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="pakietGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="miejsceOdbioru" type="{http://e-nadawca.poczta-polska.pl}miejsceOdbioruType" default="URZAD_NADANIA" /&gt;
- *       &lt;attribute name="sposobNadania" type="{http://e-nadawca.poczta-polska.pl}sposobNadaniaType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="pakietType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="kierunek" type="{http://e-nadawca.poczta-polska.pl}kierunekType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="opakowanie" type="{http://e-nadawca.poczta-polska.pl}opakowanieType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="czynnoscUpustowa" type="{http://e-nadawca.poczta-polska.pl}czynnoscUpustowaType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="pakietGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="miejsceOdbioru" type="{http://e-nadawca.poczta-polska.pl}miejsceOdbioruType" default="URZAD_NADANIA" /&amp;gt;
+ *       &amp;lt;attribute name="sposobNadania" type="{http://e-nadawca.poczta-polska.pl}sposobNadaniaType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -80,20 +80,20 @@ public class PakietType {
     /**
      * Gets the value of the opakowanie property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the opakowanie property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the opakowanie property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getOpakowanie().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link OpakowanieType }
      * 
@@ -109,20 +109,20 @@ public class PakietType {
     /**
      * Gets the value of the czynnoscUpustowa property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the czynnoscUpustowa property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the czynnoscUpustowa property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getCzynnoscUpustowa().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link CzynnoscUpustowaType }
      * 

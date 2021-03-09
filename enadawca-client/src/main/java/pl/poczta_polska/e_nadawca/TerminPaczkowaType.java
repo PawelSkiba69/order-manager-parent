@@ -6,19 +6,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for terminPaczkowaType.
+ * &lt;p&gt;Java class for terminPaczkowaType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="terminPaczkowaType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="PACZKA_24"/&gt;
- *     &lt;enumeration value="PACZKA_48"/&gt;
- *     &lt;enumeration value="PACZKA_EKSTRA_24"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="terminPaczkowaType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="PACZKA_24"/&amp;gt;
+ *     &amp;lt;enumeration value="PACZKA_48"/&amp;gt;
+ *     &amp;lt;enumeration value="PACZKA_EKSTRA_24"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "terminPaczkowaType")

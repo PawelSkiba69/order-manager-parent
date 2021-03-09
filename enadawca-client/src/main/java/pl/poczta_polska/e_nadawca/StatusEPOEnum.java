@@ -6,26 +6,25 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for statusEPOEnum.
+ * &lt;p&gt;Java class for statusEPOEnum.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="statusEPOEnum"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="ERROR"/&gt;
- *     &lt;enumeration value="NADANIE"/&gt;
- *     &lt;enumeration value="W_TRANSPORCIE"/&gt;
- *     &lt;enumeration value="CLO"/&gt;
- *     &lt;enumeration value="SMS"/&gt;
- *     &lt;enumeration value="W_DORECZENIU"/&gt;
- *     &lt;enumeration value="AWIZO"/&gt;
- *     &lt;enumeration value="PONOWNE_AWIZO"/&gt;
- *     &lt;enumeration value="ZWROT"/&gt;
- *     &lt;enumeration value="DORECZONA"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="statusEPOEnum"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="ERROR"/&amp;gt;
+ *     &amp;lt;enumeration value="NADANIE"/&amp;gt;
+ *     &amp;lt;enumeration value="W_TRANSPORCIE"/&amp;gt;
+ *     &amp;lt;enumeration value="CLO"/&amp;gt;
+ *     &amp;lt;enumeration value="SMS"/&amp;gt;
+ *     &amp;lt;enumeration value="W_DORECZENIU"/&amp;gt;
+ *     &amp;lt;enumeration value="AWIZO"/&amp;gt;
+ *     &amp;lt;enumeration value="PONOWNE_AWIZO"/&amp;gt;
+ *     &amp;lt;enumeration value="ZWROT"/&amp;gt;
+ *     &amp;lt;enumeration value="DORECZONA"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "statusEPOEnum")

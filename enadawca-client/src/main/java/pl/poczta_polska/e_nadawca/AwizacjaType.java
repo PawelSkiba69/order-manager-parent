@@ -10,22 +10,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for awizacjaType complex type.
+ * &lt;p&gt;Java class for awizacjaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="awizacjaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;all&gt;
- *         &lt;element name="od" type="{http://www.w3.org/2001/XMLSchema}time"/&gt;
- *         &lt;element name="do" type="{http://www.w3.org/2001/XMLSchema}time"/&gt;
- *       &lt;/all&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="awizacjaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;all&amp;gt;
+ *         &amp;lt;element name="od" type="{http://www.w3.org/2001/XMLSchema}time"/&amp;gt;
+ *         &amp;lt;element name="do" type="{http://www.w3.org/2001/XMLSchema}time"/&amp;gt;
+ *       &amp;lt;/all&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

@@ -9,52 +9,52 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for placowkaPocztowaType complex type.
+ * &lt;p&gt;Java class for placowkaPocztowaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="placowkaPocztowaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="lokalizacjaGeograficzna" type="{http://e-nadawca.poczta-polska.pl}lokalizacjaGeograficznaType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="prefixNazwy" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="nazwa" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="wojewodztwo" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="powiat" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="miejsce" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="kodPocztowy"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;length value="5"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute name="miejscowosc"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;minLength value="0"/&gt;
- *             &lt;maxLength value="30"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute name="ulica" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="numerDomu" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="numerLokalu" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="nazwaWydruk" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="punktWydaniaEPrzesylki" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="powiadomienieSMS" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="punktWydaniaPrzesylkiBiznesowejPlus" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="punktWydaniaPrzesylkiBiznesowej" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="siecPlacowek" type="{http://e-nadawca.poczta-polska.pl}siecPlacowekEnum" /&gt;
- *       &lt;attribute name="idZPO" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="placowkaPocztowaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="lokalizacjaGeograficzna" type="{http://e-nadawca.poczta-polska.pl}lokalizacjaGeograficznaType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="prefixNazwy" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="nazwa" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="wojewodztwo" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="powiat" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="miejsce" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="kodPocztowy"&amp;gt;
+ *         &amp;lt;simpleType&amp;gt;
+ *           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *             &amp;lt;length value="5"/&amp;gt;
+ *           &amp;lt;/restriction&amp;gt;
+ *         &amp;lt;/simpleType&amp;gt;
+ *       &amp;lt;/attribute&amp;gt;
+ *       &amp;lt;attribute name="miejscowosc"&amp;gt;
+ *         &amp;lt;simpleType&amp;gt;
+ *           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *             &amp;lt;minLength value="0"/&amp;gt;
+ *             &amp;lt;maxLength value="30"/&amp;gt;
+ *           &amp;lt;/restriction&amp;gt;
+ *         &amp;lt;/simpleType&amp;gt;
+ *       &amp;lt;/attribute&amp;gt;
+ *       &amp;lt;attribute name="ulica" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="numerDomu" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="numerLokalu" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="nazwaWydruk" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="punktWydaniaEPrzesylki" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="powiadomienieSMS" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="punktWydaniaPrzesylkiBiznesowejPlus" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="punktWydaniaPrzesylkiBiznesowej" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="siecPlacowek" type="{http://e-nadawca.poczta-polska.pl}siecPlacowekEnum" /&amp;gt;
+ *       &amp;lt;attribute name="idZPO" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

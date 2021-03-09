@@ -367,7 +367,8 @@
 						<xsd:attribute name="obszarMiasto"
 							type="xsd:boolean" />
 						<xsd:attribute name="miejscowa"
-							type="xsd:boolean" />
+							type="xsd:boolean" />
+
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
@@ -384,7 +385,8 @@
 				<xsd:complexContent>
 					<xsd:extension
 						base="tns:przesylkaRejestrowanaType">
-						<!-- <xsd:sequence> <xsd:element name="epo" type="tns:EPOType" maxOccurs="1" minOccurs="0" /> </xsd:sequence> -->
+						<!-- <xsd:sequence> <xsd:element name="epo" type="tns:EPOType" maxOccurs="1" minOccurs="0" /> </xsd:sequence> -->
+
 						<xsd:attribute name="posteRestante"
 							type="xsd:boolean" use="optional" default="false" />
 						<xsd:attribute name="wartosc"
@@ -774,7 +776,8 @@ TOWARY</xsd:documentation></xsd:annotation>
 						<xsd:annotation>
 							<xsd:documentation>Lista adresów korespondencyjnych dla kart typu 2</xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>				</xsd:sequence>
+					</xsd:element>
+				</xsd:sequence>
 				<xsd:attribute name="idKarta" type="xsd:int" />
 				<xsd:attribute name="opis" type="xsd:string" />
 				<xsd:attribute name="aktywna" type="xsd:boolean" />
@@ -853,17 +856,19 @@ TOWARY</xsd:documentation></xsd:annotation>
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="envelopes" type="tns:envelopeInfoType" maxOccurs="unbounded" minOccurs="0" />
+						
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:complexType name="envelopeInfoType">
+		<xsd:complexType name="envelopeInfoType">
 				<xsd:sequence>
 					<xsd:element name="error" type="tns:errorType" maxOccurs="unbounded" minOccurs="0" />
+					<xsd:element name="envelopeFilename" type="xsd:string" maxOccurs="unbounded" minOccurs="0" />
 				</xsd:sequence>
 				<xsd:attribute name="idEnvelope" type="xsd:int" />
 				<xsd:attribute name="envelopeStatus" type="tns:envelopeStatusType" />
 				<xsd:attribute name="dataTransmisji" type="xsd:date" />
-			</xsd:complexType>
+			</xsd:complexType> 
 			<xsd:complexType name="przesylkaZagranicznaType">
 				<xsd:complexContent>
 					<xsd:extension
@@ -2677,7 +2682,8 @@ W przypadku ustawienia FALSE lub nie przekazania tego atrybutu, planowane daty n
 							</xsd:element>
 							<xsd:element name="sposobDoreczenia"
 								type="tns:sposobDoreczeniaType" maxOccurs="1" minOccurs="0">
-							</xsd:element>
+							</xsd:element>
+
 						</xsd:sequence>
 						<xsd:attribute name="masa" type="tns:masaType" />
 						<xsd:attribute name="posteRestante" type="xsd:boolean" />
@@ -2937,7 +2943,8 @@ TOWARY</xsd:documentation>
 							</xsd:element>
 							<xsd:element name="ubezpieczenie"
 								type="tns:ubezpieczenieType" maxOccurs="1" minOccurs="0">
-							</xsd:element>
+							</xsd:element>
+
 						</xsd:sequence>
 						<xsd:attribute name="numerNadaniaZwrot"
 							type="tns:numerNadaniaType" />
@@ -3326,7 +3333,8 @@ TOWARY</xsd:documentation>
                 </xsd:annotation>
                 <xsd:sequence>
                     <xsd:element name="kind" maxOccurs="1" minOccurs="1" type="tns:PrintKindEnum"></xsd:element>
-                    <xsd:element name="method" type="tns:PrintMethodEnum" maxOccurs="1" minOccurs="1"></xsd:element>                </xsd:sequence>
+                    <xsd:element name="method" type="tns:PrintMethodEnum" maxOccurs="1" minOccurs="1"></xsd:element>
+                </xsd:sequence>
 	</xsd:complexType>
 		
 	<xsd:simpleType name="PrintMethodEnum">
@@ -3411,7 +3419,8 @@ TOWARY</xsd:documentation>
 		
 	<xsd:complexType name="DokumentyTowarzyszaceType">
 		<xsd:sequence>
-			<xsd:element name="rodzaj" type="tns:DokumentTowarzyszacyRodzajEnum">
+			<xsd:element name="rodzaj" type="tns:DokumentTowarzyszacyRodzajEnum">
+
 			</xsd:element>
 			<xsd:element name="numer" type="xsd:string"></xsd:element>
 		</xsd:sequence>
@@ -3437,7 +3446,8 @@ TOWARY</xsd:documentation>
 		name="SzczegolyZawartosciPrzesylkiZagranicznejType">
 		<xsd:sequence>
 			<xsd:element name="okreslenieZawartosci"
-				maxOccurs="1" minOccurs="1" type="xsd:string">
+				maxOccurs="1" minOccurs="1" type="xsd:string">
+
 			</xsd:element>
 			<xsd:element name="ilosc" type="xsd:int" maxOccurs="1"
 				minOccurs="1">

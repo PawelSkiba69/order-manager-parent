@@ -11,26 +11,26 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for przesylkaType complex type.
+ * &lt;p&gt;Java class for przesylkaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="oplacaOdbiorca" type="{http://e-nadawca.poczta-polska.pl}oplacaOdbiorcaType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="guid" use="required" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="pakietGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="opakowanieGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="opis" type="{http://e-nadawca.poczta-polska.pl}opisType" /&gt;
- *       &lt;attribute name="planowanaDataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="oplacaOdbiorca" type="{http://e-nadawca.poczta-polska.pl}oplacaOdbiorcaType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="guid" use="required" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="pakietGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="opakowanieGuid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="opis" type="{http://e-nadawca.poczta-polska.pl}opisType" /&amp;gt;
+ *       &amp;lt;attribute name="planowanaDataNadania" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

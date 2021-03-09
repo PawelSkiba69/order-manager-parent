@@ -12,44 +12,44 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for shopEZwrotyType complex type.
+ * &lt;p&gt;Java class for shopEZwrotyType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="shopEZwrotyType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="eZwrotPrzesylki" type="{http://e-nadawca.poczta-polska.pl}eZwrotPrzesylkiType" maxOccurs="2"/&gt;
- *         &lt;element name="eZwrotKarta" type="{http://e-nadawca.poczta-polska.pl}eZwrotKartaType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="idShop" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="nazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&gt;
- *       &lt;attribute name="nazwa2" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&gt;
- *       &lt;attribute name="przyjaznaNazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&gt;
- *       &lt;attribute name="ulica" use="required" type="{http://e-nadawca.poczta-polska.pl}ulicaType" /&gt;
- *       &lt;attribute name="numerDomu" use="required" type="{http://e-nadawca.poczta-polska.pl}numerDomuType" /&gt;
- *       &lt;attribute name="numerLokalu" type="{http://e-nadawca.poczta-polska.pl}numerLokaluType" /&gt;
- *       &lt;attribute name="miejscowosc" use="required" type="{http://e-nadawca.poczta-polska.pl}miejscowoscType" /&gt;
- *       &lt;attribute name="kodPocztowy" use="required" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType" /&gt;
- *       &lt;attribute name="mobile" use="required" type="{http://e-nadawca.poczta-polska.pl}mobileType" /&gt;
- *       &lt;attribute name="email" use="required" type="{http://e-nadawca.poczta-polska.pl}emailType" /&gt;
- *       &lt;attribute name="nip" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="regon" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="krs" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="eZwrotTyp" type="{http://e-nadawca.poczta-polska.pl}eZwrotTypZgodyType" /&gt;
- *       &lt;attribute name="wymagalnoscNumeruIdentyfikujacegoPrzesylke" type="{http://e-nadawca.poczta-polska.pl}wymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum" /&gt;
- *       &lt;attribute name="availableOnWebsite" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="emailForEZwrot" type="{http://e-nadawca.poczta-polska.pl}emailType" /&gt;
- *       &lt;attribute name="paid" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="consentValidFor" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="contractorCost" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="infoForClient" type="{http://e-nadawca.poczta-polska.pl}infoForClientType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="shopEZwrotyType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="eZwrotPrzesylki" type="{http://e-nadawca.poczta-polska.pl}eZwrotPrzesylkiType" maxOccurs="2"/&amp;gt;
+ *         &amp;lt;element name="eZwrotKarta" type="{http://e-nadawca.poczta-polska.pl}eZwrotKartaType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="idShop" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="nazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&amp;gt;
+ *       &amp;lt;attribute name="nazwa2" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&amp;gt;
+ *       &amp;lt;attribute name="przyjaznaNazwa" use="required" type="{http://e-nadawca.poczta-polska.pl}nazwaEZwrotyType" /&amp;gt;
+ *       &amp;lt;attribute name="ulica" use="required" type="{http://e-nadawca.poczta-polska.pl}ulicaType" /&amp;gt;
+ *       &amp;lt;attribute name="numerDomu" use="required" type="{http://e-nadawca.poczta-polska.pl}numerDomuType" /&amp;gt;
+ *       &amp;lt;attribute name="numerLokalu" type="{http://e-nadawca.poczta-polska.pl}numerLokaluType" /&amp;gt;
+ *       &amp;lt;attribute name="miejscowosc" use="required" type="{http://e-nadawca.poczta-polska.pl}miejscowoscType" /&amp;gt;
+ *       &amp;lt;attribute name="kodPocztowy" use="required" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType" /&amp;gt;
+ *       &amp;lt;attribute name="mobile" use="required" type="{http://e-nadawca.poczta-polska.pl}mobileType" /&amp;gt;
+ *       &amp;lt;attribute name="email" use="required" type="{http://e-nadawca.poczta-polska.pl}emailType" /&amp;gt;
+ *       &amp;lt;attribute name="nip" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="regon" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="krs" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="eZwrotTyp" type="{http://e-nadawca.poczta-polska.pl}eZwrotTypZgodyType" /&amp;gt;
+ *       &amp;lt;attribute name="wymagalnoscNumeruIdentyfikujacegoPrzesylke" type="{http://e-nadawca.poczta-polska.pl}wymagalnoscNumeruIdentyfikujacegoPrzesylkeEnum" /&amp;gt;
+ *       &amp;lt;attribute name="availableOnWebsite" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="emailForEZwrot" type="{http://e-nadawca.poczta-polska.pl}emailType" /&amp;gt;
+ *       &amp;lt;attribute name="paid" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="consentValidFor" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="contractorCost" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="infoForClient" type="{http://e-nadawca.poczta-polska.pl}infoForClientType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -112,20 +112,20 @@ public class ShopEZwrotyType {
     /**
      * Gets the value of the eZwrotPrzesylki property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the eZwrotPrzesylki property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the eZwrotPrzesylki property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getEZwrotPrzesylki().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link EZwrotPrzesylkiType }
      * 

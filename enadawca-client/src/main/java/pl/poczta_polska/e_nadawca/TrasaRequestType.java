@@ -8,23 +8,23 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for trasaRequestType complex type.
+ * &lt;p&gt;Java class for trasaRequestType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="trasaRequestType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="fromUrzadNadania" type="{http://e-nadawca.poczta-polska.pl}urzadNadaniaType"/&gt;
- *         &lt;element name="toKodPocztowy" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType"/&gt;
- *         &lt;element name="guid" type="{http://e-nadawca.poczta-polska.pl}guidType"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="trasaRequestType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="fromUrzadNadania" type="{http://e-nadawca.poczta-polska.pl}urzadNadaniaType"/&amp;gt;
+ *         &amp;lt;element name="toKodPocztowy" type="{http://e-nadawca.poczta-polska.pl}kodPocztowyType"/&amp;gt;
+ *         &amp;lt;element name="guid" type="{http://e-nadawca.poczta-polska.pl}guidType"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

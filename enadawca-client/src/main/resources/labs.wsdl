@@ -868,8 +868,8 @@ TOWARY</xsd:documentation></xsd:annotation>
 			<xsd:element name="getEnvelopeListResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="envelopes" type="tns:envelopeInfoType"
-							maxOccurs="unbounded" minOccurs="0" />
+						<xsd:element name="envelopes"
+							type="tns:envelopeInfoType" maxOccurs="unbounded" minOccurs="0" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -877,6 +877,7 @@ TOWARY</xsd:documentation></xsd:annotation>
 				<xsd:sequence>
 					<xsd:element name="error" type="tns:errorType"
 						maxOccurs="unbounded" minOccurs="0" />
+					<xsd:element name="envelopeFilename" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
 				</xsd:sequence>
 				<xsd:attribute name="idEnvelope" type="xsd:int" />
 				<xsd:attribute name="envelopeStatus" type="tns:envelopeStatusType" />

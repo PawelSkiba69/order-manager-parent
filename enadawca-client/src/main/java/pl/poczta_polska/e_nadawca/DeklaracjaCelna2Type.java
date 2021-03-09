@@ -11,31 +11,31 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for deklaracjaCelna2Type complex type.
+ * &lt;p&gt;Java class for deklaracjaCelna2Type complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="deklaracjaCelna2Type"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="rodzaj" type="{http://e-nadawca.poczta-polska.pl}DeklaracaCelnaRodzajEnum"/&gt;
- *         &lt;element name="zawartoscPrzesylki" type="{http://e-nadawca.poczta-polska.pl}ZawartoscPrzesylkiZagranicznejEnum"/&gt;
- *         &lt;element name="dokumentyTowarzyszace" type="{http://e-nadawca.poczta-polska.pl}DokumentyTowarzyszaceType" maxOccurs="5" minOccurs="0"/&gt;
- *         &lt;element name="wyjasnienie" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="oplatyPocztowe" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="uwagi" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="numerReferencyjnyImportera" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="numerTelefonuImportera" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="walutaKodISO" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="szczegolyZawartosciPrzesylki" type="{http://e-nadawca.poczta-polska.pl}SzczegolyZawartosciPrzesylkiZagranicznejType" maxOccurs="5"/&gt;
- *         &lt;element name="numerReferencyjnyCelny" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="deklaracjaCelna2Type"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="rodzaj" type="{http://e-nadawca.poczta-polska.pl}DeklaracaCelnaRodzajEnum"/&amp;gt;
+ *         &amp;lt;element name="zawartoscPrzesylki" type="{http://e-nadawca.poczta-polska.pl}ZawartoscPrzesylkiZagranicznejEnum"/&amp;gt;
+ *         &amp;lt;element name="dokumentyTowarzyszace" type="{http://e-nadawca.poczta-polska.pl}DokumentyTowarzyszaceType" maxOccurs="5" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="wyjasnienie" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="oplatyPocztowe" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="uwagi" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="numerReferencyjnyImportera" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="numerTelefonuImportera" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="walutaKodISO" type="{http://www.w3.org/2001/XMLSchema}string"/&amp;gt;
+ *         &amp;lt;element name="szczegolyZawartosciPrzesylki" type="{http://e-nadawca.poczta-polska.pl}SzczegolyZawartosciPrzesylkiZagranicznejType" maxOccurs="5"/&amp;gt;
+ *         &amp;lt;element name="numerReferencyjnyCelny" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -124,20 +124,20 @@ public class DeklaracjaCelna2Type {
     /**
      * Gets the value of the dokumentyTowarzyszace property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dokumentyTowarzyszace property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the dokumentyTowarzyszace property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getDokumentyTowarzyszace().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link DokumentyTowarzyszaceType }
      * 
@@ -297,20 +297,20 @@ public class DeklaracjaCelna2Type {
     /**
      * Gets the value of the szczegolyZawartosciPrzesylki property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the szczegolyZawartosciPrzesylki property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the szczegolyZawartosciPrzesylki property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getSzczegolyZawartosciPrzesylki().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link SzczegolyZawartosciPrzesylkiZagranicznejType }
      * 

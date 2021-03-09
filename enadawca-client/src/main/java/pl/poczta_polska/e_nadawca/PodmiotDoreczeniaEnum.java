@@ -6,50 +6,49 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for podmiotDoreczeniaEnum.
+ * &lt;p&gt;Java class for podmiotDoreczeniaEnum.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="podmiotDoreczeniaEnum"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="ADRESAT"/&gt;
- *     &lt;enumeration value="PELNOLETNI_DOMOWNIK"/&gt;
- *     &lt;enumeration value="SASIAD"/&gt;
- *     &lt;enumeration value="DOZORCA_DOMU"/&gt;
- *     &lt;enumeration value="SOLTYS"/&gt;
- *     &lt;enumeration value="ADMINISTRACJA_DOMU"/&gt;
- *     &lt;enumeration value="UPOWAZNIONY_PRACOWNIK"/&gt;
- *     &lt;enumeration value="PELNOMOCNIK_POCZTOWY"/&gt;
- *     &lt;enumeration value="PRZEDSTAWICIEL_USTAWOWY"/&gt;
- *     &lt;enumeration value="PELNOMOCNIK_ADRESATA"/&gt;
- *     &lt;enumeration value="OSOBA_UPRAWNIONA_DO_REPREZENTACJI"/&gt;
- *     &lt;enumeration value="SKRZYNKA_ODDAWCZA"/&gt;
- *     &lt;enumeration value="ADRESAT_KTORY_NIE_MOGL"/&gt;
- *     &lt;enumeration value="OSOBA_UPRAWNIONA_DO_ODBIORU"/&gt;
- *     &lt;enumeration value="DOROSLY_DOMOWNIK"/&gt;
- *     &lt;enumeration value="OSOBA_UPOWAZNIONA_DO_ODB_KORESP"/&gt;
- *     &lt;enumeration value="KIEROWNIK_JEDNOSTKI_LUB_UPOWAZNIONY"/&gt;
- *     &lt;enumeration value="PRZEDSTAWICIEL_ADRESATA"/&gt;
- *     &lt;enumeration value="OSOBA_UPOWAZNIONA_DO_REPREZENT_ADRESATA"/&gt;
- *     &lt;enumeration value="OSOBA_UPOWAZNIONA_PRZEZ_PRACODAWCE"/&gt;
- *     &lt;enumeration value="PRZELOZONY_ABW"/&gt;
- *     &lt;enumeration value="PRZELOZONY_AW"/&gt;
- *     &lt;enumeration value="PRZELOZONY_CBA"/&gt;
- *     &lt;enumeration value="PRZELOZONY_POLICJI"/&gt;
- *     &lt;enumeration value="PRZELOZONY_SC"/&gt;
- *     &lt;enumeration value="PRZELOZONY_SG"/&gt;
- *     &lt;enumeration value="PRZELOZONY_SKW"/&gt;
- *     &lt;enumeration value="PRZELOZONY_SW"/&gt;
- *     &lt;enumeration value="PRZELOZONY_SWW"/&gt;
- *     &lt;enumeration value="PRZELOZONY_ZOLNIERZA"/&gt;
- *     &lt;enumeration value="SKRYTKA_POCZTOWA"/&gt;
- *     &lt;enumeration value="PROKURENT"/&gt;
- *     &lt;enumeration value="ZARZADCA_DOMU"/&gt;
- *     &lt;enumeration value="OSOBA_UPOWAZNIONA_PRZEZ_KIER_WIEZIENIA"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="podmiotDoreczeniaEnum"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT"/&amp;gt;
+ *     &amp;lt;enumeration value="PELNOLETNI_DOMOWNIK"/&amp;gt;
+ *     &amp;lt;enumeration value="SASIAD"/&amp;gt;
+ *     &amp;lt;enumeration value="DOZORCA_DOMU"/&amp;gt;
+ *     &amp;lt;enumeration value="SOLTYS"/&amp;gt;
+ *     &amp;lt;enumeration value="ADMINISTRACJA_DOMU"/&amp;gt;
+ *     &amp;lt;enumeration value="UPOWAZNIONY_PRACOWNIK"/&amp;gt;
+ *     &amp;lt;enumeration value="PELNOMOCNIK_POCZTOWY"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZEDSTAWICIEL_USTAWOWY"/&amp;gt;
+ *     &amp;lt;enumeration value="PELNOMOCNIK_ADRESATA"/&amp;gt;
+ *     &amp;lt;enumeration value="OSOBA_UPRAWNIONA_DO_REPREZENTACJI"/&amp;gt;
+ *     &amp;lt;enumeration value="SKRZYNKA_ODDAWCZA"/&amp;gt;
+ *     &amp;lt;enumeration value="ADRESAT_KTORY_NIE_MOGL"/&amp;gt;
+ *     &amp;lt;enumeration value="OSOBA_UPRAWNIONA_DO_ODBIORU"/&amp;gt;
+ *     &amp;lt;enumeration value="DOROSLY_DOMOWNIK"/&amp;gt;
+ *     &amp;lt;enumeration value="OSOBA_UPOWAZNIONA_DO_ODB_KORESP"/&amp;gt;
+ *     &amp;lt;enumeration value="KIEROWNIK_JEDNOSTKI_LUB_UPOWAZNIONY"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZEDSTAWICIEL_ADRESATA"/&amp;gt;
+ *     &amp;lt;enumeration value="OSOBA_UPOWAZNIONA_DO_REPREZENT_ADRESATA"/&amp;gt;
+ *     &amp;lt;enumeration value="OSOBA_UPOWAZNIONA_PRZEZ_PRACODAWCE"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_ABW"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_AW"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_CBA"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_POLICJI"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_SC"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_SG"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_SKW"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_SW"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_SWW"/&amp;gt;
+ *     &amp;lt;enumeration value="PRZELOZONY_ZOLNIERZA"/&amp;gt;
+ *     &amp;lt;enumeration value="SKRYTKA_POCZTOWA"/&amp;gt;
+ *     &amp;lt;enumeration value="PROKURENT"/&amp;gt;
+ *     &amp;lt;enumeration value="ZARZADCA_DOMU"/&amp;gt;
+ *     &amp;lt;enumeration value="OSOBA_UPOWAZNIONA_PRZEZ_KIER_WIEZIENIA"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "podmiotDoreczeniaEnum")

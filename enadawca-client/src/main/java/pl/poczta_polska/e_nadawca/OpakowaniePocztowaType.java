@@ -7,23 +7,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for opakowaniePocztowaType.
+ * &lt;p&gt;Java class for opakowaniePocztowaType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="opakowaniePocztowaType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="PACZKA_DO_POL_KILO"/&gt;
- *     &lt;enumeration value="FIRMOWA_DO_1KG"/&gt;
- *     &lt;enumeration value="GABARYT_G1"/&gt;
- *     &lt;enumeration value="GABARYT_G2"/&gt;
- *     &lt;enumeration value="GABARYT_G3"/&gt;
- *     &lt;enumeration value="GABARYT_G4"/&gt;
- *     &lt;enumeration value="GABARYT_G5"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="opakowaniePocztowaType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="PACZKA_DO_POL_KILO"/&amp;gt;
+ *     &amp;lt;enumeration value="FIRMOWA_DO_1KG"/&amp;gt;
+ *     &amp;lt;enumeration value="GABARYT_G1"/&amp;gt;
+ *     &amp;lt;enumeration value="GABARYT_G2"/&amp;gt;
+ *     &amp;lt;enumeration value="GABARYT_G3"/&amp;gt;
+ *     &amp;lt;enumeration value="GABARYT_G4"/&amp;gt;
+ *     &amp;lt;enumeration value="GABARYT_G5"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "opakowaniePocztowaType")

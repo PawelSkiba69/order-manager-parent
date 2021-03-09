@@ -12,47 +12,47 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for przesylkaBiznesowaPlusType complex type.
+ * &lt;p&gt;Java class for przesylkaBiznesowaPlusType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="przesylkaBiznesowaPlusType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="pobranie" type="{http://e-nadawca.poczta-polska.pl}pobranieType" minOccurs="0"/&gt;
- *         &lt;element name="urzadWydaniaPrzesylki" type="{http://e-nadawca.poczta-polska.pl}placowkaPocztowaType" minOccurs="0"/&gt;
- *         &lt;element name="subPrzesylka" type="{http://e-nadawca.poczta-polska.pl}subPrzesylkaBiznesowaPlusType" maxOccurs="100" minOccurs="0"/&gt;
- *         &lt;choice minOccurs="0"&gt;
- *           &lt;element name="dataDrugiejProbyDoreczenia" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
- *           &lt;element name="drugaProbaDoreczeniaPoLiczbieDni" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;/choice&gt;
- *         &lt;element name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
- *         &lt;element name="potwierdzenieOdbioru" type="{http://e-nadawca.poczta-polska.pl}potwierdzenieOdbioruBiznesowaType" minOccurs="0"/&gt;
- *         &lt;element name="doreczenie" type="{http://e-nadawca.poczta-polska.pl}doreczenieBiznesowaType" minOccurs="0"/&gt;
- *         &lt;element name="zwrotDokumentow" type="{http://e-nadawca.poczta-polska.pl}zwrotDokumentowBiznesowaType" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&gt;
- *       &lt;attribute name="gabaryt" type="{http://e-nadawca.poczta-polska.pl}gabarytBiznesowaType" /&gt;
- *       &lt;attribute name="wartosc" type="{http://e-nadawca.poczta-polska.pl}wartoscType" /&gt;
- *       &lt;attribute name="kwotaTranzakcji" type="{http://e-nadawca.poczta-polska.pl}kwotaTranzakcjiType" /&gt;
- *       &lt;attribute name="ostroznie" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="kategoria" type="{http://e-nadawca.poczta-polska.pl}kategoriaType" /&gt;
- *       &lt;attribute name="iloscPotwierdzenOdbioru" type="{http://e-nadawca.poczta-polska.pl}iloscPotwierdzenOdbioruType" /&gt;
- *       &lt;attribute name="zwrotDoslanie" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="eKontaktAdresata" type="{http://e-nadawca.poczta-polska.pl}eKontaktType" /&gt;
- *       &lt;attribute name="eSposobPowiadomieniaAdresata" type="{http://e-nadawca.poczta-polska.pl}eSposobPowiadomieniaType" /&gt;
- *       &lt;attribute name="numerPrzesylkiKlienta" type="{http://e-nadawca.poczta-polska.pl}numerPrzesylkiKlientaType" /&gt;
- *       &lt;attribute name="iloscDniOczekiwaniaNaWydanie" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="oczekiwanyTerminDoreczenia" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
- *       &lt;attribute name="terminRodzajPlus" type="{http://e-nadawca.poczta-polska.pl}terminRodzajPlusType" /&gt;
- *       &lt;attribute name="numerTransakcjiOdbioru" type="{http://e-nadawca.poczta-polska.pl}numerTransakcjiOdbioruType" /&gt;
- *     &lt;/extension&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="przesylkaBiznesowaPlusType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;extension base="{http://e-nadawca.poczta-polska.pl}przesylkaRejestrowanaType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="pobranie" type="{http://e-nadawca.poczta-polska.pl}pobranieType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="urzadWydaniaPrzesylki" type="{http://e-nadawca.poczta-polska.pl}placowkaPocztowaType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="subPrzesylka" type="{http://e-nadawca.poczta-polska.pl}subPrzesylkaBiznesowaPlusType" maxOccurs="100" minOccurs="0"/&amp;gt;
+ *         &amp;lt;choice minOccurs="0"&amp;gt;
+ *           &amp;lt;element name="dataDrugiejProbyDoreczenia" type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt;
+ *           &amp;lt;element name="drugaProbaDoreczeniaPoLiczbieDni" type="{http://www.w3.org/2001/XMLSchema}int"/&amp;gt;
+ *         &amp;lt;/choice&amp;gt;
+ *         &amp;lt;element name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="potwierdzenieOdbioru" type="{http://e-nadawca.poczta-polska.pl}potwierdzenieOdbioruBiznesowaType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="doreczenie" type="{http://e-nadawca.poczta-polska.pl}doreczenieBiznesowaType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="zwrotDokumentow" type="{http://e-nadawca.poczta-polska.pl}zwrotDokumentowBiznesowaType" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *       &amp;lt;attribute name="posteRestante" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="masa" type="{http://e-nadawca.poczta-polska.pl}masaType" /&amp;gt;
+ *       &amp;lt;attribute name="gabaryt" type="{http://e-nadawca.poczta-polska.pl}gabarytBiznesowaType" /&amp;gt;
+ *       &amp;lt;attribute name="wartosc" type="{http://e-nadawca.poczta-polska.pl}wartoscType" /&amp;gt;
+ *       &amp;lt;attribute name="kwotaTranzakcji" type="{http://e-nadawca.poczta-polska.pl}kwotaTranzakcjiType" /&amp;gt;
+ *       &amp;lt;attribute name="ostroznie" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="kategoria" type="{http://e-nadawca.poczta-polska.pl}kategoriaType" /&amp;gt;
+ *       &amp;lt;attribute name="iloscPotwierdzenOdbioru" type="{http://e-nadawca.poczta-polska.pl}iloscPotwierdzenOdbioruType" /&amp;gt;
+ *       &amp;lt;attribute name="zwrotDoslanie" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *       &amp;lt;attribute name="eKontaktAdresata" type="{http://e-nadawca.poczta-polska.pl}eKontaktType" /&amp;gt;
+ *       &amp;lt;attribute name="eSposobPowiadomieniaAdresata" type="{http://e-nadawca.poczta-polska.pl}eSposobPowiadomieniaType" /&amp;gt;
+ *       &amp;lt;attribute name="numerPrzesylkiKlienta" type="{http://e-nadawca.poczta-polska.pl}numerPrzesylkiKlientaType" /&amp;gt;
+ *       &amp;lt;attribute name="iloscDniOczekiwaniaNaWydanie" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="oczekiwanyTerminDoreczenia" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&amp;gt;
+ *       &amp;lt;attribute name="terminRodzajPlus" type="{http://e-nadawca.poczta-polska.pl}terminRodzajPlusType" /&amp;gt;
+ *       &amp;lt;attribute name="numerTransakcjiOdbioru" type="{http://e-nadawca.poczta-polska.pl}numerTransakcjiOdbioruType" /&amp;gt;
+ *     &amp;lt;/extension&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -167,20 +167,20 @@ public class PrzesylkaBiznesowaPlusType
     /**
      * Gets the value of the subPrzesylka property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the subPrzesylka property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the subPrzesylka property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getSubPrzesylka().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link SubPrzesylkaBiznesowaPlusType }
      * 

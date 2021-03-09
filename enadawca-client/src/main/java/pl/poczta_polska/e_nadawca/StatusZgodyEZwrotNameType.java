@@ -6,19 +6,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for statusZgodyEZwrotNameType.
+ * &lt;p&gt;Java class for statusZgodyEZwrotNameType.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="statusZgodyEZwrotNameType"&gt;
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="NOWY"/&gt;
- *     &lt;enumeration value="ZAAKCEPTOWANY"/&gt;
- *     &lt;enumeration value="ODRZUCONY"/&gt;
- *   &lt;/restriction&gt;
- * &lt;/simpleType&gt;
- * </pre>
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;simpleType name="statusZgodyEZwrotNameType"&amp;gt;
+ *   &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *     &amp;lt;enumeration value="NOWY"/&amp;gt;
+ *     &amp;lt;enumeration value="ZAAKCEPTOWANY"/&amp;gt;
+ *     &amp;lt;enumeration value="ODRZUCONY"/&amp;gt;
+ *   &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt;
+ * &lt;/pre&gt;
  * 
  */
 @XmlType(name = "statusZgodyEZwrotNameType")

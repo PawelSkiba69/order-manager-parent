@@ -10,22 +10,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for awizoPrzesylkiType complex type.
+ * &lt;p&gt;Java class for awizoPrzesylkiType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="awizoPrzesylkiType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="dataPierwszegoAwizowania" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *       &lt;attribute name="dataDrugiegoAwizowania" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *       &lt;attribute name="miejscePozostawienia" type="{http://e-nadawca.poczta-polska.pl}miejscaPozostawieniaAwizoEnum" /&gt;
- *       &lt;attribute name="idPlacowkaPocztowaWydajaca" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="awizoPrzesylkiType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="dataPierwszegoAwizowania" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *       &amp;lt;attribute name="dataDrugiegoAwizowania" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *       &amp;lt;attribute name="miejscePozostawienia" type="{http://e-nadawca.poczta-polska.pl}miejscaPozostawieniaAwizoEnum" /&amp;gt;
+ *       &amp;lt;attribute name="idPlacowkaPocztowaWydajaca" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

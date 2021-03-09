@@ -8,37 +8,37 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for pobranieType complex type.
+ * &lt;p&gt;Java class for pobranieType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="pobranieType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="sposobPobrania" type="{http://e-nadawca.poczta-polska.pl}sposobPobraniaType" /&gt;
- *       &lt;attribute name="kwotaPobrania" type="{http://e-nadawca.poczta-polska.pl}kwotaPobraniaType" /&gt;
- *       &lt;attribute name="nrb"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;minLength value="0"/&gt;
- *             &lt;maxLength value="26"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute name="tytulem"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;minLength value="0"/&gt;
- *             &lt;maxLength value="54"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="pobranieType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="sposobPobrania" type="{http://e-nadawca.poczta-polska.pl}sposobPobraniaType" /&amp;gt;
+ *       &amp;lt;attribute name="kwotaPobrania" type="{http://e-nadawca.poczta-polska.pl}kwotaPobraniaType" /&amp;gt;
+ *       &amp;lt;attribute name="nrb"&amp;gt;
+ *         &amp;lt;simpleType&amp;gt;
+ *           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *             &amp;lt;minLength value="0"/&amp;gt;
+ *             &amp;lt;maxLength value="26"/&amp;gt;
+ *           &amp;lt;/restriction&amp;gt;
+ *         &amp;lt;/simpleType&amp;gt;
+ *       &amp;lt;/attribute&amp;gt;
+ *       &amp;lt;attribute name="tytulem"&amp;gt;
+ *         &amp;lt;simpleType&amp;gt;
+ *           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ *             &amp;lt;minLength value="0"/&amp;gt;
+ *             &amp;lt;maxLength value="54"/&amp;gt;
+ *           &amp;lt;/restriction&amp;gt;
+ *         &amp;lt;/simpleType&amp;gt;
+ *       &amp;lt;/attribute&amp;gt;
+ *       &amp;lt;attribute name="sprawdzenieZawartosciPrzesylkiPrzezOdbiorce" type="{http://www.w3.org/2001/XMLSchema}boolean" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

@@ -10,27 +10,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for reklamacjaRozpatrzonaType complex type.
+ * &lt;p&gt;Java class for reklamacjaRozpatrzonaType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="reklamacjaRozpatrzonaType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="guid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&gt;
- *       &lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&gt;
- *       &lt;attribute name="rozstrzygniecie" type="{http://e-nadawca.poczta-polska.pl}rozstrzygniecieType" /&gt;
- *       &lt;attribute name="przyznaneOdszkodowanie" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
- *       &lt;attribute name="uzasadnienie" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="dataRozpatrzenia" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
- *       &lt;attribute name="nazwaJednostkiRozpatrujacej" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="osobaRozpatrujaca" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="idReklamacja" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="reklamacjaRozpatrzonaType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="guid" type="{http://e-nadawca.poczta-polska.pl}guidType" /&amp;gt;
+ *       &amp;lt;attribute name="numerNadania" type="{http://e-nadawca.poczta-polska.pl}numerNadaniaType" /&amp;gt;
+ *       &amp;lt;attribute name="rozstrzygniecie" type="{http://e-nadawca.poczta-polska.pl}rozstrzygniecieType" /&amp;gt;
+ *       &amp;lt;attribute name="przyznaneOdszkodowanie" type="{http://www.w3.org/2001/XMLSchema}int" /&amp;gt;
+ *       &amp;lt;attribute name="uzasadnienie" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="dataRozpatrzenia" type="{http://www.w3.org/2001/XMLSchema}date" /&amp;gt;
+ *       &amp;lt;attribute name="nazwaJednostkiRozpatrujacej" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="osobaRozpatrujaca" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *       &amp;lt;attribute name="idReklamacja" type="{http://www.w3.org/2001/XMLSchema}string" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

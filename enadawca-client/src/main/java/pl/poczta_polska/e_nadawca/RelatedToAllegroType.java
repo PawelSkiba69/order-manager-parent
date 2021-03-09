@@ -11,22 +11,22 @@ import javax.xml.bind.annotation.XmlType;
  * Opcjonalne informacje o powiązaniu przesyłki ze
  * 				sprzedażą w serwisie Allegro
  * 
- * <p>Java class for relatedToAllegroType complex type.
+ * &lt;p&gt;Java class for relatedToAllegroType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="relatedToAllegroType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="id" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroIdType" /&gt;
- *       &lt;attribute name="sellerId" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroSellerIdType" /&gt;
- *       &lt;attribute name="channel" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroChannelType" /&gt;
- *       &lt;attribute name="deliveryMethod" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroDeliveryMethodType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="relatedToAllegroType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="id" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroIdType" /&amp;gt;
+ *       &amp;lt;attribute name="sellerId" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroSellerIdType" /&amp;gt;
+ *       &amp;lt;attribute name="channel" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroChannelType" /&amp;gt;
+ *       &amp;lt;attribute name="deliveryMethod" type="{http://e-nadawca.poczta-polska.pl}relatedToAllegroDeliveryMethodType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */

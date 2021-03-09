@@ -12,24 +12,24 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * &lt;p&gt;Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="status" type="{http://e-nadawca.poczta-polska.pl}statusPaczkaKorzysciType"/&gt;
- *         &lt;element name="idKarta" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/&gt;
- *         &lt;element name="info" type="{http://e-nadawca.poczta-polska.pl}infoPaczkaKorzysciType" minOccurs="0"/&gt;
- *         &lt;element name="error" type="{http://e-nadawca.poczta-polska.pl}errorType" maxOccurs="unbounded" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;sequence&amp;gt;
+ *         &amp;lt;element name="status" type="{http://e-nadawca.poczta-polska.pl}statusPaczkaKorzysciType"/&amp;gt;
+ *         &amp;lt;element name="idKarta" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="info" type="{http://e-nadawca.poczta-polska.pl}infoPaczkaKorzysciType" minOccurs="0"/&amp;gt;
+ *         &amp;lt;element name="error" type="{http://e-nadawca.poczta-polska.pl}errorType" maxOccurs="unbounded" minOccurs="0"/&amp;gt;
+ *       &amp;lt;/sequence&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
@@ -125,20 +125,20 @@ public class GetPaczkaKorzysciInfoResponse {
     /**
      * Gets the value of the error property.
      * 
-     * <p>
+     * &lt;p&gt;
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the error property.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the error property.
      * 
-     * <p>
+     * &lt;p&gt;
      * For example, to add a new item, do as follows:
-     * <pre>
+     * &lt;pre&gt;
      *    getError().add(newItem);
-     * </pre>
+     * &lt;/pre&gt;
      * 
      * 
-     * <p>
+     * &lt;p&gt;
      * Objects of the following type(s) are allowed in the list
      * {@link ErrorType }
      * 

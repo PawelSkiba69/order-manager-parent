@@ -10,21 +10,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for zwrotPrzesylkiType complex type.
+ * &lt;p&gt;Java class for zwrotPrzesylkiType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="zwrotPrzesylkiType"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="przyczyna" type="{http://e-nadawca.poczta-polska.pl}przyczynaZwrotuEnum" /&gt;
- *       &lt;attribute name="data" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
- *       &lt;attribute name="przyczynaZwrotuDodatkowa" type="{http://e-nadawca.poczta-polska.pl}przyczynaZwrotuDodatkowaType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * &lt;pre&gt;
+ * &amp;lt;complexType name="zwrotPrzesylkiType"&amp;gt;
+ *   &amp;lt;complexContent&amp;gt;
+ *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ *       &amp;lt;attribute name="przyczyna" type="{http://e-nadawca.poczta-polska.pl}przyczynaZwrotuEnum" /&amp;gt;
+ *       &amp;lt;attribute name="data" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&amp;gt;
+ *       &amp;lt;attribute name="przyczynaZwrotuDodatkowa" type="{http://e-nadawca.poczta-polska.pl}przyczynaZwrotuDodatkowaType" /&amp;gt;
+ *     &amp;lt;/restriction&amp;gt;
+ *   &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt;
+ * &lt;/pre&gt;
  * 
  * 
  */
