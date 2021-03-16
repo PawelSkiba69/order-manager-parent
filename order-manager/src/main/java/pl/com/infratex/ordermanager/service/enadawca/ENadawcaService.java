@@ -7,15 +7,14 @@ import pl.com.infratex.ordermanager.integration.enadawca.ENadawcaManager;
 import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaException;
 import pl.com.infratex.ordermanager.service.OrderService;
 import pl.com.infratex.ordermanager.service.mapper.ENadawcaMapper;
+import pl.com.infratex.ordermanager.utils.OrderManagerDateUtils;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.poczta_polska.e_nadawca.PrzesylkaType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -41,10 +40,11 @@ public class ENadawcaService {
     }
 
     public void send(List<AddressModel> addresses, LocalDate sendDate) {
-        GregorianCalendar dataNadania = new GregorianCalendar();
-        dataNadania.setTime(Date.from(sendDate.atStartOfDay()
-                .atZone(ZoneId.systemDefault())
-                .toInstant()));
+        GregorianCalendar dataNadania = OrderManagerDateUtils.createGregorianCalendar(sendDate);
+//        GregorianCalendar dataNadania = new GregorianCalendar();
+//        dataNadania.setTime(Date.from(sendDate.atStartOfDay()
+//                .atZone(ZoneId.systemDefault())
+//                .toInstant()));
         //FIXME rzucić wyjątek biznesowy
         try {
             Integer generateId = sequenceIdGenerator.generateId(ENADAWCA_BUFOR_ID_SEQ);

@@ -1,9 +1,11 @@
 package pl.com.infratex.ordermanager.integration.enadawca;
 
+import pl.com.infratex.ordermanager.api.exception.OrderManagerDateUtilsException;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.integration.enadawca.converter.ENadawcaXMLDateConverter;
 import pl.com.infratex.ordermanager.integration.enadawca.exception.ENadawcaException;
 import pl.com.infratex.ordermanager.integration.enadawca.mapper.ShipmentConfirmationMerger;
+import pl.com.infratex.ordermanager.utils.OrderManagerDateUtils;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.poczta_polska.e_nadawca.AddShipmentResponseItemType;
 import pl.poczta_polska.e_nadawca.BuforType;
@@ -13,8 +15,6 @@ import pl.poczta_polska.e_nadawca.EnvelopeInfoType;
 import pl.poczta_polska.e_nadawca.PrzesylkaShortType;
 import pl.poczta_polska.e_nadawca.PrzesylkaType;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Holder;
 import java.net.Authenticator;
@@ -70,14 +70,12 @@ public class ENadawcaManager {
     }
 
     public void elektronicznyNadawcaProperties(GregorianCalendar dataNadania, int idBufor, String opis) throws ENadawcaException {
-        XMLGregorianCalendar startDateXML = null;
         try {
-            startDateXML = DatatypeFactory.newInstance().newXMLGregorianCalendar(dataNadania);
 
             BuforType buforType = new BuforType();
             buforType.setIdBufor(idBufor);
             buforType.setOpis(opis);
-            buforType.setDataNadania(startDateXML);
+            buforType.setDataNadania(OrderManagerDateUtils.createXmlGregorianCalendar(dataNadania));
 
             List<BuforType> listBufors = new ArrayList<>();
             listBufors.add(buforType);
@@ -90,7 +88,7 @@ public class ENadawcaManager {
 
 //            elektronicznyNadawca.setEnvelopeBuforDataNadania(startDateXML);
             elektronicznyNadawca.createEnvelopeBufor(listBufors, holderBufors, null);
-        } catch (DatatypeConfigurationException e) {
+        } catch (OrderManagerDateUtilsException e) {
             throw new ENadawcaException("Błędny format daty nadania", e);
         }
     }
