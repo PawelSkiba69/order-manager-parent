@@ -57,6 +57,17 @@ public class OrderManagerController {
         return ORDER_MANAGER_VIEW;
     }
 
+    @GetMapping(value = "/upload")   // FIXME: implement!
+    public String uploadAutomatic(Model model) throws IOException {
+        LOGGER.info("uploadAutomatic()");
+        orderManagerService.uploadAutomatic();
+//        SellerOrderReportModel sellerOrderReportModel = orderManagerService.createSellerOrderReport(
+//                fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
+//        model.addAttribute("orders", sellerOrderReportModel.getOrders());
+        LOGGER.info("sendAutomatic() = ");
+        return ORDER_MANAGER_VIEW;
+    }
+
     @PostMapping(value = "/generate")
     public String generate(@ModelAttribute(name = "generateAddress") GenerateAddressModel generateAddressModel, ModelMap model)
             throws OrderManagerException {

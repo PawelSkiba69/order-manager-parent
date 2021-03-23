@@ -209,5 +209,8 @@ public class OrderManagerService {
                 .collect(Collectors.toList());
     }
 
+    public void uploadAutomatic() {
+
+    }
 }
 

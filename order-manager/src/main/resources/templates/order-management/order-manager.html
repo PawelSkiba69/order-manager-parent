@@ -9,6 +9,10 @@
 </head>
 <body>
 <h1>order-manager</h1>
+<form action="#" th:action="@{/order-management/upload}">
+<!--  FIXME: implement!  -->
+    <button>Załaduj zamówienia - automatycznie</button>
+</form>
 <form action="#" th:action="@{/order-management/upload}" method="post" enctype="multipart/form-data">
     <div>
         <label for="file-unshipped-orders">Wybierz plik csv unshipped</label>
