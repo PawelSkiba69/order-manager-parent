@@ -8,6 +8,7 @@ import pl.com.infratex.ordermanager.integration.amazon.config.AmazonMwsConnector
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = AmazonMwsConnectorTestContext.class)
 class AmazonRequestReportConnectorTest {
@@ -23,7 +24,9 @@ class AmazonRequestReportConnectorTest {
         RequestReportResponse requestReportResponse = amazonRequestReportConnector.report(AmazonOrderReportService.NEW_ORDERS_REPORT_TYPE);
         //THEN
         assertAll(
-                () -> assertNotNull(requestReportResponse,"requestReportResponse is null")
+                () -> assertNotNull(requestReportResponse,"requestReportResponse is null"),
+                () -> assertNotNull(requestReportResponse.getRequestReportResult().getReportRequestInfo().getReportRequestId(),"reportRequestId is null"),
+                () -> assertNull(requestReportResponse.getRequestReportResult().getReportRequestInfo().getGeneratedReportId(),"generatedReportId is not null")
         );
     }
 
@@ -35,7 +38,9 @@ class AmazonRequestReportConnectorTest {
         RequestReportResponse requestReportResponse = amazonRequestReportConnector.report(AmazonOrderReportService.UNSHIPPED_ORDERS_REPORT_TYPE);
         //THEN
         assertAll(
-                () -> assertNotNull(requestReportResponse,"requestReportResponse is null")
+                () -> assertNotNull(requestReportResponse,"requestReportResponse is null"),
+                () -> assertNotNull(requestReportResponse.getRequestReportResult().getReportRequestInfo().getReportRequestId(),"reportRequestId is null"),
+                () -> assertNull(requestReportResponse.getRequestReportResult().getReportRequestInfo().getGeneratedReportId(),"generatedReportId is not null")
         );
     }
 }

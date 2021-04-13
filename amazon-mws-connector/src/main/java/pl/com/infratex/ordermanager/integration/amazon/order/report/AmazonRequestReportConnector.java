@@ -13,6 +13,7 @@ import pl.com.infratex.ordermanager.utils.OrderManagerDateUtils;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDate;
+import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 @Service
@@ -29,6 +30,7 @@ public class AmazonRequestReportConnector {
     private static final String APP_VERSION = "1.0.0";
 
     private static final String M_ID = "A3NLKSN848UAEB";
+    public static final int REPORT_DATE_RANGE_7_DAYS = 7;
 
     public RequestReportResponse report(String reportType) {
         LOGGER.info("report(" + reportType + ")");
@@ -47,7 +49,7 @@ public class AmazonRequestReportConnector {
                 .withReportOptions("ShowSalesChannel=true");
 
         try {
-            XMLGregorianCalendar startDate = OrderManagerDateUtils.createXmlGregorianCalendar(LocalDate.now().minusDays(7));
+            XMLGregorianCalendar startDate = OrderManagerDateUtils.createXmlGregorianCalendar(LocalDate.now().minusDays(REPORT_DATE_RANGE_7_DAYS));
             request.setStartDate(startDate);
         } catch (OrderManagerDateUtilsException e) {
             e.printStackTrace();
@@ -64,8 +66,30 @@ public class AmazonRequestReportConnector {
     }
 
     public static RequestReportResponse invokeRequestReport(MarketplaceWebService service, RequestReportRequest request) throws MarketplaceWebServiceException {
-//        try {
-            return service.requestReport(request);
+
+        Future<RequestReportResponse> requestReportResponseFuture = service.requestReportAsync(request);
+        while (!requestReportResponseFuture.isDone()) {
+            Thread.yield();
+        }
+        RequestReportResponse response = null;
+        try {
+            response = requestReportResponseFuture.get();
+        }catch (Exception e) {
+            if (e.getCause() instanceof MarketplaceWebServiceException) {
+                MarketplaceWebServiceException exception = MarketplaceWebServiceException.class.cast(e.getCause());
+                System.out.println("Caught Exception: " + exception.getMessage());
+                System.out.println("Response Status Code: " + exception.getStatusCode());
+                System.out.println("Error Code: " + exception.getErrorCode());
+                System.out.println("Error Type: " + exception.getErrorType());
+                System.out.println("Request ID: " + exception.getRequestId());
+                System.out.print("XML: " + exception.getXML());
+                System.out.println("ResponseHeaderMetadata: " + exception.getResponseHeaderMetadata());
+            } else {
+                e.printStackTrace();
+            }
+        }
+        //        try {
+//            return service.requestReport(request);
 //            RequestReportResponse response = service.requestReport(request);
 //
 //            System.out.println ("RequestReport Action Response");
@@ -146,5 +170,6 @@ public class AmazonRequestReportConnector {
 //            System.out.print("XML: " + ex.getXML());
 //            System.out.println("ResponseHeaderMetadata: " + ex.getResponseHeaderMetadata());
 //        }
+        return response;
     }
 }
