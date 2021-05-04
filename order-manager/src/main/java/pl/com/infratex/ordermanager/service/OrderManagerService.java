@@ -13,6 +13,8 @@ import pl.com.infratex.ordermanager.dao.repository.OrderLoadedRepository;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.dao.repository.ProductRepository;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
+import pl.com.infratex.ordermanager.integration.amazon.order.report.AmazonOrderReportResult;
+import pl.com.infratex.ordermanager.integration.amazon.order.report.AmazonOrderReportService;
 import pl.com.infratex.ordermanager.service.csv.processor.AmazonCsvOrdersMergeProcessor;
 import pl.com.infratex.ordermanager.service.mapper.OrderModelMapper;
 import pl.com.infratex.ordermanager.service.mapper.SellerOrderReportMapper;
@@ -24,6 +26,8 @@ import pl.com.infratex.ordermanager.web.model.ProductMappingModel;
 import pl.com.infratex.ordermanager.web.model.ProductModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -50,12 +54,13 @@ public class OrderManagerService {
     private ProductMappingService productMappingService;
     private SequenceIdGenerator sequenceIdGenerator;
     private OrderLoadedRepository orderLoadedRepository;
-
+    private AmazonOrderReportService amazonOrderReportService;
 
     public OrderManagerService(OrderService orderService, OrderRepository orderRepository,
                                ProductRepository productRepository, ClientRepository clientRepository,
                                SellerOrderReportMapper sellerOrderReportMapper, OrderModelMapper orderModelMapper,
-                               ProductMappingService productMappingService, SequenceIdGenerator sequenceIdGenerator, OrderLoadedRepository orderLoadedRepository) {
+                               ProductMappingService productMappingService, SequenceIdGenerator sequenceIdGenerator,
+                               OrderLoadedRepository orderLoadedRepository, AmazonOrderReportService amazonOrderReportService) {
         this.orderService = orderService;
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
@@ -65,6 +70,7 @@ public class OrderManagerService {
         this.productMappingService = productMappingService;
         this.sequenceIdGenerator = sequenceIdGenerator;
         this.orderLoadedRepository = orderLoadedRepository;
+        this.amazonOrderReportService = amazonOrderReportService;
     }
 
     public List<OrderModel> filterByLatestBatchId() {
@@ -78,13 +84,36 @@ public class OrderManagerService {
 
         saveOrders(sellerOrderReportModel);
 
-        //TODO do wykorzystania przy pobieraniu zamówień bezpośrednio z Amazona
-//        List<OrderEntity> foundOrderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(0);
+        List<OrderEntity> foundOrderEntities = orderRepository.
+                findByOrderItemIdInOrderByProduct_InternalIdDesc(getUnshippedOrderItemIds(sellerOrderReportModel));
+
+        return new SellerOrderReportModel(orderModelMapper.fromEntities(foundOrderEntities), null);
+    }
+
+    public SellerOrderReportModel createSellerOrderReportFromAmazon() throws IOException {
+        LOGGER.info("createSellerOrderReportFromAmazon(...)");
+        AmazonOrderReportResult amazonOrderReportResult = amazonOrderReportService.orderReport();
+        ByteArrayOutputStream unshippedOrdersOutputStream =
+                (ByteArrayOutputStream) amazonOrderReportResult.getUnshippedOrdersOutputStream();
+        ByteArrayOutputStream newOrdersOutputStream =
+                (ByteArrayOutputStream) amazonOrderReportResult.getNewOrdersOutputStream();
+
+        InputStream inputStreamUnshippedOrders = new ByteArrayInputStream(
+                unshippedOrdersOutputStream.toByteArray());
+        InputStream inputStreamNewOrders = new ByteArrayInputStream(
+                newOrdersOutputStream.toByteArray());
+
+        List<AmazonCsvOrder> amazonCsvOrders = parseCsv(inputStreamUnshippedOrders, inputStreamNewOrders);
+
+        SellerOrderReportModel sellerOrderReportModel = sellerOrderReportMapper.fromAmazonCsvOrders(amazonCsvOrders);
+
+        saveOrders(sellerOrderReportModel);
 
         List<OrderEntity> foundOrderEntities = orderRepository.
                 findByOrderItemIdInOrderByProduct_InternalIdDesc(getUnshippedOrderItemIds(sellerOrderReportModel));
 
         return new SellerOrderReportModel(orderModelMapper.fromEntities(foundOrderEntities), null);
+
     }
 
     public void generate(GenerateAddressModel preparedAddressModel) throws OrderManagerException {

@@ -8,9 +8,14 @@ import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.ProductModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class OrderManagerServiceTest {
@@ -103,5 +108,21 @@ class OrderManagerServiceTest {
         //when
         orderManagerService.saveOrders(sellerOrderReportModel);
         //then
+    }
+
+    @Test
+    void createSellerOrderReportFromAmazon() throws IOException {
+        //GIVEN
+
+        //WHEN
+        SellerOrderReportModel sellerOrderReportFromAmazon = orderManagerService.createSellerOrderReportFromAmazon();
+        System.out.println(sellerOrderReportFromAmazon);
+        //THEN
+        assertAll(
+                ()->assertNotNull(sellerOrderReportFromAmazon,"sellerOrderReportFromAmazon is null"),
+                ()->assertNotNull(sellerOrderReportFromAmazon.getOrders(),"Amazon orders is null"),
+                ()->assertTrue(sellerOrderReportFromAmazon.getOrders().size()>0,"Amazon order size is 0")
+        );
+
     }
 }
