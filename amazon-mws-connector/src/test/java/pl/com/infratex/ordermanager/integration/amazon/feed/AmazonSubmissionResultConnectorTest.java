@@ -13,7 +13,7 @@ class AmazonSubmissionResultConnectorTest {
     @Test
     void feedSubmissionResult() throws IOException, MarketplaceWebServiceException {
         //GIVEN
-        String feedSubmissionId = "52421018652";
+        String feedSubmissionId = "53180018765";
         AmazonSubmissionResultConnector amazonSubmissionResultConnector = new AmazonSubmissionResultConnector();
         //WHEN
         GetFeedSubmissionResultResponse getFeedSubmissionResultResponse =

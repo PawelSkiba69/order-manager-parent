@@ -54,7 +54,7 @@ public class AmazonCsvNewOrdersProcessor implements AmazonCsvOrdersProcessor {
             } catch (Exception e) {
                 LOGGER.severe("Unknown problem for order id: " + orderId);
             } finally {
-                LOGGER.info("Single Amazon csv new order record: " + amazonCsvOrder);
+//                LOGGER.info("Single Amazon csv new order record: " + amazonCsvOrder);
             }
         }
         return amazonCsvOrders;

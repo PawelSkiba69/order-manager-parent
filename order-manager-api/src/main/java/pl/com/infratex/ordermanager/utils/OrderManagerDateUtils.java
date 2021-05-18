@@ -21,7 +21,7 @@ public class OrderManagerDateUtils {
         gregorianCalendar.setTime(Date.from(localDate.atStartOfDay()
                 .atZone(ZoneId.systemDefault())
                 .toInstant()));
-        LOGGER.info("createGregorianCalendar(...)=" + gregorianCalendar);
+//        LOGGER.info("createGregorianCalendar(...)=" + gregorianCalendar);
         return gregorianCalendar;
     }
 
@@ -36,7 +36,7 @@ public class OrderManagerDateUtils {
             throw new OrderManagerDateUtilsException("Błędny format daty", e);
         }
 
-        LOGGER.info("createXmlGregorianCalendar(...)=" + xmlGregorianCalendar);
+//        LOGGER.info("createXmlGregorianCalendar(...)=" + xmlGregorianCalendar);
         return xmlGregorianCalendar;
     }
 
@@ -44,7 +44,7 @@ public class OrderManagerDateUtils {
         LOGGER.info("createXmlGregorianCalendar(" + localDate + ")");
         GregorianCalendar gregorianCalendar = createGregorianCalendar(localDate);
         XMLGregorianCalendar xmlGregorianCalendar = createXmlGregorianCalendar(gregorianCalendar);
-        LOGGER.info("createXmlGregorianCalendar(...)=" + xmlGregorianCalendar);
+//        LOGGER.info("createXmlGregorianCalendar(...)=" + xmlGregorianCalendar);
         return xmlGregorianCalendar;
     }
 }

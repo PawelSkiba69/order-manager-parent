@@ -93,12 +93,12 @@ public class ShipmentConfirmationManagerService {
                 LOGGER.info("#### getFeedSubmissionResultResponse: " + getFeedSubmissionResultResponse);
             } catch (MarketplaceWebServiceException ex) {
                 System.out.println("Caught Exception: " + ex.getMessage());
-                System.out.println("Response Status Code: " + ex.getStatusCode());
-                System.out.println("Error Code: " + ex.getErrorCode());
-                System.out.println("Error Type: " + ex.getErrorType());
-                System.out.println("Request ID: " + ex.getRequestId());
-                System.out.print("XML: " + ex.getXML());
-                System.out.println("ResponseHeaderMetadata: " + ex.getResponseHeaderMetadata());
+//                System.out.println("Response Status Code: " + ex.getStatusCode());
+//                System.out.println("Error Code: " + ex.getErrorCode());
+//                System.out.println("Error Type: " + ex.getErrorType());
+//                System.out.println("Request ID: " + ex.getRequestId());
+//                System.out.print("XML: " + ex.getXML());
+//                System.out.println("ResponseHeaderMetadata: " + ex.getResponseHeaderMetadata());
             }
             return "AMZ OK!";
         }
@@ -127,7 +127,7 @@ public class ShipmentConfirmationManagerService {
                     e.printStackTrace();
                 }
                 count++;
-
+                LOGGER.info("Waiting...");
                 try {
                     Thread.sleep(delay * count);
                 } catch (InterruptedException e) {

@@ -32,10 +32,10 @@ public class AmazonOrderReportService {
 
         RequestReportResponse newOrdersRequestReportResponse = amazonRequestReportConnector.report(NEW_ORDERS_REPORT_TYPE);
         RequestReportResponse unshippedOrdersRequestReportResponse = amazonRequestReportConnector.report(UNSHIPPED_ORDERS_REPORT_TYPE);
-        LOGGER.info("before reportId "+newOrdersRequestReportResponse);
+//        LOGGER.info("before reportId "+newOrdersRequestReportResponse);
         String newOrdersReportId = getReportId(newOrdersRequestReportResponse);
         String unshippedOrdersReportId = getReportId(unshippedOrdersRequestReportResponse);
-        LOGGER.info("after reportId "+newOrdersRequestReportResponse);
+//        LOGGER.info("after reportId "+newOrdersRequestReportResponse);
         List<ReportRequestInfo> reportRequestInfos = amazonGetReportRequestListConnector.reportList();
         String newOrdersGeneratedReportId = filterReportList(reportRequestInfos, newOrdersReportId);
         String unshippedOrdersGeneratedReportId = filterReportList(reportRequestInfos, unshippedOrdersReportId);
@@ -48,7 +48,7 @@ public class AmazonOrderReportService {
                 .unshippedOrdersOutputStream(unshippedOrdersOutputStream)
                 .build();
 
-        LOGGER.info("orderReport() = "+amazonOrderReportResult);
+//        LOGGER.info("orderReport() = "+amazonOrderReportResult);
         return amazonOrderReportResult;
     }
 

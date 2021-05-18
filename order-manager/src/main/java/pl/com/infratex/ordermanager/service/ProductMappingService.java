@@ -74,8 +74,8 @@ public class ProductMappingService {
 
                 }
 
-                LOGGER.info("order with internal id: " + order);
-                LOGGER.info("product with internal id: " + product);
+//                LOGGER.info("order with internal id: " + order);
+//                LOGGER.info("product with internal id: " + product);
             }
         }
         return sellerOrderReportModel;

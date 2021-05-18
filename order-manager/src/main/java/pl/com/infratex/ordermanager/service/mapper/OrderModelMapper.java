@@ -6,7 +6,6 @@ import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -16,11 +15,11 @@ public class OrderModelMapper {
     private static final Logger LOGGER = Logger.getLogger(OrderModelMapper.class.getName());
 
     public OrderEntity fromModel(OrderModel orderModel) {
-        LOGGER.info("orderModel: " + orderModel);
+//        LOGGER.info("orderModel: " + orderModel);
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
         OrderEntity orderEntity = modelMapper.map(orderModel, OrderEntity.class);
-        LOGGER.info("orderEntity: " + orderEntity);
+//        LOGGER.info("orderEntity: " + orderEntity);
         return orderEntity;
     }
 

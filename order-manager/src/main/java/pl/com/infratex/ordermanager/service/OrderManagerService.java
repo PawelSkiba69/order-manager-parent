@@ -180,7 +180,7 @@ public class OrderManagerService {
 
     private void saveOrUpdateOrders(List<OrderEntity> orderEntities, boolean update) {
         LOGGER.info("saveOrUpdateOrders()");
-        LOGGER.info("orderEntities: " + orderEntities);
+//        LOGGER.info("orderEntities: " + orderEntities);
         LOGGER.info("update: " + update);
 
         Integer generateId = sequenceIdGenerator.generateId(ORDER_BATCH_ID_SEQ);

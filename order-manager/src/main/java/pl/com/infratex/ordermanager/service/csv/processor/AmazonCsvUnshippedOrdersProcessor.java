@@ -57,7 +57,7 @@ public class AmazonCsvUnshippedOrdersProcessor implements AmazonCsvOrdersProcess
             } catch (DateTimeParseException e) {
                 LOGGER.severe("Unable to parse purchase data for order id: " + orderId);
             } finally {
-                LOGGER.info("Single Amazon csv unshipped order record: " + amazonCsvOrder);
+//                LOGGER.info("Single Amazon csv unshipped order record: " + amazonCsvOrder);
             }
         }
 

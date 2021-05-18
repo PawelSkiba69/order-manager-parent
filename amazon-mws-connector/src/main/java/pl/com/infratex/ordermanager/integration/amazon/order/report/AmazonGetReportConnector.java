@@ -11,7 +11,6 @@ import pl.com.infratex.ordermanager.integration.amazon.ConnectorHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
-import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 @Service
@@ -64,14 +63,15 @@ public class AmazonGetReportConnector {
 
         GetReportResponse response = null;
 
-        Future<GetReportResponse> getReportResponseFuture = service.getReportAsync(requests);
-
-        while (!getReportResponseFuture.isDone()) {
-            Thread.yield();
-        }
+//        Future<GetReportResponse> getReportResponseFuture = service.getReportAsync(requests);
+//
+//        while (!getReportResponseFuture.isDone()) {
+//            Thread.yield();
+//        }
         try {
 
-            response = getReportResponseFuture.get();
+//            response = getReportResponseFuture.get();
+            response =service.getReport(requests);
             // Original request corresponding to this response, if needed:
             // GetReportRequest originalRequest = requests.get(responses.indexOf(getReportResponseFuture));
             System.out.println("Result md5checksum : " + response.getGetReportResult().getMD5Checksum());
@@ -84,12 +84,12 @@ public class AmazonGetReportConnector {
             if (e.getCause() instanceof MarketplaceWebServiceException) {
                 MarketplaceWebServiceException exception = MarketplaceWebServiceException.class.cast(e.getCause());
                 System.out.println("Caught Exception: " + exception.getMessage());
-                System.out.println("Response Status Code: " + exception.getStatusCode());
-                System.out.println("Error Code: " + exception.getErrorCode());
-                System.out.println("Error Type: " + exception.getErrorType());
-                System.out.println("Request ID: " + exception.getRequestId());
-                System.out.print("XML: " + exception.getXML());
-                System.out.println("ResponseHeaderMetadata: " + exception.getResponseHeaderMetadata());
+//                System.out.println("Response Status Code: " + exception.getStatusCode());
+//                System.out.println("Error Code: " + exception.getErrorCode());
+//                System.out.println("Error Type: " + exception.getErrorType());
+//                System.out.println("Request ID: " + exception.getRequestId());
+//                System.out.print("XML: " + exception.getXML());
+//                System.out.println("ResponseHeaderMetadata: " + exception.getResponseHeaderMetadata());
             } else {
                 e.printStackTrace();
             }

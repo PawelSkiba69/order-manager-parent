@@ -33,7 +33,7 @@ public class AmazonCsvOrdersMergeProcessor {
                             amazonCsvUnshippedOrder.setBusinessOrder(amazonCsvNewOrder.isBusinessOrder());
                             amazonCsvUnshippedOrder.setShipPhoneNumber(amazonCsvNewOrder.getShipPhoneNumber());
                         } finally {
-                            LOGGER.info("Single Amazon csv unshipped order record after merge: " + amazonCsvUnshippedOrder);
+//                            LOGGER.info("Single Amazon csv unshipped order record after merge: " + amazonCsvUnshippedOrder);
                         }
                     }
                 }

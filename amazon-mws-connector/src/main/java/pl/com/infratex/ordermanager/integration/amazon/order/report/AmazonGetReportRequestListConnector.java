@@ -89,12 +89,12 @@ public class AmazonGetReportRequestListConnector {
             if (e.getCause() instanceof MarketplaceWebServiceException) {
                 MarketplaceWebServiceException exception = MarketplaceWebServiceException.class.cast(e.getCause());
                 System.out.println("Caught Exception: " + exception.getMessage());
-                System.out.println("Response Status Code: " + exception.getStatusCode());
-                System.out.println("Error Code: " + exception.getErrorCode());
-                System.out.println("Error Type: " + exception.getErrorType());
-                System.out.println("Request ID: " + exception.getRequestId());
-                System.out.print("XML: " + exception.getXML());
-                System.out.println("ResponseHeaderMetadata: " + exception.getResponseHeaderMetadata());
+//                System.out.println("Response Status Code: " + exception.getStatusCode());
+//                System.out.println("Error Code: " + exception.getErrorCode());
+//                System.out.println("Error Type: " + exception.getErrorType());
+//                System.out.println("Request ID: " + exception.getRequestId());
+//                System.out.print("XML: " + exception.getXML());
+//                System.out.println("ResponseHeaderMetadata: " + exception.getResponseHeaderMetadata());
             } else {
                 e.printStackTrace();
             }
@@ -121,6 +121,7 @@ public class AmazonGetReportRequestListConnector {
                     List<ReportRequestInfo> list = result.getReportRequestInfoList();
                     for (ReportRequestInfo reportRequestInfo : list) {
                         String generatedReportId = reportRequestInfo.getGeneratedReportId();
+                        LOGGER.info("generatedReportId "+generatedReportId);
                         if (generatedReportId == null) {
                             return null;
                         }
@@ -157,6 +158,7 @@ public class AmazonGetReportRequestListConnector {
                 }
                 count++;
 
+                LOGGER.info("Waiting...");
                 try {
 //                    Thread.sleep(delay * count);
                     Thread.sleep(delay);

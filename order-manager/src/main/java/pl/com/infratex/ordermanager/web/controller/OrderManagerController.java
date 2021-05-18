@@ -60,15 +60,10 @@ public class OrderManagerController {
     @GetMapping(value = "/upload")
     public String uploadFromAmazon(Model model) throws IOException {
         LOGGER.info("uploadFromAmazon()");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-//        orderManagerService.createSellerOrderReportFromAmazon();
-//        SellerOrderReportModel sellerOrderReportModel = orderManagerService.createSellerOrderReportFromAmazon();
-//        model.addAttribute("orders", sellerOrderReportModel.getOrders());
-        return ORDER_MANAGER_VIEW;
+        SellerOrderReportModel sellerOrderReportModel = orderManagerService.createSellerOrderReportFromAmazon();
+        model.addAttribute("orders", sellerOrderReportModel.getOrders());
+//        return ORDER_MANAGER_VIEW;
+        return "redirect:"+ORDER_MANAGEMENT_URI;
     }
 
     @PostMapping(value = "/generate")
