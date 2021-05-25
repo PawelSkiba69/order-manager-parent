@@ -104,6 +104,9 @@ public class ENadawcaManager {
         XMLGregorianCalendar startDateXML = ENadawcaXMLDateConverter.from(oldestLoadDate);
         XMLGregorianCalendar endDateXML = ENadawcaXMLDateConverter.from(newestLoadDate);
 
+        LOGGER.info("startDateXML: "+startDateXML);
+        LOGGER.info("endDateXML: "+endDateXML);
+
         List<EnvelopeInfoType> envelopeList = elektronicznyNadawca.getEnvelopeList(startDateXML, endDateXML);
 
         List<PrzesylkaShortType> przesylkaShortTypes = filterEnvelope(envelopeList, guids);

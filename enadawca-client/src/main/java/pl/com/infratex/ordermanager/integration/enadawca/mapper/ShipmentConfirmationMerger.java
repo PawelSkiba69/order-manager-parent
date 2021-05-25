@@ -10,7 +10,7 @@ import pl.poczta_polska.e_nadawca.PrzesylkaShortType;
 import pl.poczta_polska.e_nadawca.StatusType;
 
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 public class ShipmentConfirmationMerger {
 
     private static final Logger LOGGER = Logger.getLogger(ShipmentConfirmationMerger.class.getName());
+    public static final String CARRIER_CODE_OTHER = "other";
+    public static final String SHIP_METHOD_POCZTA_POLSKA = "Poczta Polska";
 
     public List<ShipmentConfirmationModel> merge(List<PrzesylkaShortType> przesylkaShortTypes, List<OrderModel> orders) {
 
@@ -50,8 +52,8 @@ public class ShipmentConfirmationMerger {
             shipmentConfirmationModel.setGuid(guid);
 
             XMLGregorianCalendar xmlGregorianCalendarDataNadania = przesylkaShortType.getDataNadania();
-            LocalDateTime localDateTimeDataNadania = ENadawcaXMLDateConverter.from(xmlGregorianCalendarDataNadania);
-            shipmentConfirmationModel.setDataNadania(localDateTimeDataNadania);
+            LocalDate localDateDataNadania = ENadawcaXMLDateConverter.from(xmlGregorianCalendarDataNadania);
+            shipmentConfirmationModel.setDataNadania(localDateDataNadania);
 
             StatusType statusType = przesylkaShortType.getStatus();
             if (statusType != null) {
@@ -65,9 +67,10 @@ public class ShipmentConfirmationMerger {
             ClientModel client = orderModel.getClient();
             if (client != null) {
                 String shipCountry = client.getShipCountry();
-                shipmentConfirmationModel.setCarrierCode(carrierCodeConverter.convert(shipCountry));
+                shipmentConfirmationModel.setCarrierName(carrierCodeConverter.convert(shipCountry));
+                shipmentConfirmationModel.setCarrierCode(CARRIER_CODE_OTHER);
+                shipmentConfirmationModel.setShipMethod(SHIP_METHOD_POCZTA_POLSKA);
             }
-
             return shipmentConfirmationModel;
         }
         return null;

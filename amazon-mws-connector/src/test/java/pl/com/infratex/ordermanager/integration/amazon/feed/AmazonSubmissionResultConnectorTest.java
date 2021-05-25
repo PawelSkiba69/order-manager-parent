@@ -1,12 +1,12 @@
 package pl.com.infratex.ordermanager.integration.amazon.feed;
 
 import com.amazonaws.mws.MarketplaceWebServiceException;
-import com.amazonaws.mws.model.GetFeedSubmissionResultResponse;
 import org.junit.jupiter.api.Test;
+import pl.com.infratex.ordermanager.integration.amazon.csv.AmazonSubmissionResult;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AmazonSubmissionResultConnectorTest {
 
@@ -16,7 +16,7 @@ class AmazonSubmissionResultConnectorTest {
         String feedSubmissionId = "53180018765";
         AmazonSubmissionResultConnector amazonSubmissionResultConnector = new AmazonSubmissionResultConnector();
         //WHEN
-        GetFeedSubmissionResultResponse getFeedSubmissionResultResponse =
+        AmazonSubmissionResult getFeedSubmissionResultResponse =
                 amazonSubmissionResultConnector.feedSubmissionResult(feedSubmissionId);
         //THEN
         assertNotNull(getFeedSubmissionResultResponse,"rezultat jest nullem");

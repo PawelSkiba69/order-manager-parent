@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -17,7 +17,7 @@ public class ShipmentConfirmationModel {
     private String numerNadania;
     private String guid;
     /** ship-date - dataNadania */
-    private LocalDateTime dataNadania;
+    private LocalDate dataNadania;
     private ShipmentConfirmationStatusType status;
 
     // pozostałe

@@ -14,6 +14,7 @@ import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +57,7 @@ class ShipmentConfirmationManagerServiceMockTest {
                 ShipmentConfirmationModel.builder()
                         .carrierCode("Poczta Polska")
                         .carrierName("Correos")
-                        .dataNadania(LocalDateTime.now())
+                        .dataNadania(LocalDate.now())
                         .guid("2j3i2rpp")
                         .numerNadania("RR874292802PL")
                         .orderId("203-839434-83892")
@@ -64,7 +65,7 @@ class ShipmentConfirmationManagerServiceMockTest {
                 ShipmentConfirmationModel.builder()
                         .carrierCode("Poczta Polska")
                         .carrierName("La Poste")
-                        .dataNadania(LocalDateTime.now())
+                        .dataNadania(LocalDate.now())
                         .guid("2j3ythfd")
                         .numerNadania("RR87555402PL")
                         .orderId("805-64663-86592")

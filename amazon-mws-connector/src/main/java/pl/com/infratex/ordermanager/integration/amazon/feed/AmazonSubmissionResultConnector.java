@@ -9,9 +9,12 @@ import com.amazonaws.mws.model.GetFeedSubmissionResultResponse;
 import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.integration.amazon.ConnectorHelper;
 import pl.com.infratex.ordermanager.integration.amazon.csv.AmazonCsvSubmissionResultProcessor;
+import pl.com.infratex.ordermanager.integration.amazon.csv.AmazonSubmissionResult;
+import pl.com.infratex.ordermanager.integration.amazon.csv.model.AmazonCsvSubmissionResultModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Component
@@ -28,7 +31,7 @@ public class AmazonSubmissionResultConnector {
 
     private static final String M_ID = "A3NLKSN848UAEB";
 
-    public GetFeedSubmissionResultResponse feedSubmissionResult(String feedSubmissionId) throws IOException, MarketplaceWebServiceException {
+    public AmazonSubmissionResult feedSubmissionResult(String feedSubmissionId) throws IOException, MarketplaceWebServiceException {
         MarketplaceWebServiceConfig config = new MarketplaceWebServiceConfig();
         config.setServiceURL(MWS_AMAZONSERVICES_CO_UK);
 
@@ -40,17 +43,20 @@ public class AmazonSubmissionResultConnector {
         GetFeedSubmissionResultRequest request = new GetFeedSubmissionResultRequest();
         request.setMerchant(M_ID);
 
-        // FIXME:
-//        request.setFeedSubmissionId("52421018652");
         request.setFeedSubmissionId(feedSubmissionId);
 
         ByteArrayOutputStream processingResult = new ByteArrayOutputStream();
         request.setFeedSubmissionResultOutputStream(processingResult);
 
         AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor = new AmazonCsvSubmissionResultProcessor();
-        amazonCsvSubmissionResultProcessor.processResult(processingResult);
+        List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels = amazonCsvSubmissionResultProcessor.processResult(processingResult);
 
-        return invokeGetFeedSubmissionResult(service, request);
+        GetFeedSubmissionResultResponse getFeedSubmissionResultResponse = invokeGetFeedSubmissionResult(service, request);
+
+        AmazonSubmissionResult amazonSubmissionResult = new AmazonSubmissionResult(
+                amazonCsvSubmissionResultModels, getFeedSubmissionResultResponse);
+
+        return amazonSubmissionResult;
     }
 
     private GetFeedSubmissionResultResponse invokeGetFeedSubmissionResult(MarketplaceWebService service,

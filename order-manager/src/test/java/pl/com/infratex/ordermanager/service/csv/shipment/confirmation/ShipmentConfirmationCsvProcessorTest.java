@@ -6,7 +6,7 @@ import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +24,7 @@ class ShipmentConfirmationCsvProcessorTest {
                 ShipmentConfirmationModel.builder()
                         .carrierCode("Poczta Polska")
                         .carrierName("Correos")
-                        .dataNadania(LocalDateTime.now())
+                        .dataNadania(LocalDate.now())
                         .guid("2j3i2rpp")
                         .numerNadania("RR874292802PL")
                         .orderId("203-839434-83892")
@@ -32,7 +32,7 @@ class ShipmentConfirmationCsvProcessorTest {
                 ShipmentConfirmationModel.builder()
                         .carrierCode("Poczta Polska")
                         .carrierName("La Poste")
-                        .dataNadania(LocalDateTime.now())
+                        .dataNadania(LocalDate.now())
                         .guid("2j3ythfd")
                         .numerNadania("RR87555402PL")
                         .orderId("805-64663-86592")

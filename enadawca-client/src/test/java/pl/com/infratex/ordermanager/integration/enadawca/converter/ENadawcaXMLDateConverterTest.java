@@ -2,15 +2,15 @@ package pl.com.infratex.ordermanager.integration.enadawca.converter;
 
 import org.junit.jupiter.api.Test;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.GregorianCalendar;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ENadawcaXMLDateConverterTest {
 
@@ -25,9 +25,9 @@ class ENadawcaXMLDateConverterTest {
 
         XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(sdf.format(startDateCalendar.getTime()));
         //WHEN
-        LocalDateTime localDateTime = ENadawcaXMLDateConverter.from(xmlGregorianCalendar);
+        LocalDate localDate = ENadawcaXMLDateConverter.from(xmlGregorianCalendar);
         //THEN
-        assertEquals(expectedLocalDateTime,localDateTime,"daty są różne");
+        assertEquals(expectedLocalDateTime,localDate,"daty są różne");
     }
 
     @Test

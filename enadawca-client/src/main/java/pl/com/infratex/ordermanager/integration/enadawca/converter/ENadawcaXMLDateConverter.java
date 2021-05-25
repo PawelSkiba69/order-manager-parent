@@ -4,6 +4,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 
@@ -24,10 +25,10 @@ public class ENadawcaXMLDateConverter {
         return xmlGregorianCalendar;
     }
 
-    public static LocalDateTime from(XMLGregorianCalendar xmlGregorianCalendar) {
+    public static LocalDate from(XMLGregorianCalendar xmlGregorianCalendar) {
         if (xmlGregorianCalendar != null) {
-            return xmlGregorianCalendar.toGregorianCalendar().toZonedDateTime().toLocalDateTime();
+            return xmlGregorianCalendar.toGregorianCalendar().toZonedDateTime().toLocalDate();
         }
-        return LocalDateTime.now();
+        return LocalDate.now();
     }
 }

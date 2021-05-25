@@ -11,7 +11,7 @@ import pl.poczta_polska.e_nadawca.StatusType;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -65,7 +65,7 @@ class ShipmentConfirmationMergerTest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.format(startDateCalendar.getTime());
 
-        LocalDateTime expectedLocalDateTime = LocalDateTime.of(2020, Month.JULY, 20, 0, 0);
+        LocalDate expectedLocalDate = LocalDate.of(2020, Month.JULY, 20);
 
         XMLGregorianCalendar dataNadania = DatatypeFactory.newInstance().newXMLGregorianCalendar(sdf.format(startDateCalendar.getTime()));
         przesylkaShortType.setDataNadania(dataNadania);
@@ -84,7 +84,7 @@ class ShipmentConfirmationMergerTest {
         //THEN
         assertAll(
                 () -> assertEquals(NUMER_NADANIA_RR_4934820_PL, shipmentConfirmationModel.getNumerNadania(), "numery nadania nie są takie same"),
-                () -> assertEquals(expectedLocalDateTime, shipmentConfirmationModel.getDataNadania(), "daty nadania nie są takie same"),
+                () -> assertEquals(expectedLocalDate, shipmentConfirmationModel.getDataNadania(), "daty nadania nie są takie same"),
                 () -> assertEquals(orderModel.getOrderId(), shipmentConfirmationModel.getOrderId(), "id zamówienia nie są takie same"),
                 () -> assertEquals(orderModel.getGuid(), shipmentConfirmationModel.getGuid(), "guidy nie są takie same"),
                 () -> assertEquals(orderModel.getClient().getShipCountry(), shipmentConfirmationModel.getCarrierCode(), "kody kuriera nie są takie same")
