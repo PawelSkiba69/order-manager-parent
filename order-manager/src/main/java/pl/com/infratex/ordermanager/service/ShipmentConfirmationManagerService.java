@@ -3,6 +3,8 @@ package pl.com.infratex.ordermanager.service;
 import com.amazonaws.mws.MarketplaceWebServiceException;
 import com.amazonaws.mws.model.SubmitFeedResponse;
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.api.OrderStatusType;
+import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.api.exception.shipment.confirmation.ShipmentConfirmationCsvProcessorException;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.integration.amazon.csv.AmazonSubmissionResult;
@@ -17,6 +19,7 @@ import pl.com.infratex.ordermanager.web.model.coverter.ShipmentConfirmationModel
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -25,6 +28,7 @@ import java.util.logging.Logger;
 @Service
 public class ShipmentConfirmationManagerService {
     private static final Logger LOGGER = Logger.getLogger(ShipmentConfirmationManagerService.class.getName());
+    public static final String SUBMISSION_RESULT_TYPE_ERROR_ERROR = "Error";
 
     private final ENadawcaService eNadawcaService;
     private final OrderService orderService;
@@ -59,24 +63,25 @@ public class ShipmentConfirmationManagerService {
             String submitFeedResponseJSON = submitFeedResponse.toJSON();
             LOGGER.info("submitFeedResponseJSON: " + submitFeedResponseJSON);
 
-            List<OrderModel> orderModels = shipmentConfirmationModelConverter.from(shipmentConfirmationModels);
+            List<OrderModel> orders = shipmentConfirmationModelConverter.from(shipmentConfirmationModels);
             LOGGER.info("#### BEFORE CALLABLE");
             // FIXME: uncomment!!!
-//            AmazonSubmissionResult amazonSubmissionResult = checkShipment(feedSubmissionId);
-            AmazonSubmissionResult amazonSubmissionResult = checkShipment("53240018772");
+            AmazonSubmissionResult amazonSubmissionResult = checkShipment(feedSubmissionId);
+//            AmazonSubmissionResult amazonSubmissionResult = checkShipment("53240018772");
 
             LOGGER.info("#### amazonSubmissionResult: " + amazonSubmissionResult);
             if (amazonSubmissionResult != null) {
                 List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels =
                         amazonSubmissionResult.getAmazonCsvSubmissionResultModels();
                 LOGGER.info("#### amazonSubmissionResult: " + amazonCsvSubmissionResultModels);
+                LOGGER.info("#### AFTER CALLABLE");
+                // TODO: Add verification (subtract amazonCsvSubmissionResultModels from orders by correct errorType):
+                //  confirmShipment()
+                //  List<OrderModel> orders <-String orderId-> List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels
+                //  checkShipment()
+                filterShipments(amazonCsvSubmissionResultModels, orders);
+                orderService.updateOrderStatus(orders, OrderStatusType.SENT);
             }
-            LOGGER.info("#### AFTER CALLABLE");
-            // TODO: Add verification (subtract amazonCsvSubmissionResultModels from orderModels by correct errorType):
-            //  confirmShipment()
-            //  List<OrderModel> orderModels <-String orderId-> List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels
-            //  checkShipment()
-            //orderService.updateOrderStatus(orderModels, OrderStatusType.SENT);
         } catch (ShipmentConfirmationCsvProcessorException e) {
             e.printStackTrace();
             //TODO zastanowić się co z tym zrobić
@@ -87,7 +92,29 @@ public class ShipmentConfirmationManagerService {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        } catch (OrderNotFoundException e) {
+            e.printStackTrace();
         }
+    }
+
+    void filterShipments(List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResults, List<OrderModel> orders) {
+        for (AmazonCsvSubmissionResultModel result : amazonCsvSubmissionResults) {
+            LOGGER.info("amazonCsvSubmissionResults: " + amazonCsvSubmissionResults);
+            LOGGER.info("orders: " + orders);
+            String errorType = result.getErrorType();
+            if (errorType.equals(SUBMISSION_RESULT_TYPE_ERROR_ERROR)) {
+                String orderIdWithError = result.getOrderId();
+                Iterator<OrderModel> iterator = orders.iterator();
+                while (iterator.hasNext()) {
+                    OrderModel orderModel = iterator.next();
+                    String orderId = orderModel.getOrderId();
+                    if (orderId.equals(orderIdWithError)) {
+                        iterator.remove();
+                    }
+                }
+            }
+        }
+        LOGGER.info("orders: " + orders);
     }
 
     class FeedSubmissionResultCallable implements Callable<AmazonSubmissionResult> {
@@ -99,7 +126,7 @@ public class ShipmentConfirmationManagerService {
 
         @Override
         public AmazonSubmissionResult call() throws Exception {
-            System.out.println("#### CALL FeedSubmissionResultCallable");
+            LOGGER.info("#### CALL FeedSubmissionResultCallable");
             try {
 //                GetFeedSubmissionResultResponse getFeedSubmissionResultResponse =
                 AmazonSubmissionResult amazonSubmissionResult = amazonSubmissionResultConnector.feedSubmissionResult(feedSubmissionId);
@@ -133,8 +160,7 @@ public class ShipmentConfirmationManagerService {
             T result = null;
             int count = 0;
 
-//            while (count <= tries || result != null) {
-            while (count <= tries) {
+            while (result == null) {
                 try {
                     result = callable.call();
                 } catch (Exception e) {
@@ -154,45 +180,10 @@ public class ShipmentConfirmationManagerService {
     }
 
     public AmazonSubmissionResult checkShipment(String feedSubmissionId) throws ExecutionException, InterruptedException {
-        /*
-        Callable<String> getFeedSubmissionResultCallable = () -> {
-            System.out.println("getFeedSubmissionResultCallable");
-            try {
-//                Thread.sleep(5000);
-                GetFeedSubmissionResultResponse getFeedSubmissionResultResponse =
-                        amazonSubmissionResultConnector.feedSubmissionResult(feedSubmissionId);
-                LOGGER.info("#### getFeedSubmissionResultResponse: " + getFeedSubmissionResultResponse);
-            } catch (MarketplaceWebServiceException ex) {
-                System.out.println("Caught Exception: " + ex.getMessage());
-                System.out.println("Response Status Code: " + ex.getStatusCode());
-                System.out.println("Error Code: " + ex.getErrorCode());
-                System.out.println("Error Type: " + ex.getErrorType());
-                System.out.println("Request ID: " + ex.getRequestId());
-                System.out.print("XML: " + ex.getXML());
-                System.out.println("ResponseHeaderMetadata: " + ex.getResponseHeaderMetadata());
-            }
-            return "AMZ OK!";
-        };
-        */
-        //        ExecutorService executorService = Executors.newSingleThreadExecutor();
-//        Future<String> futureResultString = executorService.submit(getFeedSubmissionResultCallable);
-//        executorService.shutdown();
-//        String resultString = futureResultString.get();
-
-//        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-//        threadPoolTaskExecutor.setCorePoolSize(2);
-//        threadPoolTaskExecutor.setMaxPoolSize(2);
-//        threadPoolTaskExecutor.initialize();
-
         FeedSubmissionResultCallable callable = new FeedSubmissionResultCallable(feedSubmissionId);
-//        Future<String> stringFuture = threadPoolTaskExecutor.submit(callable);
 
         RetryHelper<AmazonSubmissionResult> retryHelper = new RetryHelper<>(3, 3000, callable);
         return retryHelper.retry();
-//        LOGGER.info("#### stringFuture: " + stringFuture);
-//        String resultString = stringFuture.get();
-//        LOGGER.info("#### resultString " + resultString);
-//        threadPoolTaskExecutor.shutdown();
     }
 
 }

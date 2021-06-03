@@ -16,7 +16,7 @@ public class AmazonSubmitFeedScheduledTask {
         this.shipmentConfirmationManagerService = shipmentConfirmationManagerService;
     }
 
-    @Scheduled(fixedRate = 5000L)
+    @Scheduled(fixedRate = 50000L)
     public void task() {
         LOGGER.info("executing scheduled task");
         shipmentConfirmationManagerService.confirmShipment();

@@ -13,6 +13,7 @@ public class ShipmentConfirmationModelConverter {
     public OrderModel from(ShipmentConfirmationModel shipmentConfirmationModel) {
         OrderModel orderModel = new OrderModel();
         orderModel.setOId(shipmentConfirmationModel.getOId());
+        orderModel.setOrderId(shipmentConfirmationModel.getOrderId());
         return orderModel;
     }
 

@@ -48,15 +48,20 @@ public class AmazonSubmissionResultConnector {
         ByteArrayOutputStream processingResult = new ByteArrayOutputStream();
         request.setFeedSubmissionResultOutputStream(processingResult);
 
+        GetFeedSubmissionResultResponse getFeedSubmissionResultResponse = invokeGetFeedSubmissionResult(service, request);
+
         AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor = new AmazonCsvSubmissionResultProcessor();
         List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels = amazonCsvSubmissionResultProcessor.processResult(processingResult);
 
-        GetFeedSubmissionResultResponse getFeedSubmissionResultResponse = invokeGetFeedSubmissionResult(service, request);
+        if (getFeedSubmissionResultResponse != null) {
+            AmazonSubmissionResult amazonSubmissionResult =
+                    new AmazonSubmissionResult(amazonCsvSubmissionResultModels, getFeedSubmissionResultResponse);
+            LOGGER.info("getFeedSubmissionResultResponse: " + getFeedSubmissionResultResponse);
 
-        AmazonSubmissionResult amazonSubmissionResult = new AmazonSubmissionResult(
-                amazonCsvSubmissionResultModels, getFeedSubmissionResultResponse);
-
-        return amazonSubmissionResult;
+            return amazonSubmissionResult;
+        } else {
+            return null;
+        }
     }
 
     private GetFeedSubmissionResultResponse invokeGetFeedSubmissionResult(MarketplaceWebService service,
