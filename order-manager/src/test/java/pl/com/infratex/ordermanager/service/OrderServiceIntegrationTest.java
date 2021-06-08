@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.com.infratex.ordermanager.api.OrderStatusType;
+import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.service.mapper.OrderModelMapper;
@@ -63,7 +64,7 @@ class OrderServiceIntegrationTest {
 
     @Test
 //    @Rollback(false)
-    void oldestUnshippedLabeledOrder() {
+    void oldestUnshippedLabeledOrder() throws OrderNotFoundException {
         //GIVEN
         List<OrderModel> orders = asList(
                 OrderModel.builder().oId(O_ID_1).status(OrderStatusType.LABELED).loadDate(DATE_1).build(),

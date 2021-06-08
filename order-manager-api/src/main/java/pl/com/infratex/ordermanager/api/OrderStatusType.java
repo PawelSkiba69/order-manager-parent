@@ -8,5 +8,6 @@ public enum OrderStatusType {
     CANCELLED,
     UNDELIVERED,
     RETURNED,
-    SHIPPED
+    SHIPPED,
+    SHIP_CONFIRM_ERROR
 }

@@ -1,6 +1,7 @@
 package pl.com.infratex.ordermanager.service.enadawca;
 
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.integration.enadawca.ENadawcaManager;
@@ -60,7 +61,7 @@ public class ENadawcaService {
 
     }
 
-    public List<ShipmentConfirmationModel> checkStatus(LocalDateTime newestLoadDate) {
+    public List<ShipmentConfirmationModel> checkStatus(LocalDateTime newestLoadDate) throws OrderNotFoundException {
         LOGGER.info("checkStatus(" + newestLoadDate + ")");
         OrderModel orderModel = orderService.oldestUnshippedLabeledOrder();
         LocalDateTime oldestLoadDate = orderModel.getLoadDate();

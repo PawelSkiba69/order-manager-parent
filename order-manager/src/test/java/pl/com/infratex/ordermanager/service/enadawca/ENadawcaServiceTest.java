@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.service.enadawca;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
 
@@ -55,7 +56,7 @@ class ENadawcaServiceTest {
     }
 
     @Test
-    void checkStatus(){
+    void checkStatus() throws OrderNotFoundException {
         //given
 
         //when

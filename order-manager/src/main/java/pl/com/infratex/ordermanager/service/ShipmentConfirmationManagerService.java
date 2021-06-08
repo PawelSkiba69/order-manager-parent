@@ -14,7 +14,9 @@ import pl.com.infratex.ordermanager.integration.amazon.feed.AmazonSubmitFeedConn
 import pl.com.infratex.ordermanager.service.csv.shipment.confirmation.ShipmentConfirmationCsvProcessor;
 import pl.com.infratex.ordermanager.service.enadawca.ENadawcaService;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
+import pl.com.infratex.ordermanager.web.model.ShipmentConfirmationReportModel;
 import pl.com.infratex.ordermanager.web.model.coverter.ShipmentConfirmationModelConverter;
+import pl.com.infratex.ordermanager.web.model.coverter.ShipmentConfirmationReportConverter;
 
 import java.io.InputStream;
 import java.time.LocalDateTime;
@@ -33,22 +35,21 @@ public class ShipmentConfirmationManagerService {
     private final ENadawcaService eNadawcaService;
     private final OrderService orderService;
     private final ShipmentConfirmationCsvProcessor shipmentConfirmationCsvProcessor;
-    //    private final AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor;
     private final AmazonSubmitFeedConnector amazonSubmitFeedConnector;
     private final ShipmentConfirmationModelConverter shipmentConfirmationModelConverter;
+    private final ShipmentConfirmationReportConverter shipmentConfirmationReportConverter;
     private final AmazonSubmissionResultConnector amazonSubmissionResultConnector;
 
     public ShipmentConfirmationManagerService(ENadawcaService eNadawcaService, OrderService orderService,
                                               ShipmentConfirmationCsvProcessor shipmentConfirmationCsvProcessor,
-//                                              AmazonCsvSubmissionResultProcessor amazonCsvSubmissionResultProcessor,
                                               AmazonSubmitFeedConnector amazonSubmitFeedConnector,
-                                              ShipmentConfirmationModelConverter shipmentConfirmationModelConverter, AmazonSubmissionResultConnector amazonSubmissionResultConnector) {
+                                              ShipmentConfirmationModelConverter shipmentConfirmationModelConverter, ShipmentConfirmationReportConverter shipmentConfirmationReportConverter, AmazonSubmissionResultConnector amazonSubmissionResultConnector) {
         this.eNadawcaService = eNadawcaService;
         this.orderService = orderService;
         this.shipmentConfirmationCsvProcessor = shipmentConfirmationCsvProcessor;
-//        this.amazonCsvSubmissionResultProcessor = amazonCsvSubmissionResultProcessor;
         this.amazonSubmitFeedConnector = amazonSubmitFeedConnector;
         this.shipmentConfirmationModelConverter = shipmentConfirmationModelConverter;
+        this.shipmentConfirmationReportConverter = shipmentConfirmationReportConverter;
         this.amazonSubmissionResultConnector = amazonSubmissionResultConnector;
     }
 
@@ -56,7 +57,8 @@ public class ShipmentConfirmationManagerService {
         LOGGER.info("confirmShipment()");
         List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
         try {
-            shipmentConfirmationModels = eNadawcaService.checkStatus(LocalDateTime.now());
+            LocalDateTime loadDate = LocalDateTime.now();
+            shipmentConfirmationModels = eNadawcaService.checkStatus(loadDate);
             InputStream csvInputStream = shipmentConfirmationCsvProcessor.createCsv(shipmentConfirmationModels);
             SubmitFeedResponse submitFeedResponse = amazonSubmitFeedConnector.submitFeed(csvInputStream);
             String feedSubmissionId = submitFeedResponse.getSubmitFeedResult().getFeedSubmissionInfo().getFeedSubmissionId();
@@ -65,9 +67,7 @@ public class ShipmentConfirmationManagerService {
 
             List<OrderModel> orders = shipmentConfirmationModelConverter.from(shipmentConfirmationModels);
             LOGGER.info("#### BEFORE CALLABLE");
-            // FIXME: uncomment!!!
             AmazonSubmissionResult amazonSubmissionResult = checkShipment(feedSubmissionId);
-//            AmazonSubmissionResult amazonSubmissionResult = checkShipment("53240018772");
 
             LOGGER.info("#### amazonSubmissionResult: " + amazonSubmissionResult);
             if (amazonSubmissionResult != null) {
@@ -75,12 +75,20 @@ public class ShipmentConfirmationManagerService {
                         amazonSubmissionResult.getAmazonCsvSubmissionResultModels();
                 LOGGER.info("#### amazonSubmissionResult: " + amazonCsvSubmissionResultModels);
                 LOGGER.info("#### AFTER CALLABLE");
-                // TODO: Add verification (subtract amazonCsvSubmissionResultModels from orders by correct errorType):
-                //  confirmShipment()
-                //  List<OrderModel> orders <-String orderId-> List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels
-                //  checkShipment()
-                filterShipments(amazonCsvSubmissionResultModels, orders);
+
+                List<OrderModel> ordersWithConfirmError = filterShipments(amazonCsvSubmissionResultModels, orders);
                 orderService.updateOrderStatus(orders, OrderStatusType.SENT);
+                orderService.updateOrderStatus(ordersWithConfirmError, OrderStatusType.SHIP_CONFIRM_ERROR);
+
+                ShipmentConfirmationReportModel shipmentConfirmationReportModel =
+                        shipmentConfirmationReportConverter.convert(loadDate, orders.size(), ordersWithConfirmError.size());
+                // TODO: add ShipmentConfirmationReportService with save() and list() methods
+                // add ShipmentConfirmationReportEntity
+                // add ShipmentConfirmationReportRepository
+                // add ShipmentConfirmationReportMapper
+                // add JUnit tests!
+                // figure out how to save files in Entity with JPA
+
             }
         } catch (ShipmentConfirmationCsvProcessorException e) {
             e.printStackTrace();
@@ -93,11 +101,14 @@ public class ShipmentConfirmationManagerService {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (OrderNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.warning(e.getMessage());
         }
     }
 
-    void filterShipments(List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResults, List<OrderModel> orders) {
+    List<OrderModel> filterShipments(List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResults, List<OrderModel> orders) {
+
+        List<OrderModel> ordersWithConfirmError = new ArrayList<>();
+
         for (AmazonCsvSubmissionResultModel result : amazonCsvSubmissionResults) {
             LOGGER.info("amazonCsvSubmissionResults: " + amazonCsvSubmissionResults);
             LOGGER.info("orders: " + orders);
@@ -109,12 +120,16 @@ public class ShipmentConfirmationManagerService {
                     OrderModel orderModel = iterator.next();
                     String orderId = orderModel.getOrderId();
                     if (orderId.equals(orderIdWithError)) {
+                        ordersWithConfirmError.add(orderModel);
                         iterator.remove();
                     }
                 }
             }
         }
         LOGGER.info("orders: " + orders);
+        LOGGER.info("orders with error: " + ordersWithConfirmError);
+
+        return ordersWithConfirmError;
     }
 
     class FeedSubmissionResultCallable implements Callable<AmazonSubmissionResult> {

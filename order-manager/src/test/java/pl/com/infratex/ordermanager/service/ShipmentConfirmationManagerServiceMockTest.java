@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.api.exception.shipment.confirmation.ShipmentConfirmationCsvProcessorException;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
 import pl.com.infratex.ordermanager.integration.amazon.feed.AmazonSubmitFeedConnector;
@@ -39,7 +40,7 @@ class ShipmentConfirmationManagerServiceMockTest {
 
 
     @Test
-    void confirmShipmentENadawcaWithOrderServiceMock() throws ShipmentConfirmationCsvProcessorException {
+    void confirmShipmentENadawcaWithOrderServiceMock() throws ShipmentConfirmationCsvProcessorException, OrderNotFoundException {
         //GIVEN
         OrderModel orderModel= OrderModel.builder()
                 .orderId("408-8953630-8555526")

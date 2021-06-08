@@ -89,9 +89,9 @@ public class OrderService {
         }
     }
 
-    public OrderModel oldestUnshippedLabeledOrder() {
+    public OrderModel oldestUnshippedLabeledOrder() throws OrderNotFoundException {
         OrderEntity orderEntity = orderRepository.findFirstByStatusOrderByLoadDateAsc(OrderStatusType.LABELED);
-        //FIXME jeżeli orderEntity jest null to rzucić własny wyjątek
+        if(orderEntity==null) throw new OrderNotFoundException("Orders with status LABELED not found");
         return orderModelMapper.fromEntity(orderEntity);
     }
 
