@@ -34,23 +34,22 @@ public class ShipmentConfirmationManagerService {
 
     private final ENadawcaService eNadawcaService;
     private final OrderService orderService;
+    private final ShipmentConfirmationReportService shipmentConfirmationReportService;
     private final ShipmentConfirmationCsvProcessor shipmentConfirmationCsvProcessor;
+    private final AmazonSubmissionResultConnector amazonSubmissionResultConnector;
     private final AmazonSubmitFeedConnector amazonSubmitFeedConnector;
     private final ShipmentConfirmationModelConverter shipmentConfirmationModelConverter;
     private final ShipmentConfirmationReportConverter shipmentConfirmationReportConverter;
-    private final AmazonSubmissionResultConnector amazonSubmissionResultConnector;
 
-    public ShipmentConfirmationManagerService(ENadawcaService eNadawcaService, OrderService orderService,
-                                              ShipmentConfirmationCsvProcessor shipmentConfirmationCsvProcessor,
-                                              AmazonSubmitFeedConnector amazonSubmitFeedConnector,
-                                              ShipmentConfirmationModelConverter shipmentConfirmationModelConverter, ShipmentConfirmationReportConverter shipmentConfirmationReportConverter, AmazonSubmissionResultConnector amazonSubmissionResultConnector) {
+    public ShipmentConfirmationManagerService(ENadawcaService eNadawcaService, OrderService orderService, ShipmentConfirmationReportService shipmentConfirmationReportService, ShipmentConfirmationCsvProcessor shipmentConfirmationCsvProcessor, AmazonSubmissionResultConnector amazonSubmissionResultConnector, AmazonSubmitFeedConnector amazonSubmitFeedConnector, ShipmentConfirmationModelConverter shipmentConfirmationModelConverter, ShipmentConfirmationReportConverter shipmentConfirmationReportConverter) {
         this.eNadawcaService = eNadawcaService;
         this.orderService = orderService;
+        this.shipmentConfirmationReportService = shipmentConfirmationReportService;
         this.shipmentConfirmationCsvProcessor = shipmentConfirmationCsvProcessor;
+        this.amazonSubmissionResultConnector = amazonSubmissionResultConnector;
         this.amazonSubmitFeedConnector = amazonSubmitFeedConnector;
         this.shipmentConfirmationModelConverter = shipmentConfirmationModelConverter;
         this.shipmentConfirmationReportConverter = shipmentConfirmationReportConverter;
-        this.amazonSubmissionResultConnector = amazonSubmissionResultConnector;
     }
 
     public void confirmShipment() {
@@ -82,6 +81,8 @@ public class ShipmentConfirmationManagerService {
 
                 ShipmentConfirmationReportModel shipmentConfirmationReportModel =
                         shipmentConfirmationReportConverter.convert(loadDate, orders.size(), ordersWithConfirmError.size());
+
+                shipmentConfirmationReportService.save(shipmentConfirmationReportModel);
                 // TODO: add ShipmentConfirmationReportService with save() and list() methods
                 // add ShipmentConfirmationReportEntity
                 // add ShipmentConfirmationReportRepository

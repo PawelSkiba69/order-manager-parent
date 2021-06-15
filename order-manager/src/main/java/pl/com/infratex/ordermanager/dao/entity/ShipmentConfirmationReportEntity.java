@@ -1,29 +1,28 @@
-package pl.com.infratex.ordermanager.web.model;
+package pl.com.infratex.ordermanager.dao.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
-//@Data
-//@Builder
-//@NoArgsConstructor
-//@AllArgsConstructor
-public class ShipmentConfirmationReportModel {
+@Entity
+@Table(name = "SHIPMENT_CONFIRM_REPORTS")
+public class ShipmentConfirmationReportEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime reportDate;
     private int shipmentConfirmedNumber;
     private int shipmentWithConfirmErrorNumber;
     private Long fileId;
 
-    public ShipmentConfirmationReportModel() {
+    public ShipmentConfirmationReportEntity() {
     }
 
-    public ShipmentConfirmationReportModel(LocalDateTime reportDate, int shipmentConfirmedNumber, int shipmentWithConfirmErrorNumber) {
-        this.reportDate = reportDate;
-        this.shipmentConfirmedNumber = shipmentConfirmedNumber;
-        this.shipmentWithConfirmErrorNumber = shipmentWithConfirmErrorNumber;
-    }
-
-    public ShipmentConfirmationReportModel(Long id, LocalDateTime reportDate, int shipmentConfirmedNumber, int shipmentWithConfirmErrorNumber, Long fileId) {
+    public ShipmentConfirmationReportEntity(Long id, LocalDateTime reportDate, int shipmentConfirmedNumber, int shipmentWithConfirmErrorNumber, Long fileId) {
         this.id = id;
         this.reportDate = reportDate;
         this.shipmentConfirmedNumber = shipmentConfirmedNumber;
@@ -73,7 +72,7 @@ public class ShipmentConfirmationReportModel {
 
     @Override
     public String toString() {
-        return "ShipmentConfirmationReportModel{" +
+        return "ShipmentConfirmationReportEntity{" +
                 "id=" + id +
                 ", reportDate=" + reportDate +
                 ", shipmentConfirmedNumber=" + shipmentConfirmedNumber +
