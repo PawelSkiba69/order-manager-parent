@@ -31,4 +31,10 @@ public class ShipmentConfirmationReportController {
         model.addAttribute("shipmentConfirmationReports", shipmentConfirmationReports);
         return SHIPMENT_CONFIRMATION_REPORTS_VIEW;
     }
+
+    @GetMapping(value="/download")
+    public String download(){
+        LOGGER.info("download()");
+        return SHIPMENT_CONFIRMATION_REPORTS_VIEW;
+    }
 }

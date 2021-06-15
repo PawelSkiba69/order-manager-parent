@@ -31,7 +31,6 @@ public class OrderModelMapper {
         return orderModel;
     }
 
-
     public List<OrderEntity> fromModels(List<OrderModel> orderModels) {
         return orderModels.stream()
                 .map(this::fromModel)

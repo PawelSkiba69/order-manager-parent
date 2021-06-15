@@ -1,5 +1,6 @@
 package pl.com.infratex.ordermanager.service;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.com.infratex.ordermanager.dao.entity.ShipmentConfirmationReportEntity;
 import pl.com.infratex.ordermanager.dao.repository.ShipmentConfirmationReportRepository;
@@ -30,7 +31,7 @@ public class ShipmentConfirmationReportService {
 
     public List<ShipmentConfirmationReportModel> list() {
         LOGGER.info("list()");
-        List<ShipmentConfirmationReportEntity> shipmentConfirmationReportRepositoryAll = shipmentConfirmationReportRepository.findAll();
+        List<ShipmentConfirmationReportEntity> shipmentConfirmationReportRepositoryAll = shipmentConfirmationReportRepository.findAll(Sort.by(Sort.Direction.DESC,"reportDate"));
         List<ShipmentConfirmationReportModel> shipmentConfirmationReportModels = shipmentConfirmationReportMapper.fromEntities(shipmentConfirmationReportRepositoryAll);
         LOGGER.info("list()=" + shipmentConfirmationReportModels);
         return shipmentConfirmationReportModels;

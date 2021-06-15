@@ -17,30 +17,20 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Numer Zamówienia</th>
-                    <th scope="col">Nazwa Kupującego</th>
-                    <th scope="col">Kraj wysyłki</th>
-                    <th scope="col">Data zakupu</th>
-                    <th scope="col">Nazwa przedmiotu</th>
-                    <th scope="col">Nazwa wewnętrzna</th>
-                    <th scope="col">Szt.</th>
-                    <th scope="col">Do wysłania</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Liczba potwierdzonych wysyłek</th>
+                    <th scope="col">Liczba przesyłek z błędem</th>
+                    <th scope="col">Raport</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="order, stat : *{orders}">
+                <tr th:each="shipmentConfirmationReport, stat : *{shipmentConfirmationReports}">
                     <th th:text="${stat.count}" scope="row"></th>
-                    <td th:text="${order.orderId}"></td>
-                    <td th:text="${order.client.buyerName}">/td>
-                    <td th:text="${order.client.shipCountry}">/td>
-                    <td th:text="${order.purchaseDateFormatted}"></td>
-                    <td th:text="${order.product.productName}">/td>
-                    <td class="productChanged">
-                        <input type="text" th:field="*{orders[__${stat.index}__].product.internalId}">
-                        <input type="hidden" th:field="*{orders[__${stat.index}__].product.changedInternalId}">
-                    </td>
-                    <td th:text="${order.quantityPurchased}"></td>
-                    <td><input th:field="*{orders[__${stat.index}__].chosen}" type="checkbox"/></td>
+                    <td th:text="${shipmentConfirmationReport.reportDate}"></td>
+                    <td th:text="${shipmentConfirmationReport.shipmentConfirmedNumber}"></td>
+                    <td th:text="${shipmentConfirmationReport.shipmentWithConfirmErrorNumber}"></td>
+                    <td><a href="#" th:href="@{/shipment-confirmation-report/download}">Pobierz</a></td>
                 </tr>
                 </tbody>
             </table>

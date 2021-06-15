@@ -48,10 +48,10 @@
                     <tr th:each="order, stat : *{orders}">
                         <th th:text="${stat.count}" scope="row"></th>
                         <td th:text="${order.orderId}"></td>
-                        <td th:text="${order.client.buyerName}">/td>
-                        <td th:text="${order.client.shipCountry}">/td>
+                        <td th:text="${order.client.buyerName}"></td>
+                        <td th:text="${order.client.shipCountry}"></td>
                         <td th:text="${order.purchaseDateFormatted}"></td>
-                        <td th:text="${order.product.productName}">/td>
+                        <td th:text="${order.product.productName}"></td>
                         <td class="productChanged">
                             <input type="text" th:field="*{orders[__${stat.index}__].product.internalId}">
                             <input type="hidden" th:field="*{orders[__${stat.index}__].product.changedInternalId}">
