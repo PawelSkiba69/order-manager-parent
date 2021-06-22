@@ -1,9 +1,16 @@
 package pl.com.infratex.ordermanager.web.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import pl.com.infratex.ordermanager.api.exception.ShipmentConfirmationReportException;
 import pl.com.infratex.ordermanager.service.ShipmentConfirmationReportService;
 import pl.com.infratex.ordermanager.web.model.ShipmentConfirmationReportModel;
 
@@ -32,9 +39,17 @@ public class ShipmentConfirmationReportController {
         return SHIPMENT_CONFIRMATION_REPORTS_VIEW;
     }
 
-    @GetMapping(value="/download")
-    public String download(){
-        LOGGER.info("download()");
-        return SHIPMENT_CONFIRMATION_REPORTS_VIEW;
+    @GetMapping(value = "/download/{fileId}", produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public ResponseEntity<byte[]> download(@PathVariable(name = "fileId") Long id) throws ShipmentConfirmationReportException {
+        LOGGER.info("download(" + id + ")");
+        ShipmentConfirmationReportModel shipmentConfirmationReportModel = shipmentConfirmationReportService.read(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        String filename = "output_" + id + ".txt";
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        ResponseEntity<byte[]> response = new ResponseEntity<>(shipmentConfirmationReportModel.getFile(), headers, HttpStatus.OK);
+        return response;
     }
 }

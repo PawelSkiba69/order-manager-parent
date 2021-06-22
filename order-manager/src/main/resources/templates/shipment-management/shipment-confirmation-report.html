@@ -30,7 +30,7 @@
                     <td th:text="${shipmentConfirmationReport.reportDate}"></td>
                     <td th:text="${shipmentConfirmationReport.shipmentConfirmedNumber}"></td>
                     <td th:text="${shipmentConfirmationReport.shipmentWithConfirmErrorNumber}"></td>
-                    <td><a href="#" th:href="@{/shipment-confirmation-report/download}">Pobierz</a></td>
+                    <td><a href="#" target="_blank" th:href="@{/shipment-confirmation-report/download/__${shipmentConfirmationReport.id}__}">Pobierz</a></td>
                 </tr>
                 </tbody>
             </table>

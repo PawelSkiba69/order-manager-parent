@@ -13,6 +13,7 @@ public class ShipmentConfirmationReportModel {
     private int shipmentConfirmedNumber;
     private int shipmentWithConfirmErrorNumber;
     private Long fileId;
+    private byte[] file;
 
     public ShipmentConfirmationReportModel() {
     }
@@ -23,12 +24,13 @@ public class ShipmentConfirmationReportModel {
         this.shipmentWithConfirmErrorNumber = shipmentWithConfirmErrorNumber;
     }
 
-    public ShipmentConfirmationReportModel(Long id, LocalDateTime reportDate, int shipmentConfirmedNumber, int shipmentWithConfirmErrorNumber, Long fileId) {
+    public ShipmentConfirmationReportModel(Long id, LocalDateTime reportDate, int shipmentConfirmedNumber, int shipmentWithConfirmErrorNumber, Long fileId, byte[] file) {
         this.id = id;
         this.reportDate = reportDate;
         this.shipmentConfirmedNumber = shipmentConfirmedNumber;
         this.shipmentWithConfirmErrorNumber = shipmentWithConfirmErrorNumber;
         this.fileId = fileId;
+        this.file = file;
     }
 
     public Long getId() {
@@ -69,6 +71,14 @@ public class ShipmentConfirmationReportModel {
 
     public void setFileId(Long fileId) {
         this.fileId = fileId;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 
     @Override
