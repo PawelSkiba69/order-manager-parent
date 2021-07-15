@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar ./order-manager-parent/build/libs/order-manager-0.0.1-SNAPSHOT.jar
