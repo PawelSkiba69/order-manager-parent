@@ -68,6 +68,7 @@
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>${basedir}/src/main/resources/en.wsdl</wsdl>
+                                    <wsdlLocation>classpath:en.wsdl</wsdlLocation>
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>
