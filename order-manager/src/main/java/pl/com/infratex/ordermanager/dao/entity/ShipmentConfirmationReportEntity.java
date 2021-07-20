@@ -1,11 +1,9 @@
 package pl.com.infratex.ordermanager.dao.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -21,20 +19,20 @@ public class ShipmentConfirmationReportEntity {
     private int shipmentWithConfirmErrorNumber;
     private Long fileId;
 
-    @Lob
-    @Column(name = "file", columnDefinition="BLOB")
-    private byte[] file;
+//    @Lob
+//    @Column(name = "file", columnDefinition="BLOB")
+//    private byte[] file;
 
     public ShipmentConfirmationReportEntity() {
     }
 
-    public ShipmentConfirmationReportEntity(Long id, LocalDateTime reportDate, int shipmentConfirmedNumber, int shipmentWithConfirmErrorNumber, Long fileId, byte[] file) {
+    public ShipmentConfirmationReportEntity(Long id, LocalDateTime reportDate, int shipmentConfirmedNumber, int shipmentWithConfirmErrorNumber, Long fileId) {
         this.id = id;
         this.reportDate = reportDate;
         this.shipmentConfirmedNumber = shipmentConfirmedNumber;
         this.shipmentWithConfirmErrorNumber = shipmentWithConfirmErrorNumber;
         this.fileId = fileId;
-        this.file = file;
+//        this.file = file;
     }
 
     public Long getId() {
@@ -77,13 +75,13 @@ public class ShipmentConfirmationReportEntity {
         this.fileId = fileId;
     }
 
-    public byte[] getFile() {
-        return file;
-    }
+//    public byte[] getFile() {
+//        return file;
+//    }
 
-    public void setFile(byte[] file) {
-        this.file = file;
-    }
+//    public void setFile(byte[] file) {
+//        this.file = file;
+//    }
 
     @Override
     public String toString() {
