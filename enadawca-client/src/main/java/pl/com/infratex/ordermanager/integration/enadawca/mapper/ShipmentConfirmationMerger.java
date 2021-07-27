@@ -25,7 +25,7 @@ public class ShipmentConfirmationMerger {
 
         LOGGER.info("merge()");
         LOGGER.info("przesylkaShortTypes: " + przesylkaShortTypes);
-        LOGGER.info("orders: " + orders);
+        //LOGGER.info("orders: " + orders);
 
         List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
 

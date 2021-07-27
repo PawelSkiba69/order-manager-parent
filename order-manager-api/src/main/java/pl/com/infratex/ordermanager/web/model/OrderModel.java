@@ -44,7 +44,7 @@ public class OrderModel {
     private String currencySymbol;
     private BigDecimal totalPrice;
 
-    private boolean chosen;
+    private boolean chosen = true;
 
     public OrderModel(Long oId, String orderId, BigDecimal itemPrice) {
         this.oId = oId;

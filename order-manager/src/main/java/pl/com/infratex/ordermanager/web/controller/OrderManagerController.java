@@ -54,7 +54,8 @@ public class OrderManagerController {
         SellerOrderReportModel sellerOrderReportModel = orderManagerService.createSellerOrderReport(
                 fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
         model.addAttribute("orders", sellerOrderReportModel.getOrders());
-        return ORDER_MANAGER_VIEW;
+//        return ORDER_MANAGER_VIEW;
+        return "redirect:" + ORDER_MANAGEMENT_URI;
     }
 
     @GetMapping(value = "/upload")
