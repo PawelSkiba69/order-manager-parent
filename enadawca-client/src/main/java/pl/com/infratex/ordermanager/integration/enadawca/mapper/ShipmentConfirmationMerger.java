@@ -24,7 +24,7 @@ public class ShipmentConfirmationMerger {
     public List<ShipmentConfirmationModel> merge(List<PrzesylkaShortType> przesylkaShortTypes, List<OrderModel> orders) {
 
         LOGGER.info("merge()");
-        LOGGER.info("przesylkaShortTypes: " + przesylkaShortTypes);
+        //LOGGER.info("przesylkaShortTypes: " + przesylkaShortTypes);
         //LOGGER.info("orders: " + orders);
 
         List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
