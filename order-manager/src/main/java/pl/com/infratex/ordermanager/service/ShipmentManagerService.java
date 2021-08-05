@@ -78,12 +78,12 @@ public class ShipmentManagerService {
 //        LOGGER.info("Orders before sent "+orders);
         orderService.updateOrdersWithGuids(addressesWithGuids, orders);
         try {
+            eNadawcaService.send(addressesWithGuids,sendDate);
             orderService.updateOrderStatus(orders, OrderStatusType.SENT);
         } catch (OrderNotFoundException e) {
             e.printStackTrace();
         }
 
-        eNadawcaService.send(addressesWithGuids,sendDate);
     }
 
     void generateCorrectedAddresses(SellerOrderReportModel sellerOrderReportModel) {
