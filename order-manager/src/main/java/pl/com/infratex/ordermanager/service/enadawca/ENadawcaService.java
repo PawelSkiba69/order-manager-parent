@@ -1,5 +1,6 @@
 package pl.com.infratex.ordermanager.service.enadawca;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator.ENADAWCA_BUFOR_ID_SEQ;
@@ -40,12 +42,10 @@ public class ENadawcaService {
         eNadawcaManager = new ENadawcaManager();
     }
 
+    @Async
     public void send(List<AddressModel> addresses, LocalDate sendDate) {
         GregorianCalendar dataNadania = OrderManagerDateUtils.createGregorianCalendar(sendDate);
-//        GregorianCalendar dataNadania = new GregorianCalendar();
-//        dataNadania.setTime(Date.from(sendDate.atStartOfDay()
-//                .atZone(ZoneId.systemDefault())
-//                .toInstant()));
+
         //FIXME rzucić wyjątek biznesowy
         try {
             Integer generateId = sequenceIdGenerator.generateId(ENADAWCA_BUFOR_ID_SEQ);
@@ -56,7 +56,7 @@ public class ENadawcaService {
             LOGGER.info("####GeneratedID= " + generateId);
             LOGGER.info("####BuforName= " + "Amazon_" + dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
         } catch (ENadawcaException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
     }

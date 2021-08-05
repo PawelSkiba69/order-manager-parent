@@ -70,7 +70,7 @@ public class OrderManagerController {
     @PostMapping(value = "/generate")
     public String generate(@ModelAttribute(name = "generateAddress") GenerateAddressModel generateAddressModel, ModelMap model)
             throws OrderManagerException {
-        LOGGER.info("generating: " + generateAddressModel);
+//        LOGGER.info("generating: " + generateAddressModel);
         if (generateAddressModel.getSaveAll()) {
             LOGGER.info("SaveAll TRUE!");
             List<OrderModel> orders = orders(model);
