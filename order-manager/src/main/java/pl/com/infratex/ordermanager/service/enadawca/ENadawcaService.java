@@ -2,6 +2,7 @@ package pl.com.infratex.ordermanager.service.enadawca;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
@@ -43,7 +44,7 @@ public class ENadawcaService {
     }
 
     @Async
-    public void send(List<AddressModel> addresses, LocalDate sendDate) {
+    public void send(List<AddressModel> addresses, LocalDate sendDate, List<OrderModel> orders) {
         LOGGER.info("send("+sendDate+")");
         GregorianCalendar dataNadania = OrderManagerDateUtils.createGregorianCalendar(sendDate);
 
@@ -56,8 +57,13 @@ public class ENadawcaService {
             eNadawcaManager.addShipment(przesylkaTypes, generateId);
             LOGGER.info("####GeneratedID= " + generateId);
             LOGGER.info("####BuforName= " + "Amazon_" + dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
+
+            orderService.updateOrderStatus(orders, OrderStatusType.SENT);
         } catch (ENadawcaException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        } catch (OrderNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            e.printStackTrace();
         }
 
     }

@@ -62,6 +62,7 @@ public class ShipmentManagerService {
     }
 
     public void send(SellerOrderReportModel sellerOrderReport){
+        LOGGER.info("send(...)");
         generateCorrectedAddresses(sellerOrderReport);
         sendToENadawca(sellerOrderReport.getSendDate());
         removeCorrectedAddresses(sellerOrderReport);
@@ -78,12 +79,12 @@ public class ShipmentManagerService {
         List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.GENERATED);
 //        LOGGER.info("Orders before sent "+orders);
         orderService.updateOrdersWithGuids(addressesWithGuids, orders);
-        try {
-            eNadawcaService.send(addressesWithGuids,sendDate);
-            orderService.updateOrderStatus(orders, OrderStatusType.SENT);
-        } catch (OrderNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+            eNadawcaService.send(addressesWithGuids, sendDate, orders);
+
+//        } catch (OrderNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
