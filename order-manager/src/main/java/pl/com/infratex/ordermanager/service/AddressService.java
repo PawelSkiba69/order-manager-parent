@@ -39,6 +39,7 @@ public class AddressService {
     }
 
     public List<AddressModel> assignGuids(List<String> guids, List<AddressModel> addresses) {
+        LOGGER.info("assignGuids()");
         int counter = 0;
         for (AddressModel address : addresses) {
             address.setGuid(guids.get(counter));

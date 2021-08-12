@@ -56,6 +56,7 @@ public class ENadawcaManager {
     }
 
     public List<String> generateGuids(int amount) {
+        LOGGER.info("generateGuids("+amount+")");
         List<String> generatedGuids = new ArrayList<>();
 
         int numberOfGeneratedSets = amount / GENEREATED_GUIDS_LIMIT;

@@ -68,6 +68,7 @@ public class ShipmentManagerService {
     }
 
     private void sendToENadawca(LocalDate sendDate) {
+        LOGGER.info("sendToENadawca("+sendDate+")");
         List<AddressModel> addresses = addressService.list();
 
         ENadawcaManager eNadawcaManager = new ENadawcaManager();

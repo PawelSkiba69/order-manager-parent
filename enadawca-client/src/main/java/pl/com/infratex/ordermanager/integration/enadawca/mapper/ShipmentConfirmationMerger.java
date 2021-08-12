@@ -38,7 +38,7 @@ public class ShipmentConfirmationMerger {
             });
         });
 
-        LOGGER.info("merge(...) = " + shipmentConfirmationModels);
+//        LOGGER.info("merge(...) = " + shipmentConfirmationModels);
         return shipmentConfirmationModels;
     }
 
