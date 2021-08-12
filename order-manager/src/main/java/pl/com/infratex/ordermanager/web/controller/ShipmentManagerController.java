@@ -18,6 +18,7 @@ import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.SHIPMENT_MANAGER_STATUS_VIEW;
@@ -56,8 +57,8 @@ public class ShipmentManagerController {
 
         LOGGER.info("Sending ...");
 //        LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
-        boolean sent = shipmentManagerService.send(sellerOrderReport);
-        modelMap.addAttribute("sent", sent);
+        CompletableFuture<Boolean> sent = shipmentManagerService.send(sellerOrderReport);
+        modelMap.addAttribute("sent", sent.isDone());
         return SHIPMENT_MANAGER_STATUS_VIEW;
     }
 

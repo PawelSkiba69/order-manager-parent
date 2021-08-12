@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 @Service
@@ -61,15 +62,15 @@ public class ShipmentManagerService {
         return null;
     }
 
-    public boolean send(SellerOrderReportModel sellerOrderReport){
+    public CompletableFuture<Boolean> send(SellerOrderReportModel sellerOrderReport){
         LOGGER.info("send(...)");
         generateCorrectedAddresses(sellerOrderReport);
-        boolean sent = sendToENadawca(sellerOrderReport.getSendDate());
+        CompletableFuture<Boolean> sent = sendToENadawca(sellerOrderReport.getSendDate());
         removeCorrectedAddresses(sellerOrderReport);
         return sent;
     }
 
-    private boolean sendToENadawca(LocalDate sendDate) {
+    private CompletableFuture<Boolean> sendToENadawca(LocalDate sendDate) {
         LOGGER.info("sendToENadawca("+sendDate+")");
         List<AddressModel> addresses = addressService.list();
 
@@ -81,7 +82,7 @@ public class ShipmentManagerService {
 //        LOGGER.info("Orders before sent "+orders);
         orderService.updateOrdersWithGuids(addressesWithGuids, orders);
 //        try {
-        boolean sent = eNadawcaService.send(addressesWithGuids, sendDate, orders);
+        CompletableFuture<Boolean> sent = eNadawcaService.send(addressesWithGuids, sendDate, orders);
         return sent;
 
 //        } catch (OrderNotFoundException e) {

@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,7 +45,7 @@ public class ENadawcaService {
     }
 
     @Async
-    public boolean send(List<AddressModel> addresses, LocalDate sendDate, List<OrderModel> orders) {
+    public CompletableFuture<Boolean> send(List<AddressModel> addresses, LocalDate sendDate, List<OrderModel> orders) {
         LOGGER.info("send("+sendDate+")");
 
         boolean sent = false;
@@ -63,14 +64,13 @@ public class ENadawcaService {
             orderService.updateOrderStatus(orders, OrderStatusType.SENT);
             sent = true;
         } catch (ENadawcaException e) {
-            sent = false;
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         } catch (OrderNotFoundException e) {
-            sent = false;
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
             e.printStackTrace();
         }
-        return sent;
+
+        return CompletableFuture.completedFuture(sent);
 
     }
 
