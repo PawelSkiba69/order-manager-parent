@@ -117,7 +117,7 @@ public class OrderManagerService {
     }
 
     public void generate(GenerateAddressModel preparedAddressModel) throws OrderManagerException {
-        LOGGER.info("Preparing... " + preparedAddressModel);
+//        LOGGER.info("Preparing... " + preparedAddressModel);
         try {
             orderService.prepareAddresses(preparedAddressModel);
         } catch (OrderNotFoundException e) {
