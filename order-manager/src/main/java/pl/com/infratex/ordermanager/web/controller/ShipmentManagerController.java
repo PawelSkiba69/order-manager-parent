@@ -41,7 +41,7 @@ public class ShipmentManagerController {
     @GetMapping
     public String orders(Model model) throws IOException {
         List<OrderModel> orders = shipmentManagerService.list();
-        LOGGER.info("Orders: " + orders);
+//        LOGGER.info("Orders: " + orders);
         SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel();
         sellerOrderReportModel.setOrders(OrderModelConverter.convert(orders));
 
@@ -53,7 +53,7 @@ public class ShipmentManagerController {
     public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport) {
 
         LOGGER.info("Sending ...");
-        LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
+//        LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
         shipmentManagerService.send(sellerOrderReport);
         return SHIPMENT_MANAGER_STATUS_VIEW;
     }
