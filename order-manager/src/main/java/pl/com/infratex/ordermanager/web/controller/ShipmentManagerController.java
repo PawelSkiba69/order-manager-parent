@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.web.controller;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,11 +51,13 @@ public class ShipmentManagerController {
     }
 
     @PostMapping(value = "/send")//)
-    public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport) {
+    public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport,
+                       ModelMap modelMap) {
 
         LOGGER.info("Sending ...");
 //        LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
-        shipmentManagerService.send(sellerOrderReport);
+        boolean sent = shipmentManagerService.send(sellerOrderReport);
+        modelMap.addAttribute("sent", sent);
         return SHIPMENT_MANAGER_STATUS_VIEW;
     }
 

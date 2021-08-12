@@ -61,14 +61,15 @@ public class ShipmentManagerService {
         return null;
     }
 
-    public void send(SellerOrderReportModel sellerOrderReport){
+    public boolean send(SellerOrderReportModel sellerOrderReport){
         LOGGER.info("send(...)");
         generateCorrectedAddresses(sellerOrderReport);
-        sendToENadawca(sellerOrderReport.getSendDate());
+        boolean sent = sendToENadawca(sellerOrderReport.getSendDate());
         removeCorrectedAddresses(sellerOrderReport);
+        return sent;
     }
 
-    private void sendToENadawca(LocalDate sendDate) {
+    private boolean sendToENadawca(LocalDate sendDate) {
         LOGGER.info("sendToENadawca("+sendDate+")");
         List<AddressModel> addresses = addressService.list();
 
@@ -80,7 +81,8 @@ public class ShipmentManagerService {
 //        LOGGER.info("Orders before sent "+orders);
         orderService.updateOrdersWithGuids(addressesWithGuids, orders);
 //        try {
-            eNadawcaService.send(addressesWithGuids, sendDate, orders);
+        boolean sent = eNadawcaService.send(addressesWithGuids, sendDate, orders);
+        return sent;
 
 //        } catch (OrderNotFoundException e) {
 //            e.printStackTrace();

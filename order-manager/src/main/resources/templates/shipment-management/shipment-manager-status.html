@@ -6,6 +6,11 @@
 </head>
 <body>
 <h1>Status generowania adresów do wysyłki</h1>
-<a href="#" th:href="@{/shipment-management/generate}" target="_blank">Generuj PDF</a>
+<div th:if="${sent}">
+    <a href="#" th:href="@{/shipment-management/generate}" target="_blank">Generuj PDF</a>
+</div>
+<div th:unless="${sent}">
+    Wysyłka do ENadawcy niegotowa, odśwież stronę.
+</div>
 </body>
 </html>

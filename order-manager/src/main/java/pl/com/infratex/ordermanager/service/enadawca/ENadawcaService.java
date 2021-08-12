@@ -44,8 +44,10 @@ public class ENadawcaService {
     }
 
     @Async
-    public void send(List<AddressModel> addresses, LocalDate sendDate, List<OrderModel> orders) {
+    public boolean send(List<AddressModel> addresses, LocalDate sendDate, List<OrderModel> orders) {
         LOGGER.info("send("+sendDate+")");
+
+        boolean sent = false;
         GregorianCalendar dataNadania = OrderManagerDateUtils.createGregorianCalendar(sendDate);
 
         //FIXME rzucić wyjątek biznesowy
@@ -59,12 +61,16 @@ public class ENadawcaService {
             LOGGER.info("####BuforName= " + "Amazon_" + dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
 
             orderService.updateOrderStatus(orders, OrderStatusType.SENT);
+            sent = true;
         } catch (ENadawcaException e) {
+            sent = false;
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         } catch (OrderNotFoundException e) {
+            sent = false;
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
             e.printStackTrace();
         }
+        return sent;
 
     }
 
