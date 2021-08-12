@@ -44,6 +44,7 @@ public class ENadawcaService {
 
     @Async
     public void send(List<AddressModel> addresses, LocalDate sendDate) {
+        LOGGER.info("send("+sendDate+")");
         GregorianCalendar dataNadania = OrderManagerDateUtils.createGregorianCalendar(sendDate);
 
         //FIXME rzucić wyjątek biznesowy

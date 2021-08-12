@@ -26,7 +26,7 @@ public class OrderManagerDateUtils {
     }
 
     public static XMLGregorianCalendar createXmlGregorianCalendar(GregorianCalendar gregorianCalendar) throws OrderManagerDateUtilsException {
-        LOGGER.info("createXmlGregorianCalendar(" + gregorianCalendar + ")");
+        LOGGER.info("createXmlGregorianCalendar()");
         XMLGregorianCalendar xmlGregorianCalendar;
 
         try {

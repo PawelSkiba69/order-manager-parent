@@ -45,7 +45,7 @@ public class AddressService {
             address.setGuid(guids.get(counter));
             counter++;
         }
-        LOGGER.info("#### "+addresses);
+//        LOGGER.info("#### "+addresses);
         return addresses;
     }
 }
