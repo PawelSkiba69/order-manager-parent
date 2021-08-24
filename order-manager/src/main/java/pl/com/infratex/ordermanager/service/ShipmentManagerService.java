@@ -49,8 +49,8 @@ public class ShipmentManagerService {
     public byte[] generatePackingSlips() {
         List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT);
         try {
-            orderService.updateOrderStatus(orders,OrderStatusType.LABELED);
             OutputStream outputStream = packingSlipAddressPdfReportGenerator.generatePdf(orders, "template.jrxml");
+            orderService.updateOrderStatus(orders,OrderStatusType.LABELED);
             return ((ByteArrayOutputStream) outputStream).toByteArray();
         } catch (JRException e) {
             e.printStackTrace();

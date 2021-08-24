@@ -67,4 +67,10 @@ public class ShipmentManagerController {
     public byte[] generate() throws OrderManagerException {
         return shipmentManagerService.generatePackingSlips();
     }
+
+    @GetMapping(value = "/generate/check")
+    public String generateCheck() {
+        LOGGER.info("generateCheck()");
+        return SHIPMENT_MANAGER_STATUS_VIEW;
+    }
 }
