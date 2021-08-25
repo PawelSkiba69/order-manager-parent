@@ -85,7 +85,7 @@ public class OrderManagerService {
         saveOrders(sellerOrderReportModel);
 
         List<OrderEntity> foundOrderEntities = orderRepository.
-                findByOrderItemIdInOrderByProduct_InternalIdDesc(getUnshippedOrderItemIds(sellerOrderReportModel));
+                findByOrderItemIdInOrderByProduct_InternalIdDescPurchaseDateAsc(getUnshippedOrderItemIds(sellerOrderReportModel));
 
         return new SellerOrderReportModel(orderModelMapper.fromEntities(foundOrderEntities), null);
     }
@@ -110,7 +110,7 @@ public class OrderManagerService {
         saveOrders(sellerOrderReportModel);
 
         List<OrderEntity> foundOrderEntities = orderRepository.
-                findByOrderItemIdInOrderByProduct_InternalIdDesc(getUnshippedOrderItemIds(sellerOrderReportModel));
+                findByOrderItemIdInOrderByProduct_InternalIdDescPurchaseDateAsc(getUnshippedOrderItemIds(sellerOrderReportModel));
 
         return new SellerOrderReportModel(orderModelMapper.fromEntities(foundOrderEntities), null);
 

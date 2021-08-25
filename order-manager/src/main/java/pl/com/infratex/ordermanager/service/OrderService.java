@@ -40,7 +40,7 @@ public class OrderService {
     //FIXME Add test
     public List<OrderModel> ordersWithStatus(OrderStatusType orderStatusType) {
         LOGGER.info("ordersWithStatus()");
-        List<OrderEntity> orderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(orderStatusType);
+        List<OrderEntity> orderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDescPurchaseDateAsc(orderStatusType);
         return orderModelMapper.fromEntities(orderEntities);
     }
 

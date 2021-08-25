@@ -90,9 +90,12 @@ public class OrderManagerController {
             orders = orderManagerService.filterByLatestBatchId();
         }
 
+        Comparator<OrderModel> comparator = Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
+                Comparator.nullsLast(Comparator.reverseOrder()));
+        comparator = comparator.thenComparing(orderModel -> orderModel.getPurchaseDate());
+
         orders = orders.stream()
-                .sorted(Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
-                        Comparator.nullsLast(Comparator.reverseOrder())))
+                .sorted(comparator)
                 .collect(Collectors.toList());
 
         GenerateAddressModel generateAddressModel = (GenerateAddressModel) model.get(GENERATE_ADDRESS_MODEL_ATTRIBUTE);
