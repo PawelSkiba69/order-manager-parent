@@ -130,6 +130,15 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{product.internalId}]]></textFieldExpression>
 			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="325" y="46" width="34" height="24" isPrintInFirstWholeBand="true" uuid="0d6d84fd-8c3c-4ccc-a36d-eb21c21a1708">
+					<printWhenExpression><![CDATA[$F{quantityPurchased}>1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantityPurchased}+"x"]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
