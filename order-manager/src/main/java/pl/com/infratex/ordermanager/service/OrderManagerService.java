@@ -2,6 +2,7 @@ package pl.com.infratex.ordermanager.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.entity.ClientEntity;
@@ -123,6 +124,12 @@ public class OrderManagerService {
         } catch (OrderNotFoundException e) {
             throw new OrderManagerException(e.getMessage(), e);
         }
+    }
+
+    public boolean generateCheck() {
+        LOGGER.info("generateCheck()");
+        List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT);
+        return orders != null && orders.size() > 0;
     }
 
     private List<AmazonCsvOrder> parseCsv(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException {

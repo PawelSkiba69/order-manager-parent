@@ -68,9 +68,19 @@ public class ShipmentManagerController {
         return shipmentManagerService.generatePackingSlips();
     }
 
-    @GetMapping(value = "/generate/check")
-    public String generateCheck() {
+    @PostMapping(value = "/generate/check")
+    @ResponseBody
+    public boolean generateCheck(ModelMap modelMap) {
         LOGGER.info("generateCheck()");
+        boolean sent = orderManagerService.generateCheck();
+        modelMap.addAttribute("sent", sent);
+        return sent;
+    }
+
+    @GetMapping(value = "/generate/check")
+    public String generateCheckView(ModelMap modelMap) {
+        LOGGER.info("generateCheckView()");
+        modelMap.addAttribute("sent", true);
         return SHIPMENT_MANAGER_STATUS_VIEW;
     }
 }
