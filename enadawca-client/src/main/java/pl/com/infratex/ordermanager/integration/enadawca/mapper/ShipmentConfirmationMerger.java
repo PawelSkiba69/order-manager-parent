@@ -24,8 +24,8 @@ public class ShipmentConfirmationMerger {
     public List<ShipmentConfirmationModel> merge(List<PrzesylkaShortType> przesylkaShortTypes, List<OrderModel> orders) {
 
         LOGGER.info("merge()");
-        LOGGER.info("przesylkaShortTypes: " + przesylkaShortTypes);
-        LOGGER.info("orders: " + orders);
+        //LOGGER.info("przesylkaShortTypes: " + przesylkaShortTypes);
+        //LOGGER.info("orders: " + orders);
 
         List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class ShipmentConfirmationMerger {
             });
         });
 
-        LOGGER.info("merge(...) = " + shipmentConfirmationModels);
+//        LOGGER.info("merge(...) = " + shipmentConfirmationModels);
         return shipmentConfirmationModels;
     }
 

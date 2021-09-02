@@ -54,7 +54,8 @@ public class OrderManagerController {
         SellerOrderReportModel sellerOrderReportModel = orderManagerService.createSellerOrderReport(
                 fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
         model.addAttribute("orders", sellerOrderReportModel.getOrders());
-        return ORDER_MANAGER_VIEW;
+//        return ORDER_MANAGER_VIEW;
+        return "redirect:" + ORDER_MANAGEMENT_URI;
     }
 
     @GetMapping(value = "/upload")
@@ -69,7 +70,7 @@ public class OrderManagerController {
     @PostMapping(value = "/generate")
     public String generate(@ModelAttribute(name = "generateAddress") GenerateAddressModel generateAddressModel, ModelMap model)
             throws OrderManagerException {
-        LOGGER.info("generating: " + generateAddressModel);
+//        LOGGER.info("generating: " + generateAddressModel);
         if (generateAddressModel.getSaveAll()) {
             LOGGER.info("SaveAll TRUE!");
             List<OrderModel> orders = orders(model);
@@ -89,9 +90,12 @@ public class OrderManagerController {
             orders = orderManagerService.filterByLatestBatchId();
         }
 
+        Comparator<OrderModel> comparator = Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
+                Comparator.nullsLast(Comparator.reverseOrder()));
+        comparator = comparator.thenComparing(orderModel -> orderModel.getPurchaseDate());
+
         orders = orders.stream()
-                .sorted(Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
-                        Comparator.nullsLast(Comparator.reverseOrder())))
+                .sorted(comparator)
                 .collect(Collectors.toList());
 
         GenerateAddressModel generateAddressModel = (GenerateAddressModel) model.get(GENERATE_ADDRESS_MODEL_ATTRIBUTE);

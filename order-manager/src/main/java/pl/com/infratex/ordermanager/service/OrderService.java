@@ -12,11 +12,13 @@ import pl.com.infratex.ordermanager.web.model.OrderModel;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
 
+    private static final Logger LOGGER = Logger.getLogger(OrderService.class.getName());
     private OrderRepository orderRepository;
     private OrderModelMapper orderModelMapper;
 
@@ -37,7 +39,8 @@ public class OrderService {
 
     //FIXME Add test
     public List<OrderModel> ordersWithStatus(OrderStatusType orderStatusType) {
-        List<OrderEntity> orderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDesc(orderStatusType);
+        LOGGER.info("ordersWithStatus()");
+        List<OrderEntity> orderEntities = orderRepository.findByStatusOrderByProduct_InternalIdDescPurchaseDateAsc(orderStatusType);
         return orderModelMapper.fromEntities(orderEntities);
     }
 
@@ -59,6 +62,7 @@ public class OrderService {
     }
 
     public List<OrderEntity> updateOrdersWithGuids(List<AddressModel> addresses, List<OrderModel> orders) {
+        LOGGER.info("updateOrdersWithGuids()");
         List<OrderModel> ordersWithGuids = copyGuids(addresses, orders);
         List<OrderEntity> orderEntitiesWithGuids = orderModelMapper.fromModels(ordersWithGuids);
         return orderRepository.saveAll(orderEntitiesWithGuids);
@@ -79,6 +83,7 @@ public class OrderService {
 
     //FIXME Add test
     public void updateOrderStatus(List<OrderModel> orders, OrderStatusType orderStatus) throws OrderNotFoundException {
+        LOGGER.info("updateOrderStatus("+orderStatus+")");
         if (orders != null) {
             for (OrderModel order : orders) {
                 Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(order.getOId());

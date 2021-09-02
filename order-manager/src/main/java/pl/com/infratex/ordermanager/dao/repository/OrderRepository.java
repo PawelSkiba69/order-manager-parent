@@ -15,9 +15,9 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
             "WHERE O.BATCH_ID =\n" +
             "    (SELECT max(OMAX.BATCH_ID)\n" +
             "     FROM ORDERS OMAX)\n" +
-            "ORDER BY P.INTERNAL_ID DESC";
+            "ORDER BY P.INTERNAL_ID DESC, O.PURCHASE_DATE ASC";
 
-    List<OrderEntity> findByStatusOrderByProduct_InternalIdDesc(OrderStatusType status);
+    List<OrderEntity> findByStatusOrderByProduct_InternalIdDescPurchaseDateAsc(OrderStatusType status);
 
     OrderEntity findFirstByStatusOrderByLoadDateAsc(OrderStatusType status);
 
@@ -25,7 +25,7 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     List<OrderEntity> findByOrderIdAndOrderItemId(String orderId, String orderItemId);
 
-    List<OrderEntity> findByOrderItemIdInOrderByProduct_InternalIdDesc(List<String> orderIds);
+    List<OrderEntity> findByOrderItemIdInOrderByProduct_InternalIdDescPurchaseDateAsc(List<String> orderIds);
 
     @Query(name = "ordersWithLatestBatchId", value = ORDERS_WITH_LATEST_BATCH_ID_SQL, nativeQuery = true)
     List<OrderEntity> ordersWithLatestBatchId();

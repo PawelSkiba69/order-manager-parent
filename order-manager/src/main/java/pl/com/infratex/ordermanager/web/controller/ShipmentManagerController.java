@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.web.controller;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.SHIPMENT_MANAGER_STATUS_VIEW;
@@ -41,7 +43,7 @@ public class ShipmentManagerController {
     @GetMapping
     public String orders(Model model) throws IOException {
         List<OrderModel> orders = shipmentManagerService.list();
-        LOGGER.info("Orders: " + orders);
+//        LOGGER.info("Orders: " + orders);
         SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel();
         sellerOrderReportModel.setOrders(OrderModelConverter.convert(orders));
 
@@ -50,11 +52,13 @@ public class ShipmentManagerController {
     }
 
     @PostMapping(value = "/send")//)
-    public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport) {
+    public String send(@ModelAttribute(name = "sellerOrderReport") SellerOrderReportModel sellerOrderReport,
+                       ModelMap modelMap) {
 
         LOGGER.info("Sending ...");
-        LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
-        shipmentManagerService.send(sellerOrderReport);
+//        LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
+        CompletableFuture<Boolean> sent = shipmentManagerService.send(sellerOrderReport);
+        modelMap.addAttribute("sent", sent.isDone());
         return SHIPMENT_MANAGER_STATUS_VIEW;
     }
 
@@ -62,5 +66,21 @@ public class ShipmentManagerController {
     @ResponseBody
     public byte[] generate() throws OrderManagerException {
         return shipmentManagerService.generatePackingSlips();
+    }
+
+    @PostMapping(value = "/generate/check")
+    @ResponseBody
+    public boolean generateCheck(ModelMap modelMap) {
+        LOGGER.info("generateCheck()");
+        boolean sent = orderManagerService.generateCheck();
+        modelMap.addAttribute("sent", sent);
+        return sent;
+    }
+
+    @GetMapping(value = "/generate/check")
+    public String generateCheckView(ModelMap modelMap) {
+        LOGGER.info("generateCheckView()");
+        modelMap.addAttribute("sent", true);
+        return SHIPMENT_MANAGER_STATUS_VIEW;
     }
 }

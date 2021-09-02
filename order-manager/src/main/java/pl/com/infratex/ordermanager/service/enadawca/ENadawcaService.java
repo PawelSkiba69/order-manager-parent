@@ -1,6 +1,8 @@
 package pl.com.infratex.ordermanager.service.enadawca;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
 import pl.com.infratex.ordermanager.enadawca.ShipmentConfirmationModel;
@@ -18,6 +20,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator.ENADAWCA_BUFOR_ID_SEQ;
@@ -40,12 +44,13 @@ public class ENadawcaService {
         eNadawcaManager = new ENadawcaManager();
     }
 
-    public void send(List<AddressModel> addresses, LocalDate sendDate) {
+    @Async
+    public CompletableFuture<Boolean> send(List<AddressModel> addresses, LocalDate sendDate, List<OrderModel> orders) {
+        LOGGER.info("send("+sendDate+")");
+
+        boolean sent = false;
         GregorianCalendar dataNadania = OrderManagerDateUtils.createGregorianCalendar(sendDate);
-//        GregorianCalendar dataNadania = new GregorianCalendar();
-//        dataNadania.setTime(Date.from(sendDate.atStartOfDay()
-//                .atZone(ZoneId.systemDefault())
-//                .toInstant()));
+
         //FIXME rzucić wyjątek biznesowy
         try {
             Integer generateId = sequenceIdGenerator.generateId(ENADAWCA_BUFOR_ID_SEQ);
@@ -55,9 +60,17 @@ public class ENadawcaService {
             eNadawcaManager.addShipment(przesylkaTypes, generateId);
             LOGGER.info("####GeneratedID= " + generateId);
             LOGGER.info("####BuforName= " + "Amazon_" + dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
+
+            orderService.updateOrderStatus(orders, OrderStatusType.SENT);
+            sent = true;
         } catch (ENadawcaException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        } catch (OrderNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
             e.printStackTrace();
         }
+
+        return CompletableFuture.completedFuture(sent);
 
     }
 

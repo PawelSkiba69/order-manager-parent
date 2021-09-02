@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="/webjars/jquery-ui/1.12.1/jquery-ui.structure.min.css" rel="stylesheet"/>
+    <link href="/webjars/jquery-ui/1.12.1/jquery-ui.theme.min.css" rel="stylesheet"/>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+
+    <script defer src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script defer src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+    <script defer src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script defer src="/js/shipment-manager-status.js"></script>
 </head>
 <body>
 <h1>Status generowania adresów do wysyłki</h1>
-<a href="#" th:href="@{/shipment-management/generate}" target="_blank">Generuj PDF</a>
+<div th:if="${sent}">
+    <a href="#" th:href="@{/shipment-management/generate}" target="_blank">Generuj PDF</a>
+</div>
+<div th:unless="${sent}">
+    Wysyłka do ENadawcy niegotowa.
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
 </body>
 </html>

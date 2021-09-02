@@ -5,13 +5,13 @@
     <parent>
         <artifactId>order-manager-parent</artifactId>
         <groupId>pl.com.infratex.ordermanager.parent</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.com.infratex.ordermanager.integration.amazon</groupId>
     <artifactId>amazon-mws-connector</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <dependencies>
         <dependency>
@@ -65,7 +65,7 @@
         <dependency>
             <groupId>pl.com.infratex.ordermanager.api</groupId>
             <artifactId>order-manager-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -74,4 +74,13 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <!-- mvn deploy:deploy-file -Durl=file://C:\DEV\order-manager-parent\amazon-mws-connector\repo -Dfile=marketplace-web-service-2009-01-01-java-library-1.1.jar -DgroupId=com.amazonaws -DartifactId=marketplace-web-service-2009-01-01-java-library -Dpackaging=jar -Dversion=1.1 -->
+        <repository>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file:${project.basedir}/repo</url>
+        </repository>
+    </repositories>
 </project>

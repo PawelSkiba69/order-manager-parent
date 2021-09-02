@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -jar order-manager/target/order-manager-1.0.0.jar

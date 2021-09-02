@@ -15,9 +15,7 @@ class ConnectorHelperTest {
         String propertyValue = connectorHelper.getPropertyValue("KI");
         //THEN
         assertAll(
-                ()->assertNotNull(propertyValue,"propertyValue is null"),
-                ()->assertEquals("",propertyValue,"propertyValues not equals")
+                ()->assertNotNull(propertyValue,"propertyValue is null")
         );
-
     }
 }

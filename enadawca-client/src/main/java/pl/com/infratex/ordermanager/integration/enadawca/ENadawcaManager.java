@@ -56,6 +56,7 @@ public class ENadawcaManager {
     }
 
     public List<String> generateGuids(int amount) {
+        LOGGER.info("generateGuids("+amount+")");
         List<String> generatedGuids = new ArrayList<>();
 
         int numberOfGeneratedSets = amount / GENEREATED_GUIDS_LIMIT;
@@ -94,7 +95,7 @@ public class ENadawcaManager {
     }
 
     public void addShipment(List<PrzesylkaType> shipments, int idBufor) {
-        LOGGER.info("addShipment " + shipments + " id Bufor: " + idBufor);
+//        LOGGER.info("addShipment " + shipments + " id Bufor: " + idBufor);
         List<AddShipmentResponseItemType> addShipmentResponseItemTypes = elektronicznyNadawca.addShipment(shipments, idBufor);
     }
 

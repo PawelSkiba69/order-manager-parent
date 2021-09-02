@@ -31,6 +31,7 @@ public class ConnectorHelper {
     }
 
     public String getPropertyValue(String propertyKey) {
-        return properties.getProperty(propertyKey);
+        return System.getenv(propertyKey);
+//        return properties.getProperty(propertyKey);
     }
 }

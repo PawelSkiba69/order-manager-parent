@@ -28,6 +28,7 @@ public class AdminController {
 
     @GetMapping
     public String adminPanelView(ModelMap modelMap) {
+        LOGGER.info("adminPanelView() ");
         modelMap.addAttribute("productMappingModel", new ProductMappingModel());
         return "admin/admin-panel";
     }
@@ -40,12 +41,12 @@ public class AdminController {
         } catch (IOException e) {
             throw new AdminException("Wystąpił błąd podczas ładowania pliku csv", e);
         }
-        return "admin/admin-panel";
+        return "redirect:/admin";
     }
 
     @PostMapping("/products/add/mapping")
     public String addSingleProductMapping(@ModelAttribute ProductMappingModel productMappingModel) {
         ProductMappingModel savedProductMappingModel = adminService.addOrUpdateProductMapping(productMappingModel);
-        return "admin/admin-panel";
+        return "redirect:/admin";
     }
 }

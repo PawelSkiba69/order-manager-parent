@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
 @Service
@@ -48,8 +49,8 @@ public class ShipmentManagerService {
     public byte[] generatePackingSlips() {
         List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT);
         try {
-            orderService.updateOrderStatus(orders,OrderStatusType.LABELED);
             OutputStream outputStream = packingSlipAddressPdfReportGenerator.generatePdf(orders, "template.jrxml");
+            orderService.updateOrderStatus(orders,OrderStatusType.LABELED);
             return ((ByteArrayOutputStream) outputStream).toByteArray();
         } catch (JRException e) {
             e.printStackTrace();
@@ -61,13 +62,16 @@ public class ShipmentManagerService {
         return null;
     }
 
-    public void send(SellerOrderReportModel sellerOrderReport){
+    public CompletableFuture<Boolean> send(SellerOrderReportModel sellerOrderReport){
+        LOGGER.info("send(...)");
         generateCorrectedAddresses(sellerOrderReport);
-        sendToENadawca(sellerOrderReport.getSendDate());
+        CompletableFuture<Boolean> sent = sendToENadawca(sellerOrderReport.getSendDate());
         removeCorrectedAddresses(sellerOrderReport);
+        return sent;
     }
 
-    private void sendToENadawca(LocalDate sendDate) {
+    private CompletableFuture<Boolean> sendToENadawca(LocalDate sendDate) {
+        LOGGER.info("sendToENadawca("+sendDate+")");
         List<AddressModel> addresses = addressService.list();
 
         ENadawcaManager eNadawcaManager = new ENadawcaManager();
@@ -77,13 +81,14 @@ public class ShipmentManagerService {
         List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.GENERATED);
 //        LOGGER.info("Orders before sent "+orders);
         orderService.updateOrdersWithGuids(addressesWithGuids, orders);
-        try {
-            orderService.updateOrderStatus(orders, OrderStatusType.SENT);
-        } catch (OrderNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+        CompletableFuture<Boolean> sent = eNadawcaService.send(addressesWithGuids, sendDate, orders);
+        return sent;
 
-        eNadawcaService.send(addressesWithGuids,sendDate);
+//        } catch (OrderNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
     void generateCorrectedAddresses(SellerOrderReportModel sellerOrderReportModel) {

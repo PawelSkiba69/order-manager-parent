@@ -39,6 +39,7 @@
                         <th scope="col">Kraj wysyłki</th>
                         <th scope="col">Data zakupu</th>
                         <th scope="col">Nazwa przedmiotu</th>
+                        <th scope="col">SKU</th>
                         <th scope="col">Nazwa wewnętrzna</th>
                         <th scope="col">Szt.</th>
                         <th scope="col">Do wysłania</th>
@@ -52,6 +53,7 @@
                         <td th:text="${order.client.shipCountry}"></td>
                         <td th:text="${order.purchaseDateFormatted}"></td>
                         <td th:text="${order.product.productName}"></td>
+                        <td th:text="${order.product.sku}"></td>
                         <td class="productChanged">
                             <input type="text" th:field="*{orders[__${stat.index}__].product.internalId}">
                             <input type="hidden" th:field="*{orders[__${stat.index}__].product.changedInternalId}">
