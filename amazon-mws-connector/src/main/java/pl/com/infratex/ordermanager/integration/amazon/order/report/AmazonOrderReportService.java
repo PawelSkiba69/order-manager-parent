@@ -75,12 +75,17 @@ public class AmazonOrderReportService {
     private String filterReportList(List<ReportRequestInfo> reportRequestInfos, String reportId) {
 
         LOGGER.info("filterReportList("+reportId+")");
+        LOGGER.info("filterReportList("+reportId+")="+((reportRequestInfos!=null)?reportRequestInfos.size():0));
 //        Optional<ReportRequestInfo> first = reportRequestInfos.stream()
 //                .filter(reportRequestInfo -> reportRequestInfo.getReportRequestId().equals(reportId))
 //                .findFirst();
         for (ReportRequestInfo reportRequestInfo : reportRequestInfos) {
-            if (reportRequestInfo.getReportRequestId().equals(reportId)) {
-                return reportRequestInfo.getGeneratedReportId();
+            String reportRequestId = reportRequestInfo.getReportRequestId();
+            LOGGER.info("getReportRequestId("+reportRequestId+")");
+            if (reportRequestId.equals(reportId)) {
+                String generatedReportId = reportRequestInfo.getGeneratedReportId();
+                LOGGER.info("getReportRequestId("+generatedReportId+")");
+                return generatedReportId;
             }
         }
         return null;
