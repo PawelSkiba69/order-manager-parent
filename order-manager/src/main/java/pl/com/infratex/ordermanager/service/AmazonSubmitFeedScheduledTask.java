@@ -1,5 +1,6 @@
 package pl.com.infratex.ordermanager.service;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
@@ -15,10 +16,10 @@ public class AmazonSubmitFeedScheduledTask {
         this.shipmentConfirmationManagerService = shipmentConfirmationManagerService;
     }
 
-//    @Scheduled(fixedRate = 50000L)
+    @Scheduled(fixedRate = 500000L)
     public void task() {
-//        LOGGER.info("executing scheduled task");
-//        shipmentConfirmationManagerService.confirmShipment();
+        LOGGER.info("executing scheduled task");
+        shipmentConfirmationManagerService.confirmShipment();
     }
 
 }
