@@ -105,6 +105,11 @@ public class OrderService {
         return orderModelMapper.fromEntities(orderEntities);
     }
 
+    public List<OrderModel> findOrdersByStatusNotShippedAmazon() {
+        List<OrderEntity> orderEntities = orderRepository.findByStatusNot(OrderStatusType.SHIPPED_AMAZON);
+        return orderModelMapper.fromEntities(orderEntities);
+    }
+
     public List<String> extractNotNullGuids(List<OrderModel> orders) {
         return orders.stream()
                 .filter(orderModel -> orderModel.getGuid() != null)

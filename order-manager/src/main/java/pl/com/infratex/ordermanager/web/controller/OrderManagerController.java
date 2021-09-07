@@ -87,7 +87,8 @@ public class OrderManagerController {
     private List<OrderModel> orders(ModelMap model) {
         List<OrderModel> orders = (List<OrderModel>) model.get(ORDERS_MODEL_ATTRIBUTE);
         if (orders == null) {
-            orders = orderManagerService.filterByLatestBatchId();
+//            orders = orderManagerService.filterByLatestBatchId();
+            orders = orderManagerService.findOrdersByStatusNotShippedAmazon();
         }
 
         Comparator<OrderModel> comparator = Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),

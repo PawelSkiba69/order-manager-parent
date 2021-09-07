@@ -185,6 +185,11 @@ public class OrderManagerService {
         saveOrUpdateOrders(orderEntities,true);
     }
 
+    public List<OrderModel> findOrdersByStatusNotShippedAmazon(){
+        LOGGER.info("findOrdersByStatusNotShippedAmazon()");
+        return orderService.findOrdersByStatusNotShippedAmazon();
+    }
+
     private void saveOrUpdateOrders(List<OrderEntity> orderEntities, boolean update) {
         LOGGER.info("saveOrUpdateOrders()");
 //        LOGGER.info("orderEntities: " + orderEntities);
@@ -245,8 +250,5 @@ public class OrderManagerService {
                 .collect(Collectors.toList());
     }
 
-    public void uploadAutomatic() {
-
-    }
 }
 
