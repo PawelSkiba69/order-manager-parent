@@ -76,7 +76,7 @@ public class ShipmentConfirmationManagerService {
                 LOGGER.info("#### AFTER CALLABLE");
 
                 List<OrderModel> ordersWithConfirmError = filterShipments(amazonCsvSubmissionResultModels, orders);
-                orderService.updateOrderStatus(orders, OrderStatusType.SENT);
+                orderService.updateOrderStatus(orders, OrderStatusType.SHIPPED_AMAZON);
                 orderService.updateOrderStatus(ordersWithConfirmError, OrderStatusType.SHIP_CONFIRM_ERROR);
 
                 ShipmentConfirmationReportModel shipmentConfirmationReportModel =

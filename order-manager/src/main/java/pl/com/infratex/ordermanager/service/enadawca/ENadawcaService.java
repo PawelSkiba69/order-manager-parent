@@ -61,7 +61,7 @@ public class ENadawcaService {
             LOGGER.info("####GeneratedID= " + generateId);
             LOGGER.info("####BuforName= " + "Amazon_" + dataNadania.toZonedDateTime().format(DateTimeFormatter.BASIC_ISO_DATE));
 
-            orderService.updateOrderStatus(orders, OrderStatusType.SENT);
+            orderService.updateOrderStatus(orders, OrderStatusType.SENT_ENADAWCA);
             sent = true;
         } catch (ENadawcaException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);

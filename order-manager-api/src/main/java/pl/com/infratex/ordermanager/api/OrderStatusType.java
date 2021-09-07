@@ -3,11 +3,11 @@ package pl.com.infratex.ordermanager.api;
 public enum OrderStatusType {
     UPLOADED,
     GENERATED,
-    SENT,
+    SENT_ENADAWCA,
     LABELED,
     CANCELLED,
     UNDELIVERED,
     RETURNED,
-    SHIPPED,
+    SHIPPED_AMAZON,
     SHIP_CONFIRM_ERROR
 }

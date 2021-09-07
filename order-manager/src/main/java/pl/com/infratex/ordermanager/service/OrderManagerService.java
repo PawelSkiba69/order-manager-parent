@@ -128,7 +128,7 @@ public class OrderManagerService {
 
     public boolean generateCheck() {
         LOGGER.info("generateCheck()");
-        List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT);
+        List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT_ENADAWCA);
         return orders != null && orders.size() > 0;
     }
 
