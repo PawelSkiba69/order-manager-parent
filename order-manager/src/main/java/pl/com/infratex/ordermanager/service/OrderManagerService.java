@@ -207,7 +207,7 @@ public class OrderManagerService {
 
             if (foundOrderLoadedEntity != null) {
                 if (productEntity != null) productEntity.setId(foundOrderLoadedEntity.getProductId());
-                if (clientEntity != null) clientEntity.setId(foundOrderLoadedEntity.getProductId());
+                if (clientEntity != null) clientEntity.setId(foundOrderLoadedEntity.getClientId());
             }
 
             ProductEntity savedProductEntity = productRepository.save(productEntity);
