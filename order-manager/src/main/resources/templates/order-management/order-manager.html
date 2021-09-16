@@ -8,7 +8,8 @@
     <script defer src="/js/order-manager.js"></script>
 </head>
 <body>
-<h1>order-manager</h1>
+<div class="container-fluid">
+    <div th:replace="fragments/navigationbar :: navigationbar"></div>
 <form action="#" th:action="@{/order-management/upload}">
     <button>Załaduj niewysłane zamówienia</button>
 </form>
@@ -76,5 +77,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
+</div>
 </body>
 </html>

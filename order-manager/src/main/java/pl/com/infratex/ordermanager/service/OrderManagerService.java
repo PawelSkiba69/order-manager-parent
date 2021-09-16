@@ -205,6 +205,7 @@ public class OrderManagerService {
             ProductEntity productEntity = orderEntity.getProduct();
             ClientEntity clientEntity = orderEntity.getClient();
 
+            LOGGER.info("foundOrderLoadedEntity: "+foundOrderLoadedEntity);
             if (foundOrderLoadedEntity != null) {
                 if (productEntity != null) productEntity.setId(foundOrderLoadedEntity.getProductId());
                 if (clientEntity != null) clientEntity.setId(foundOrderLoadedEntity.getClientId());
