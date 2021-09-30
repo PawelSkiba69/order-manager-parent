@@ -1,6 +1,7 @@
 package pl.com.infratex.ordermanager.dao.entity;
 
-import javax.persistence.Column;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,8 @@ public class ShipmentConfirmationReportEntity {
     private Long fileId;
 
     @Lob
-    @Column(name = "file", columnDefinition="BLOB")
+//    @Column(name = "file", columnDefinition="BLOB")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] file;
 
     public ShipmentConfirmationReportEntity() {

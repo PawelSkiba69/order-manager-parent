@@ -12,4 +12,6 @@ public class ControllerConstants {
     public static final String GENERATE_ADDRESS_MODEL_ATTRIBUTE = "generateAddress";
     public static final String ORDERS_MODEL_ATTRIBUTE = "orders";
 
+    public static final String CURRENT_PAGE_SESSION = "currentPageSession";
+
 }

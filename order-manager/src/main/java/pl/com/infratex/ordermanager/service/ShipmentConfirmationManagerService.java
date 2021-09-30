@@ -54,42 +54,37 @@ public class ShipmentConfirmationManagerService {
 
     public void confirmShipment() {
         LOGGER.info("confirmShipment()");
-        List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
+//        List<ShipmentConfirmationModel> shipmentConfirmationModels = new ArrayList<>();
         try {
             LocalDateTime loadDate = LocalDateTime.now();
-            shipmentConfirmationModels = eNadawcaService.checkStatus(loadDate);
-            InputStream csvInputStream = shipmentConfirmationCsvProcessor.createCsv(shipmentConfirmationModels);
-            SubmitFeedResponse submitFeedResponse = amazonSubmitFeedConnector.submitFeed(csvInputStream);
-            String feedSubmissionId = submitFeedResponse.getSubmitFeedResult().getFeedSubmissionInfo().getFeedSubmissionId();
-            String submitFeedResponseJSON = submitFeedResponse.toJSON();
-            LOGGER.info("submitFeedResponseJSON: " + submitFeedResponseJSON);
+            List<ShipmentConfirmationModel> shipmentConfirmationModels = eNadawcaService.checkStatus(loadDate);
+            if (shipmentConfirmationModels != null && shipmentConfirmationModels.size() > 0) {
+                InputStream csvInputStream = shipmentConfirmationCsvProcessor.createCsv(shipmentConfirmationModels);
+                SubmitFeedResponse submitFeedResponse = amazonSubmitFeedConnector.submitFeed(csvInputStream);
+                String feedSubmissionId = submitFeedResponse.getSubmitFeedResult().getFeedSubmissionInfo().getFeedSubmissionId();
+                String submitFeedResponseJSON = submitFeedResponse.toJSON();
+                LOGGER.info("submitFeedResponseJSON: " + submitFeedResponseJSON);
 
-            List<OrderModel> orders = shipmentConfirmationModelConverter.from(shipmentConfirmationModels);
-            LOGGER.info("#### BEFORE CALLABLE");
-            AmazonSubmissionResult amazonSubmissionResult = checkShipment(feedSubmissionId);
+                List<OrderModel> orders = shipmentConfirmationModelConverter.from(shipmentConfirmationModels);
+                LOGGER.info("#### BEFORE CALLABLE");
+                AmazonSubmissionResult amazonSubmissionResult = checkShipment(feedSubmissionId);
 
-            LOGGER.info("#### amazonSubmissionResult: " + amazonSubmissionResult);
-            if (amazonSubmissionResult != null) {
-                List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels =
-                        amazonSubmissionResult.getAmazonCsvSubmissionResultModels();
-                LOGGER.info("#### amazonSubmissionResult: " + amazonCsvSubmissionResultModels);
-                LOGGER.info("#### AFTER CALLABLE");
+                LOGGER.info("#### amazonSubmissionResult: " + amazonSubmissionResult);
+                if (amazonSubmissionResult != null) {
+                    List<AmazonCsvSubmissionResultModel> amazonCsvSubmissionResultModels =
+                            amazonSubmissionResult.getAmazonCsvSubmissionResultModels();
+                    LOGGER.info("#### amazonSubmissionResult: " + amazonCsvSubmissionResultModels);
+                    LOGGER.info("#### AFTER CALLABLE");
 
-                List<OrderModel> ordersWithConfirmError = filterShipments(amazonCsvSubmissionResultModels, orders);
-                orderService.updateOrderStatus(orders, OrderStatusType.SENT);
-                orderService.updateOrderStatus(ordersWithConfirmError, OrderStatusType.SHIP_CONFIRM_ERROR);
+                    List<OrderModel> ordersWithConfirmError = filterShipments(amazonCsvSubmissionResultModels, orders);
+                    orderService.updateOrderStatus(orders, OrderStatusType.SHIPPED_AMAZON);
+                    orderService.updateOrderStatus(ordersWithConfirmError, OrderStatusType.SHIP_CONFIRM_ERROR);
 
-                ShipmentConfirmationReportModel shipmentConfirmationReportModel =
-                        shipmentConfirmationReportConverter.convert(loadDate, orders.size(), ordersWithConfirmError.size());
+                    ShipmentConfirmationReportModel shipmentConfirmationReportModel =
+                            shipmentConfirmationReportConverter.convert(loadDate, orders.size(), ordersWithConfirmError.size());
 
-                shipmentConfirmationReportService.save(shipmentConfirmationReportModel);
-                // TODO: add ShipmentConfirmationReportService with save() and list() methods
-                // add ShipmentConfirmationReportEntity
-                // add ShipmentConfirmationReportRepository
-                // add ShipmentConfirmationReportMapper
-                // add JUnit tests!
-                // figure out how to save files in Entity with JPA
-
+                    shipmentConfirmationReportService.save(shipmentConfirmationReportModel);
+                }
             }
         } catch (ShipmentConfirmationCsvProcessorException e) {
             e.printStackTrace();

@@ -17,6 +17,7 @@
 </head>
 <body>
 <h1>Status generowania adresów do wysyłki</h1>
+<div class="container-fluid">
 <div th:if="${sent}">
     <a href="#" th:href="@{/shipment-management/generate}" target="_blank">Generuj PDF</a>
 </div>
@@ -26,6 +27,6 @@
         <span class="sr-only">Loading...</span>
     </div>
 </div>
-
+</div>
 </body>
 </html>

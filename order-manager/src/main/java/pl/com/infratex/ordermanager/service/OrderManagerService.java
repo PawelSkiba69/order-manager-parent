@@ -128,7 +128,7 @@ public class OrderManagerService {
 
     public boolean generateCheck() {
         LOGGER.info("generateCheck()");
-        List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT);
+        List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT_ENADAWCA);
         return orders != null && orders.size() > 0;
     }
 
@@ -185,6 +185,11 @@ public class OrderManagerService {
         saveOrUpdateOrders(orderEntities,true);
     }
 
+    public List<OrderModel> findOrdersByStatusNotShippedAmazon(){
+        LOGGER.info("findOrdersByStatusNotShippedAmazon()");
+        return orderService.findOrdersByStatusNotShippedAmazon();
+    }
+
     private void saveOrUpdateOrders(List<OrderEntity> orderEntities, boolean update) {
         LOGGER.info("saveOrUpdateOrders()");
 //        LOGGER.info("orderEntities: " + orderEntities);
@@ -200,9 +205,10 @@ public class OrderManagerService {
             ProductEntity productEntity = orderEntity.getProduct();
             ClientEntity clientEntity = orderEntity.getClient();
 
+            LOGGER.info("foundOrderLoadedEntity: "+foundOrderLoadedEntity);
             if (foundOrderLoadedEntity != null) {
                 if (productEntity != null) productEntity.setId(foundOrderLoadedEntity.getProductId());
-                if (clientEntity != null) clientEntity.setId(foundOrderLoadedEntity.getProductId());
+                if (clientEntity != null) clientEntity.setId(foundOrderLoadedEntity.getClientId());
             }
 
             ProductEntity savedProductEntity = productRepository.save(productEntity);
@@ -245,8 +251,5 @@ public class OrderManagerService {
                 .collect(Collectors.toList());
     }
 
-    public void uploadAutomatic() {
-
-    }
 }
 

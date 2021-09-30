@@ -12,31 +12,31 @@ public class CarrierCodeConverter {
             return "Deutsche Post";
         }
         if (countryCode.equals("IT")){
-            return "Włochy";
+            return "Poste Italiane";
         }
         if (countryCode.equals("FR")){
             return "La Poste";
         }
         if (countryCode.equals("ES")){
-            return "Hiszpania";
+            return "Correos";
         }
         if (countryCode.equals("AT")){
-            return "Austria";
+            return "AT Post";
         }
         if (countryCode.equals("BE")){
-            return "Belgia";
+            return "BPost";
         }
         if (countryCode.equals("SE")){
-            return "Szwecja";
+            return "Post Nord";
         }
         if (countryCode.equals("IE")){
-            return "Irlandia";
+            return "AN Post";
         }
         if (countryCode.equals("CY")){
-            return "Cypr";
+            return "Cyprus Post";
         }
         if (countryCode.equals("NL")){
-            return "Holandia";
+            return "Post NL";
         }
         if (countryCode.equals("NZ")){
             return "Nowa Zelandia";
@@ -53,6 +53,6 @@ public class CarrierCodeConverter {
         if (countryCode.equals("HK")){
             return "Chorwacja";
         }
-        return countryCode;
+        return "Poczta Polska";
     }
 }
