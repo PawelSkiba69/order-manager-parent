@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.CURRENT_PAGE_SESSION;
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.GENERATE_ADDRESS_MODEL_ATTRIBUTE;
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.ORDERS_MODEL_ATTRIBUTE;
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.ORDER_MANAGEMENT_URI;
@@ -30,7 +31,7 @@ import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.SH
 
 @Controller
 @RequestMapping(value = ORDER_MANAGEMENT_URI)
-@SessionAttributes(names = {ORDERS_MODEL_ATTRIBUTE, GENERATE_ADDRESS_MODEL_ATTRIBUTE})
+@SessionAttributes(names = {ORDERS_MODEL_ATTRIBUTE, GENERATE_ADDRESS_MODEL_ATTRIBUTE, CURRENT_PAGE_SESSION})
 public class OrderManagerController {
     private static final Logger LOGGER = Logger.getLogger(OrderManagerController.class.getName());
 
@@ -43,6 +44,7 @@ public class OrderManagerController {
     @GetMapping
     public String ordersView(ModelMap model) throws IOException {
         LOGGER.info("ordersView(...)");
+        model.addAttribute(CURRENT_PAGE_SESSION,"order-management");
         orders(model);
 
         return ORDER_MANAGER_VIEW;

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import pl.com.infratex.ordermanager.api.exception.admin.AdminException;
 import pl.com.infratex.ordermanager.service.AdminService;
@@ -17,8 +18,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.CURRENT_PAGE_SESSION;
+
 @Controller
 @RequestMapping("/admin")
+@SessionAttributes(names = {CURRENT_PAGE_SESSION})
 public class AdminController {
 
     private static final Logger LOGGER = Logger.getLogger(AdminController.class.getName());
@@ -29,6 +33,7 @@ public class AdminController {
     @GetMapping
     public String adminPanelView(ModelMap modelMap) {
         LOGGER.info("adminPanelView() ");
+        modelMap.addAttribute(CURRENT_PAGE_SESSION,"admin-panel");
         modelMap.addAttribute("productMappingModel", new ProductMappingModel());
         return "admin/admin-panel";
     }

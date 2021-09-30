@@ -10,24 +10,40 @@
 <body>
 <div class="container-fluid">
     <div th:replace="fragments/navigationbar :: navigationbar"></div>
-<form action="#" th:action="@{/order-management/upload}">
-    <button>Załaduj niewysłane zamówienia</button>
-</form>
-<form action="#" th:action="@{/order-management/upload}" method="post" enctype="multipart/form-data">
-    <div>
-        <label for="file-unshipped-orders">Wybierz plik csv unshipped</label>
-        <input type="file" id="file-unshipped-orders" name="file-unshipped-orders"/>
-        <label for="file-new-orders">Wybierz plik csv new orders</label>
-        <input type="file" id="file-new-orders" name="file-new-orders"/>
-        <button type="submit">wyślij</button>
+    <div class="m-2">
+        <form class="mb-2" action="#" th:action="@{/order-management/upload}">
+            <button class="btn btn-dark">Załaduj niewysłane zamówienia</button>
+        </form>
+        <form action="#" class="row" th:action="@{/order-management/upload}" method="post" enctype="multipart/form-data">
+                <div class="col-auto">
+                    <label class="btn btn-dark" for="file-unshipped-orders">
+                        <input id="file-unshipped-orders" name="file-unshipped-orders"
+                               type="file" style="display:none"
+                               onchange="$('#file-unshipped-orders-info').text(this.files[0].name)">
+                        Wybierz plik csv unshipped
+                    </label>
+                    <span class='label label-info' id="file-unshipped-orders-info"></span>
+                </div>
+                <div class="col-auto">
+                    <label class="btn btn-dark" for="file-new-orders">
+                        <input id="file-new-orders" name="file-new-orders"
+                               type="file" style="display:none"
+                               onchange="$('#file-new-orders-info').text(this.files[0].name)">
+                        Wybierz plik csv new orders
+                    </label>
+                    <span class='label label-info' id="file-new-orders-info"></span>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-dark">wyślij</button>
+                </div>
+        </form>
     </div>
-</form>
 <div class="content">
     <div>
         <form action="shipment-manager" th:action="@{/order-management/generate}" th:object="${generateAddress}" method="post">
-            <div>
+            <div class="m-2">
                 <label for="generate">Generuje Packing Slips oraz listę adresów</label>
-                <button id="generate" type="submit">Generuj wysyłki</button>
+                <button id="generate" type="submit" class="btn btn-dark">Generuj wysyłki</button>
                 <input id="saveAll" type="hidden" th:field="*{saveAll}" />
             </div>
             <div>
