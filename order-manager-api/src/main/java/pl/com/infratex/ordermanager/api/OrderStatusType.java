@@ -9,5 +9,6 @@ public enum OrderStatusType {
     UNDELIVERED,
     RETURNED,
     SHIPPED_AMAZON,
-    SHIP_CONFIRM_ERROR
+    SHIP_CONFIRM_ERROR,
+    UNKNOWN
 }

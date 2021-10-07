@@ -54,6 +54,10 @@ public class OrderEntity {
     public OrderEntity() {
     }
 
+    public OrderEntity(OrderStatusType status) {
+        this.status = status;
+    }
+
     public Long getoId() {
         return oId;
     }

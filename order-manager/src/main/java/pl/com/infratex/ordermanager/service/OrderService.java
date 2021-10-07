@@ -106,7 +106,9 @@ public class OrderService {
     }
 
     public List<OrderModel> findOrdersByStatusNotShippedAmazon() {
-        List<OrderEntity> orderEntities = orderRepository.findByStatusNot(OrderStatusType.SHIPPED_AMAZON);
+        LOGGER.info("findOrdersByStatusNotShippedAmazon()");
+        List<OrderEntity> orderEntities = orderRepository.findByStatusNotIn(
+                OrderStatusType.SHIPPED_AMAZON,OrderStatusType.UNKNOWN);
         return orderModelMapper.fromEntities(orderEntities);
     }
 

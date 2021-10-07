@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
+import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.service.OrderManagerService;
+import pl.com.infratex.ordermanager.service.OrderVerifierService;
 import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
@@ -35,10 +37,12 @@ import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.SH
 public class OrderManagerController {
     private static final Logger LOGGER = Logger.getLogger(OrderManagerController.class.getName());
 
-    private OrderManagerService orderManagerService;
+    private final OrderManagerService orderManagerService;
+    private final OrderVerifierService orderVerifierService;
 
-    public OrderManagerController(OrderManagerService orderManagerService) {
+    public OrderManagerController(OrderManagerService orderManagerService, OrderVerifierService orderVerifierService) {
         this.orderManagerService = orderManagerService;
+        this.orderVerifierService = orderVerifierService;
     }
 
     @GetMapping
@@ -52,11 +56,12 @@ public class OrderManagerController {
 
     @PostMapping(value = "/upload")
     public String send(@RequestParam("file-unshipped-orders") MultipartFile fileUnshippedOrders,
-                       @RequestParam("file-new-orders") MultipartFile fileNewOrders, Model model) throws IOException {
+                       @RequestParam("file-new-orders") MultipartFile fileNewOrders, Model model) throws IOException, OrderNotFoundException {
         SellerOrderReportModel sellerOrderReportModel = orderManagerService.createSellerOrderReport(
                 fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
-        model.addAttribute("orders", sellerOrderReportModel.getOrders());
-//        return ORDER_MANAGER_VIEW;
+        List<OrderModel> orders = sellerOrderReportModel.getOrders();
+        model.addAttribute("orders", orders);
+        orderVerifierService.markOrderStatusUnknown(orders);
         return "redirect:" + ORDER_MANAGEMENT_URI;
     }
 

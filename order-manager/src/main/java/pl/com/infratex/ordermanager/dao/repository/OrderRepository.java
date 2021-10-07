@@ -23,7 +23,7 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     List<OrderEntity> findByStatus(OrderStatusType status);
 
-    List<OrderEntity> findByStatusNot(OrderStatusType status);
+    List<OrderEntity> findByStatusNotIn(OrderStatusType... statuses);
 
     List<OrderEntity> findByOrderIdAndOrderItemId(String orderId, String orderItemId);
 
@@ -31,4 +31,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     @Query(name = "ordersWithLatestBatchId", value = ORDERS_WITH_LATEST_BATCH_ID_SQL, nativeQuery = true)
     List<OrderEntity> ordersWithLatestBatchId();
+
+    OrderEntity findByoId(Long oId);
 }
