@@ -58,6 +58,11 @@ public class OrderEntity {
         this.status = status;
     }
 
+    public OrderEntity(LocalDateTime loadDate, OrderStatusType status) {
+        this.loadDate = loadDate;
+        this.status = status;
+    }
+
     public Long getoId() {
         return oId;
     }
@@ -198,22 +203,8 @@ public class OrderEntity {
     public String toString() {
         return "OrderEntity{" +
                 "oId=" + oId +
-                ", orderId='" + orderId + '\'' +
-                ", orderItemId='" + orderItemId + '\'' +
-                ", purchaseDate=" + purchaseDate +
-                ", quantityPurchased=" + quantityPurchased +
-                ", isBusinessOrder=" + isBusinessOrder +
-                ", currency='" + currency + '\'' +
-                ", itemPrice=" + itemPrice +
-                ", itemTax=" + itemTax +
-                ", shippingPrice=" + shippingPrice +
-                ", shippingTax=" + shippingTax +
-                ", product=" + product +
-                ", client=" + client +
                 ", loadDate=" + loadDate +
                 ", status=" + status +
-                ", guid='" + guid + '\'' +
-                ", batchId=" + batchId +
                 '}';
     }
 }

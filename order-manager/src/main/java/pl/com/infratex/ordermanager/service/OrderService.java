@@ -10,6 +10,7 @@ import pl.com.infratex.ordermanager.web.model.AddressModel;
 import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -111,6 +112,15 @@ public class OrderService {
                 OrderStatusType.SHIPPED_AMAZON,OrderStatusType.UNKNOWN);
         return orderModelMapper.fromEntities(orderEntities);
     }
+
+    public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
+        LOGGER.info("findOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
+        List<OrderEntity> orderEntities = orderRepository.findByLoadDateBeforeAndStatusIn(
+                LocalDateTime.now().minusDays(3), OrderStatusType.SHIPPED_AMAZON, OrderStatusType.UNKNOWN);
+        LOGGER.info("orderEntities: "+orderEntities);
+        orderRepository.deleteAll(orderEntities);
+    }
+
 
     public List<String> extractNotNullGuids(List<OrderModel> orders) {
         return orders.stream()

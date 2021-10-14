@@ -34,4 +34,12 @@ public class OrderVerifierService {
         orderService.updateOrderStatus(ordersToChangeStatusUnknown, OrderStatusType.UNKNOWN);
         LOGGER.info("markOrderStatusUnknown()");
     }
+
+//    public void findOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
+//        LOGGER.info("findOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
+//        List<OrderEntity> orderEntities = orderRepository.findByLoadDateBeforeAndStatusIn(
+//                LocalDateTime.now().minusDays(3), OrderStatusType.SHIPPED_AMAZON, OrderStatusType.UNKNOWN);
+//        LOGGER.info("orderEntities: "+orderEntities);
+////        orderRepository.deleteAll(orderEntities);
+//    }
 }

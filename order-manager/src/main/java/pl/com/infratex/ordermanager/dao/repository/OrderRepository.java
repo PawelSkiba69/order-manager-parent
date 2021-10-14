@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
@@ -24,6 +25,8 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     List<OrderEntity> findByStatus(OrderStatusType status);
 
     List<OrderEntity> findByStatusNotIn(OrderStatusType... statuses);
+
+    List<OrderEntity> findByLoadDateBeforeAndStatusIn(LocalDateTime date, OrderStatusType... statuses);
 
     List<OrderEntity> findByOrderIdAndOrderItemId(String orderId, String orderItemId);
 
