@@ -190,6 +190,11 @@ public class OrderManagerService {
         return orderService.findOrdersByStatusNotShippedAmazon();
     }
 
+    public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
+        LOGGER.info("deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
+        orderService.deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays();
+    }
+
     private void saveOrUpdateOrders(List<OrderEntity> orderEntities, boolean update) {
         LOGGER.info("saveOrUpdateOrders()");
 //        LOGGER.info("orderEntities: " + orderEntities);

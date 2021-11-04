@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
+import pl.com.infratex.ordermanager.dao.repository.OrderLoadedRepository;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
@@ -31,11 +32,13 @@ class OrderServiceTest {
     private OrderService orderService;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private OrderLoadedRepository orderLoadedRepository;
 
     @Test
     void copyGuids() {
         //Given
-        OrderService orderService = new OrderService(null, null);
+        OrderService orderService = new OrderService(null, orderLoadedRepository, null);
         //When
         List<AddressModel> addresses = asList(
                 AddressModel.builder().oId(O_ID_1).guid(GUID_1).build(),

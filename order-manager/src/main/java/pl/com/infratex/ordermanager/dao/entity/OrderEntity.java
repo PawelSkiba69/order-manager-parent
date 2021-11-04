@@ -37,11 +37,11 @@ public class OrderEntity {
     private BigDecimal shippingPrice;
     private BigDecimal shippingTax;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "PRODUCT_ID")
     private ProductEntity product;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "CLIENT_ID")
     private ClientEntity client;
 

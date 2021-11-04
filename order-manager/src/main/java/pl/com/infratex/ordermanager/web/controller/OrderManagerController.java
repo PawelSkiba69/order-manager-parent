@@ -62,6 +62,7 @@ public class OrderManagerController {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         model.addAttribute("orders", orders);
         orderVerifierService.markOrderStatusUnknown(orders);
+        orderManagerService.deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays();
         return "redirect:" + ORDER_MANAGEMENT_URI;
     }
 
