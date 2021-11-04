@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.service.OrderManagerService;
-import pl.com.infratex.ordermanager.service.OrderVerifierService;
 import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
@@ -38,11 +37,9 @@ public class OrderManagerController {
     private static final Logger LOGGER = Logger.getLogger(OrderManagerController.class.getName());
 
     private final OrderManagerService orderManagerService;
-    private final OrderVerifierService orderVerifierService;
 
-    public OrderManagerController(OrderManagerService orderManagerService, OrderVerifierService orderVerifierService) {
+    public OrderManagerController(OrderManagerService orderManagerService) {
         this.orderManagerService = orderManagerService;
-        this.orderVerifierService = orderVerifierService;
     }
 
     @GetMapping
@@ -57,12 +54,8 @@ public class OrderManagerController {
     @PostMapping(value = "/upload")
     public String send(@RequestParam("file-unshipped-orders") MultipartFile fileUnshippedOrders,
                        @RequestParam("file-new-orders") MultipartFile fileNewOrders, Model model) throws IOException, OrderNotFoundException {
-        SellerOrderReportModel sellerOrderReportModel = orderManagerService.createSellerOrderReport(
-                fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
-        List<OrderModel> orders = sellerOrderReportModel.getOrders();
+        List<OrderModel> orders = orderManagerService.uploadAndUpdateUnshippedOrders(fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
         model.addAttribute("orders", orders);
-        orderVerifierService.markOrderStatusUnknown(orders);
-        orderManagerService.deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays();
         return "redirect:" + ORDER_MANAGEMENT_URI;
     }
 
