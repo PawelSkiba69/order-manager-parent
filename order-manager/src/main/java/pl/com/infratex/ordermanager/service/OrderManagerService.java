@@ -46,23 +46,25 @@ public class OrderManagerService {
 
     private static final Logger LOGGER = Logger.getLogger(OrderManagerService.class.getName());
 
-    private OrderService orderService;
-    private OrderRepository orderRepository;
-    private ProductRepository productRepository;
-    private ClientRepository clientRepository;
-    private SellerOrderReportMapper sellerOrderReportMapper;
-    private OrderModelMapper orderModelMapper;
-    private ProductMappingService productMappingService;
-    private SequenceIdGenerator sequenceIdGenerator;
-    private OrderLoadedRepository orderLoadedRepository;
-    private AmazonOrderReportService amazonOrderReportService;
+    private final OrderService orderService;
+    private final OrderVerifierService orderVerifierService;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
+    private final ClientRepository clientRepository;
+    private final SellerOrderReportMapper sellerOrderReportMapper;
+    private final OrderModelMapper orderModelMapper;
+    private final ProductMappingService productMappingService;
+    private final SequenceIdGenerator sequenceIdGenerator;
+    private final OrderLoadedRepository orderLoadedRepository;
+    private final AmazonOrderReportService amazonOrderReportService;
 
-    public OrderManagerService(OrderService orderService, OrderRepository orderRepository,
+    public OrderManagerService(OrderService orderService, OrderVerifierService orderVerifierService, OrderRepository orderRepository,
                                ProductRepository productRepository, ClientRepository clientRepository,
                                SellerOrderReportMapper sellerOrderReportMapper, OrderModelMapper orderModelMapper,
                                ProductMappingService productMappingService, SequenceIdGenerator sequenceIdGenerator,
                                OrderLoadedRepository orderLoadedRepository, AmazonOrderReportService amazonOrderReportService) {
         this.orderService = orderService;
+        this.orderVerifierService = orderVerifierService;
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
         this.clientRepository = clientRepository;
@@ -72,6 +74,15 @@ public class OrderManagerService {
         this.sequenceIdGenerator = sequenceIdGenerator;
         this.orderLoadedRepository = orderLoadedRepository;
         this.amazonOrderReportService = amazonOrderReportService;
+    }
+
+    public List<OrderModel> uploadAndUpdateUnshippedOrders(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException, OrderNotFoundException {
+        LOGGER.info("uploadUnshippedOrders()");
+        SellerOrderReportModel sellerOrderReportModel = createSellerOrderReport(inputStreamUnshippedOrders, inputStreamNewOrders);
+        List<OrderModel> orders = sellerOrderReportModel.getOrders();
+        orderVerifierService.markOrderStatusUnknown(orders);
+        deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays();
+        return orders;
     }
 
     public List<OrderModel> filterByLatestBatchId() {
@@ -188,6 +199,11 @@ public class OrderManagerService {
     public List<OrderModel> findOrdersByStatusNotShippedAmazon(){
         LOGGER.info("findOrdersByStatusNotShippedAmazon()");
         return orderService.findOrdersByStatusNotShippedAmazon();
+    }
+
+    public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
+        LOGGER.info("deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
+        orderService.deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays();
     }
 
     private void saveOrUpdateOrders(List<OrderEntity> orderEntities, boolean update) {

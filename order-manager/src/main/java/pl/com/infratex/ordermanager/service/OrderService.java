@@ -4,12 +4,15 @@ import org.springframework.stereotype.Service;
 import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
+import pl.com.infratex.ordermanager.dao.entity.OrderLoadedEntity;
+import pl.com.infratex.ordermanager.dao.repository.OrderLoadedRepository;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.service.mapper.OrderModelMapper;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
 import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -19,11 +22,14 @@ import java.util.stream.Collectors;
 public class OrderService {
 
     private static final Logger LOGGER = Logger.getLogger(OrderService.class.getName());
-    private OrderRepository orderRepository;
-    private OrderModelMapper orderModelMapper;
+    private final OrderRepository orderRepository;
+    private final OrderLoadedRepository orderLoadedRepository;
+    private final OrderModelMapper orderModelMapper;
 
-    public OrderService(OrderRepository orderRepository, OrderModelMapper orderModelMapper) {
+
+    public OrderService(OrderRepository orderRepository, OrderLoadedRepository orderLoadedRepository, OrderModelMapper orderModelMapper) {
         this.orderRepository = orderRepository;
+        this.orderLoadedRepository = orderLoadedRepository;
         this.orderModelMapper = orderModelMapper;
     }
 
@@ -106,9 +112,26 @@ public class OrderService {
     }
 
     public List<OrderModel> findOrdersByStatusNotShippedAmazon() {
-        List<OrderEntity> orderEntities = orderRepository.findByStatusNot(OrderStatusType.SHIPPED_AMAZON);
+        LOGGER.info("findOrdersByStatusNotShippedAmazon()");
+        List<OrderEntity> orderEntities = orderRepository.findByStatusNotIn(
+                OrderStatusType.SHIPPED_AMAZON,OrderStatusType.UNKNOWN);
         return orderModelMapper.fromEntities(orderEntities);
     }
+
+    public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
+        LOGGER.info("findOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
+        List<OrderEntity> orderEntities = orderRepository.findByLoadDateBeforeAndStatusIn(
+                LocalDateTime.now().minusDays(3), OrderStatusType.SHIPPED_AMAZON, OrderStatusType.UNKNOWN);
+        LOGGER.info("orderEntities: "+orderEntities);
+
+        for (OrderEntity orderEntity : orderEntities) {
+            OrderLoadedEntity orderLoadedEntity = orderLoadedRepository.findByoId(orderEntity.getoId());
+            orderLoadedRepository.delete(orderLoadedEntity);
+        }
+
+        orderRepository.deleteAll(orderEntities);
+    }
+
 
     public List<String> extractNotNullGuids(List<OrderModel> orders) {
         return orders.stream()

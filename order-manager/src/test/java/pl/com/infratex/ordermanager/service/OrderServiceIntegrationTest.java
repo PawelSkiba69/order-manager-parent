@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
+import pl.com.infratex.ordermanager.dao.repository.OrderLoadedRepository;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.service.mapper.OrderModelMapper;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
@@ -38,6 +39,9 @@ class OrderServiceIntegrationTest {
     private OrderRepository orderRepository;
 
     @Autowired
+    private OrderLoadedRepository orderLoadedRepository;
+
+    @Autowired
     private OrderModelMapper orderModelMapper;
 
     @Autowired
@@ -46,7 +50,7 @@ class OrderServiceIntegrationTest {
     @Test
     void updateOrdersWithGuids() {
         //given
-        OrderService orderService = new OrderService(orderRepository, orderModelMapper);
+        OrderService orderService = new OrderService(orderRepository, orderLoadedRepository, orderModelMapper);
         List<AddressModel> addresses = asList(
                 AddressModel.builder().oId(O_ID_1).guid(GUID_1).build(),
                 AddressModel.builder().oId(O_ID_2).guid(GUID_2).build(),

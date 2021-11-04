@@ -37,11 +37,11 @@ public class OrderEntity {
     private BigDecimal shippingPrice;
     private BigDecimal shippingTax;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "PRODUCT_ID")
     private ProductEntity product;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "CLIENT_ID")
     private ClientEntity client;
 
@@ -52,6 +52,15 @@ public class OrderEntity {
     private Integer batchId;
 
     public OrderEntity() {
+    }
+
+    public OrderEntity(OrderStatusType status) {
+        this.status = status;
+    }
+
+    public OrderEntity(LocalDateTime loadDate, OrderStatusType status) {
+        this.loadDate = loadDate;
+        this.status = status;
     }
 
     public Long getoId() {
@@ -194,22 +203,8 @@ public class OrderEntity {
     public String toString() {
         return "OrderEntity{" +
                 "oId=" + oId +
-                ", orderId='" + orderId + '\'' +
-                ", orderItemId='" + orderItemId + '\'' +
-                ", purchaseDate=" + purchaseDate +
-                ", quantityPurchased=" + quantityPurchased +
-                ", isBusinessOrder=" + isBusinessOrder +
-                ", currency='" + currency + '\'' +
-                ", itemPrice=" + itemPrice +
-                ", itemTax=" + itemTax +
-                ", shippingPrice=" + shippingPrice +
-                ", shippingTax=" + shippingTax +
-                ", product=" + product +
-                ", client=" + client +
                 ", loadDate=" + loadDate +
                 ", status=" + status +
-                ", guid='" + guid + '\'' +
-                ", batchId=" + batchId +
                 '}';
     }
 }
