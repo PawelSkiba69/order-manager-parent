@@ -12,6 +12,7 @@ public class SequenceIdGenerator {
     private static final Logger LOGGER = Logger.getLogger(SequenceIdGenerator.class.getName());
     public static final String ENADAWCA_BUFOR_ID_SEQ = "ENADAWCA_BUFOR_ID_SEQ";
     public static final String ORDER_BATCH_ID_SEQ = "ORDER_BATCH_ID_SEQ";
+    public static final String MERCHANT_FULFILLMENT_ORDER_ID_SEQ = "MERCHANT_FULFILLMENT_ORDER_ID_SEQ";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
