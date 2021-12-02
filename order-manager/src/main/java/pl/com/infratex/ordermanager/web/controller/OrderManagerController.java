@@ -1,5 +1,9 @@
 package pl.com.infratex.ordermanager.web.controller;
 
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -8,16 +12,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.service.OrderManagerService;
+import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
+import pl.com.infratex.ordermanager.web.model.ProductModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
@@ -83,6 +93,49 @@ public class OrderManagerController {
             orderManagerService.generate(generateAddressModel);
             return "redirect:" + SHIPMENT_MANAGER_URL;
         }
+    }
+
+    @GetMapping(value = "/generate-mcf")
+    @ResponseBody
+    //public byte[] generateMcf() throws OrderManagerException, IOException {
+    public ResponseEntity<Resource> generateMcf() {
+        LOGGER.info("generateMcf()");
+        ProductModel productModel = ProductModel.builder()
+                .productName("Remote control Grandin")
+                .sku("23AWAEG")
+                .build();
+
+        ClientModel clientModel = new ClientModel();
+        clientModel.setRecipientName("Janusz");
+        clientModel.setShipAddress1("Brzozowa 10");
+        clientModel.setShipAddress2("lokal 3");
+        clientModel.setShipCity("Warszawa");
+        clientModel.setShipPostalCode("34-233");
+        clientModel.setShipCountry("GB");
+        clientModel.setBuyerEmail("w16ckfncfrjtgkb@marketplace.amazon.co.uk");
+
+        InputStream inputStream = orderManagerService.generateMultiChannelFulfillmentReport(
+                Arrays.asList(
+                        OrderModel.builder()
+                                .orderId("9849-442-4-224-24")
+                                .orderItemId("235-252-244-2")
+                                .currency("EUR")
+                                .itemPrice(BigDecimal.valueOf(10L))
+                                .product(productModel)
+                                .client(clientModel)
+                                .build()
+                )
+        );
+
+        //ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
+        //IOUtils.copy(inputStream,outputStream);
+        //byte[] bytes = outputStream.toByteArray();
+
+        Resource file = new InputStreamResource(inputStream);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + "report-mcf.csv" + "\"").body(file);
+
+        //return bytes;
     }
 
     private List<OrderModel> orders(ModelMap model) {

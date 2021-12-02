@@ -46,6 +46,14 @@
                 <button id="generate" type="submit" class="btn btn-dark">Generuj wysyłki</button>
                 <input id="saveAll" type="hidden" th:field="*{saveAll}" />
             </div>
+            <div class="m-2">
+                <label for="generate-mcf">Generuje raport przesyłek MCF</label>
+                <!--
+                <button id="generate-mcf" form="generate-mcf-form" type="submit" class="btn btn-dark">Generuje raport przesyłek MCF</button>
+                -->
+                <button id="generate-mcf" type="submit" class="btn btn-dark">Generuje raport przesyłek MCF</button>
+                <input id="saveMcf" type="hidden" th:field="*{saveMcf}" />
+            </div>
             <div>
                 <table class="table">
                     <thead class="thead-dark">
@@ -59,7 +67,8 @@
                         <th scope="col">SKU</th>
                         <th scope="col">Nazwa wewnętrzna</th>
                         <th scope="col">Szt.</th>
-                        <th scope="col">Do wysłania</th>
+                        <th scope="col">EN</th>
+                        <th scope="col">MCF</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,6 +86,7 @@
                         </td>
                         <td th:text="${order.quantityPurchased}"></td>
                         <td><input th:field="*{orders[__${stat.index}__].chosen}"  type="checkbox" /></td>
+                        <td><input th:field="*{orders[__${stat.index}__].mcf}"  type="checkbox" /></td>
                     </tr>
                     </tbody>
                 </table>
