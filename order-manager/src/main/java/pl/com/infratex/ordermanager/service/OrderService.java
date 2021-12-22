@@ -132,6 +132,12 @@ public class OrderService {
         orderRepository.deleteAll(orderEntities);
     }
 
+    public List<OrderModel> orderModelsByoIds(List<Long> oIds) {
+        LOGGER.info("orderModelsByoIds(" + oIds + ")");
+        List<OrderEntity> orderEntities = orderRepository.findByoIdIn(oIds);
+        return orderModelMapper.fromEntities(orderEntities);
+    }
+
 
     public List<String> extractNotNullGuids(List<OrderModel> orders) {
         return orders.stream()

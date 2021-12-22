@@ -36,4 +36,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     List<OrderEntity> ordersWithLatestBatchId();
 
     OrderEntity findByoId(Long oId);
+
+    List<OrderEntity> findByoIdIn(List<Long> oIds);
 }

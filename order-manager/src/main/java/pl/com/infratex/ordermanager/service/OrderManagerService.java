@@ -220,6 +220,11 @@ public class OrderManagerService {
         return null;
     }
 
+    public List<OrderModel> orderModelsByoIds(List<Long> oIds) {
+        LOGGER.info("orderModelsByoIds(" + oIds + ")");
+        return orderService.orderModelsByoIds(oIds);
+    }
+
     private void saveOrUpdateOrders(List<OrderEntity> orderEntities, boolean update) {
         LOGGER.info("saveOrUpdateOrders()");
 //        LOGGER.info("orderEntities: " + orderEntities);

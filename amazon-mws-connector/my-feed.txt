@@ -1,0 +1,4 @@
+order-id	order-item-id	quantity	ship-date	carrier-code	carrier-name	tracking-number	ship-method
+408-6926413-3060353 			2020-08-07	other	Correos	RR930808232PL	Poczta Polska
+404-1035389-4552350 			2020-08-07	other	Poste Italiane	RR930808246PL	Poczta Polska
+403-2155649-5891525 			2020-08-07	other	Correos	RR930808250PL	Poczta Polska

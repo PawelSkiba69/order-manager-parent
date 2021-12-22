@@ -95,6 +95,20 @@ public class OrderManagerController {
         }
     }
 
+    @PostMapping(value = "/generate-mcf-rest")
+    public ResponseEntity<Resource> generateMcfRest(@RequestParam(value = "s[]") List<Long> oIds) {
+        LOGGER.info("generateMcfRest(" + oIds + ")");
+        List<OrderModel> orderModels = orderManagerService.orderModelsByoIds(oIds);
+
+        InputStream inputStream = orderManagerService.generateMultiChannelFulfillmentReport(orderModels);
+
+        Resource file = new InputStreamResource(inputStream);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + "report-mcf.csv" + "\"").body(file);
+
+        //return "redirect:" + ORDER_MANAGEMENT_URI;
+    }
+
     @GetMapping(value = "/generate-mcf")
     @ResponseBody
     //public byte[] generateMcf() throws OrderManagerException, IOException {
