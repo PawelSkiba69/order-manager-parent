@@ -1,2 +1,0 @@
-MerchantFulfillmentOrderID	DisplayableOrderID	DisplayableOrderDate	MerchantSKU	Quantity	MerchantFulfillmentOrderItemID	GiftMessage	DisplayableComment	DisplayableOrderComment	DeliverySLA	AddressName	AddressFieldOne	AddressFieldTwo	AddressFieldThree	AddressCity	AddressCountryCode	AddressStateOrRegion	AddressPostalCode	AddressPhoneNumber	NotificationEmail	FulfillmentAction	MarketplaceID
-MFO_AW1	MFO_AW1	2021-11-17T18:17:41.353		0				Thank you for buying	Standard	Janusz	Brzozowa 10	lokal 3		Warszawa	GB		34-233		w16ckfncfrjtgkb@marketplace.amazon.co.uk	Ship	A1F83G8C2ARO7P
