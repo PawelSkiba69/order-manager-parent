@@ -31,20 +31,26 @@ $(document).ready(function() {
             }
         });
 
-		$.post("/order-management/generate-mcf-rest", {'s[]': mcfs}, function() {
-			console.log("success");
-		})
-		.done(function(data) {
-			console.log("second success");
-			sent = data;
-		})
-		.fail(function() {
-			console.log("error");
-		})
-		.always(function() {
-			console.log("finished");
-		});
+        console.log("BEFORE ajax!");
+        $.ajax({
+            type: "POST",
+            url: "/order-management/generate-mcf-rest",
+            data: {
+                "s[]": mcfs
+            },
+            dataType: "text",
+            success: function(data) {
+                var blob = new Blob([data]);
+                var a = document.createElement('a');
+                a.href = window.URL.createObjectURL(blob);
+                a.download = "report-mcf.csv";
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+            },
+            error: function(result) {
+                console.log("error result: " + result);
+            }
+        });
     });
-
-
 });

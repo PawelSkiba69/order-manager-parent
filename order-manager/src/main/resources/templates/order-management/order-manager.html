@@ -61,6 +61,7 @@
                 -->
                 <button id="generate-mcf-btn" type="button" class="btn btn-dark">Generuje raport przesyłek MCF</button>
                 <input id="saveMcf" type="hidden" th:field="*{saveMcf}" />
+                <!--<a download="report-mcf.csv" id="downloadReportMcf">Pobierz</a>-->
             </div>
             <div>
                 <table class="table">
@@ -93,7 +94,9 @@
                             <input type="hidden" th:field="*{orders[__${stat.index}__].product.changedInternalId}">
                         </td>
                         <td th:text="${order.quantityPurchased}"></td>
-                        <td class="orderChosenCheckbox"><input th:field="*{orders[__${stat.index}__].chosen}"  type="checkbox" /></td>
+                        <td class="orderChosenCheckbox">
+                            <input th:field="*{orders[__${stat.index}__].chosen}" type="checkbox" class="form-check-input" />
+                        </td>
                         <td class="orderMcfCheckbox">
 <!--                            <input th:field="*{orders[__${stat.index}__].mcf}" type="checkbox" />-->
                             <input id="orderOIdMcfChosen" name="orderOIdMcfChosen" type="checkbox" />
