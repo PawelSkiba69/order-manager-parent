@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GenerateAddressModel {
     private Boolean saveAll = false;
+    private Boolean saveMcf = false;
     private List<OrderModel> orders;
     private Boolean[] chosen;
 }

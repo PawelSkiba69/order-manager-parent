@@ -45,6 +45,7 @@ public class OrderModel {
     private BigDecimal totalPrice;
 
     private boolean chosen = true;
+    private boolean mcf;
 
     public OrderModel(Long oId, String orderId, BigDecimal itemPrice) {
         this.oId = oId;
@@ -69,5 +70,13 @@ public class OrderModel {
 
     public void setChosen(boolean chosen) {
         this.chosen = chosen;
+    }
+
+    public boolean isMcf() {
+        return mcf;
+    }
+
+    public void setMcf(boolean mcf) {
+        this.mcf = mcf;
     }
 }

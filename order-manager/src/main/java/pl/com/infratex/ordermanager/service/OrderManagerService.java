@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
+import pl.com.infratex.ordermanager.api.exception.order.OrderMultiChannelFulfillmentCsvProcessorException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.dao.entity.ClientEntity;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
@@ -16,6 +17,7 @@ import pl.com.infratex.ordermanager.dao.repository.ProductRepository;
 import pl.com.infratex.ordermanager.dao.utils.SequenceIdGenerator;
 import pl.com.infratex.ordermanager.integration.amazon.order.report.AmazonOrderReportResult;
 import pl.com.infratex.ordermanager.integration.amazon.order.report.AmazonOrderReportService;
+import pl.com.infratex.ordermanager.service.csv.order.OrderMultiChannelFulfillmentCsvProcessor;
 import pl.com.infratex.ordermanager.service.csv.processor.AmazonCsvOrdersMergeProcessor;
 import pl.com.infratex.ordermanager.service.mapper.OrderModelMapper;
 import pl.com.infratex.ordermanager.service.mapper.SellerOrderReportMapper;
@@ -57,12 +59,13 @@ public class OrderManagerService {
     private final SequenceIdGenerator sequenceIdGenerator;
     private final OrderLoadedRepository orderLoadedRepository;
     private final AmazonOrderReportService amazonOrderReportService;
+    private final OrderMultiChannelFulfillmentCsvProcessor orderMultiChannelFulfillmentCsvProcessor;
 
     public OrderManagerService(OrderService orderService, OrderVerifierService orderVerifierService, OrderRepository orderRepository,
                                ProductRepository productRepository, ClientRepository clientRepository,
                                SellerOrderReportMapper sellerOrderReportMapper, OrderModelMapper orderModelMapper,
                                ProductMappingService productMappingService, SequenceIdGenerator sequenceIdGenerator,
-                               OrderLoadedRepository orderLoadedRepository, AmazonOrderReportService amazonOrderReportService) {
+                               OrderLoadedRepository orderLoadedRepository, AmazonOrderReportService amazonOrderReportService, OrderMultiChannelFulfillmentCsvProcessor orderMultiChannelFulfillmentCsvProcessor) {
         this.orderService = orderService;
         this.orderVerifierService = orderVerifierService;
         this.orderRepository = orderRepository;
@@ -74,6 +77,7 @@ public class OrderManagerService {
         this.sequenceIdGenerator = sequenceIdGenerator;
         this.orderLoadedRepository = orderLoadedRepository;
         this.amazonOrderReportService = amazonOrderReportService;
+        this.orderMultiChannelFulfillmentCsvProcessor = orderMultiChannelFulfillmentCsvProcessor;
     }
 
     public List<OrderModel> uploadAndUpdateUnshippedOrders(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException, OrderNotFoundException {
@@ -204,6 +208,21 @@ public class OrderManagerService {
     public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
         LOGGER.info("deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
         orderService.deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays();
+    }
+
+    public InputStream generateMultiChannelFulfillmentReport(List<OrderModel> orders){
+        LOGGER.info("generateMultiChannelFulfillmentReport("+orders+")");
+        try {
+            return orderMultiChannelFulfillmentCsvProcessor.createCsv(orders);
+        } catch (OrderMultiChannelFulfillmentCsvProcessorException e) {
+            LOGGER.info("Błąd podczas generowania raportu zamówień MCF "+e.getMessage());
+        }
+        return null;
+    }
+
+    public List<OrderModel> orderModelsByoIds(List<Long> oIds) {
+        LOGGER.info("orderModelsByoIds(" + oIds + ")");
+        return orderService.orderModelsByoIds(oIds);
     }
 
     private void saveOrUpdateOrders(List<OrderEntity> orderEntities, boolean update) {
