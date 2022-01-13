@@ -95,10 +95,9 @@
                         </td>
                         <td th:text="${order.quantityPurchased}"></td>
                         <td class="orderChosenCheckbox">
-                            <input th:field="*{orders[__${stat.index}__].chosen}" type="checkbox" class="form-check-input" />
+                            <input th:field="*{orders[__${stat.index}__].chosen}" type="checkbox" />
                         </td>
                         <td class="orderMcfCheckbox">
-<!--                            <input th:field="*{orders[__${stat.index}__].mcf}" type="checkbox" />-->
                             <input id="orderOIdMcfChosen" name="orderOIdMcfChosen" type="checkbox" />
                             <input type="hidden" th:value="${order.oId}" id="orderOIdMcf" name="orderOIdMcf">
                         </td>

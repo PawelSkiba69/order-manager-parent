@@ -8,13 +8,25 @@ $(document).ready(function() {
         console.log("function productCheckbox()");
     };
 
-    $(".orderChosenCheckbox").on("click", function(e) {
+    $(".orderChosenCheckbox").on("click", function(e) {//----
         console.log("clicked orderChosenCheckbox!");
+
+        var cbox = $(this).closest("tr").find(".orderMcfCheckbox").find("input[type='checkbox']");
+        if (cbox.prop("checked")) {
+            cbox.prop("checked", !cbox.prop("checked"));
+        }
+
         productCheckbox();
     });
 
-    $(".orderMcfCheckbox").on("click", function(e) {
+    $(".orderMcfCheckbox").on("click", function(e) {//----
         console.log("clicked orderMcfCheckbox!");
+
+        var cbox = $(this).closest("tr").find(".orderChosenCheckbox").find("input[type='checkbox']");
+        if (cbox.prop("checked")) {
+            cbox.prop("checked", !cbox.prop("checked"));
+        }
+
         productCheckbox();
     });
 
