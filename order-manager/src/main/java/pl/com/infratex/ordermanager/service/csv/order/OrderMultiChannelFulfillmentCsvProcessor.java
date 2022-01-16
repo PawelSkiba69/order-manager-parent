@@ -50,7 +50,7 @@ public class OrderMultiChannelFulfillmentCsvProcessor {
                              "MerchantFulfillmentOrderItemID", "GiftMessage", "DisplayableComment", "DisplayableOrderComment", "DeliverySLA",
                              "AddressName", "AddressFieldOne", "AddressFieldTwo", "AddressFieldThree", "AddressCity", "AddressCountryCode",
                              "AddressStateOrRegion", "AddressPostalCode", "AddressPhoneNumber", "NotificationEmail", "FulfillmentAction", "MarketplaceID"
-                           //  ,"ProductName"
+                             ,"OrderName","ProductAsin","ProductName"
                      ))) {
             if (orderModels != null) {
                 orderModels.forEach(
@@ -95,7 +95,10 @@ public class OrderMultiChannelFulfillmentCsvProcessor {
                     client.getShipPhoneNumber(),//AddressPhoneNumber
                     client.getBuyerEmail(),//NotificationEmail
                     FULFILLMENT_ACTION_SHIP,//FulfillmentAction
-                    marketplaceDataModel.getMarketplaceId()//MarketplaceID
+                    marketplaceDataModel.getMarketplaceId(),//MarketplaceID,
+                    orderModel.getOrderId(),
+                    orderModel.getAsin(),
+                    product.getProductName()
             );
             try {
                 csvPrinter.printRecord(strings);

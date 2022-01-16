@@ -16,6 +16,15 @@ public class MarketplaceDataConverter {
     static {
         MARKETPLACE_DATA.put("GB", MarketplaceDataModel.builder()
                 .displayableOrderComment("Thank you for buying").marketplaceId("A1F83G8C2ARO7P").build());
+        MARKETPLACE_DATA.put("DE", MarketplaceDataModel.builder()
+                .displayableOrderComment("Vielen Dank für Ihre Bestellung").marketplaceId("A1PA6795UKMFR9").build());
+        MARKETPLACE_DATA.put("FR", MarketplaceDataModel.builder()
+                .displayableOrderComment("Merci de votre commande").marketplaceId("A13V1IB3VIYZZH").build());
+        MARKETPLACE_DATA.put("ES", MarketplaceDataModel.builder()
+                .displayableOrderComment("Gracias por tu solicitud").marketplaceId("A1RKKUPIHCS9HS").build());
+        MARKETPLACE_DATA.put("IT", MarketplaceDataModel.builder()
+                .displayableOrderComment("Grazie per il tuo ordine").marketplaceId("APJ6JRA9NG5V4").build());
+
     }
 
     public static MarketplaceDataModel extract(String buyerEmail) {
