@@ -20,6 +20,7 @@ import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.service.OrderManagerService;
 import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
+import pl.com.infratex.ordermanager.web.model.NoCustomsDeclarationShipCountry;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.ProductModel;
 import pl.com.infratex.ordermanager.web.model.SellerOrderReportModel;
@@ -164,6 +165,18 @@ public class OrderManagerController {
         comparator = comparator.thenComparing(orderModel -> orderModel.getPurchaseDate());
 
         orders = orders.stream()
+                .filter(order -> {
+                    if (order.getClient() != null) {
+                        ClientModel client = order.getClient();
+                        String shipCountry = client.getShipCountry();
+                        for (NoCustomsDeclarationShipCountry country : NoCustomsDeclarationShipCountry.values()) {
+                            if (country.name().equalsIgnoreCase(shipCountry)) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                })
                 .sorted(comparator)
                 .collect(Collectors.toList());
 
