@@ -134,7 +134,7 @@ public class OrderService {
 
     public List<OrderModel> orderModelsByoIds(List<Long> oIds) {
         LOGGER.info("orderModelsByoIds(" + oIds + ")");
-        List<OrderEntity> orderEntities = orderRepository.findByoIdIn(oIds);
+        List<OrderEntity> orderEntities = orderRepository.findByoIdInOrderByProduct_InternalIdDescPurchaseDateAsc(oIds);
         return orderModelMapper.fromEntities(orderEntities);
     }
 

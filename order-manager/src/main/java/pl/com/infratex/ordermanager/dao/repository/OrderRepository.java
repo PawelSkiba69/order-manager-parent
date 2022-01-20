@@ -37,5 +37,5 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     OrderEntity findByoId(Long oId);
 
-    List<OrderEntity> findByoIdIn(List<Long> oIds);
+    List<OrderEntity> findByoIdInOrderByProduct_InternalIdDescPurchaseDateAsc(List<Long> oIds);
 }
