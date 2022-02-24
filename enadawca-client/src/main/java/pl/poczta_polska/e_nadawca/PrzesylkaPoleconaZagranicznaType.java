@@ -172,4 +172,14 @@ public class PrzesylkaPoleconaZagranicznaType
         this.iloscPotwierdzenOdbioru = value;
     }
 
+    @Override
+    public String toString() {
+        return "PrzesylkaPoleconaZagranicznaType{" +
+                "deklaracjaCelna2=" + deklaracjaCelna2 +
+                ", zawartosc='" + zawartosc + '\'' +
+                ", posteRestante=" + posteRestante +
+                ", masa=" + masa +
+                ", iloscPotwierdzenOdbioru=" + iloscPotwierdzenOdbioru +
+                '}';
+    }
 }

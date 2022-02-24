@@ -1,6 +1,7 @@
 package pl.com.infratex.ordermanager.service.mapper;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
@@ -25,7 +26,14 @@ public class OrderModelMapper {
 
     public OrderModel fromEntity(OrderEntity orderEntity) {
         ModelMapper modelMapper = new ModelMapper();
+        //modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+
+        TypeMap<OrderEntity, OrderModel> typeMap = modelMapper.createTypeMap(OrderEntity.class, OrderModel.class);
+        typeMap.addMapping(OrderEntity::getProduct, OrderModel::setProduct);
+        typeMap.addMapping(OrderEntity::getClient, OrderModel::setClient);
+
         OrderModel orderModel = modelMapper.map(orderEntity, OrderModel.class);
+    //    LOGGER.info("OrderModel: "+orderModel);
         OrderModelConverter.formatDate(orderModel);
 
         return orderModel;

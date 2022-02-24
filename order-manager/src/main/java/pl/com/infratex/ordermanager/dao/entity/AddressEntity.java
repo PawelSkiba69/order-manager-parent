@@ -1,10 +1,13 @@
 package pl.com.infratex.ordermanager.dao.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name="ADDRESSES")
@@ -27,6 +30,10 @@ public class AddressEntity {
     private String shipCountry;
     private String shipPhoneNumber;
     private String status;
+    private String currency;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<AddressContentsEntity> addressContents;
 
     public AddressEntity() {
     }
@@ -143,6 +150,22 @@ public class AddressEntity {
         this.status = status;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public List<AddressContentsEntity> getAddressContents() {
+        return addressContents;
+    }
+
+    public void setAddressContents(List<AddressContentsEntity> addressContents) {
+        this.addressContents = addressContents;
+    }
+
     @Override
     public String toString() {
         return "AddressEntity{" +
@@ -160,6 +183,8 @@ public class AddressEntity {
                 ", shipCountry='" + shipCountry + '\'' +
                 ", shipPhoneNumber='" + shipPhoneNumber + '\'' +
                 ", status='" + status + '\'' +
+                ", currency='" + currency + '\'' +
+                ", addressContents=" + addressContents +
                 '}';
     }
 }

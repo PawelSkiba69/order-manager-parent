@@ -7,10 +7,13 @@ import pl.com.infratex.ordermanager.web.model.OrderModel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static pl.com.infratex.ordermanager.web.model.coverter.CountryConverter.countryConvert;
 
 public class OrderModelConverter {
+
+    private static final Logger LOGGER = Logger.getLogger(OrderModelConverter.class.getName());
 
     public static List<OrderModel> convert(List<OrderModel> orders) {
         for (OrderModel order : orders) {
@@ -30,6 +33,7 @@ public class OrderModelConverter {
     }
 
     private static void formatShipAddress(OrderModel order) {
+     //  LOGGER.info("formatShipAddress("+order+")");
         ClientModel client = order.getClient();
         if (client != null) {
             String shipAddress1=client.getShipAddress1();
@@ -43,6 +47,7 @@ public class OrderModelConverter {
                 client.setShipAddress1("");
             }
         }
+     //   LOGGER.info("formatShipAddress("+order+")");
     }
 
     private static void toUpperCase(OrderModel order) {
