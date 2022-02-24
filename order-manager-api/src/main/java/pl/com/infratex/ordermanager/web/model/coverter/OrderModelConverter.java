@@ -9,8 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static pl.com.infratex.ordermanager.web.model.coverter.CountryConverter.countryConvert;
-
 public class OrderModelConverter {
 
     private static final Logger LOGGER = Logger.getLogger(OrderModelConverter.class.getName());
@@ -66,7 +64,8 @@ public class OrderModelConverter {
     private static void countryCode(OrderModel order) {
         ClientModel client = order.getClient();
         if (client != null) {
-            client.setShipCountry(countryConvert(client.getShipCountry()));
+//            client.setShipCountry(CountryConverter.countryConvert(client.getShipCountry()));
+//            order.setCountryInfo(CountryConverter.countryConvert(client.getShipCountry()));
             order.setClient(client);
         }
     }

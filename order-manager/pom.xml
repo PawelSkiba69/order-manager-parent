@@ -21,6 +21,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>pl.com.infratex.ordermanager.integration.enadawca</groupId>
+            <artifactId>enadawca-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>pl.com.infratex.ordermanager.api</groupId>
             <artifactId>order-manager-api</artifactId>
             <version>1.0.0</version>
