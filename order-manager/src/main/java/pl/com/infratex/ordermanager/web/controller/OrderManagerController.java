@@ -28,10 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.CURRENT_PAGE_SESSION;
 import static pl.com.infratex.ordermanager.web.controller.ControllerConstants.GENERATE_ADDRESS_MODEL_ATTRIBUTE;
@@ -159,25 +157,7 @@ public class OrderManagerController {
             orders = orderManagerService.findOrdersByStatusNotShippedAmazon();
         }
 
-        Comparator<OrderModel> comparator = Comparator.comparing(orderModel -> orderModel.getProduct().getInternalId(),
-                Comparator.nullsLast(Comparator.reverseOrder()));
-        comparator = comparator.thenComparing(orderModel -> orderModel.getPurchaseDate());
-
-        orders = orders.stream()
-//                .filter(order -> {
-////                    if (order.getClient() != null) {
-////                        ClientModel client = order.getClient();
-////                        String shipCountry = client.getShipCountry();
-////                        for (NoCustomsDeclarationShipCountry country : NoCustomsDeclarationShipCountry.values()) {
-////                            if (country.name().equalsIgnoreCase(shipCountry)) {
-////                                return true;
-////                            }
-////                        }
-////                    }
-////                    return false;
-////                })
-                .sorted(comparator)
-                .collect(Collectors.toList());
+        orders = orderManagerService.sortByCustomsDeclarationRequired(orders,true);
 
         GenerateAddressModel generateAddressModel = (GenerateAddressModel) model.get(GENERATE_ADDRESS_MODEL_ATTRIBUTE);
         if (generateAddressModel == null) {

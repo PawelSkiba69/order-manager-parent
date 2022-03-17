@@ -19,7 +19,7 @@ public class OrderModelConverter {
         for (OrderModel order : orders) {
             formatShipAddress(order);
             toUpperCase(order);
-            countryCode(order);
+            countryCode(order, true);
         }
         return orders;
     }
@@ -29,6 +29,23 @@ public class OrderModelConverter {
         if (purchaseDate != null) {
             String format = purchaseDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             order.setPurchaseDateFormatted(format);
+        }
+    }
+
+    public static void countryCode(OrderModel order, boolean withCountryName) {
+        ClientModel client = order.getClient();
+        if (client != null) {
+            CountryInfo countryInfo = CountryConverter.countryConvert(client.getShipCountry());
+            if (countryInfo != null) {
+                if (withCountryName) {
+                    client.setShipCountry(countryInfo.getCountryName());
+                }
+                DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj = countryInfo.getDeklaracaCelnaRodzaj();
+                if (deklaracaCelnaRodzaj != null) {
+                    order.setCountryInfo(countryInfo);
+                }
+            }
+            order.setClient(client);
         }
     }
 
@@ -58,22 +75,6 @@ public class OrderModelConverter {
             client.setShipAddress3(client.getShipAddress3().toUpperCase());
             client.setShipCity(client.getShipCity().toUpperCase());
 
-            order.setClient(client);
-        }
-    }
-
-    private static void countryCode(OrderModel order) {
-        ClientModel client = order.getClient();
-        if (client != null) {
-//            client.setShipCountry(CountryConverter.countryConvert(client.getShipCountry()));
-            CountryInfo countryInfo = CountryConverter.countryConvert(client.getShipCountry());
-            if (countryInfo != null) {
-                client.setShipCountry(countryInfo.getCountryName());
-                DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj = countryInfo.getDeklaracaCelnaRodzaj();
-                if (deklaracaCelnaRodzaj != null) {
-                    order.setCountryInfo(countryInfo);
-                }
-            }
             order.setClient(client);
         }
     }

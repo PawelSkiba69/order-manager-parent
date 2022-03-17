@@ -9,10 +9,13 @@ import pl.com.infratex.ordermanager.dao.repository.OrderLoadedRepository;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.service.mapper.OrderModelMapper;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
+import pl.com.infratex.ordermanager.web.model.CountryInfo;
 import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
+import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -41,6 +44,34 @@ public class OrderService {
     public List<OrderModel> filterByLatestBatchId() {
         List<OrderEntity> orderEntities = orderRepository.ordersWithLatestBatchId();
         return orderModelMapper.fromEntities(orderEntities);
+    }
+
+    public List<OrderModel> sortByCustomsDeclarationRequired(List<OrderModel> orders, boolean extraSortInternalIdPurchaseDate) {
+        LOGGER.info("sortByCustomsDeclarationRequired()");
+        orders.forEach(orderModel -> OrderModelConverter.countryCode(orderModel, false));
+
+        Comparator<OrderModel> comparator = Comparator.comparing(orderModel -> {
+                    CountryInfo countryInfo = orderModel.getCountryInfo();
+                    if (countryInfo != null) {
+                        return countryInfo.getDeklaracaCelnaRodzaj();
+                    } else {
+                        return null;
+                    }
+                },
+                Comparator.nullsFirst(Comparator.reverseOrder()));
+        if (!extraSortInternalIdPurchaseDate) {
+            comparator = comparator.thenComparing(
+                    orderModel -> orderModel.getProduct().getInternalId(),
+                    Comparator.nullsLast(Comparator.reverseOrder())
+            );
+            comparator = comparator.thenComparing(OrderModel::getPurchaseDate);
+        }
+        List<OrderModel> sortedOrders = orders.stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
+
+        LOGGER.info("sortByCustomsDeclarationRequired()");
+        return sortedOrders;
     }
 
     //FIXME Add test
@@ -145,4 +176,5 @@ public class OrderService {
                 .map(OrderModel::getGuid)
                 .collect(Collectors.toList());
     }
+
 }

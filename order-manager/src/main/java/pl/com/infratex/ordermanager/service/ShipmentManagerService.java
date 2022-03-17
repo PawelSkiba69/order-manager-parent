@@ -48,6 +48,7 @@ public class ShipmentManagerService {
 
     public byte[] generatePackingSlips() {
         List<OrderModel> orders = orderService.ordersWithStatus(OrderStatusType.SENT_ENADAWCA);
+        orders = orderService.sortByCustomsDeclarationRequired(orders,false);
         try {
             OutputStream outputStream = packingSlipAddressPdfReportGenerator.generatePdf(orders, "template.jrxml");
             orderService.updateOrderStatus(orders,OrderStatusType.LABELED);
