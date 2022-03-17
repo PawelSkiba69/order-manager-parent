@@ -63,6 +63,26 @@ public class OrderEntity {
         this.status = status;
     }
 
+    public OrderEntity(Long oId, String orderId, String orderItemId, LocalDateTime purchaseDate, int quantityPurchased, boolean isBusinessOrder, String currency, BigDecimal itemPrice, BigDecimal itemTax, BigDecimal shippingPrice, BigDecimal shippingTax, ProductEntity product, ClientEntity client, LocalDateTime loadDate, OrderStatusType status, String guid, Integer batchId) {
+        this.oId = oId;
+        this.orderId = orderId;
+        this.orderItemId = orderItemId;
+        this.purchaseDate = purchaseDate;
+        this.quantityPurchased = quantityPurchased;
+        this.isBusinessOrder = isBusinessOrder;
+        this.currency = currency;
+        this.itemPrice = itemPrice;
+        this.itemTax = itemTax;
+        this.shippingPrice = shippingPrice;
+        this.shippingTax = shippingTax;
+        this.product = product;
+        this.client = client;
+        this.loadDate = loadDate;
+        this.status = status;
+        this.guid = guid;
+        this.batchId = batchId;
+    }
+
     public Long getoId() {
         return oId;
     }
@@ -203,6 +223,8 @@ public class OrderEntity {
     public String toString() {
         return "OrderEntity{" +
                 "oId=" + oId +
+                ", product=" + product +
+                ", client=" + client +
                 ", loadDate=" + loadDate +
                 ", status=" + status +
                 '}';

@@ -2,21 +2,24 @@ package pl.com.infratex.ordermanager.web.model.coverter;
 
 import org.apache.commons.lang3.StringUtils;
 import pl.com.infratex.ordermanager.web.model.ClientModel;
+import pl.com.infratex.ordermanager.web.model.CountryInfo;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
+import pl.poczta_polska.e_nadawca.DeklaracaCelnaRodzajEnum;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static pl.com.infratex.ordermanager.web.model.coverter.CountryConverter.countryConvert;
+import java.util.logging.Logger;
 
 public class OrderModelConverter {
+
+    private static final Logger LOGGER = Logger.getLogger(OrderModelConverter.class.getName());
 
     public static List<OrderModel> convert(List<OrderModel> orders) {
         for (OrderModel order : orders) {
             formatShipAddress(order);
             toUpperCase(order);
-            countryCode(order);
+            countryCode(order, true);
         }
         return orders;
     }
@@ -29,20 +32,38 @@ public class OrderModelConverter {
         }
     }
 
-    private static void formatShipAddress(OrderModel order) {
+    public static void countryCode(OrderModel order, boolean withCountryName) {
         ClientModel client = order.getClient();
         if (client != null) {
-            String shipAddress1=client.getShipAddress1();
-            String shipAddress2=client.getShipAddress2();
+            CountryInfo countryInfo = CountryConverter.countryConvert(client.getShipCountry());
+            if (countryInfo != null) {
+                if (withCountryName) {
+                    client.setShipCountry(countryInfo.getCountryName());
+                }
+                DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj = countryInfo.getDeklaracaCelnaRodzaj();
+                if (deklaracaCelnaRodzaj != null) {
+                    order.setCountryInfo(countryInfo);
+                }
+            }
+            order.setClient(client);
+        }
+    }
+
+    private static void formatShipAddress(OrderModel order) {
+        //  LOGGER.info("formatShipAddress("+order+")");
+        ClientModel client = order.getClient();
+        if (client != null) {
+            String shipAddress1 = client.getShipAddress1();
+            String shipAddress2 = client.getShipAddress2();
             if (StringUtils.isBlank(shipAddress2)) {
                 client.setShipAddress2(shipAddress1);
                 client.setShipAddress1("");
-            }
-            else if (shipAddress2.length()<4||shipAddress1.length()<4){
-                client.setShipAddress2(shipAddress1+" "+shipAddress2);
+            } else if (shipAddress2.length() < 4 || shipAddress1.length() < 4) {
+                client.setShipAddress2(shipAddress1 + " " + shipAddress2);
                 client.setShipAddress1("");
             }
         }
+        //   LOGGER.info("formatShipAddress("+order+")");
     }
 
     private static void toUpperCase(OrderModel order) {
@@ -54,14 +75,6 @@ public class OrderModelConverter {
             client.setShipAddress3(client.getShipAddress3().toUpperCase());
             client.setShipCity(client.getShipCity().toUpperCase());
 
-            order.setClient(client);
-        }
-    }
-
-    private static void countryCode(OrderModel order) {
-        ClientModel client = order.getClient();
-        if (client != null) {
-            client.setShipCountry(countryConvert(client.getShipCountry()));
             order.setClient(client);
         }
     }

@@ -43,7 +43,8 @@ public class ShipmentManagerController {
     @GetMapping
     public String orders(Model model) throws IOException {
         List<OrderModel> orders = shipmentManagerService.list();
-//        LOGGER.info("Orders: " + orders);
+        orders = orderManagerService.sortByCustomsDeclarationRequired(orders,false);
+        LOGGER.info("Orders: " + orders);
         SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel();
         sellerOrderReportModel.setOrders(OrderModelConverter.convert(orders));
 
@@ -56,7 +57,7 @@ public class ShipmentManagerController {
                        ModelMap modelMap) {
 
         LOGGER.info("Sending ...");
-//        LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
+        LOGGER.info("SellerOrderReportModel: " + sellerOrderReport);
         CompletableFuture<Boolean> sent = shipmentManagerService.send(sellerOrderReport);
         modelMap.addAttribute("sent", sent.isDone());
         return SHIPMENT_MANAGER_STATUS_VIEW;

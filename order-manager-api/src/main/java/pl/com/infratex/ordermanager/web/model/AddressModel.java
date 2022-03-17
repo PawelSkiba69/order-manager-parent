@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.poczta_polska.e_nadawca.DeklaracaCelnaRodzajEnum;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -25,6 +29,7 @@ public class AddressModel {
     private String shipCountry;
     private String shipPhoneNumber;
     private String guid;
-    private double weight;
-
+    private String currency;
+    private List<AddressContentsModel> addressContents=new ArrayList<>();
+    private DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj;
 }

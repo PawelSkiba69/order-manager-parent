@@ -93,6 +93,11 @@ public class OrderManagerService {
         return orderService.filterByLatestBatchId();
     }
 
+    public List<OrderModel> sortByCustomsDeclarationRequired(List<OrderModel> orders, boolean extraSortInternalIdPurchaseDate) {
+        LOGGER.info("sortByCustomsDeclarationRequired()");
+        return orderService.sortByCustomsDeclarationRequired(orders, extraSortInternalIdPurchaseDate);
+    }
+
     public SellerOrderReportModel createSellerOrderReport(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException {
 
         List<AmazonCsvOrder> amazonCsvOrders = parseCsv(inputStreamUnshippedOrders, inputStreamNewOrders);
@@ -162,7 +167,7 @@ public class OrderManagerService {
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
         List<OrderEntity> orderEntities = orderModelMapper.fromModels(orders);
 
-        saveOrUpdateOrders(orderEntities,false);
+        saveOrUpdateOrders(orderEntities, false);
     }
 
     public void updateOrders(SellerOrderReportModel sellerOrderReportModel) {
@@ -197,25 +202,25 @@ public class OrderManagerService {
 
         List<OrderEntity> orderEntities = orderModelMapper.fromModels(changedProductOrders);
 
-        saveOrUpdateOrders(orderEntities,true);
+        saveOrUpdateOrders(orderEntities, true);
     }
 
-    public List<OrderModel> findOrdersByStatusNotShippedAmazon(){
+    public List<OrderModel> findOrdersByStatusNotShippedAmazon() {
         LOGGER.info("findOrdersByStatusNotShippedAmazon()");
         return orderService.findOrdersByStatusNotShippedAmazon();
     }
 
-    public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
+    public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays() {
         LOGGER.info("deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
         orderService.deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays();
     }
 
-    public InputStream generateMultiChannelFulfillmentReport(List<OrderModel> orders){
-        LOGGER.info("generateMultiChannelFulfillmentReport("+orders+")");
+    public InputStream generateMultiChannelFulfillmentReport(List<OrderModel> orders) {
+        LOGGER.info("generateMultiChannelFulfillmentReport(" + orders + ")");
         try {
             return orderMultiChannelFulfillmentCsvProcessor.createCsv(orders);
         } catch (OrderMultiChannelFulfillmentCsvProcessorException e) {
-            LOGGER.info("Błąd podczas generowania raportu zamówień MCF "+e.getMessage());
+            LOGGER.info("Błąd podczas generowania raportu zamówień MCF " + e.getMessage());
         }
         return null;
     }
@@ -240,7 +245,7 @@ public class OrderManagerService {
             ProductEntity productEntity = orderEntity.getProduct();
             ClientEntity clientEntity = orderEntity.getClient();
 
-            LOGGER.info("foundOrderLoadedEntity: "+foundOrderLoadedEntity);
+            LOGGER.info("foundOrderLoadedEntity: " + foundOrderLoadedEntity);
             if (foundOrderLoadedEntity != null) {
                 if (productEntity != null) productEntity.setId(foundOrderLoadedEntity.getProductId());
                 if (clientEntity != null) clientEntity.setId(foundOrderLoadedEntity.getClientId());
@@ -251,7 +256,7 @@ public class OrderManagerService {
 
             orderEntity.setProduct(savedProductEntity);
             orderEntity.setClient(savedClientEntity);
-            if(!update) {
+            if (!update) {
                 orderEntity.setBatchId(generateId);
             }
             orderEntity.setLoadDate(LocalDateTime.now());

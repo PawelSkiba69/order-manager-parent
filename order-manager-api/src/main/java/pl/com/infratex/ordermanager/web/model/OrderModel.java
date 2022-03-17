@@ -47,6 +47,8 @@ public class OrderModel {
     private boolean chosen = true;
     private boolean mcf;
 
+    private CountryInfo countryInfo;
+
     public OrderModel(Long oId, String orderId, BigDecimal itemPrice) {
         this.oId = oId;
         this.orderId = orderId;
