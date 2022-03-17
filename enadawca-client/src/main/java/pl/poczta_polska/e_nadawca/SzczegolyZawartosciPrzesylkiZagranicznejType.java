@@ -178,15 +178,4 @@ public class SzczegolyZawartosciPrzesylkiZagranicznejType {
         this.krajPochodzeniaKodAlfa2 = value;
     }
 
-    @Override
-    public String toString() {
-        return "SzczegolyZawartosciPrzesylkiZagranicznejType{" +
-                "okreslenieZawartosci='" + okreslenieZawartosci + '\'' +
-                ", ilosc=" + ilosc +
-                ", masaNetto=" + masaNetto +
-                ", wartosc=" + wartosc +
-                ", numerTaryfyHs='" + numerTaryfyHs + '\'' +
-                ", krajPochodzeniaKodAlfa2='" + krajPochodzeniaKodAlfa2 + '\'' +
-                '}';
-    }
 }

@@ -347,20 +347,4 @@ public class DeklaracjaCelna2Type {
         this.numerReferencyjnyCelny = value;
     }
 
-    @Override
-    public String toString() {
-        return "DeklaracjaCelna2Type{" +
-                "rodzaj=" + rodzaj +
-                ", zawartoscPrzesylki=" + zawartoscPrzesylki +
-                ", dokumentyTowarzyszace=" + dokumentyTowarzyszace +
-                ", wyjasnienie='" + wyjasnienie + '\'' +
-                ", oplatyPocztowe='" + oplatyPocztowe + '\'' +
-                ", uwagi='" + uwagi + '\'' +
-                ", numerReferencyjnyImportera='" + numerReferencyjnyImportera + '\'' +
-                ", numerTelefonuImportera='" + numerTelefonuImportera + '\'' +
-                ", walutaKodISO='" + walutaKodISO + '\'' +
-                ", szczegolyZawartosciPrzesylki=" + szczegolyZawartosciPrzesylki +
-                ", numerReferencyjnyCelny='" + numerReferencyjnyCelny + '\'' +
-                '}';
-    }
 }

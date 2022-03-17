@@ -1,7 +1,10 @@
 package pl.com.infratex.ordermanager.dao.entity;
 
+import pl.poczta_polska.e_nadawca.DeklaracaCelnaRodzajEnum;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +37,8 @@ public class AddressEntity {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<AddressContentsEntity> addressContents;
+    @Enumerated
+    private DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj;
 
     public AddressEntity() {
     }
@@ -166,6 +171,14 @@ public class AddressEntity {
         this.addressContents = addressContents;
     }
 
+    public DeklaracaCelnaRodzajEnum getDeklaracaCelnaRodzaj() {
+        return deklaracaCelnaRodzaj;
+    }
+
+    public void setDeklaracaCelnaRodzaj(DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj) {
+        this.deklaracaCelnaRodzaj = deklaracaCelnaRodzaj;
+    }
+
     @Override
     public String toString() {
         return "AddressEntity{" +
@@ -185,6 +198,7 @@ public class AddressEntity {
                 ", status='" + status + '\'' +
                 ", currency='" + currency + '\'' +
                 ", addressContents=" + addressContents +
+                ", deklaracaCelnaRodzaj=" + deklaracaCelnaRodzaj +
                 '}';
     }
 }

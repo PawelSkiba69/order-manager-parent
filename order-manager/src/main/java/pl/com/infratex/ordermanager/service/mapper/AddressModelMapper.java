@@ -10,6 +10,7 @@ import pl.com.infratex.ordermanager.web.model.CountryInfo;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.OrderReportModel;
 import pl.com.infratex.ordermanager.web.model.ProductModel;
+import pl.poczta_polska.e_nadawca.DeklaracaCelnaRodzajEnum;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -62,16 +63,25 @@ public class AddressModelMapper {
         addressModel.setShipCountry(clientModel.getShipCountry());
         addressModel.setCurrency(orderModel.getCurrency());
 
-        AddressContentsModel addressContentsModel=new AddressContentsModel();
-        addressContentsModel.setDescription(productModel.getProductName());
-        addressContentsModel.setQuantity(orderModel.getQuantityPurchased());
-        addressContentsModel.setWeight(WEIGHT);
-        addressContentsModel.setOriginCountryCode(CountryInfo.PL.getCountryCode());
+        CountryInfo countryInfo = orderModel.getCountryInfo();
+        LOGGER.info("countryInfo: "+countryInfo);
+        if (countryInfo != null) {
+            DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj = countryInfo.getDeklaracaCelnaRodzaj();
+            if (deklaracaCelnaRodzaj != null) {
+                addressModel.setDeklaracaCelnaRodzaj(deklaracaCelnaRodzaj);
+                AddressContentsModel addressContentsModel=new AddressContentsModel();
+                addressContentsModel.setDescription(productModel.getProductName());
+                addressContentsModel.setQuantity(orderModel.getQuantityPurchased());
+                addressContentsModel.setWeight(WEIGHT);
+                addressContentsModel.setOriginCountryCode(CountryInfo.PL.getCountryCode());
 
-        OrderReportModel orderReportModel=new OrderReportModel(orderModel);
-        addressContentsModel.setValue(orderReportModel.getTotalPrice());
+                OrderReportModel orderReportModel=new OrderReportModel(orderModel);
+                addressContentsModel.setValue(orderReportModel.getTotalPrice());
 
-        addressModel.getAddressContents().add(addressContentsModel);
+                addressModel.getAddressContents().add(addressContentsModel);
+            }
+        }
+
         LOGGER.info("Dane klienta: " + addressModel);
         return addressModel;
     }

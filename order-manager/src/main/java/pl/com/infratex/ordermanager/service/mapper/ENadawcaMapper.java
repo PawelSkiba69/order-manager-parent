@@ -25,7 +25,7 @@ public class ENadawcaMapper {
 
     public PrzesylkaPoleconaZagranicznaType fromAddressModelToPrzesylkaPoleconaZagraniczna(AddressModel addressModel) {
 
-     //   LOGGER.info("addressModel: "+addressModel);
+        //   LOGGER.info("addressModel: "+addressModel);
         PrzesylkaPoleconaZagranicznaType przesylkaPoleconaZagranicznaType = new PrzesylkaPoleconaZagranicznaType();
         przesylkaPoleconaZagranicznaType.setMasa(ENADAWCA_MASA_200_GRAM);
 
@@ -37,37 +37,43 @@ public class ENadawcaMapper {
         adresType.setNazwa2(addressModel.getShipAddress1());
         adresType.setUlica(addressModel.getShipAddress2());
 
-        DeklaracjaCelna2Type deklaracjaCelna2Type = new DeklaracjaCelna2Type();
+        DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj = addressModel.getDeklaracaCelnaRodzaj();
+        LOGGER.info("deklaracaCelnaRodzaj: " + deklaracaCelnaRodzaj);
+        if (deklaracaCelnaRodzaj != null) {
+            DeklaracjaCelna2Type deklaracjaCelna2Type = new DeklaracjaCelna2Type();
 //        deklaracjaCelna2Type.setNumerReferencyjnyCelny();
 //        deklaracjaCelna2Type.setNumerReferencyjnyImportera();
 //        deklaracjaCelna2Type.setNumerTelefonuImportera();
 //        deklaracjaCelna2Type.setOplatyPocztowe();
-        deklaracjaCelna2Type.setRodzaj(DeklaracaCelnaRodzajEnum.CN_22);
 //        deklaracjaCelna2Type.setUwagi();
-        deklaracjaCelna2Type.setWalutaKodISO(addressModel.getCurrency());
 //        deklaracjaCelna2Type.setWyjasnienie();
-        deklaracjaCelna2Type.setZawartoscPrzesylki(ZawartoscPrzesylkiZagranicznejEnum.SPRZEDAZ_TOWARU);
+            deklaracjaCelna2Type.setRodzaj(deklaracaCelnaRodzaj);
+            deklaracjaCelna2Type.setWalutaKodISO(addressModel.getCurrency());
+            deklaracjaCelna2Type.setZawartoscPrzesylki(ZawartoscPrzesylkiZagranicznejEnum.SPRZEDAZ_TOWARU);
 
-        for (AddressContentsModel addressContent : addressModel.getAddressContents()) {
-            SzczegolyZawartosciPrzesylkiZagranicznejType szczegolyZawartosciPrzesylkiZagranicznejType =
-                    new SzczegolyZawartosciPrzesylkiZagranicznejType();
-            szczegolyZawartosciPrzesylkiZagranicznejType.setIlosc(addressContent.getQuantity());
-            szczegolyZawartosciPrzesylkiZagranicznejType.setKrajPochodzeniaKodAlfa2(addressContent.getOriginCountryCode());
-            szczegolyZawartosciPrzesylkiZagranicznejType.setMasaNetto(addressContent.getWeight());
-            szczegolyZawartosciPrzesylkiZagranicznejType.setNumerTaryfyHs(HS_TARIFF_NUMBER);
-            szczegolyZawartosciPrzesylkiZagranicznejType.setOkreslenieZawartosci(addressContent.getDescription());
-            //NOTE ENadawca dzieli wartość przez 100
-            if(addressContent.getValue()!=null) {
-                szczegolyZawartosciPrzesylkiZagranicznejType.setWartosc((addressContent.getValue().floatValue()) * CURRENCY_MULTIPLY_VALUE_FACTOR);
+            for (AddressContentsModel addressContent : addressModel.getAddressContents()) {
+                SzczegolyZawartosciPrzesylkiZagranicznejType szczegolyZawartosciPrzesylkiZagranicznejType =
+                        new SzczegolyZawartosciPrzesylkiZagranicznejType();
+                szczegolyZawartosciPrzesylkiZagranicznejType.setIlosc(addressContent.getQuantity());
+                szczegolyZawartosciPrzesylkiZagranicznejType.setKrajPochodzeniaKodAlfa2(addressContent.getOriginCountryCode());
+                szczegolyZawartosciPrzesylkiZagranicznejType.setMasaNetto(addressContent.getWeight());
+                szczegolyZawartosciPrzesylkiZagranicznejType.setNumerTaryfyHs(HS_TARIFF_NUMBER);
+                szczegolyZawartosciPrzesylkiZagranicznejType.setOkreslenieZawartosci(addressContent.getDescription());
+                //NOTE ENadawca dzieli wartość przez 100
+                if (addressContent.getValue() != null) {
+                    szczegolyZawartosciPrzesylkiZagranicznejType.setWartosc((addressContent.getValue().floatValue()) * CURRENCY_MULTIPLY_VALUE_FACTOR);
+                }
+                deklaracjaCelna2Type.getSzczegolyZawartosciPrzesylki().add(szczegolyZawartosciPrzesylkiZagranicznejType);
             }
-            deklaracjaCelna2Type.getSzczegolyZawartosciPrzesylki().add(szczegolyZawartosciPrzesylkiZagranicznejType);
+
+            LOGGER.info("deklaracaCelnaRodzaj: " + deklaracaCelnaRodzaj);
+            przesylkaPoleconaZagranicznaType.setDeklaracjaCelna2(deklaracjaCelna2Type);
         }
 
-        przesylkaPoleconaZagranicznaType.setDeklaracjaCelna2(deklaracjaCelna2Type);
         przesylkaPoleconaZagranicznaType.setAdres(adresType);
         przesylkaPoleconaZagranicznaType.setGuid(addressModel.getGuid());
 
-        LOGGER.info("przesylkaPoleconaZagranicznaType: "+przesylkaPoleconaZagranicznaType);
+        LOGGER.info("przesylkaPoleconaZagranicznaType: " + przesylkaPoleconaZagranicznaType);
         return przesylkaPoleconaZagranicznaType;
     }
 
