@@ -23,8 +23,8 @@
     <modules>
         <module>/order-manager-api</module>
         <module>/amazon-mws-connector</module>
-        <module>/enadawca-client</module>
         <module>/enadawca-client-api</module>
+        <module>/enadawca-client</module>
         <module>/order-manager</module>
     </modules>
 
