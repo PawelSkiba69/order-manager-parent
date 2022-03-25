@@ -45,7 +45,7 @@ public class AddressModelMapper {
 //        TypeMap<OrderModel, AddressModel> typeMap = modelMapper.createTypeMap(OrderModel.class, AddressModel.class);
 //        typeMap.addMapping(OrderModel::getOId, AddressModel::setId);
 
-        LOGGER.info("OrderModel: "+orderModel);
+//        LOGGER.info("OrderModel: "+orderModel);
         ClientModel clientModel = extractClientModel(orderModel);
         ProductModel productModel = extractProductModel(orderModel);
 
@@ -64,7 +64,7 @@ public class AddressModelMapper {
         addressModel.setCurrency(orderModel.getCurrency());
 
         CountryInfo countryInfo = orderModel.getCountryInfo();
-        LOGGER.info("countryInfo: "+countryInfo);
+//        LOGGER.info("countryInfo: "+countryInfo);
         if (countryInfo != null) {
             DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj = countryInfo.getDeklaracaCelnaRodzaj();
             if (deklaracaCelnaRodzaj != null) {
@@ -82,7 +82,7 @@ public class AddressModelMapper {
             }
         }
 
-        LOGGER.info("Dane klienta: " + addressModel);
+//        LOGGER.info("Dane klienta: " + addressModel);
         return addressModel;
     }
 

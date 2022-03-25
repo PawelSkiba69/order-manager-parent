@@ -38,7 +38,7 @@ public class ENadawcaMapper {
         adresType.setUlica(addressModel.getShipAddress2());
 
         DeklaracaCelnaRodzajEnum deklaracaCelnaRodzaj = addressModel.getDeklaracaCelnaRodzaj();
-        LOGGER.info("deklaracaCelnaRodzaj: " + deklaracaCelnaRodzaj);
+//        LOGGER.info("deklaracaCelnaRodzaj: " + deklaracaCelnaRodzaj);
         if (deklaracaCelnaRodzaj != null) {
             DeklaracjaCelna2Type deklaracjaCelna2Type = new DeklaracjaCelna2Type();
 //        deklaracjaCelna2Type.setNumerReferencyjnyCelny();
@@ -66,14 +66,14 @@ public class ENadawcaMapper {
                 deklaracjaCelna2Type.getSzczegolyZawartosciPrzesylki().add(szczegolyZawartosciPrzesylkiZagranicznejType);
             }
 
-            LOGGER.info("deklaracaCelnaRodzaj: " + deklaracaCelnaRodzaj);
+//            LOGGER.info("deklaracaCelnaRodzaj: " + deklaracaCelnaRodzaj);
             przesylkaPoleconaZagranicznaType.setDeklaracjaCelna2(deklaracjaCelna2Type);
         }
 
         przesylkaPoleconaZagranicznaType.setAdres(adresType);
         przesylkaPoleconaZagranicznaType.setGuid(addressModel.getGuid());
 
-        LOGGER.info("przesylkaPoleconaZagranicznaType: " + przesylkaPoleconaZagranicznaType);
+//        LOGGER.info("przesylkaPoleconaZagranicznaType: " + przesylkaPoleconaZagranicznaType);
         return przesylkaPoleconaZagranicznaType;
     }
 

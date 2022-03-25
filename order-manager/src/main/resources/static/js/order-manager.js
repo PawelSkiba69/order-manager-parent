@@ -43,6 +43,10 @@ $(document).ready(function() {
             }
         });
 
+        if(mcfs.length<1){
+            alert("Proszę zaznaczyć przynajmniej jedno zamówienie");
+        }
+
         console.log("BEFORE ajax!");
         $.ajax({
             type: "POST",

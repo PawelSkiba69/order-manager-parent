@@ -44,7 +44,7 @@ public class ShipmentManagerController {
     public String orders(Model model) throws IOException {
         List<OrderModel> orders = shipmentManagerService.list();
         orders = orderManagerService.sortByCustomsDeclarationRequired(orders,false);
-        LOGGER.info("Orders: " + orders);
+//        LOGGER.info("Orders: " + orders);
         SellerOrderReportModel sellerOrderReportModel = new SellerOrderReportModel();
         sellerOrderReportModel.setOrders(OrderModelConverter.convert(orders));
 

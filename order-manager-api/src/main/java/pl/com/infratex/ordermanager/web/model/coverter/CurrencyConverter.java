@@ -2,13 +2,12 @@ package pl.com.infratex.ordermanager.web.model.coverter;
 
 public class CurrencyConverter {
     public static String currencyConvertToSymbol(String currency) {
-        if (currency.equals("GBP")) {
+        if ("GBP".equals(currency)) {
             return "£";
         }
-        if (currency.equals("EUR")) {
+        if ("EUR".equals(currency)) {
             return "€";
         }
-        else
-            return "";
+        return "";
     }
 }

@@ -18,7 +18,9 @@ public enum CountryInfo {
     CZ("Czechy","CZ","Česká pošta", null),
     LU("Luksemburg","LU","POST LUXEMBOURG", null),
     SI("Słowenia","SI","Pošta Slovenije", null),
-    GB("Wielka Brytania","GB","Royal Mail", DeklaracaCelnaRodzajEnum.CN_22); //DeklaracaCelnaRodzajEnum.CN_22),
+    HR("Chorwacja","HR","Hrvatska pošta", null),
+    GB("Wielka Brytania","GB","Royal Mail", DeklaracaCelnaRodzajEnum.CN_22), //DeklaracaCelnaRodzajEnum.CN_22),
+    UNKNOWN("UNKNOWN","UNKNOWN","UNKNOWN", null);
 
     private String countryName;
     private String countryCode;
