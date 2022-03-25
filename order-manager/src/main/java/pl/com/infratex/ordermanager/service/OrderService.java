@@ -47,7 +47,7 @@ public class OrderService {
     }
 
     public List<OrderModel> sortByCustomsDeclarationRequired(List<OrderModel> orders, boolean extraSortInternalIdPurchaseDate) {
-        LOGGER.info("sortByCustomsDeclarationRequired()");
+//        LOGGER.info("sortByCustomsDeclarationRequired()");
         orders.forEach(orderModel -> OrderModelConverter.countryCode(orderModel, false));
 
         Comparator<OrderModel> comparator = Comparator.comparing(orderModel -> {
@@ -70,7 +70,7 @@ public class OrderService {
                 .sorted(comparator)
                 .collect(Collectors.toList());
 
-        LOGGER.info("sortByCustomsDeclarationRequired()");
+//        LOGGER.info("sortByCustomsDeclarationRequired()");
         return sortedOrders;
     }
 
