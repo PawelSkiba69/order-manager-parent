@@ -15,9 +15,11 @@ import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -47,30 +49,34 @@ public class OrderService {
     }
 
     public List<OrderModel> sortByCustomsDeclarationRequired(List<OrderModel> orders, boolean extraSortInternalIdPurchaseDate) {
-//        LOGGER.info("sortByCustomsDeclarationRequired()");
-        orders.forEach(orderModel -> OrderModelConverter.countryCode(orderModel, false));
+        LOGGER.info("sortByCustomsDeclarationRequired()");
+        List<OrderModel> sortedOrders = new ArrayList<>();
+        try {
+            orders.forEach(orderModel -> OrderModelConverter.countryCode(orderModel, false));
 
-        Comparator<OrderModel> comparator = Comparator.comparing(orderModel -> {
-                    CountryInfo countryInfo = orderModel.getCountryInfo();
-                    if (countryInfo != null) {
-                        return countryInfo.getDeklaracaCelnaRodzaj();
-                    } else {
-                        return null;
-                    }
-                },
-                Comparator.nullsFirst(Comparator.reverseOrder()));
-        if (!extraSortInternalIdPurchaseDate) {
-            comparator = comparator.thenComparing(
-                    orderModel -> orderModel.getProduct().getInternalId(),
-                    Comparator.nullsLast(Comparator.reverseOrder())
-            );
+            Comparator<OrderModel> comparator = Comparator.comparing(orderModel -> {
+                        CountryInfo countryInfo = orderModel.getCountryInfo();
+                        if (countryInfo != null) {
+                            return countryInfo.getDeklaracaCelnaRodzaj();
+                        } else {
+                            return null;
+                        }
+                    },
+                    Comparator.nullsFirst(Comparator.reverseOrder()));
+            if (!extraSortInternalIdPurchaseDate) {
+                comparator = comparator.thenComparing(
+                        orderModel -> orderModel.getProduct().getInternalId(),
+                        Comparator.nullsLast(Comparator.reverseOrder())
+                );
+            }
             comparator = comparator.thenComparing(OrderModel::getPurchaseDate);
+            sortedOrders = orders.stream()
+                    .sorted(comparator)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Błąd podczas sortowania");
         }
-        List<OrderModel> sortedOrders = orders.stream()
-                .sorted(comparator)
-                .collect(Collectors.toList());
-
-//        LOGGER.info("sortByCustomsDeclarationRequired()");
+        LOGGER.info("sortByCustomsDeclarationRequired()-success");
         return sortedOrders;
     }
 
@@ -120,7 +126,7 @@ public class OrderService {
 
     //FIXME Add test
     public void updateOrderStatus(List<OrderModel> orders, OrderStatusType orderStatus) throws OrderNotFoundException {
-        LOGGER.info("updateOrderStatus("+orderStatus+")");
+        LOGGER.info("updateOrderStatus(" + orderStatus + ")");
         if (orders != null) {
             for (OrderModel order : orders) {
                 Optional<OrderEntity> foundOptionalOrderEntity = orderRepository.findById(order.getOId());
@@ -133,7 +139,7 @@ public class OrderService {
 
     public OrderModel oldestUnshippedLabeledOrder() throws OrderNotFoundException {
         OrderEntity orderEntity = orderRepository.findFirstByStatusOrderByLoadDateAsc(OrderStatusType.LABELED);
-        if(orderEntity==null) throw new OrderNotFoundException("Orders with status LABELED not found");
+        if (orderEntity == null) throw new OrderNotFoundException("Orders with status LABELED not found");
         return orderModelMapper.fromEntity(orderEntity);
     }
 
@@ -145,15 +151,15 @@ public class OrderService {
     public List<OrderModel> findOrdersByStatusNotShippedAmazon() {
         LOGGER.info("findOrdersByStatusNotShippedAmazon()");
         List<OrderEntity> orderEntities = orderRepository.findByStatusNotIn(
-                OrderStatusType.SHIPPED_AMAZON,OrderStatusType.UNKNOWN);
+                OrderStatusType.SHIPPED_AMAZON, OrderStatusType.UNKNOWN);
         return orderModelMapper.fromEntities(orderEntities);
     }
 
-    public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
+    public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays() {
         LOGGER.info("findOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
         List<OrderEntity> orderEntities = orderRepository.findByLoadDateBeforeAndStatusIn(
                 LocalDateTime.now().minusDays(3), OrderStatusType.SHIPPED_AMAZON, OrderStatusType.UNKNOWN);
-        LOGGER.info("orderEntities: "+orderEntities);
+        LOGGER.info("orderEntities: " + orderEntities);
 
         for (OrderEntity orderEntity : orderEntities) {
             OrderLoadedEntity orderLoadedEntity = orderLoadedRepository.findByoId(orderEntity.getoId());
