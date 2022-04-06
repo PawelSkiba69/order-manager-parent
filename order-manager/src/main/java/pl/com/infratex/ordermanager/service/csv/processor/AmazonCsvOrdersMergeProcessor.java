@@ -1,5 +1,6 @@
 package pl.com.infratex.ordermanager.service.csv.processor;
 
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrder;
 
 import java.io.IOException;
@@ -13,7 +14,8 @@ public class AmazonCsvOrdersMergeProcessor {
     private static final Logger LOGGER = Logger.getLogger(AmazonCsvOrdersMergeProcessor.class.getName());
     private AmazonCsvProcessor amazonCsvProcessor = new AmazonCsvProcessor();
 
-    public List<AmazonCsvOrder> mergeOrders(Reader unshippedOrdersReader, Reader newOrdersReader) throws IOException {
+    public List<AmazonCsvOrder> mergeOrders(Reader unshippedOrdersReader, Reader newOrdersReader)
+            throws IOException, AmazonCsvOrderProcessorException {
         //TODO use AmazonCsv Validators
         List<AmazonCsvOrder> amazonCsvUnshippedOrders = amazonCsvProcessor.parseCsv(new AmazonCsvUnshippedOrdersProcessor(unshippedOrdersReader));
         List<AmazonCsvOrder> amazonCsvNewOrders = amazonCsvProcessor.parseCsv(new AmazonCsvNewOrdersProcessor(newOrdersReader));

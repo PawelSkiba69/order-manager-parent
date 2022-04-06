@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
 import pl.com.infratex.ordermanager.service.OrderManagerService;
@@ -62,13 +63,18 @@ public class OrderManagerController {
     @PostMapping(value = "/upload")
     public String send(@RequestParam("file-unshipped-orders") MultipartFile fileUnshippedOrders,
                        @RequestParam("file-new-orders") MultipartFile fileNewOrders, Model model) throws IOException, OrderNotFoundException {
-        List<OrderModel> orders = orderManagerService.uploadAndUpdateUnshippedOrders(fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
+        List<OrderModel> orders = null;
+        try {
+            orders = orderManagerService.uploadAndUpdateUnshippedOrders(fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
+        } catch (AmazonCsvOrderProcessorException e) {
+            e.printStackTrace();
+        }
         model.addAttribute("orders", orders);
         return "redirect:" + ORDER_MANAGEMENT_URI;
     }
 
     @GetMapping(value = "/upload")
-    public String uploadFromAmazon(Model model) throws IOException {
+    public String uploadFromAmazon(Model model) throws IOException, AmazonCsvOrderProcessorException {
         LOGGER.info("uploadFromAmazon()");
         SellerOrderReportModel sellerOrderReportModel = orderManagerService.createSellerOrderReportFromAmazon();
         model.addAttribute("orders", sellerOrderReportModel.getOrders());

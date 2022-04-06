@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.ProductModel;
@@ -111,7 +112,7 @@ class OrderManagerServiceTest {
     }
 
     @Test
-    void createSellerOrderReportFromAmazon() throws IOException {
+    void createSellerOrderReportFromAmazon() throws IOException, AmazonCsvOrderProcessorException {
         //GIVEN
 
         //WHEN

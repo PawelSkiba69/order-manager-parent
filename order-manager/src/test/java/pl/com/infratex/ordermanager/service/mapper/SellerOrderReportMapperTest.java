@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.service.mapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrder;
 import pl.com.infratex.ordermanager.service.csv.processor.AmazonCsvProcessorSampleDataTest;
 import pl.com.infratex.ordermanager.web.model.ClientModel;
@@ -31,7 +32,7 @@ class SellerOrderReportMapperTest {
     }
 
     @Test
-    void fromAmazonCsvOrders() throws IOException {
+    void fromAmazonCsvOrders() throws IOException, AmazonCsvOrderProcessorException {
         //given
         List<AmazonCsvOrder> amazonCsvOrders = AmazonCsvProcessorSampleDataTest.parseCsv();
         //when

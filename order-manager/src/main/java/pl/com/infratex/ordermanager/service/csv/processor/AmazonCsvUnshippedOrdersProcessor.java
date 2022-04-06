@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.service.csv.processor;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrder;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrderHeader;
 
@@ -25,7 +26,7 @@ public class AmazonCsvUnshippedOrdersProcessor implements AmazonCsvOrdersProcess
     }
 
     @Override
-    public List<AmazonCsvOrder> parseOrders() throws IOException {
+    public List<AmazonCsvOrder> parseOrders() throws IOException,AmazonCsvOrderProcessorException {
         CSVParser csvRecords = CSVFormat.TDF.withHeader().parse(reader);
         List<AmazonCsvOrder> amazonCsvOrders = new ArrayList<>();
 
@@ -33,6 +34,12 @@ public class AmazonCsvUnshippedOrdersProcessor implements AmazonCsvOrdersProcess
             String orderId = csvRecord.get(AmazonCsvOrderHeader.ORDER_ID.getName());
             AmazonCsvOrder amazonCsvOrder = new AmazonCsvOrder();
             try {
+                try {
+                    csvRecord.get(AmazonCsvOrderHeader.ITEM_PRICE.getName());
+                    throw new AmazonCsvOrderProcessorException("Nieprawidłowy rodzaj raportu");
+                }catch (IllegalArgumentException e){
+                    // NOTE sytuacja porządana, nic nie robimy
+                }
                 amazonCsvOrder.setOrderId(orderId);
                 amazonCsvOrder.setOrderItemId(csvRecord.get(AmazonCsvOrderHeader.ORDER_ITEM_ID.getName()));
                 String purchaseDateString = csvRecord.get(AmazonCsvOrderHeader.PURCHASE_DATE.getName());

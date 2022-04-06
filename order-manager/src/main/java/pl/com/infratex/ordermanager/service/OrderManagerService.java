@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.service;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pl.com.infratex.ordermanager.api.OrderStatusType;
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderManagerException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderMultiChannelFulfillmentCsvProcessorException;
 import pl.com.infratex.ordermanager.api.exception.order.OrderNotFoundException;
@@ -80,7 +81,8 @@ public class OrderManagerService {
         this.orderMultiChannelFulfillmentCsvProcessor = orderMultiChannelFulfillmentCsvProcessor;
     }
 
-    public List<OrderModel> uploadAndUpdateUnshippedOrders(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException, OrderNotFoundException {
+    public List<OrderModel> uploadAndUpdateUnshippedOrders(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders)
+            throws IOException, OrderNotFoundException,AmazonCsvOrderProcessorException {
         LOGGER.info("uploadUnshippedOrders()");
         SellerOrderReportModel sellerOrderReportModel = createSellerOrderReport(inputStreamUnshippedOrders, inputStreamNewOrders);
         List<OrderModel> orders = sellerOrderReportModel.getOrders();
@@ -98,7 +100,8 @@ public class OrderManagerService {
         return orderService.sortByCustomsDeclarationRequired(orders, extraSortInternalIdPurchaseDate);
     }
 
-    public SellerOrderReportModel createSellerOrderReport(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException {
+    public SellerOrderReportModel createSellerOrderReport(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders)
+            throws IOException,AmazonCsvOrderProcessorException {
 
         List<AmazonCsvOrder> amazonCsvOrders = parseCsv(inputStreamUnshippedOrders, inputStreamNewOrders);
         SellerOrderReportModel sellerOrderReportModel = sellerOrderReportMapper.fromAmazonCsvOrders(amazonCsvOrders);
@@ -111,7 +114,7 @@ public class OrderManagerService {
         return new SellerOrderReportModel(orderModelMapper.fromEntities(foundOrderEntities), null);
     }
 
-    public SellerOrderReportModel createSellerOrderReportFromAmazon() throws IOException {
+    public SellerOrderReportModel createSellerOrderReportFromAmazon() throws IOException,AmazonCsvOrderProcessorException {
         LOGGER.info("createSellerOrderReportFromAmazon(...)");
         AmazonOrderReportResult amazonOrderReportResult = amazonOrderReportService.orderReport();
         ByteArrayOutputStream unshippedOrdersOutputStream =
@@ -152,7 +155,8 @@ public class OrderManagerService {
         return orders != null && orders.size() > 0;
     }
 
-    private List<AmazonCsvOrder> parseCsv(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders) throws IOException {
+    private List<AmazonCsvOrder> parseCsv(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders)
+            throws IOException, AmazonCsvOrderProcessorException {
         Reader readerUnshippedOrders = new InputStreamReader(inputStreamUnshippedOrders);
         Reader readerNewOrders = new InputStreamReader(inputStreamNewOrders);
         AmazonCsvOrdersMergeProcessor amazonCsvOrdersMergeProcessor = new AmazonCsvOrdersMergeProcessor();
