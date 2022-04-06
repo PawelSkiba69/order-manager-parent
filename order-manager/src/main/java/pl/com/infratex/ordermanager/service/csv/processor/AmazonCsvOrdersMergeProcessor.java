@@ -16,7 +16,6 @@ public class AmazonCsvOrdersMergeProcessor {
 
     public List<AmazonCsvOrder> mergeOrders(Reader unshippedOrdersReader, Reader newOrdersReader)
             throws IOException, AmazonCsvOrderProcessorException {
-        //TODO use AmazonCsv Validators
         List<AmazonCsvOrder> amazonCsvUnshippedOrders = amazonCsvProcessor.parseCsv(new AmazonCsvUnshippedOrdersProcessor(unshippedOrdersReader));
         List<AmazonCsvOrder> amazonCsvNewOrders = amazonCsvProcessor.parseCsv(new AmazonCsvNewOrdersProcessor(newOrdersReader));
 

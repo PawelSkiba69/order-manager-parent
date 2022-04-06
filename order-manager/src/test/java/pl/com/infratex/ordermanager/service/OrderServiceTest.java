@@ -2,13 +2,12 @@ package pl.com.infratex.ordermanager.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import pl.com.infratex.ordermanager.api.OrderStatusType;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
 import pl.com.infratex.ordermanager.dao.repository.OrderLoadedRepository;
 import pl.com.infratex.ordermanager.dao.repository.OrderRepository;
 import pl.com.infratex.ordermanager.web.model.AddressModel;
+import pl.com.infratex.ordermanager.web.model.CountryInfo;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 
 import java.time.LocalDateTime;
@@ -19,7 +18,7 @@ import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+//@SpringBootTest
 class OrderServiceTest {
 
     private static final long O_ID_1 = 1L;
@@ -28,11 +27,11 @@ class OrderServiceTest {
     private static final String GUID_1 = "92ry298n9820";
     private static final String GUID_2 = "iuahe938dn24";
     private static final String GUID_3 = "1sry138nfs20";
-    @Autowired
+//    @Autowired
     private OrderService orderService;
-    @Autowired
+//    @Autowired
     private OrderRepository orderRepository;
-    @Autowired
+//    @Autowired
     private OrderLoadedRepository orderLoadedRepository;
 
     @Test
@@ -81,5 +80,31 @@ class OrderServiceTest {
         List<OrderEntity> foundOrderEntities=orderRepository.findAll();
         //THEN
         Assertions.assertEquals(4, foundOrderEntities.size(), "Liczba orders nie zgadza się");
+    }
+
+    @Test
+    public void sorting(){
+        // given
+        OrderService orderService=new OrderService(null,null,null);
+
+        List<OrderModel> orders = asList(
+                OrderModel.builder()
+                        .oId(O_ID_1)
+                        .countryInfo(CountryInfo.GB)
+                        .purchaseDate(LocalDateTime.now().minusHours(1)).build(),
+                OrderModel.builder()
+                        .oId(O_ID_2)
+                        .countryInfo(CountryInfo.DE)
+                        .purchaseDate(LocalDateTime.now().minusHours(3)).build(),
+                OrderModel.builder()
+                        .oId(O_ID_3)
+                        .countryInfo(CountryInfo.GB)
+                        .purchaseDate(LocalDateTime.now().minusHours(2)).build());
+
+        // when
+        List<OrderModel> sortedOrderModels = orderService.sortByCustomsDeclarationRequired(orders, true);
+        // then
+//        System.out.println(sortedOrderModels);
+        sortedOrderModels.forEach(System.out::println);
     }
 }
