@@ -68,6 +68,8 @@ public class OrderManagerController {
             orders = orderManagerService.uploadAndUpdateUnshippedOrders(fileUnshippedOrders.getInputStream(), fileNewOrders.getInputStream());
         } catch (AmazonCsvOrderProcessorException e) {
             e.printStackTrace();
+            model.addAttribute("orders", null);
+            return ORDER_MANAGER_VIEW;
         }
         model.addAttribute("orders", orders);
         return "redirect:" + ORDER_MANAGEMENT_URI;

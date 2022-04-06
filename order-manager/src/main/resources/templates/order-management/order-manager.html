@@ -44,6 +44,9 @@
                 <div class="col-auto">
                     <button type="submit" class="btn btn-dark">wyślij</button>
                 </div>
+            <div th:if="${orders == null}" class="col-auto alert alert-danger" role="alert">
+                Niepoprawny rodzaj raportu
+            </div>
         </form>
     </div>
 <div class="content">
