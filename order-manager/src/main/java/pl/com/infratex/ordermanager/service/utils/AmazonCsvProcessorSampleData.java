@@ -1,6 +1,7 @@
 package pl.com.infratex.ordermanager.service.utils;
 
 import org.springframework.core.io.ClassPathResource;
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrder;
 import pl.com.infratex.ordermanager.service.csv.processor.AmazonCsvOrdersMergeProcessor;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class AmazonCsvProcessorSampleData {
 
     @Deprecated
-    public static List<AmazonCsvOrder> parseCsv() throws IOException {
+    public static List<AmazonCsvOrder> parseCsv() throws IOException, AmazonCsvOrderProcessorException {
         ClassPathResource classPathResourceUnshippedOrders = new ClassPathResource("csv/18435540075018196.txt");
         ClassPathResource classPathResourceNewOrders = new ClassPathResource("csv/18433847258018196.txt");
         Reader readerUnshipped = new InputStreamReader(classPathResourceUnshippedOrders.getInputStream());

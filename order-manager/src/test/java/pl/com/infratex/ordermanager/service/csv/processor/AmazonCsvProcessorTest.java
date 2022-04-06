@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrder;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class AmazonCsvProcessorTest {
     }
 
     @Test
-    public void parseCsv() throws IOException {
+    public void parseCsv() throws IOException, AmazonCsvOrderProcessorException {
         List<AmazonCsvOrder> amazonCsvOrders = AmazonCsvProcessorSampleDataTest.parseCsv();
         Assertions.assertTrue(amazonCsvOrders.size() > 0, "csv orders is 0");
         for (AmazonCsvOrder amazonCsvOrder : amazonCsvOrders) {

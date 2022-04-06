@@ -3,6 +3,7 @@ package pl.com.infratex.ordermanager.service.csv.processor;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import pl.com.infratex.ordermanager.api.exception.order.AmazonCsvOrderProcessorException;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrder;
 import pl.com.infratex.ordermanager.service.model.AmazonCsvOrderHeader;
 
@@ -26,7 +27,7 @@ public class AmazonCsvNewOrdersProcessor implements AmazonCsvOrdersProcessor {
     }
 
     @Override
-    public List<AmazonCsvOrder> parseOrders() throws IOException {
+    public List<AmazonCsvOrder> parseOrders() throws IOException, AmazonCsvOrderProcessorException {
         CSVParser csvRecords = CSVFormat.TDF.withHeader().parse(reader);
 
         List<AmazonCsvOrder> amazonCsvOrders = new ArrayList<>();
@@ -35,10 +36,16 @@ public class AmazonCsvNewOrdersProcessor implements AmazonCsvOrdersProcessor {
             String orderId = csvRecord.get(AmazonCsvOrderHeader.ORDER_ID.getName());
             AmazonCsvOrder amazonCsvOrder = new AmazonCsvOrder();
             try {
+                String csvColumnItemPrice="0";
+                try {
+                    csvColumnItemPrice = csvRecord.get(AmazonCsvOrderHeader.ITEM_PRICE.getName());
+                    amazonCsvOrder.setItemPrice(new BigDecimal(csvColumnItemPrice));
+                }catch (IllegalArgumentException e){
+                    throw new AmazonCsvOrderProcessorException("Nieprawidłowy rodzaj raportu",e);
+                }
                 amazonCsvOrder.setOrderId(orderId);
                 amazonCsvOrder.setOrderItemId(csvRecord.get(AmazonCsvOrderHeader.ORDER_ITEM_ID.getName()));
                 amazonCsvOrder.setCurrency(csvRecord.get(AmazonCsvOrderHeader.CURRENCY.getName()));
-                amazonCsvOrder.setItemPrice(new BigDecimal(csvRecord.get(AmazonCsvOrderHeader.ITEM_PRICE.getName())));
                 amazonCsvOrder.setShippingPrice(new BigDecimal(csvRecord.get(AmazonCsvOrderHeader.SHIPPING_PRICE.getName())));
                 amazonCsvOrder.setItemTax(new BigDecimal(csvRecord.get(AmazonCsvOrderHeader.ITEM_TAX.getName())));
                 amazonCsvOrder.setShippingTax(new BigDecimal(csvRecord.get(AmazonCsvOrderHeader.SHIPPING_TAX.getName())));
@@ -51,8 +58,8 @@ public class AmazonCsvNewOrdersProcessor implements AmazonCsvOrdersProcessor {
                 LOGGER.severe("Unable to parse purchase data for order id: " + orderId);
             } catch (IllegalArgumentException e) {
                 LOGGER.severe("Column not found for order id: " + orderId);
-            } catch (Exception e) {
-                LOGGER.severe("Unknown problem for order id: " + orderId);
+//            } catch (Exception e) {
+//                LOGGER.severe("Unknown problem for order id: " + orderId);
             } finally {
 //                LOGGER.info("Single Amazon csv new order record: " + amazonCsvOrder);
             }
