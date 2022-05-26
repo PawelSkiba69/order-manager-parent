@@ -165,7 +165,7 @@ public class OrderManagerController {
             orders = orderManagerService.findOrdersByStatusNotShippedAmazon();
         }
 
-        orders = orderManagerService.sortByCustomsDeclarationRequired(orders,true);
+        orders = orderManagerService.sortByCustomsDeclarationRequired(orders,false);
 
         GenerateAddressModel generateAddressModel = (GenerateAddressModel) model.get(GENERATE_ADDRESS_MODEL_ATTRIBUTE);
         if (generateAddressModel == null) {

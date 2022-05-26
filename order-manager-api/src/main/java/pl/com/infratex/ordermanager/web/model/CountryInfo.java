@@ -6,7 +6,7 @@ public enum CountryInfo {
     PL("Polska","PL","Poczta Polska", null),
     ES("Hiszpania","ES","Correos", null),
     FR("Francja","FR","La Poste", null),
-    DE("Niemcy","DE","Deutsche Post", null),
+    DE("Niemcy","DE","DHL", null),
     IT("Włochy","IT","Poste Italiane", null),
     AT("Austria","AT","AG Post", null),
     BE("Belgia","BE","BPost", null),
@@ -19,6 +19,7 @@ public enum CountryInfo {
     LU("Luksemburg","LU","POST LUXEMBOURG", null),
     SI("Słowenia","SI","Pošta Slovenije", null),
     HR("Chorwacja","HR","Hrvatska pošta", null),
+    GR("Grecja","GR","Elta", null),
     GB("Wielka Brytania","GB","Royal Mail", DeklaracaCelnaRodzajEnum.CN_22), //DeklaracaCelnaRodzajEnum.CN_22),
     UNKNOWN("UNKNOWN","UNKNOWN","UNKNOWN", null);
 
