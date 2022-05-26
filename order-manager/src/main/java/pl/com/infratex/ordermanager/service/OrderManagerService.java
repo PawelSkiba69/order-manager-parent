@@ -157,11 +157,17 @@ public class OrderManagerService {
 
     private List<AmazonCsvOrder> parseCsv(InputStream inputStreamUnshippedOrders, InputStream inputStreamNewOrders)
             throws IOException, AmazonCsvOrderProcessorException {
-        Reader readerUnshippedOrders = new InputStreamReader(inputStreamUnshippedOrders);
-        Reader readerNewOrders = new InputStreamReader(inputStreamNewOrders);
-        AmazonCsvOrdersMergeProcessor amazonCsvOrdersMergeProcessor = new AmazonCsvOrdersMergeProcessor();
+        List<AmazonCsvOrder> amazonCsvOrders = new ArrayList<>();
 
-        return amazonCsvOrdersMergeProcessor.mergeOrders(readerUnshippedOrders, readerNewOrders);
+        try (Reader readerUnshippedOrders = new InputStreamReader(inputStreamUnshippedOrders);
+             Reader readerNewOrders = new InputStreamReader(inputStreamNewOrders)) {
+            AmazonCsvOrdersMergeProcessor amazonCsvOrdersMergeProcessor = new AmazonCsvOrdersMergeProcessor();
+            amazonCsvOrders = amazonCsvOrdersMergeProcessor.mergeOrders(readerUnshippedOrders, readerNewOrders);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return amazonCsvOrders;
     }
 
     void saveOrders(SellerOrderReportModel sellerOrderReportModel) {

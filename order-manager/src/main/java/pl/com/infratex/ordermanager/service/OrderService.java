@@ -14,7 +14,6 @@ import pl.com.infratex.ordermanager.web.model.GenerateAddressModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
 import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -143,16 +142,18 @@ public class OrderService {
     }
 
     public List<OrderModel> findOrdersByStatusNotShippedAmazon() {
+//        List<OrderEntity> orderEntities = orderRepository.findByStatusNotIn(
+//                OrderStatusType.SHIPPED_AMAZON, OrderStatusType.UNKNOWN);
+        List<OrderEntity> orderEntities = orderRepository.ordersWithStatusNotIn();
         LOGGER.info("findOrdersByStatusNotShippedAmazon()");
-        List<OrderEntity> orderEntities = orderRepository.findByStatusNotIn(
-                OrderStatusType.SHIPPED_AMAZON,OrderStatusType.UNKNOWN);
         return orderModelMapper.fromEntities(orderEntities);
     }
 
     public void deleteOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays(){
         LOGGER.info("findOrdersByStatusShippedAmazonOrUnknownOlderThanThreeDays()");
-        List<OrderEntity> orderEntities = orderRepository.findByLoadDateBeforeAndStatusIn(
-                LocalDateTime.now().minusDays(3), OrderStatusType.SHIPPED_AMAZON, OrderStatusType.UNKNOWN);
+//        List<OrderEntity> orderEntities = orderRepository.findByLoadDateBeforeAndStatusIn(
+//                LocalDateTime.now().minusDays(3), OrderStatusType.SHIPPED_AMAZON, OrderStatusType.UNKNOWN);
+        List<OrderEntity> orderEntities = orderRepository.ordersWithLoadDateBeforeAndStatusIn();
         LOGGER.info("orderEntities: "+orderEntities);
 
         for (OrderEntity orderEntity : orderEntities) {

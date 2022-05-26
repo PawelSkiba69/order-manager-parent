@@ -17,6 +17,14 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
             "    (SELECT max(OMAX.BATCH_ID)\n" +
             "     FROM ORDERS OMAX)\n" +
             "ORDER BY P.INTERNAL_ID DESC, O.PURCHASE_DATE ASC";
+    String ORDERS_WITH_STATUS_NOT_IN_SQL = "SELECT *\n" +
+            " FROM ORDERS O\n" +
+            " WHERE O.STATUS NOT IN ('SHIPPED_AMAZON', 'UNKNOWN');";
+
+    String ORDERS_WITH_LOAD_DATE_BEFORE_AND_STATUS_IN_SQL = "SELECT * \n" +
+            " FROM ORDERS \n" +
+            " WHERE STATUS NOT IN ('SHIPPED_AMAZON', 'UNKNOWN') \n" +
+            " AND LOAD_DATE < ((CURRENT_DATE) - INTERVAL '3 DAY')";
 
     List<OrderEntity> findByStatusOrderByProduct_InternalIdDescPurchaseDateAsc(OrderStatusType status);
 
@@ -26,7 +34,13 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     List<OrderEntity> findByStatusNotIn(OrderStatusType... statuses);
 
+    @Query(name = "ordersWithStatusNotIn", value = ORDERS_WITH_STATUS_NOT_IN_SQL, nativeQuery = true)
+    List<OrderEntity> ordersWithStatusNotIn();
+
     List<OrderEntity> findByLoadDateBeforeAndStatusIn(LocalDateTime date, OrderStatusType... statuses);
+
+    @Query(name = "ordersWithLoadDateBeforeAndStatusIn", value = ORDERS_WITH_LOAD_DATE_BEFORE_AND_STATUS_IN_SQL, nativeQuery = true)
+    List<OrderEntity> ordersWithLoadDateBeforeAndStatusIn();
 
     List<OrderEntity> findByOrderIdAndOrderItemId(String orderId, String orderItemId);
 

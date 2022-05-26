@@ -1,10 +1,11 @@
 package pl.com.infratex.ordermanager.service.mapper;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Component;
 import pl.com.infratex.ordermanager.dao.entity.OrderEntity;
+import pl.com.infratex.ordermanager.web.model.ClientModel;
 import pl.com.infratex.ordermanager.web.model.OrderModel;
+import pl.com.infratex.ordermanager.web.model.ProductModel;
 import pl.com.infratex.ordermanager.web.model.coverter.OrderModelConverter;
 
 import java.util.List;
@@ -28,11 +29,12 @@ public class OrderModelMapper {
         ModelMapper modelMapper = new ModelMapper();
         //modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 
-        TypeMap<OrderEntity, OrderModel> typeMap = modelMapper.createTypeMap(OrderEntity.class, OrderModel.class);
-        typeMap.addMapping(OrderEntity::getProduct, OrderModel::setProduct);
-        typeMap.addMapping(OrderEntity::getClient, OrderModel::setClient);
+        ProductModel productModel = modelMapper.map(orderEntity.getProduct(), ProductModel.class);
+        ClientModel clientModel = modelMapper.map(orderEntity.getClient(), ClientModel.class);
 
         OrderModel orderModel = modelMapper.map(orderEntity, OrderModel.class);
+        orderModel.setProduct(productModel);
+        orderModel.setClient(clientModel);
     //    LOGGER.info("OrderModel: "+orderModel);
         OrderModelConverter.formatDate(orderModel);
 
