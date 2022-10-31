@@ -20,6 +20,7 @@ public enum CountryInfo {
     SI("Słowenia","SI","Pošta Slovenije", null),
     HR("Chorwacja","HR","Hrvatska pošta", null),
     GR("Grecja","GR","Elta", null),
+    NL("Holandia","NL","PostNL", null),
     GB("Wielka Brytania","GB","Royal Mail", DeklaracaCelnaRodzajEnum.CN_22), //DeklaracaCelnaRodzajEnum.CN_22),
     UNKNOWN("UNKNOWN","UNKNOWN","UNKNOWN", null);
 

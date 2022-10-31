@@ -58,8 +58,13 @@ $(document).ready(function() {
             success: function(data) {
                 var blob = new Blob([data]);
                 var a = document.createElement('a');
+                var date = new Date();
+                let day = date.getDate();
+                let month = date.getMonth() + 1;
+                let year = date.getFullYear();
+                let currentDate = `${year}${month}${day}`;
                 a.href = window.URL.createObjectURL(blob);
-                a.download = "report-mcf.csv";
+                a.download = "mcf_"+currentDate+".txt";
                 a.style.display = 'none';
                 document.body.appendChild(a);
                 a.click();
