@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 public class CarrierCodeConverter {
     public String convert(String countryCode){
         if (countryCode.equals("GB")){
-            return "Wielka Brytania";
+            return "Royal Mail";
         }
         if (countryCode.equals("DE")){
-            return "Deutsche Post";
+            return "DHL";
         }
         if (countryCode.equals("IT")){
             return "Poste Italiane";
