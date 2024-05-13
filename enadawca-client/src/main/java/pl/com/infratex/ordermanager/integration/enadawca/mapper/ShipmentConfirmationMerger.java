@@ -34,6 +34,7 @@ public class ShipmentConfirmationMerger {
                 ShipmentConfirmationModel shipmentConfirmationModel = merge(przesylkaShortType, orderModel);
                 if (shipmentConfirmationModel != null) {
                     shipmentConfirmationModels.add(shipmentConfirmationModel);
+                    LOGGER.info("ShipmentConfirmationModel: "+shipmentConfirmationModel);
                 }
             });
         });
