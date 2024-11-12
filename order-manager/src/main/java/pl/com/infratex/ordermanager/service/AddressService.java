@@ -44,6 +44,7 @@ public class AddressService {
         for (AddressModel address : addresses) {
             address.setGuid(guids.get(counter));
             counter++;
+            LOGGER.info("adres: "+address);
         }
 //        LOGGER.info("#### "+addresses);
         return addresses;
