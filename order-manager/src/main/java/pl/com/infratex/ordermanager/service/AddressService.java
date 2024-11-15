@@ -44,7 +44,7 @@ public class AddressService {
         for (AddressModel address : addresses) {
             address.setGuid(guids.get(counter));
             counter++;
-            LOGGER.info(address.getOrderId()+"\t"+address.getRecipientName()+"\t"
+            LOGGER.info("adres"+"\t"+address.getOrderId()+"\t"+address.getRecipientName()+"\t"
             +address.getShipAddress1()+"\t"+address.getShipAddress2()+"\t"+address.getShipPostalCode()
             +"\t"+address.getShipCity()+"\t"+address.getShipCountry());
         }
